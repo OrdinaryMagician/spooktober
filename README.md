@@ -15,7 +15,7 @@ A Halloween 2018 map pack for Doom.
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
 - **SPOOK01**: Large House of Illusions - leodoom85
-- **SPOOK02**: *Slot open*.
+- **SPOOK02**: Untitled Map - FishyClockwork
 - **SPOOK03**: *Slot open*.
 - **SPOOK04**: *Slot open*.
 - **SPOOK05**: *Slot open*.
