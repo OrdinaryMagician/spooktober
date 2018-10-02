@@ -69,6 +69,18 @@ Class SpooktoberHandler : EventHandler
 	{
 		if ( (level.levelnum > 1) && (level.levelnum < 14) )
 			SpooktoberGlobals.SetCompletion(level.levelnum-2);
+		if ( level.levelnum != 1 ) return;
+		// adjust player size back to normal
+		// there's no "PlayerLeft" event so it has to be done here
+		for ( int i=0; i<MAXPLAYERS; i++ )
+		{
+			if ( !playeringame[i] ) continue;
+			let mo = players[i].mo;
+			let d = GetDefaultByType(mo.GetClass());
+			mo.A_SetSize(d.radius,d.height);
+			mo.scale = d.scale;
+			mo.player.viewheight = mo.viewheight = d.viewheight;
+		}
 	}
 
 	override void WorldLoaded( WorldEvent e )
@@ -106,7 +118,7 @@ Class SpooktoberHandler : EventHandler
 			break;
 		}
 		// advance the stage
-		AdvanceStage();
+		SpooktoberGlobals.AdvanceStage();
 	}
 
 	override void PlayerEntered( PlayerEvent e )
@@ -114,5 +126,11 @@ Class SpooktoberHandler : EventHandler
 		if ( level.levelnum != 1 ) return;
 		// no items at all while in the hub, please
 		players[e.playernumber].mo.ClearInventory();
+		// adjust player size (too lazy to rescale map itself)
+		let mo = players[e.playernumber].mo;
+		let d = GetDefaultByType(mo.GetClass());
+		mo.A_SetSize(d.radius*1.3,d.height*1.3);
+		mo.scale = d.scale*1.3;
+		mo.player.viewheight = mo.viewheight = 60;
 	}
 }

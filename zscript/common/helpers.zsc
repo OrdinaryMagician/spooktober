@@ -1,1 +1,19 @@
 // Useful shared code
+Class SpooktoberUtil abstract play
+{
+	static void SetLineLight( int tag, int brightness, bool absolute = false )
+	{
+		let l = LineIdIterator.Create(tag);
+		int i;
+		while ( (i = l.Next()) != -1 )
+		{
+			for ( int j=0; j<2; j++ )
+			{
+				if ( !level.lines[i].sidedef[j] ) continue;
+				level.lines[i].sidedef[0].light = brightness;
+				if ( absolute ) level.lines[i].sidedef[0].flags |= Side.WALLF_ABSLIGHTING;
+				else level.lines[i].sidedef[0].flags &= ~Side.WALLF_ABSLIGHTING;
+			}
+		}
+	}
+}

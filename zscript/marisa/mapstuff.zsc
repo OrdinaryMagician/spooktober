@@ -10,16 +10,16 @@ Class mkFireBrazier : SwitchableDecoration
 {
 	Default
 	{
-		//$Title "Toggleable Fire Brazier"
-		//$Category "Marisa Kirisame"
+		//$Title Toggleable Fire Brazier
+		//$Category Marisa Kirisame
 		Radius 16;
 		Height 44;
-		+SOLID
+		+SOLID;
 	}
 	States
 	{
 	Spawn:
-		KFR1 I 0;
+		KFR1 A 0;
 		Goto Inactive;
 	Active:
 		KFR1 A 0
@@ -45,16 +45,16 @@ Class mkWallTorch : SwitchableDecoration
 {
 	Default
 	{
-		//$Title "Toggleable Wall Torch"
-		//$Category "Marisa Kirisame"
+		//$Title Toggleable Wall Torch
+		//$Category Marisa Kirisame
 		Radius 6;
 		Height 16;
-		+NOGRAVITY
+		+NOGRAVITY;
 	}
 	States
 	{
 	Spawn:
-		WTRH D 0;
+		WTRH A 0;
 		Goto Inactive;
 	Active:
 		WTRH A 0
@@ -80,17 +80,17 @@ Class mkChandelier : SwitchableDecoration
 {
 	Default
 	{
-		//$Title "Toggleable Chandelier"
-		//$Category "Marisa Kirisame"
+		//$Title Toggleable Chandelier
+		//$Category Marisa Kirisame
 		Radius 20;
 		Height 60;
-		+SPAWNCEILING
-		+NOGRAVITY
+		+SPAWNCEILING;
+		+NOGRAVITY;
 	}
 	States
 	{
 	Spawn:
-		CHDL D 0;
+		CHDL A 0;
 		Goto Inactive;
 	Active:
 		CHDL A 0
