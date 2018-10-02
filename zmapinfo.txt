@@ -35,37 +35,37 @@ Map SPOOKHUB "Gallery Of Spooks - Marisa Kirisame"
 	levelnum = 1
 }
 
-Map SPOOK01 "Large House of Illusions - leodoom85"
+Map SPOOK01 "Untitled - N/A"
 {
 	levelnum = 2
 }
 
-Map SPOOK02 "Untitled - FishyClockwork"
+Map SPOOK02 "Untitled - N/A"
 {
 	levelnum = 3
 }
 
-Map SPOOK03 "Untitled - Caligari87"
+Map SPOOK03 "Untitled - N/A"
 {
 	levelnum = 4
 }
 
-Map SPOOK04 "Mansion of Despair - QuakedoomNukem Cz"
+Map SPOOK04 "Untitled - N/A"
 {
 	levelnum = 5
 }
 
-Map SPOOK05 "Untitled - PixelEater"
+Map SPOOK05 "Untitled - N/A"
 {
 	levelnum = 6
 }
 
-Map SPOOK06 "Horrible Night - UndeadRyker"
+Map SPOOK06 "Untitled - N/A"
 {
 	levelnum = 7
 }
 
-Map SPOOK07 "Untitled - CardBoxNeko"
+Map SPOOK07 "Untitled - N/A"
 {
 	levelnum = 8
 }
@@ -100,4 +100,24 @@ Map SPOOK13 "Nightmare Fuel Arena - Marisa Kirisame"
 	CheckSwitchRange
 	EvenLighting
 	levelnum = 14
+}
+
+Map SECRET01 "Untitled - N/A"
+{
+	levelnum = 15
+}
+
+Map SECRET02 "Untitled - N/A"
+{
+	levelnum = 16
+}
+
+Map SECRET03 "Untitled - N/A"
+{
+	levelnum = 17
+}
+
+Map SECRET04 "Untitled - N/A"
+{
+	levelnum = 18
 }

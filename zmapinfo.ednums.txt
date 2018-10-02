@@ -4,4 +4,25 @@ DoomEdNums
 	6400 = mkFireBrazier
 	6402 = mkWallTorch
 	6403 = mkChandelier
+	6405 = mkBlockActor32
+	6406 = mkBlockActor32Tall
+	6410 = mkThiefSofa
+	6411 = mkThiefSofaChair
+	6412 = mkThiefPainting1
+	6413 = mkThiefPainting2
+	6414 = mkThiefPainting3
+	6415 = mkThiefPainting4
+	6416 = mkThiefPainting5
+	6417 = mkThiefPainting6
+	6418 = mkThiefPainting7
+	6419 = mkThiefPainting8
+	6420 = mkThiefPainting9
+	6421 = mkThiefPainting10
+	6422 = mkThiefPainting11
+	6423 = mkThiefPainting12
+	6424 = mkThiefPainting13
+	6425 = mkThiefPainting14
+	6426 = mkThiefPainting15
+	6427 = mkThiefPainting16
+	6428 = mkThiefTableCabinet
 }

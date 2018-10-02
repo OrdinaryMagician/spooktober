@@ -80,6 +80,7 @@ Class SpooktoberHandler : EventHandler
 			mo.A_SetSize(d.radius,d.height);
 			mo.scale = d.scale;
 			mo.player.viewheight = mo.viewheight = d.viewheight;
+			mo.viewbob = d.viewbob;
 		}
 	}
 
@@ -132,5 +133,8 @@ Class SpooktoberHandler : EventHandler
 		mo.A_SetSize(d.radius*1.3,d.height*1.3);
 		mo.scale = d.scale*1.3;
 		mo.player.viewheight = mo.viewheight = 60;
+		mo.viewbob = d.viewbob*0.5;
+		// footsteps!
+		mkFootstepMaker.AttachTo(mo);
 	}
 }

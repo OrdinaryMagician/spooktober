@@ -5,6 +5,456 @@ Class mkMonkBase : Actor abstract
 {
 }
 
+Class mkFootstepMaker : Thinker
+{
+	PlayerPawn mo;
+	bool lastground, init;
+	double lastvelz, prevvelz;
+
+	static void AttachTo( PlayerPawn mo )
+	{
+		let t = ThinkerIterator.Create("mkFootstepMaker",STAT_USER);
+		if ( t.Next() ) return;
+		let m = new("mkFootstepMaker");
+		m.ChangeStatNum(STAT_USER);
+		m.mo = mo;
+		m.init = false;
+	}
+
+	private int GetFloorMaterial()
+	{
+		static const String materials[] =
+		{
+			"1:rug02", "1:rug02a",
+			"4:floor4",
+			"5:rufgry", "5:dunfloor"
+			"7:frame3b", "7:palslant"
+		};
+		String tx = TexMan.GetName(mo.floorpic);
+		for ( int i=0; i<materials.size(); i++ )
+		{
+			String l = materials[i].Left(1), r = materials[i].Mid(2);
+			if ( r ~== tx )
+				return l.ToInt();
+		}
+		return 0;
+	}
+
+	private void PlayStep( double vol = 1.0 )
+	{
+		switch ( GetFloorMaterial() )
+		{
+		case 1:
+			mo.A_PlaySound("thief/carpet",CHAN_7,vol);
+			break;
+		case 2:
+			mo.A_PlaySound("thief/dirt",CHAN_7,vol);
+			break;
+		case 3:
+			mo.A_PlaySound("thief/grass",CHAN_7,vol);
+			break;
+		case 4:
+			mo.A_PlaySound("thief/metal",CHAN_7,vol);
+			break;
+		case 5:
+			mo.A_PlaySound("thief/stone",CHAN_7,vol);
+			break;
+		case 6:
+			mo.A_PlaySound("thief/tile",CHAN_7,vol);
+			break;
+		case 7:
+			mo.A_PlaySound("thief/wood",CHAN_7,vol);
+			break;
+		}
+	}
+	private void PlayWetStep( double vol = 1.0 )
+	{
+	}
+	private void PlayLand( double vol = 1.0 )
+	{
+		switch ( GetFloorMaterial() )
+		{
+		case 1:
+			mo.A_PlaySound("thief/lcarpet",CHAN_6,vol);
+			break;
+		case 2:
+			mo.A_PlaySound("thief/ldirt",CHAN_6,vol);
+			break;
+		case 3:
+			mo.A_PlaySound("thief/lgrass",CHAN_6,vol);
+			break;
+		case 4:
+			mo.A_PlaySound("thief/lmetal",CHAN_6,vol);
+			break;
+		case 5:
+			mo.A_PlaySound("thief/lstone",CHAN_6,vol);
+			break;
+		case 6:
+			mo.A_PlaySound("thief/ltile",CHAN_6,vol);
+			break;
+		case 7:
+			mo.A_PlaySound("thief/lwood",CHAN_6,vol);
+			break;
+		}
+	}
+	private void PlayWetLand( double vol = 1.0 )
+	{
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		if ( !mo )
+		{
+			Destroy();
+			return;
+		}
+		if ( !init )
+		{
+			init = true;
+			lastground = true;
+			mo.player.onground = true;
+			return;
+		}
+		double ang = level.time/(20*TICRATE/35.)*360.;
+		if ( mo.player.onground && !mo.bNoGravity && !lastground && (mo.waterlevel < 3) )
+		{
+			double vol = clamp(-(lastvelz-8)*0.05,0.01,1.0);
+			if ( (mo.waterlevel > 0) || mo.GetFloorTerrain().IsLiquid && !mo.bOnMobj ) PlayWetLand(vol);
+			else PlayLand(vol);
+		}
+		if ( (abs(sin(ang)) >= 1.0) && mo.player.onground && lastground && (mo.player.jumptics == 0) && (mo.player.cmd.forwardmove || mo.player.cmd.sidemove) && (mo.waterlevel < 3) )
+		{
+			double vol = abs(mo.vel.xy.length())*0.03;
+			if ( (mo.waterlevel > 0) || mo.GetFloorTerrain().IsLiquid && !mo.bOnMobj ) PlayWetStep(vol);
+			else PlayStep(vol);
+		}
+		lastground = mo.player.onground;
+		lastvelz = prevvelz;
+		prevvelz = mo.vel.z;
+	}
+}
+
+// collision models
+Class mkBlockActor32 : Actor
+{
+	Default
+	{
+		//$Title 32x32 hitbox
+		//$Category Marisa Kirisame
+		+SOLID;
+		+NOGRAVITY;
+		Radius 16;
+		Height 32;
+	}
+	States
+	{
+	Spawn:
+		TNT1 A -1;
+		Stop;
+	}
+}
+Class mkBlockActor32Tall : Actor
+{
+	Default
+	{
+		//$Title 32x128 hitbox
+		//$Category Marisa Kirisame
+		+SOLID;
+		+NOGRAVITY;
+		Radius 16;
+		Height 128;
+	}
+	States
+	{
+	Spawn:
+		TNT1 A -1;
+		Stop;
+	}
+}
+
+// thief decoration models
+Class mkThiefDecoration : Actor abstract
+{
+	Default
+	{
+		Radius 0.1;
+		Height 0;
+		-SOLID;
+		+NOGRAVITY;
+	}
+}
+
+Class mkThiefSofa : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Sofa
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefSofaChair : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Sofa Chair
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefTableCabinet : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Table Cabinet
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefPainting1 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #1
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting2 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #2
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting3 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #3
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting4 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #4
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting5 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #5
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting6 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #6
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting7 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #7
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting8 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #8
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting9 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #9
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting10 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #10
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting11 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #11
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting12 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #12
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting13 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #13
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting14 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #14
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting15 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #15
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkThiefPainting16 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Thief Painting #16
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
 // toggleable lights from 20 heretics
 Class mkFireBrazier : SwitchableDecoration
 {

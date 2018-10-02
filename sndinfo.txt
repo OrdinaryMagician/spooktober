@@ -36,6 +36,50 @@ $pitchshift thief/firelp1 0
 $pitchshift thief/firelp8 0
 $pitchshift thief/firelp9 0
 
+thief/lcarpet FTCAR_J
+thief/carpet1 FTCAR_P1
+thief/carpet2 FTCAR_P2
+thief/carpet3 FTCAR_P3
+thief/carpet4 FTCAR_P4
+$random thief/carpet { thief/carpet1 thief/carpet2 thief/carpet3 thief/carpet4 }
+thief/ldirt FTDIR_J
+thief/dirt1 FTDIR_P1
+thief/dirt2 FTDIR_P2
+thief/dirt3 FTDIR_P3
+thief/dirt4 FTDIR_P4
+$random thief/dirt { thief/dirt1 thief/dirt2 thief/dirt3 thief/dirt4 }
+thief/lgrass FTGRA_J
+thief/grass1 FTGRA_P1
+thief/grass2 FTGRA_P2
+thief/grass3 FTGRA_P3
+thief/grass4 FTGRA_P4
+$random thief/grass { thief/grass1 thief/grass2 thief/grass3 thief/grass4 }
+thief/lmetal FTMET_J
+thief/metal1 FTMET_P1
+thief/metal2 FTMET_P2
+thief/metal3 FTMET_P3
+thief/metal4 FTMET_P4
+$random thief/metal { thief/metal1 thief/metal2 thief/metal3 thief/metal4 }
+thief/lstone FTROC_J
+thief/stone1 FTROC_P1
+thief/stone2 FTROC_P2
+thief/stone3 FTROC_P3
+thief/stone4 FTROC_P4
+$random thief/stone { thief/stone1 thief/stone2 thief/stone3 thief/stone4 }
+thief/ltile FTTIL_J
+thief/tile1 FTTIL_P1
+thief/tile2 FTTIL_P2
+thief/tile3 FTTIL_P3
+thief/tile4 FTTIL_P4
+$random thief/tile { thief/tile1 thief/tile2 thief/tile3 thief/tile4 }
+thief/lwood FTWOO_J
+thief/wood1 FTWOO_P1
+thief/wood2 FTWOO_P2
+thief/wood3 FTWOO_P3
+thief/wood4 FTWOO_P4
+$random thief/wood { thief/wood1 thief/wood2 thief/wood3 thief/wood4 }
+
 hexen/ignite	TORCH2
+hexen/locked	LOCKED
 
 ////////
