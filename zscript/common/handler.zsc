@@ -1,0 +1,118 @@
+// global data shared between maps, used for progression
+Class SpooktoberGlobals : Thinker
+{
+	bool completion[12];
+	int stage;
+
+	static SpooktoberGlobals GetInstance()
+	{
+		let t = ThinkerIterator.Create("SpooktoberGlobals",STAT_STATIC);
+		let vars = SpooktoberGlobals(t.Next());
+		if ( !vars )
+		{
+			vars = new("SpooktoberGlobals");
+			vars.ChangeStatNum(STAT_STATIC);
+		}
+		return vars;
+	}
+
+	static void SetCompletion( int n )
+	{
+		let v = GetInstance();
+		v.completion[n] = true;
+		if ( (n > 8) && GetFullCompletion(3) ) v.stage = max(7,v.stage);
+		else if ( (n > 5) && GetFullCompletion(2) ) v.stage = max(5,v.stage);
+		else if ( (n > 2) && GetFullCompletion(1) ) v.stage = max(3,v.stage);
+		else if ( GetFullCompletion(0) ) v.stage = max(1,v.stage);
+	}
+
+	static bool GetCompletion( int n )
+	{
+		let v = GetInstance();
+		return v.completion[n];
+	}
+
+	static bool GetFullCompletion( int n )
+	{
+		let v = GetInstance();
+		if ( n == 0 )
+			return (v.completion[0]&&v.completion[1]&&v.completion[2]);
+		else if ( n == 1 )
+			return (v.completion[3]&&v.completion[4]&&v.completion[5]);
+		else if ( n == 2 )
+			return (v.completion[6]&&v.completion[7]&&v.completion[8]);
+		else if ( n == 3 )
+			return (v.completion[9]&&v.completion[10]&&v.completion[11]);
+		return false;
+	}
+
+	static void AdvanceStage()
+	{
+		let v = GetInstance();
+		if ( GetFullCompletion(3) ) v.stage = max(8,v.stage);
+		else if ( GetFullCompletion(2) ) v.stage = max(6,v.stage);
+		else if ( GetFullCompletion(1) ) v.stage = max(4,v.stage);
+		else if ( GetFullCompletion(0) ) v.stage = max(2,v.stage);
+	}
+
+	static int GetStage()
+	{
+		let v = GetInstance();
+		return v.stage;
+	}
+}
+
+// main handler of various events, including loadouts for maps
+Class SpooktoberHandler : EventHandler
+{
+	override void WorldUnloaded( WorldEvent e )
+	{
+		if ( (level.levelnum > 1) && (level.levelnum < 14) )
+			SpooktoberGlobals.SetCompletion(level.levelnum-2);
+	}
+
+	override void WorldLoaded( WorldEvent e )
+	{
+		if ( level.levelnum != -1 ) return;
+		// TODO put all the progression unlocks here
+		switch ( SpooktoberGlobals.GetStage() )
+		{
+		case 1:
+			// unlock east wing
+			break;
+		case 2:
+			// east wing unlocked
+			break;
+		case 3:
+			// unlock west wing
+			break;
+		case 4:
+			// west wing unlocked
+			break;
+		case 5:
+			// unlock second floor
+			break;
+		case 6:
+			// second floor unlocked
+			break;
+		case 7:
+			// unlock basement
+			break;
+		case 8:
+			// basement unlocked
+			break;
+		default:
+			// do nothing
+			break;
+		}
+		// advance the stage
+		AdvanceStage();
+	}
+
+	override void PlayerEntered( PlayerEvent e )
+	{
+		if ( level.levelnum != 1 ) return;
+		// no items at all while in the hub, please
+		players[e.playernumber].mo.ClearInventory();
+	}
+}

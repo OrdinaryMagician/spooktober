@@ -1,0 +1,103 @@
+include "zmapinfo.ednums.txt"
+
+GameInfo
+{
+	StatusBarClass = "SpooktoberHUD"
+	StatScreen_Single = "SpooktoberStatScreenSP"
+	StatScreen_Coop = "SpooktoberStatScreenCoop"
+	StatScreen_DM = "SpooktoberStatScreenDM"
+	AddEventHandlers = "SpooktoberHandler"
+}
+
+DefaultMap
+{
+	Sky1 = "sky1"
+	Next = "SPOOKHUB"
+	SecretNext = "SPOOKHUB"
+	Cluster = 0
+	ResetInventory
+	ResetHealth
+}
+
+ClearEpisodes
+
+Episode SPOOKHUB
+{
+	Name = "Spooktober Community Map Project"
+}
+
+Map SPOOKHUB "Gallery Of Spooks - Marisa Kirisame"
+{
+	NoIntermission
+	CheckSwitchRange
+	EvenLighting
+	Music = "D_SPKHUB"
+	levelnum = 1
+}
+
+Map SPOOK01 "Large House of Illusions - leodoom85"
+{
+	levelnum = 2
+}
+
+Map SPOOK02 "Untitled - FishyClockwork"
+{
+	levelnum = 3
+}
+
+Map SPOOK03 "Untitled - Caligari87"
+{
+	levelnum = 4
+}
+
+Map SPOOK04 "Mansion of Despair - QuakedoomNukem Cz"
+{
+	levelnum = 5
+}
+
+Map SPOOK05 "Untitled - PixelEater"
+{
+	levelnum = 6
+}
+
+Map SPOOK06 "Horrible Night - UndeadRyker"
+{
+	levelnum = 7
+}
+
+Map SPOOK07 "Untitled - CardBoxNeko"
+{
+	levelnum = 8
+}
+
+Map SPOOK08 "Untitled - N/A"
+{
+	levelnum = 9
+}
+
+Map SPOOK09 "Untitled - N/A"
+{
+	levelnum = 10
+}
+
+Map SPOOK10 "Untitled - N/A"
+{
+	levelnum = 11
+}
+
+Map SPOOK11 "Untitled - N/A"
+{
+	levelnum = 12
+}
+
+Map SPOOK12 "Untitled - N/A"
+{
+	levelnum = 13
+}
+
+Map SPOOK13 "Nightmare Fuel Arena - Marisa Kirisame"
+{
+	CheckSwitchRange
+	EvenLighting
+	levelnum = 14
+}

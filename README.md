@@ -6,6 +6,7 @@ A Halloween 2018 map pack for Doom.
 
 - Maps must be horror themed.
 - Custom resources are allowed, along with new monsters and items/weapons.
+- Maps must be in UDMF format.
 - All maps are to be played from pistol start (or any starting items of the
   author's choice)
 - Jumpscares are discouraged, though not outright forbidden.
@@ -14,16 +15,16 @@ A Halloween 2018 map pack for Doom.
 ### Current status
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
-- **SPOOK01**: Large House of Illusions - leodoom85
-- **SPOOK02**: Untitled Map - FishyClockwork
-- **SPOOK03**: *Slot open*.
-- **SPOOK04**: *Slot open*.
-- **SPOOK05**: *Slot open*.
-- **SPOOK06**: *Slot open*.
-- **SPOOK07**: *Slot open*.
-- **SPOOK08**: *Slot open*.
-- **SPOOK09**: *Slot open*.
-- **SPOOK10**: *Slot open*.
-- **SPOOK11**: *Slot open*.
-- **SPOOK12**: *Slot open*.
-- **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame.
+- **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
+
+- Large House of Illusions - leodoom85
+- Untitled Map - FishyClockwork
+- Untitled Map - Caligari87
+- Mansion of Despair - QuakedoomNukem Cz
+- Untitled Map - Pixel Eater
+- Horrible Night - UndeadRyker
+- Untitled Map - CardBoxNeko
+- Untitled Map - Rachael
+- Untitled Map - zrrion the insect
+- Untitled Map - A.Gamma
+- Untitled Map - Camper125Lv

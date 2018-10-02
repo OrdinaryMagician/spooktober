@@ -1,0 +1,52 @@
+// Marisa
+flickerlight2 MKBRAZIER
+{
+	color 1.0 0.8 0.0
+	size 204
+	secondarySize 212
+	interval 0.1
+	offset 0 48 0
+	attenuate 1
+}
+object mkFireBrazier
+{
+	frame KFR1A { light MKBRAZIER }
+	frame KFR1B { light MKBRAZIER }
+	frame KFR1C { light MKBRAZIER }
+	frame KFR1D { light MKBRAZIER }
+	frame KFR1E { light MKBRAZIER }
+	frame KFR1F { light MKBRAZIER }
+	frame KFR1G { light MKBRAZIER }
+	frame KFR1H { light MKBRAZIER }
+}
+
+flickerlight2 MKTORCH
+{
+	color 0.85 0.7 0.0
+	size 64
+	secondarySize 72
+	interval 0.1
+	offset 0 70 0
+}
+object mkWallTorch
+{
+	frame WTRHA { light MKTORCH }
+	frame WTRHB { light MKTORCH }
+	frame WTRHC { light MKTORCH }
+}
+
+flickerlight2 MKCHANDELIER
+{
+	color 0.5 0.4 0.0
+	size 160
+	secondarySize 168
+	interval 0.1
+	attenuate 1
+}
+object mkChandelier
+{
+	frame CHDLA { light MKCHANDELIER }
+	frame CHDLB { light MKCHANDELIER }
+	frame CHDLC { light MKCHANDELIER }
+}
+

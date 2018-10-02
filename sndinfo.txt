@@ -1,0 +1,41 @@
+//////// Marisa
+
+rain/rain rainM1
+rain/rain2 rainM2
+$pitchshift rain/rain 0
+$pitchshift rain/rain2 0
+rain/thunder1 thund1
+rain/thunder2 thunder
+rain/thunder3 thunder4
+rain/thunder4 lightn10
+rain/thunder5 lightn11
+rain/thunder6 lightn12
+$random rain/thunder { rain/thunder1 rain/thunder2 rain/thunder3 rain/thunder4 rain/thunder5 rain/thunder6 }
+
+misc/wind1 wind40
+misc/wind2 wind30
+misc/wind3 wind32
+misc/wind4 wind33
+misc/growl growl
+misc/wah stower51
+
+$ambient 6400 rain/rain point 1.5 continuous 0.5
+$ambient 6401 rain/rain2 world continuous 0.5
+$ambient 6402 misc/wind1 point 1.0 continuous 0.25
+$ambient 6403 misc/wind2 point 1.0 continuous 0.25
+$ambient 6404 misc/wind3 point 1.0 continuous 0.25
+$ambient 6405 misc/wind4 point 1.0 continuous 0.25
+$ambient 6406 misc/growl point 2.0 continuous 0.5
+$ambient 6407 misc/wah point 3.0 continuous 0.25
+
+thief/firelp1	FIRELP1
+thief/firelp8	FIRELP8
+thief/firelp9	FIRELP9
+$random thief/firelp { thief/firelp1 thief/firelp8 thief/firelp9 }
+$pitchshift thief/firelp1 0
+$pitchshift thief/firelp8 0
+$pitchshift thief/firelp9 0
+
+hexen/ignite	TORCH2
+
+////////

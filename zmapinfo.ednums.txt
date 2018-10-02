@@ -1,0 +1,7 @@
+// Marisa
+DoomEdNums
+{
+	6400 = mkFireBrazier
+	6402 = mkWallTorch
+	6403 = mkChandelier
+}
