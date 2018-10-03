@@ -1,0 +1,293 @@
+
+// Dialogue sequences
+// all sequences have to be put in the same class since we don't have an
+// AllClasses array to dynamically load them
+Class mkDialogueSequence : HUDMessageBase
+{
+	PlayerInfo p;
+	int seqnum, curstate, curdelay, delaycnt, charcnt;
+	double dimalpha;
+	bool bStarted, bInText;
+	BrokenLines lines;
+	String header, voice;
+
+	mkDialogueSequence Init( int seqnum, PlayerInfo p )
+	{
+		self.seqnum = seqnum;
+		self.p = p;
+		return self;
+	}
+
+	private void DrawText()
+	{
+		int cur = charcnt;
+		Vector2 pos = (15,145);
+		for ( int i=0; i<lines.Count(); i++ )
+		{
+			if ( cur <= 0 ) break;
+			String part = lines.StringAt(i).Left(cur);
+			Screen.DrawText(SmallFont,Font.CR_ORANGE,pos.x,pos.y,part,DTA_VirtualWidth,320,DTA_VirtualHeight,200,DTA_Alpha,dimalpha);
+			pos.y += SmallFont.GetHeight();
+			cur -= lines.StringAt(i).Length();
+		}
+	}
+
+	private void StartText( string cont )
+	{
+		String loc = cont;
+		if ( cont.CharAt(0) == "$" ) loc = StringTable.Localize(cont);
+		lines = SmallFont.BreakLines(loc,290);
+		charcnt = 0;
+		bInText = true;
+	}
+
+	private int TotalLength()
+	{
+		int len = 0;
+		for ( int i=0; i<lines.Count(); i++ )
+			len += lines.StringAt(i).Length();
+		return len;
+	}
+
+	private String GetChar( int pos )
+	{
+		int cur = pos;
+		for ( int i=0; i<lines.Count(); i++ )
+		{
+			int len = lines.StringAt(i).Length();
+			if ( cur < len )
+				return lines.StringAt(i).CharAt(cur);
+			cur -= len;
+		}
+		return "";
+	}
+
+	private void AdvanceText( bool bSkip )
+	{
+		charcnt++;
+		if ( charcnt >= TotalLength() )
+		{
+			if ( !bSkip ) return;
+			bInText = false;
+			curstate++;
+			curdelay = 3;
+			return;
+		}
+		// play sound on non-whitespace
+		String ch = GetChar(charcnt);
+		if ( (ch != "\n") && (ch != " ") && (p == players[consoleplayer]) )
+			S_Sound(voice,CHAN_VOICE|CHAN_UI,0.5,ATTN_NONE);
+		if ( bSkip )
+		{
+			charcnt = TotalLength();
+			curdelay = 5;
+		}
+		else curdelay = 1;
+	}
+
+	private void DialogueSeq1()
+	{
+		switch( curstate )
+		{
+		case 0:
+			header = StringTable.Localize("$HUBD_1");
+			voice = "misc/i_pkup";
+			StartText("$HUBD_11");
+			break;
+		case 1:
+			StartText("$HUBD_12");
+			break;
+		case 2:
+			StartText("$HUBD_13");
+			break;
+		case 3:
+			StartText("$HUBD_14");
+			break;
+		case 4:
+			StartText("$HUBD_15");
+			break;
+		case 5:
+			StartText("$HUBD_16");
+			break;
+		case 6:
+			StartText("$HUBD_17");
+			break;
+		case 7:
+			EventHandler.SendNetworkEvent("dialogue_setnext",2);
+			EventHandler.SendNetworkEvent("dialogue_special");
+			seqnum = 0;
+			break;
+		}
+	}
+
+	private void DialogueSeq2()
+	{
+		switch( curstate )
+		{
+		case 0:
+			header = StringTable.Localize("$HUBD_1");
+			voice = "misc/i_pkup";
+			StartText("$HUBD_18");
+			break;
+		case 1:
+			seqnum = 0;
+			break;
+		}
+	}
+
+	override bool Tick()
+	{
+		bool bSkip = !!(p.cmd.buttons&BT_USE);
+		if ( !bStarted )
+		{
+			bStarted = true;
+			EventHandler.SendNetworkEvent("dialogue_start");
+		}
+		// here comes the spaghetti code!
+		// fade in textbox
+		if ( seqnum && (dimalpha < 1.0) )
+		{
+			dimalpha += 0.1;
+			return false;
+		}
+		if ( delaycnt < curdelay )
+		{
+			delaycnt++;
+			return false;
+		}
+		curdelay = 0;
+		delaycnt = 0;
+		if ( bInText )
+		{
+			AdvanceText(bSkip);
+			return false;
+		}
+		switch( seqnum )
+		{
+		case 0:
+			// end sequence
+			break;
+		case 1:
+			DialogueSeq1();
+			return false;
+		case 2:
+			DialogueSeq2();
+			return false;
+		default:
+			ThrowAbortException("Unknown dialogue sequence %d",seqnum);
+			return false;
+		}
+		// fade out textbox
+		if ( dimalpha > 0.0 )
+		{
+			dimalpha -= 0.1;
+			return false;
+		}
+		EventHandler.SendNetworkEvent("dialogue_end");
+		return true;
+	}
+
+	override void Draw( int bottom, int visibility )
+	{
+		if ( p != players[consoleplayer] ) return;
+		// draw textbox area
+		Vector2 pos, sz;
+		[pos, sz] = Screen.VirtualToRealCoords((10,140),(300,50),(320,200));
+		Screen.Dim("Black",dimalpha*0.75,int(pos.x),int(pos.y),int(sz.x),int(sz.y));
+		// draw header (if any)
+		if ( header )
+		{
+			int ln = SmallFont.StringWidth(header);
+			[pos, sz] = Screen.VirtualToRealCoords((12,125),(ln+6,12),(320,200));
+			Screen.Dim("Black",dimalpha*0.75,int(pos.x),int(pos.y),int(sz.x),int(sz.y));
+			Screen.DrawText(SmallFont,Font.CR_RED,15,127,header,DTA_VirtualWidth,320,DTA_VirtualHeight,200,DTA_Alpha,dimalpha);
+		}
+		// draw text, if any
+		if ( charcnt > 0 )
+		{
+			DrawText();
+			// draw blinking "next" marker
+			if ( (gametic%16 < 8) && (charcnt > TotalLength()) )
+				Screen.DrawText(SmallFont,Font.CR_RED,300,180,">",DTA_VirtualWidth,320,DTA_VirtualHeight,200,DTA_Alpha,dimalpha);
+		}
+	}
+}
+
+// Main handler for all interactive dialogues with the monks
+Class mkDialogueHandler : EventHandler
+{
+	int seqtime, seqnum;
+	Actor speaker, speakee;
+	PlayerInfo starter;
+	bool orientspeaker, orientspeakee;
+	double oldang;
+
+	override void PostUiTick()
+	{
+		if ( !seqnum || (seqtime < gametic) ) return;
+		let s = new("mkDialogueSequence").Init(seqnum,starter);
+		StatusBar.AttachMessage(s);
+	}
+
+	override void NetworkProcess( ConsoleEvent e )
+	{
+		if ( e.IsManual ) return;
+		if ( e.Name ~== "dialogue_start" )
+		{
+			// face each other
+			if ( orientspeaker )
+			{
+				oldang = speaker.angle;
+				speaker.angle = speaker.AngleTo(speakee);
+			}
+			if ( orientspeakee )
+			{
+				speakee.A_SetAngle(speakee.AngleTo(speaker),SPF_INTERPOLATE);
+				speakee.A_SetPitch(0,SPF_INTERPOLATE);	// no PitchTo yet
+			}
+			speakee.vel *= 0;	// stap
+			starter.vel *= 0;	// STAHP
+			starter.cheats |= CF_TOTALLYFROZEN; // freeze!
+		}
+		else if ( e.Name ~== "dialogue_end" )
+		{
+			// thaw player and return camera
+			starter.cheats &= ~CF_TOTALLYFROZEN;
+			starter.camera = speakee;
+			if ( orientspeaker ) speaker.angle = oldang;
+			seqnum = 0;
+		}
+		else if ( e.Name ~== "dialogue_setcam" )
+		{
+			if ( e.Args[0] <= 0 ) starter.camera = speakee;
+			let i = ActorIterator.Create(e.Args[0]);
+			Actor c = i.Next();
+			if ( c ) starter.camera = c;
+		}
+		else if ( e.Name ~== "dialogue_special" )
+		{
+			// execute speaker's special (if any)
+			level.ExecuteSpecial(speaker.special,speakee,null,false,speaker.args[0],speaker.args[1],speaker.args[2],speaker.args[3],speaker.args[4]);
+		}
+		else if ( e.Name ~== "dialogue_setnext" )
+		{
+			// set the next dialogue index
+			speaker.score = e.Args[0];
+		}
+	}
+
+	static void StartDialogueSequence( Actor speaker, Actor speakee, int seqnum, bool bOrientSpeaker = true, bool bOrientSpeakee = true )
+	{
+		if ( !speakee.player ) return;	// non-players can't activate these
+		let dh = mkDialogueHandler(EventHandler.Find("mkDialogueHandler"));
+		if ( !dh ) ThrowAbortException("Dialogue Handler not found!");
+		if ( dh.seqnum ) return;	// only one at a time
+		dh.seqtime = gametic;
+		dh.seqnum = seqnum;
+		dh.speaker = speaker;
+		dh.speakee = speakee;
+		dh.starter = speakee.player;
+		dh.orientspeaker = bOrientSpeaker;
+		dh.orientspeakee = bOrientSpeakee;
+	}
+}

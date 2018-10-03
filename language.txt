@@ -1,1 +1,42 @@
 [enu default]
+// Hub Dialogues
+
+HUBD_1 = "Brother Marcus";
+// 1: Initial
+HUBD_11 = "Ah, hello. You must be the man they call \"Doom Slayer\", am I correct? I'm glad you're here.";
+HUBD_12 = "You see, we came to this mansion in order to cleanse it from evil. However, it appears we underestimated the forces at work here.";
+HUBD_13 = "The master of this house of horrors has set barriers around many parts of the mansion, trapping my brothers inside.";
+HUBD_14 = "Seeing as you are quite skilled in... your profession... I'm sure you could be of assistance, so hear me out.";
+HUBD_15 = "You may have noticed those large paintings already. They are portals to other worlds, each more terrifying than the last.";
+HUBD_16 = "We believe that by exterminating the evil within these paintings, we can break the barriers blocking the other areas of the house.";
+HUBD_17 = "Once I reunite with my brothers, we should be able to draw out the evil master. Then... he's all yours, I guess...";
+//
+HUBD_18 = "There is great evil within these walls...";
+// 3: Unlocked East Wing
+HUBD_19 = "The east wing has been opened, please seek brother James. He should be in the dining room.";
+//
+HUBD_110 = "I haven't seen such a wild storm in years...";
+// 5: Unlocked West Wing
+HUBD_111 = "The west wing is clear. Brother Gunther should be somewhere around.";
+//
+HUBD_112 = "Hmm... The oppressive atmosphere of this place seems weaker than before...";
+// 7: Unlocked Second Floor
+HUBD_113 = "So, the second floor is next. If I remember correctly, brother Sigmund was up there.";
+HUBD_114 = "He's probably in the study, that man sure loves to read...";
+//
+HUBD_115 = "I must say, I'm impressed by how easily you're handling this...";
+// 9: Unlocked Basement
+HUBD_116 = "I can feel a great surge of power down in the basement. The fiend must be hiding there.";
+HUBD_117 = "We will go on ahead and reunite with brother Alfred. It's time to get to the bottom of this...";
+// 10: Moved to Basement
+HUBD_118 = "The final painting... So this is where he's hiding...";
+HUBD_119 = "Well, I'm sure you are eager to confront the beast, so let's not waste any time.";
+//
+HUBD_120 = "Good luck, friend...";
+// 11: All Clear
+HUBD_121 = "It is done, then... Many thanks, friend. We would have long perished without your help.";
+
+HUBD_2 = "Brother James";
+HUBD_3 = "Brother Gunther";
+HUBD_4 = "Brother Sigmund";
+HUBD_5 = "Brother Alfred";

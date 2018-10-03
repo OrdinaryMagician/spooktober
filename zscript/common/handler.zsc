@@ -2,7 +2,20 @@
 Class SpooktoberGlobals : Thinker
 {
 	bool completion[12];
+	bool hastalked;
 	int stage;
+
+	static void TalkedToFirstMonk()
+	{
+		let v = GetInstance();
+		v.hastalked = true;
+	}
+
+	static bool HasTalkedToFirstMonk()
+	{
+		let v = GetInstance();
+		return v.hastalked;
+	}
 
 	static SpooktoberGlobals GetInstance()
 	{

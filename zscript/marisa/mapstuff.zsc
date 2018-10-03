@@ -3,6 +3,101 @@
 // Base classe of monks tending to the gallery
 Class mkMonkBase : Actor abstract
 {
+	override bool Used( Actor user )
+	{
+		if ( !score ) return false;
+		if ( SpooktoberGlobals.HasTalkedToFirstMonk() && (score == 1) ) score = 2;
+		mkDialogueHandler.StartDialogueSequence(self,user,score);
+		return true;
+	}
+
+	Default
+	{
+		+SOLID;
+		Radius 20;
+		Height 72;
+	}
+}
+
+Class mkMonk1 : mkMonkBase
+{
+	Default
+	{
+		//$Title First Monk
+		//$Category Marisa Kirisame
+		XScale 1.21;
+		YScale 1.26;
+	}
+	States
+	{
+	Spawn:
+		MNK1 A -1;
+		Stop;
+	}
+}
+Class mkMonk2 : mkMonkBase
+{
+	Default
+	{
+		//$Title Second Monk
+		//$Category Marisa Kirisame
+		XScale 1.24;
+		YScale 1.18;
+	}
+	States
+	{
+	Spawn:
+		MNK2 A -1;
+		Stop;
+	}
+}
+Class mkMonk3 : mkMonkBase
+{
+	Default
+	{
+		//$Title Third Monk
+		//$Category Marisa Kirisame
+		XScale 1.43;
+		YScale 1.25;
+	}
+	States
+	{
+	Spawn:
+		MNK3 A -1;
+		Stop;
+	}
+}
+Class mkMonk4 : mkMonkBase
+{
+	Default
+	{
+		//$Title Fourth Monk
+		//$Category Marisa Kirisame
+		XScale 1.23;
+		YScale 1.46;
+	}
+	States
+	{
+	Spawn:
+		MNK4 A -1;
+		Stop;
+	}
+}
+Class mkMonk5 : mkMonkBase
+{
+	Default
+	{
+		//$Title Fifth Monk
+		//$Category Marisa Kirisame
+		XScale 1.31;
+		YScale 1.28;
+	}
+	States
+	{
+	Spawn:
+		MNK5 A -1;
+		Stop;
+	}
 }
 
 Class mkFootstepMaker : Thinker

@@ -6,7 +6,7 @@ GameInfo
 	StatScreen_Single = "SpooktoberStatScreenSP"
 	StatScreen_Coop = "SpooktoberStatScreenCoop"
 	StatScreen_DM = "SpooktoberStatScreenDM"
-	AddEventHandlers = "SpooktoberHandler"
+	AddEventHandlers = "SpooktoberHandler", "mkDialogueHandler"
 }
 
 DefaultMap

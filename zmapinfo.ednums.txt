@@ -2,10 +2,15 @@
 DoomEdNums
 {
 	6400 = mkFireBrazier
-	6402 = mkWallTorch
-	6403 = mkChandelier
-	6405 = mkBlockActor32
-	6406 = mkBlockActor32Tall
+	6401 = mkWallTorch
+	6402 = mkChandelier
+	6403 = mkBlockActor32
+	6404 = mkBlockActor32Tall
+	6405 = mkMonk1
+	6406 = mkMonk2
+	6407 = mkMonk3
+	6408 = mkMonk4
+	6409 = mkMonk5
 	6410 = mkThiefSofa
 	6411 = mkThiefSofaChair
 	6412 = mkThiefPainting1
