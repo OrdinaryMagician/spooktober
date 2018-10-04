@@ -4,8 +4,7 @@ DoomEdNums
 	6400 = mkFireBrazier
 	6401 = mkWallTorch
 	6402 = mkChandelier
-	6403 = mkBlockActor32
-	6404 = mkBlockActor32Tall
+	6403 = mkBlockActor
 	6405 = mkMonk1
 	6406 = mkMonk2
 	6407 = mkMonk3
@@ -37,4 +36,6 @@ DoomEdNums
 	6433 = mkAmnesiaPainting1
 	6434 = mkAmnesiaPainting2
 	6435 = mkSpookPainting1
+	6436 = mkThiefChair
+	6437 = mkThiefTable
 }

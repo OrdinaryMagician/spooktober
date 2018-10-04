@@ -14,7 +14,7 @@ Class mkMonkBase : Actor abstract
 	Default
 	{
 		+SOLID;
-		Radius 20;
+		Radius 12;
 		Height 72;
 	}
 }
@@ -121,18 +121,31 @@ Class mkFootstepMaker : Thinker
 		static const String materials[] =
 		{
 			"1:rug02", "1:rug02a",
+			"1:mkThiefSofa", "1:mkThiefSofaChair",
+			"1:mkThiefChairOrnate",
 			"4:floor4",
-			"5:rufgry", "5:dunfloor"
-			"7:frame3b", "7:palslant"
+			"5:rufgry", "5:dunfloor",
+			"7:frame3b", "7:palslant",
+			"7:mkThiefChair", "7:mkThiefTable",
+			"7:mkThiefTableCabinet", "7:mkThiefBarrel"
 		};
-		String tx = TexMan.GetName(mo.floorpic);
+		String tx;
+		bool dummy;
+		Actor onmobj;
+		[dummy, onmobj] = mo.TestMobjZ(true);
+		if ( onmobj )
+		{
+			if ( onmobj is 'mkBlockActor' ) return onmobj.Score;
+			tx = onmobj.GetClassName();
+		}
+		else tx = TexMan.GetName(mo.floorpic);
 		for ( int i=0; i<materials.size(); i++ )
 		{
 			String l = materials[i].Left(1), r = materials[i].Mid(2);
 			if ( r ~== tx )
 				return l.ToInt();
 		}
-		return 0;
+		return 5;
 	}
 
 	private void PlayStep( double vol = 1.0 )
@@ -231,34 +244,25 @@ Class mkFootstepMaker : Thinker
 }
 
 // collision models
-Class mkBlockActor32 : Actor
+Class mkBlockActor : Actor
 {
 	Default
 	{
-		//$Title 32x32 hitbox
+		//$Title Invisible Collision
 		//$Category Marisa Kirisame
 		+SOLID;
 		+NOGRAVITY;
-		Radius 16;
-		Height 32;
+		+NODAMAGE;
+		+NOBLOOD;
+		Mass int.max;
+		Radius 0.1;
+		Height 0;
 	}
-	States
+	override void PostBeginPlay()
 	{
-	Spawn:
-		TNT1 A -1;
-		Stop;
-	}
-}
-Class mkBlockActor32Tall : Actor
-{
-	Default
-	{
-		//$Title 32x128 hitbox
-		//$Category Marisa Kirisame
-		+SOLID;
-		+NOGRAVITY;
-		Radius 16;
-		Height 128;
+		Super.PostBeginPlay();
+		A_SetSize(Scale.y,Scale.x);
+		bSHOOTABLE = bAMBUSH;
 	}
 	States
 	{
@@ -269,23 +273,15 @@ Class mkBlockActor32Tall : Actor
 }
 
 // thief decoration models
-Class mkThiefDecoration : Actor abstract
-{
-	Default
-	{
-		Radius 0.1;
-		Height 0;
-		-SOLID;
-		+NOGRAVITY;
-	}
-}
-
-Class mkThiefSofa : mkThiefDecoration
+Class mkThiefSofa : Actor
 {
 	Default
 	{
 		//$Title Thief Sofa
 		//$Category Marisa Kirisame
+		Radius 16;
+		Height 16;
+		+SOLID;
 	}
 	States
 	{
@@ -295,12 +291,15 @@ Class mkThiefSofa : mkThiefDecoration
 	}
 }
 
-Class mkThiefSofaChair : mkThiefDecoration
+Class mkThiefSofaChair : Actor
 {
 	Default
 	{
 		//$Title Thief Sofa Chair
 		//$Category Marisa Kirisame
+		Radius 16;
+		Height 16;
+		+SOLID;
 	}
 	States
 	{
@@ -310,12 +309,15 @@ Class mkThiefSofaChair : mkThiefDecoration
 	}
 }
 
-Class mkThiefTableCabinet : mkThiefDecoration
+Class mkThiefTableCabinet : Actor
 {
 	Default
 	{
 		//$Title Thief Table Cabinet
 		//$Category Marisa Kirisame
+		Radius 16;
+		Height 48;
+		+SOLID;
 	}
 	States
 	{
@@ -325,7 +327,89 @@ Class mkThiefTableCabinet : mkThiefDecoration
 	}
 }
 
-Class mkThiefPainting1 : mkThiefDecoration
+Class mkThiefChair : Actor
+{
+	Default
+	{
+		//$Title Thief Chair
+		//$Category Marisa Kirisame
+		Radius 10;
+		Height 18;
+		+SOLID;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefTable : Actor
+{
+	Default
+	{
+		//$Title Thief Table
+		//$Category Marisa Kirisame
+		Radius 32;
+		Height 32;
+		+SOLID;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefBarrel : Actor
+{
+	Default
+	{
+		//$Title Thief Barrel
+		//$Category Marisa Kirisame
+		Radius 16;
+		Height 48;
+		+SOLID;
+		+PUSHABLE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefChairOrnate : Actor
+{
+	Default
+	{
+		//$Title Thief Ornate Chair
+		//$Category Marisa Kirisame
+		Radius 16;
+		Height 16;
+		+SOLID;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefPainting : Actor abstract
+{
+	Default
+	{
+		Radius 0.1;
+		Height 0;
+		+NOGRAVITY;	}
+}
+
+Class mkThiefPainting1 : mkThiefPainting
 {
 	Default
 	{
@@ -339,7 +423,7 @@ Class mkThiefPainting1 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting2 : mkThiefDecoration
+Class mkThiefPainting2 : mkThiefPainting
 {
 	Default
 	{
@@ -353,7 +437,7 @@ Class mkThiefPainting2 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting3 : mkThiefDecoration
+Class mkThiefPainting3 : mkThiefPainting
 {
 	Default
 	{
@@ -367,7 +451,7 @@ Class mkThiefPainting3 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting4 : mkThiefDecoration
+Class mkThiefPainting4 : mkThiefPainting
 {
 	Default
 	{
@@ -381,7 +465,7 @@ Class mkThiefPainting4 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting5 : mkThiefDecoration
+Class mkThiefPainting5 : mkThiefPainting
 {
 	Default
 	{
@@ -395,7 +479,7 @@ Class mkThiefPainting5 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting6 : mkThiefDecoration
+Class mkThiefPainting6 : mkThiefPainting
 {
 	Default
 	{
@@ -409,7 +493,7 @@ Class mkThiefPainting6 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting7 : mkThiefDecoration
+Class mkThiefPainting7 : mkThiefPainting
 {
 	Default
 	{
@@ -423,7 +507,7 @@ Class mkThiefPainting7 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting8 : mkThiefDecoration
+Class mkThiefPainting8 : mkThiefPainting
 {
 	Default
 	{
@@ -437,7 +521,7 @@ Class mkThiefPainting8 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting9 : mkThiefDecoration
+Class mkThiefPainting9 : mkThiefPainting
 {
 	Default
 	{
@@ -451,7 +535,7 @@ Class mkThiefPainting9 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting10 : mkThiefDecoration
+Class mkThiefPainting10 : mkThiefPainting
 {
 	Default
 	{
@@ -465,7 +549,7 @@ Class mkThiefPainting10 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting11 : mkThiefDecoration
+Class mkThiefPainting11 : mkThiefPainting
 {
 	Default
 	{
@@ -479,7 +563,7 @@ Class mkThiefPainting11 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting12 : mkThiefDecoration
+Class mkThiefPainting12 : mkThiefPainting
 {
 	Default
 	{
@@ -493,7 +577,7 @@ Class mkThiefPainting12 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting13 : mkThiefDecoration
+Class mkThiefPainting13 : mkThiefPainting
 {
 	Default
 	{
@@ -507,7 +591,7 @@ Class mkThiefPainting13 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting14 : mkThiefDecoration
+Class mkThiefPainting14 : mkThiefPainting
 {
 	Default
 	{
@@ -521,7 +605,7 @@ Class mkThiefPainting14 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting15 : mkThiefDecoration
+Class mkThiefPainting15 : mkThiefPainting
 {
 	Default
 	{
@@ -535,7 +619,7 @@ Class mkThiefPainting15 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkThiefPainting16 : mkThiefDecoration
+Class mkThiefPainting16 : mkThiefPainting
 {
 	Default
 	{
@@ -549,7 +633,7 @@ Class mkThiefPainting16 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkSeacatPainting1 : mkThiefDecoration
+Class mkSeacatPainting1 : mkThiefPainting
 {
 	Default
 	{
@@ -563,7 +647,7 @@ Class mkSeacatPainting1 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkSeacatPainting2 : mkThiefDecoration
+Class mkSeacatPainting2 : mkThiefPainting
 {
 	Default
 	{
@@ -577,7 +661,7 @@ Class mkSeacatPainting2 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkSilentPainting1 : mkThiefDecoration
+Class mkSilentPainting1 : mkThiefPainting
 {
 	Default
 	{
@@ -591,7 +675,7 @@ Class mkSilentPainting1 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkTimPainting1 : mkThiefDecoration
+Class mkTimPainting1 : mkThiefPainting
 {
 	Default
 	{
@@ -605,7 +689,7 @@ Class mkTimPainting1 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkAmnesiaPainting1 : mkThiefDecoration
+Class mkAmnesiaPainting1 : mkThiefPainting
 {
 	Default
 	{
@@ -619,7 +703,7 @@ Class mkAmnesiaPainting1 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkAmnesiaPainting2 : mkThiefDecoration
+Class mkAmnesiaPainting2 : mkThiefPainting
 {
 	Default
 	{
@@ -633,7 +717,7 @@ Class mkAmnesiaPainting2 : mkThiefDecoration
 		Stop;
 	}
 }
-Class mkSpookPainting1 : mkThiefDecoration
+Class mkSpookPainting1 : mkThiefPainting
 {
 	Default
 	{

@@ -293,3 +293,48 @@ Model "mkSpookPainting1"
 	AngleOffset 90
 	FrameIndex MODL A 0 0
 }
+Model "mkThiefChair"
+{
+	Path "models/thief"
+	Model 0 "chair_d.3d"
+	SurfaceSkin 0 0 "WDPLNKS4.png"
+	SurfaceSkin 0 1 "WDPLNKS1.png"
+	Scale 0.0004 0.0004 0.001
+	ZOffset 16
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefTable"
+{
+	Path "models/thief"
+	Model 0 "table_d.3d"
+	SurfaceSkin 0 0 "WDPLNKS1.png"
+	Scale 0.001 0.002 0.0006
+	ZOffset 16
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefBarrel"
+{
+	Path "models/thief"
+	Model 0 "barrel_d.3d"
+	SurfaceSkin 0 0 "BARREL2.png"
+	Scale 0.0008 0.0008 0.0016
+	ZOffset 24
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefChairOrnate"
+{
+	Path "models/thief"
+	Model 0 "chairorn_d.3d"
+	SurfaceSkin 0 0 "CHRSIDE.png"
+	SurfaceSkin 0 1 "CHRFRNT.png"
+	SurfaceSkin 0 2 "CHRDET.png"
+	SurfaceSkin 0 3 "CHRCUSH.png"
+	SurfaceSkin 0 4 "CHRCUSHF.png"
+	Scale 0.0004 0.0006 0.0012
+	ZOffset 22
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
