@@ -143,9 +143,9 @@ Class SpooktoberHandler : EventHandler
 		// adjust player size (too lazy to rescale map itself)
 		let mo = players[e.playernumber].mo;
 		let d = GetDefaultByType(mo.GetClass());
-		mo.A_SetSize(d.radius*1.3,d.height*1.3);
-		mo.scale = d.scale*1.3;
-		mo.player.viewheight = mo.viewheight = 60;
+		mo.A_SetSize(d.radius*1.3,d.height*1.4);
+		mo.scale = d.scale*1.4;
+		mo.player.viewheight = mo.viewheight = 65;
 		mo.viewbob = d.viewbob*0.5;
 		// footsteps!
 		mkFootstepMaker.AttachTo(mo);

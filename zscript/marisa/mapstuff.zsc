@@ -549,6 +549,104 @@ Class mkThiefPainting16 : mkThiefDecoration
 		Stop;
 	}
 }
+Class mkSeacatPainting1 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Seacat Painting #1
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkSeacatPainting2 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Seacat Painting #2
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkSilentPainting1 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Silent Hill Painting #1
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkTimPainting1 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Tim Allen Painting #1
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkAmnesiaPainting1 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Amnesia Painting #1
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkAmnesiaPainting2 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Amnesia Painting #2
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+Class mkSpookPainting1 : mkThiefDecoration
+{
+	Default
+	{
+		//$Title Spooktime Painting #1
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
 
 // toggleable lights from 20 heretics
 Class mkFireBrazier : SwitchableDecoration

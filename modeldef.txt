@@ -216,3 +216,80 @@ Model "mkThiefPainting16"
 	AngleOffset 90
 	FrameIndex MODL A 0 0
 }
+Model "mkSeacatPainting1"
+{
+	Path "models/thief"
+	Model 0 "paintingp_d.3d"
+	SurfaceSkin 0 0 "SEACAT1.png"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.0011 0.001
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkSeacatPainting2"
+{
+	Path "models/thief"
+	Model 0 "paintingp_d.3d"
+	SurfaceSkin 0 0 "SEACAT2.png"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.0011 0.001
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkSilentPainting1"
+{
+	Path "models/thief"
+	Model 0 "paintingl_d.3d"
+	SurfaceSkin 0 0 "SILENT1.png"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.001 0.00137
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkTimPainting1"
+{
+	Path "models/thief"
+	Model 0 "paintingp_d.3d"
+	SurfaceSkin 0 0 "TIM1.png"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.0012 0.001
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkAmnesiaPainting1"
+{
+	Path "models/thief"
+	Model 0 "paintingp_d.3d"
+	SurfaceSkin 0 0 "AMNESIA1.png"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.0011 0.001
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkAmnesiaPainting2"
+{
+	Path "models/thief"
+	Model 0 "paintingp_d.3d"
+	SurfaceSkin 0 0 "AMNESIA2.png"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.0011 0.001
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkSpookPainting1"
+{
+	Path "models/thief"
+	Model 0 "paintingp_d.3d"
+	SurfaceSkin 0 0 "SPOOK1.png"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.001 0.0012
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}

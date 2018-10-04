@@ -30,4 +30,11 @@ DoomEdNums
 	6426 = mkThiefPainting15
 	6427 = mkThiefPainting16
 	6428 = mkThiefTableCabinet
+	6429 = mkSeacatPainting1
+	6430 = mkSeacatPainting2
+	6431 = mkSilentPainting1
+	6432 = mkTimPainting1
+	6433 = mkAmnesiaPainting1
+	6434 = mkAmnesiaPainting2
+	6435 = mkSpookPainting1
 }
