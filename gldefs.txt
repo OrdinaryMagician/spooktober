@@ -3,6 +3,10 @@ hardwareshader texture "RBARRIER"
 {
 	Shader "shaders/glsl/bwarp.fp"
 }
+hardwareshader texture "RBARRIE2"
+{
+	Shader "shaders/glsl/bwarp.fp"
+}
 
 flickerlight2 MKBRAZIER
 {

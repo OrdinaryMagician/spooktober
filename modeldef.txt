@@ -663,7 +663,7 @@ Model "mkBarrier"
 	Skin 0 "RBARRIER"
 	Scale 0.01 1 1.2
 	AngleOffset 90
-	ZOffset 64
+	ZOffset 128
 	FrameIndex MODL A 0 0
 }
 Model "mkBarrierTall"
@@ -673,6 +673,6 @@ Model "mkBarrierTall"
 	Skin 0 "RBARRIE2"
 	Scale 0.01 1 4.8
 	AngleOffset 90
-	ZOffset 256
+	ZOffset 512
 	FrameIndex MODL A 0 0
 }
