@@ -32,9 +32,12 @@ thief/firelp1	FIRELP1
 thief/firelp8	FIRELP8
 thief/firelp9	FIRELP9
 $random thief/firelp { thief/firelp1 thief/firelp8 thief/firelp9 }
-$pitchshift thief/firelp1 0
-$pitchshift thief/firelp8 0
-$pitchshift thief/firelp9 0
+thief/locked	LOCKED
+thief/unlocked	UNLOCKED
+thief/wboxopen	BOXW_OP
+thief/button	B_PUSH
+thief/egloop	EGPEDLP2
+thief/egzap	EGZAP
 
 thief/lcarpet FTCAR_J
 thief/carpet1 FTCAR_P1
@@ -78,8 +81,13 @@ thief/wood2 FTWOO_P2
 thief/wood3 FTWOO_P3
 thief/wood4 FTWOO_P4
 $random thief/wood { thief/wood1 thief/wood2 thief/wood3 thief/wood4 }
+thief/lwater FTWAT_J
+thief/water1 FTWAT_P1
+thief/water2 FTWAT_P2
+thief/water3 FTWAT_P3
+thief/water4 FTWAT_P4
+$random thief/water { thief/water1 thief/water2 thief/water3 thief/water4 }
 
 hexen/ignite	TORCH2
-hexen/locked	LOCKED
 
 ////////

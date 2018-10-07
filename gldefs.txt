@@ -1,4 +1,9 @@
 // Marisa
+hardwareshader texture "RBARRIER"
+{
+	Shader "shaders/glsl/bwarp.fp"
+}
+
 flickerlight2 MKBRAZIER
 {
 	color 1.0 0.8 0.0

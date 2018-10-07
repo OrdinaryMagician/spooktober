@@ -1,4 +1,57 @@
-// Classes for SPOOKHUB and SPOOK13
+// Classes for Marisa's maps
+Class mkDialogueSequence1 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			SetVoice("misc/i_pkup");
+			StartText("$HUBD_11");
+			break;
+		case 1:
+			StartText("$HUBD_12");
+			break;
+		case 2:
+			StartText("$HUBD_13");
+			break;
+		case 3:
+			StartText("$HUBD_14");
+			break;
+		case 4:
+			StartText("$HUBD_15");
+			break;
+		case 5:
+			StartText("$HUBD_16");
+			break;
+		case 6:
+			StartText("$HUBD_17");
+			break;
+		case 7:
+			EventHandler.SendNetworkEvent("talkedtofirstmonk");
+			EndSeq(2);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence2 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			header = StringTable.Localize("$HUBD_1");
+			StartText("$HUBD_18");
+			break;
+		case 1:
+			seqnum = 0;
+			break;
+		}
+	}
+}
 
 // Base classe of monks tending to the gallery
 Class mkMonkBase : Actor abstract
@@ -27,6 +80,7 @@ Class mkMonk1 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.21;
 		YScale 1.26;
+		Tag "$HUBD_1";
 	}
 	States
 	{
@@ -43,6 +97,7 @@ Class mkMonk2 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.24;
 		YScale 1.18;
+		Tag "$HUBD_2";
 	}
 	States
 	{
@@ -59,6 +114,7 @@ Class mkMonk3 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.43;
 		YScale 1.25;
+		Tag "$HUBD_3";
 	}
 	States
 	{
@@ -75,6 +131,7 @@ Class mkMonk4 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.23;
 		YScale 1.46;
+		Tag "$HUBD_4";
 	}
 	States
 	{
@@ -91,6 +148,7 @@ Class mkMonk5 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.31;
 		YScale 1.28;
+		Tag "$HUBD_5";
 	}
 	States
 	{
@@ -120,14 +178,18 @@ Class mkFootstepMaker : Thinker
 	{
 		static const String materials[] =
 		{
-			"1:rug02", "1:rug02a",
-			"1:mkThiefSofa", "1:mkThiefSofaChair",
-			"1:mkThiefChairOrnate",
+			"1:rug02", "1:rug02a", "1:mkThiefSofa",
+			"1:mkThiefSofaChair", "1:mkThiefChairOrnate",
+			"1:mkThiefBedFancy",
 			"4:floor4",
-			"5:rufgry", "5:dunfloor",
-			"7:frame3b", "7:palslant",
-			"7:mkThiefChair", "7:mkThiefTable",
-			"7:mkThiefTableCabinet", "7:mkThiefBarrel"
+			"6:tile",
+			"7:frame3b", "7:palslant", "7:mkThiefChair",
+			"7:mkThiefTable",
+			"7:mkThiefTableCabinet", "7:mkThiefBarrel",
+			"7:mkThiefBox", "7:mkThiefBoxOpen", "7:mkThiefBoxLid",
+			"7:mkThiefArmoire", "7:mkThiefStool", "7:mkThiefDesk",
+			"7:mkThiefTableFancy1", "7:mkThiefTableFancy2",
+			"7:mkThiefFootlocker"
 		};
 		String tx;
 		bool dummy;
@@ -177,6 +239,7 @@ Class mkFootstepMaker : Thinker
 	}
 	private void PlayWetStep( double vol = 1.0 )
 	{
+		mo.A_PlaySound("thief/water",CHAN_7,vol);
 	}
 	private void PlayLand( double vol = 1.0 )
 	{
@@ -207,6 +270,7 @@ Class mkFootstepMaker : Thinker
 	}
 	private void PlayWetLand( double vol = 1.0 )
 	{
+		mo.A_PlaySound("thief/lwater",CHAN_6,vol);
 	}
 
 	override void Tick()
@@ -254,6 +318,7 @@ Class mkBlockActor : Actor
 		+NOGRAVITY;
 		+NODAMAGE;
 		+NOBLOOD;
+		+ACTLIKEBRIDGE;
 		Mass int.max;
 		Radius 0.1;
 		Height 0;
@@ -282,6 +347,7 @@ Class mkThiefSofa : Actor
 		Radius 16;
 		Height 16;
 		+SOLID;
+		+ACTLIKEBRIDGE;
 	}
 	States
 	{
@@ -300,6 +366,7 @@ Class mkThiefSofaChair : Actor
 		Radius 16;
 		Height 16;
 		+SOLID;
+		+ACTLIKEBRIDGE;
 	}
 	States
 	{
@@ -316,8 +383,9 @@ Class mkThiefTableCabinet : Actor
 		//$Title Thief Table Cabinet
 		//$Category Marisa Kirisame
 		Radius 16;
-		Height 48;
+		Height 46;
 		+SOLID;
+		+ACTLIKEBRIDGE;
 	}
 	States
 	{
@@ -336,6 +404,9 @@ Class mkThiefChair : Actor
 		Radius 10;
 		Height 18;
 		+SOLID;
+		+PUSHABLE;
+		+CANPASS;
+		+ACTLIKEBRIDGE;
 	}
 	States
 	{
@@ -354,6 +425,7 @@ Class mkThiefTable : Actor
 		Radius 32;
 		Height 32;
 		+SOLID;
+		+ACTLIKEBRIDGE;
 	}
 	States
 	{
@@ -369,10 +441,12 @@ Class mkThiefBarrel : Actor
 	{
 		//$Title Thief Barrel
 		//$Category Marisa Kirisame
-		Radius 16;
-		Height 48;
+		Radius 15;
+		Height 50;
 		+SOLID;
 		+PUSHABLE;
+		+CANPASS;
+		+ACTLIKEBRIDGE;
 	}
 	States
 	{
@@ -391,6 +465,585 @@ Class mkThiefChairOrnate : Actor
 		Radius 16;
 		Height 16;
 		+SOLID;
+		+PUSHABLE;
+		+CANPASS;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefFootlocker : Actor
+{
+	override void Activate( Actor activator )
+	{
+		if ( InStateSequence(CurState,FindState("Spawn")) )
+			SetStateLabel("Unlock");
+		else if ( InStateSequence(CurState,FindState("Unlocked")) )
+			SetStateLabel("Open");
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if ( bAMBUSH ) SetStateLabel("Opened");
+	}
+
+	Default
+	{
+		//$Title Thief Footlocker
+		//$Category Marisa Kirisame
+		Radius 16;
+		Height 16;
+		+SOLID;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Unlock:
+		MODL A 0;
+		MODL ABCDE 4;
+	Unlocked:
+		MODL E -1;
+		Stop;
+	Open:
+		MODL F 0;
+		MODL FGHIJKLMNOP 4;
+	Opened:
+		MODL P -1;
+		Stop;
+	}
+}
+
+Class mkThiefBox : Actor
+{
+	Default
+	{
+		//$Title Thief Box
+		//$Category Marisa Kirisame
+		Radius 13;
+		Height 25;
+		+SOLID;
+		+PUSHABLE;
+		+CANPASS;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefBoxOpen : Actor
+{
+	Default
+	{
+		//$Title Thief Box (Open)
+		//$Category Marisa Kirisame
+		Radius 13;
+		Height 25;
+		+SOLID;
+		+PUSHABLE;
+		+CANPASS;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefBoxLid : Actor
+{
+	Default
+	{
+		//$Title Thief Box (Lid)
+		//$Category Marisa Kirisame
+		Radius 12;
+		Height 1;
+		+SOLID;
+		+PUSHABLE;
+		+CANPASS;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefArmoire : Actor
+{
+	Default
+	{
+		//$Title Thief Armoire
+		//$Category Marisa Kirisame
+		Radius 16;
+		Height 106;
+		+SOLID;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefBrokenVase1 : Actor
+{
+	Default
+	{
+		//$Title Thief Broken Vase #1
+		//$Category Marisa Kirisame
+		Radius 16;
+		Height 16;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefBrokenVase2 : Actor
+{
+	Default
+	{
+		//$Title Thief Broken Vase #2
+		//$Category Marisa Kirisame
+		Radius 16;
+		Height 16;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefBrokenVase3 : Actor
+{
+	Default
+	{
+		//$Title Thief Broken Vase #3
+		//$Category Marisa Kirisame
+		Radius 16;
+		Height 16;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefCandlestick : Actor
+{
+	Default
+	{
+		//$Title Thief Candlestick
+		//$Category Marisa Kirisame
+		Radius 4;
+		Height 32;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefSkull : Actor
+{
+	Default
+	{
+		//$Title Thief Skull
+		//$Category Marisa Kirisame
+		Radius 4;
+		Height 8;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefSkullGold : Actor
+{
+	Default
+	{
+		//$Title Thief Skull (Gold)
+		//$Category Marisa Kirisame
+		Radius 4;
+		Height 8;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefStool : Actor
+{
+	Default
+	{
+		//$Title Thief Stool
+		//$Category Marisa Kirisame
+		Radius 8;
+		Height 16;
+		+SOLID;
+		+PUSHABLE;
+		+CANPASS;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefDesk : Actor
+{
+	Default
+	{
+		//$Title Thief Desk
+		//$Category Marisa Kirisame
+		Radius 20;
+		Height 41;
+		+SOLID;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefBedFancy : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Bed
+		//$Category Marisa Kirisame
+		Radius 44;
+		Height 20;
+		+SOLID;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefTableFancy1 : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Table #1
+		//$Category Marisa Kirisame
+		Radius 22;
+		Height 41;
+		+SOLID;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefTableFancy2 : Actor
+{
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		SetState(CurState+clamp(args[0],0,3));
+	}
+	Default
+	{
+		//$Title Thief Fancy Table #2
+		//$Category Marisa Kirisame
+		Radius 22;
+		Height 41;
+		+SOLID;
+		+ACTLIKEBRIDGE;
+	}
+	States
+	{
+	Spawn:
+		MODL ABCD -1;
+		Stop;
+	}
+}
+
+Class mkThiefCandlestickFancy : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Candlestick
+		//$Category Marisa Kirisame
+		Radius 4;
+		Height 32;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefGobletFancy1 : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Goblet #1
+		//$Category Marisa Kirisame
+		Radius 2;
+		Height 8;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefGobletFancy2 : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Goblet #2
+		//$Category Marisa Kirisame
+		Radius 2;
+		Height 8;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefVaseFancy1 : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Vase #1
+		//$Category Marisa Kirisame
+		Radius 3;
+		Height 8;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefVaseFancy2 : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Vase #2
+		//$Category Marisa Kirisame
+		Radius 3;
+		Height 8;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefVaseFancy3 : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Vase #3
+		//$Category Marisa Kirisame
+		Radius 3;
+		Height 8;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefVaseFancy4 : Actor
+{
+	Default
+	{
+		//$Title Thief Fancy Vase #4
+		//$Category Marisa Kirisame
+		Radius 3;
+		Height 8;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefVial : Actor
+{
+	Default
+	{
+		//$Title Thief Vial
+		//$Category Marisa Kirisame
+		Radius 2;
+		Height 6;
+		-SOLID;
+		+CANPASS;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class mkThiefProtrudingBook : Actor
+{
+	override bool Used( Actor user )
+	{
+		if ( InStateSequence(CurState,FindState("Activated")) ) return false;
+		SetStateLabel("Activated");
+		return level.ExecuteSpecial(special,user,null,false,args[0],args[1],args[2],args[3],args[4]);
+	}
+
+	Default
+	{
+		//$Title Thief Protruding Book
+		//$Category Marisa Kirisame
+		Radius 2;
+		Height 16;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Activated:
+		MODL A 15;
+		MODL B -1;
+		Stop;
+	}
+}
+
+Class mkThiefProtrudingBookReusable : Actor
+{
+	override bool Used( Actor user )
+	{
+		if ( InStateSequence(CurState,FindState("Activated")) ) return false;
+		SetStateLabel("Activated");
+		return level.ExecuteSpecial(special,user,null,false,args[0],args[1],args[2],args[3],args[4]);
+	}
+
+	Default
+	{
+		//$Title Thief Protruding Book (Reusable)
+		//$Category Marisa Kirisame
+		Radius 2;
+		Height 16;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Activated:
+		MODL A 15;
+		MODL B 30;
+		MODL B 15;
+		MODL A 0;
+		Goto Spawn;
+	}
+}
+
+Class mkThiefCthulhu : Actor
+{
+	Default
+	{
+		//$Title Thief Cthulhu Statue
+		//$Category Marisa Kirisame
+		Radius 22;
+		Height 128;
+		+SOLID;
+		+ACTLIKEBRIDGE;
 	}
 	States
 	{
@@ -834,6 +1487,46 @@ Class mkChandelier : SwitchableDecoration
 			return ResolveState(null);
 		}
 		CHDL D -1;
+		Stop;
+	}
+}
+Class mkBarrier : Actor
+{
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		A_PlaySound("thief/egloop",CHAN_BODY,1.0,true,2.0);
+	}
+	Default
+	{
+		//$Title Barrier FX
+		//$Category Marisa Kirisame
+		RenderStyle "Add";
+		Radius 128;
+		Height 256;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1 BRIGHT;
+		Stop;
+	}
+}
+Class mkBarrierTall : mkBarrier
+{
+	Default
+	{
+		//$Title Barrier FX (Tall)
+		//$Category Marisa Kirisame
+		Radius 128;
+		Height 1024;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1 BRIGHT;
 		Stop;
 	}
 }

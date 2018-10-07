@@ -3,9 +3,6 @@ include "zmapinfo.ednums.txt"
 GameInfo
 {
 	StatusBarClass = "SpooktoberHUD"
-	StatScreen_Single = "SpooktoberStatScreenSP"
-	StatScreen_Coop = "SpooktoberStatScreenCoop"
-	StatScreen_DM = "SpooktoberStatScreenDM"
 	AddEventHandlers = "SpooktoberHandler", "mkDialogueHandler"
 }
 
@@ -14,9 +11,17 @@ DefaultMap
 	Sky1 = "sky1"
 	Next = "SPOOKHUB"
 	SecretNext = "SPOOKHUB"
-	Cluster = 0
+	Cluster = 666
+	NoIntermission
 	ResetInventory
 	ResetHealth
+	ForgetState
+}
+
+Cluster 666
+{
+	Hub
+	ExitText = Lookup, "SP_EXTXT"
 }
 
 ClearEpisodes
@@ -26,98 +31,107 @@ Episode SPOOKHUB
 	Name = "Spooktober Community Map Project"
 }
 
-Map SPOOKHUB "Gallery Of Spooks - Marisa Kirisame"
+Map SPOOKHUB lookup "SP_HUB"
 {
-	NoIntermission
 	CheckSwitchRange
 	EvenLighting
+	RememberState
 	Music = "D_SPKHUB"
+	Next = "EndTitle"
+	SecretNext = "EndTitle"
 	levelnum = 1
 }
 
-Map SPOOK01 "Untitled - N/A"
+Map SPOOK01 lookup "SP_SPOOK01"
 {
 	levelnum = 2
 }
 
-Map SPOOK02 "Untitled - N/A"
+Map SPOOK02 lookup "SP_SPOOK02"
 {
 	levelnum = 3
 }
 
-Map SPOOK03 "Untitled - N/A"
+Map SPOOK03 lookup "SP_SPOOK03"
 {
 	levelnum = 4
 }
 
-Map SPOOK04 "Untitled - N/A"
+Map SPOOK04 lookup "SP_SPOOK04"
 {
 	levelnum = 5
 }
 
-Map SPOOK05 "Untitled - N/A"
+Map SPOOK05 lookup "SP_SPOOK05"
 {
 	levelnum = 6
 }
 
-Map SPOOK06 "Untitled - N/A"
+Map SPOOK06 lookup "SP_SPOOK06"
 {
 	levelnum = 7
 }
 
-Map SPOOK07 "Untitled - N/A"
+Map SPOOK07 lookup "SP_SPOOK07"
 {
 	levelnum = 8
 }
 
-Map SPOOK08 "Untitled - N/A"
+Map SPOOK08 lookup "SP_SPOOK08"
 {
 	levelnum = 9
 }
 
-Map SPOOK09 "Untitled - N/A"
+Map SPOOK09 lookup "SP_SPOOK09"
 {
 	levelnum = 10
 }
 
-Map SPOOK10 "Untitled - N/A"
+Map SPOOK10 lookup "SP_SPOOK10"
 {
 	levelnum = 11
 }
 
-Map SPOOK11 "Untitled - N/A"
+Map SPOOK11 lookup "SP_SPOOK11"
 {
 	levelnum = 12
 }
 
-Map SPOOK12 "Untitled - N/A"
+Map SPOOK12 lookup "SP_SPOOK12"
 {
 	levelnum = 13
 }
 
-Map SPOOK13 "Nightmare Fuel Arena - Marisa Kirisame"
+Map SPOOK13 lookup "SP_SPOOK13"
 {
 	CheckSwitchRange
 	EvenLighting
 	levelnum = 14
 }
 
-Map SECRET01 "Untitled - N/A"
+Map SECRET01 lookup "SP_SECRET01"
 {
 	levelnum = 15
 }
 
-Map SECRET02 "Untitled - N/A"
+Map SECRET02 lookup "SP_SECRET02"
 {
 	levelnum = 16
 }
 
-Map SECRET03 "Untitled - N/A"
+Map SECRET03 lookup "SP_SECRET03"
 {
 	levelnum = 17
 }
 
-Map SECRET04 "Untitled - N/A"
+Map SECRET04 lookup "SP_SECRET04"
 {
 	levelnum = 18
+}
+
+Map SECRET05 lookup "SP_SECRET05"
+{
+	CheckSwitchRange
+	EvenLighting
+	levelnum = 19
 }

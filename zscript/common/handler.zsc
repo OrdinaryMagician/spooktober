@@ -1,89 +1,268 @@
 // global data shared between maps, used for progression
 Class SpooktoberGlobals : Thinker
 {
-	bool completion[12];
-	bool hastalked;
+	bool completion[18];
+	int maptimes[18][2];
+	int mapkills[18][2];
+	int mapitems[18][2];
+	int mapsecrets[18][2];
+	bool hastalked, secretending;
 	int stage;
 
 	static void TalkedToFirstMonk()
 	{
 		let v = GetInstance();
+		if ( !v ) return;
 		v.hastalked = true;
 	}
 
-	static bool HasTalkedToFirstMonk()
+	static clearscope bool HasTalkedToFirstMonk()
 	{
 		let v = GetInstance();
+		if ( !v ) return false;
 		return v.hastalked;
 	}
 
-	static SpooktoberGlobals GetInstance()
+	static void MakeInstance()
 	{
 		let t = ThinkerIterator.Create("SpooktoberGlobals",STAT_STATIC);
 		let vars = SpooktoberGlobals(t.Next());
-		if ( !vars )
-		{
-			vars = new("SpooktoberGlobals");
-			vars.ChangeStatNum(STAT_STATIC);
-		}
+		if ( vars ) return;
+		vars = new("SpooktoberGlobals");
+		vars.ChangeStatNum(STAT_STATIC);
+	}
+
+	static clearscope SpooktoberGlobals GetInstance()
+	{
+		let t = ThinkerIterator.Create("SpooktoberGlobals",STAT_STATIC);
+		let vars = SpooktoberGlobals(t.Next());
 		return vars;
 	}
 
 	static void SetCompletion( int n )
 	{
+		if ( (n < 0) || (n > 17) ) return;
 		let v = GetInstance();
+		if ( !v ) return;
 		v.completion[n] = true;
-		if ( (n > 8) && GetFullCompletion(3) ) v.stage = max(7,v.stage);
-		else if ( (n > 5) && GetFullCompletion(2) ) v.stage = max(5,v.stage);
-		else if ( (n > 2) && GetFullCompletion(1) ) v.stage = max(3,v.stage);
-		else if ( GetFullCompletion(0) ) v.stage = max(1,v.stage);
+		// store the stats
+		v.maptimes[n][0] = level.maptime/Thinker.TICRATE;
+		v.maptimes[n][1] = level.partime/Thinker.TICRATE;
+		v.mapkills[n][0] = level.killed_monsters;
+		v.mapkills[n][1] = level.total_monsters;
+		v.mapitems[n][0] = level.found_items;
+		v.mapitems[n][1] = level.total_items;
+		v.mapsecrets[n][0] = level.found_secrets;
+		v.mapsecrets[n][1] = level.total_secrets;
+		if ( (n <= 12) && GetFullCompletion(4) ) v.stage = max(10,v.stage);
+		else if ( (n <= 11) && GetFullCompletion(3) ) v.stage = max(8,v.stage);
+		else if ( (n <= 8) && GetFullCompletion(2) ) v.stage = max(6,v.stage);
+		else if ( (n <= 5) && GetFullCompletion(1) ) v.stage = max(4,v.stage);
+		else if ( (n <= 2) && GetFullCompletion(0) ) v.stage = max(2,v.stage);
 	}
 
-	static bool GetCompletion( int n )
+	static clearscope bool GetCompletion( int n )
 	{
 		let v = GetInstance();
+		if ( !v ) return false;
 		return v.completion[n];
 	}
 
-	static bool GetFullCompletion( int n )
+	static clearscope int, int GetTimes( int n )
 	{
 		let v = GetInstance();
-		if ( n == 0 )
+		if ( !v ) return 0, 0;
+		return v.maptimes[n][0], v.maptimes[n][1];
+	}
+
+	static clearscope int, int GetKills( int n )
+	{
+		let v = GetInstance();
+		if ( !v ) return 0, 0;
+		return v.mapkills[n][0], v.mapkills[n][1];
+	}
+
+	static clearscope int, int GetItems( int n )
+	{
+		let v = GetInstance();
+		if ( !v ) return 0, 0;
+		return v.mapitems[n][0], v.mapitems[n][1];
+	}
+
+	static clearscope int, int GetSecrets( int n )
+	{
+		let v = GetInstance();
+		if ( !v ) return 0, 0;
+		return v.mapsecrets[n][0], v.mapsecrets[n][1];
+	}
+
+	static clearscope bool GetFullCompletion( int n )
+	{
+		let v = GetInstance();
+		if ( n == 0 )	// foyer
 			return (v.completion[0]&&v.completion[1]&&v.completion[2]);
-		else if ( n == 1 )
+		else if ( n == 1 )	// east wing
 			return (v.completion[3]&&v.completion[4]&&v.completion[5]);
-		else if ( n == 2 )
+		else if ( n == 2 )	// west wing
 			return (v.completion[6]&&v.completion[7]&&v.completion[8]);
-		else if ( n == 3 )
+		else if ( n == 3 )	// second floor
 			return (v.completion[9]&&v.completion[10]&&v.completion[11]);
+		else if ( n == 4 )	// basement (final boss)
+			return (v.completion[12]);
+		else if ( n == 5 )	// secret maps (SECRET05 is optional)
+			return (v.completion[13]&&v.completion[14]&&v.completion[15]&&v.completion[16]);
 		return false;
 	}
 
 	static void AdvanceStage()
 	{
 		let v = GetInstance();
-		if ( GetFullCompletion(3) ) v.stage = max(8,v.stage);
-		else if ( GetFullCompletion(2) ) v.stage = max(6,v.stage);
-		else if ( GetFullCompletion(1) ) v.stage = max(4,v.stage);
-		else if ( GetFullCompletion(0) ) v.stage = max(2,v.stage);
+		if ( !v ) return;
+		if ( GetFullCompletion(4) ) v.stage = max(10,v.stage);
+		else if ( GetFullCompletion(3) ) v.stage = max(9,v.stage);
+		else if ( GetFullCompletion(2) ) v.stage = max(7,v.stage);
+		else if ( GetFullCompletion(1) ) v.stage = max(5,v.stage);
+		else if ( GetFullCompletion(0) ) v.stage = max(3,v.stage);
+		else v.stage = max(1,v.stage);
 	}
 
-	static int GetStage()
+	static clearscope int GetStage()
 	{
 		let v = GetInstance();
+		if ( !v ) return -1;
 		return v.stage;
 	}
 }
 
-// main handler of various events, including loadouts for maps
+// main handler of various events
 Class SpooktoberHandler : EventHandler
 {
+	transient FLineTraceData tdata;
+
+	override void OnRegister()
+	{
+		// initialize globals
+		SpooktoberGlobals.MakeInstance();
+		// inject test data
+		/*let g = SpooktoberGlobals.GetInstance();
+		g.completion[0] = true;
+		g.maptimes[0][0] = 354;
+		g.maptimes[0][1] = 600;
+		g.mapkills[0][0] = 30;
+		g.mapkills[0][1] = 36;
+		g.mapitems[0][0] = 33;
+		g.mapitems[0][1] = 43;
+		g.mapsecrets[0][0] = 3;
+		g.mapsecrets[0][1] = 4;*/
+	}
+
+	override void WorldTick()
+	{
+		if ( level.levelnum != 1 ) return;
+		// trace from consoleplayer and see what hits
+		PlayerPawn mo = players[consoleplayer].mo;
+		mo.LineTrace(mo.angle,140,mo.pitch,TRF_THRUACTORS,mo.viewheight,data:tdata);
+	}
+
+	override void RenderOverlay( RenderEvent e )
+	{
+		if ( level.levelnum != 1 ) return;
+		// check that we're tracing the midtex of a level painting
+		if ( (tdata.HitType != TRACE_HitWall) || (tdata.LinePart != 1) || (tdata.HitLine.special != 80) || (tdata.HitLine.args[0] != 10) ) return;
+		// get map name from levelnum
+		String mname = "???";
+		if ( (tdata.HitLine.args[2] >= 2) || (tdata.HitLine.args[2] <= 14) )
+			mname = StringTable.Localize(String.Format("$SP_SPOOK%02d",tdata.HitLine.args[2]));
+		else if ( (tdata.HitLine.args[2] >= 15) || (tdata.HitLine.args[2] <= 19) )
+			mname = StringTable.Localize(String.Format("$SP_SECRET%02d",tdata.HitLine.args[2]));
+		double ypos;
+		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) ) ypos = 140.;
+		else ypos = 180.;
+		int len;
+		// format name
+		if ( mname.IndexOf(" - by: ") != -1 )
+		{
+			Array<String> fname;
+			mname.Split(fname," - by: ");
+			len = BigFont.StringWidth(fname[0]);
+			Screen.DrawText(BigFont,Font.CR_RED,(320.-len)/2.,ypos,fname[0],DTA_Clean,true);
+			ypos += BigFont.GetHeight()+2;
+			len = SmallFont.StringWidth(fname[1]);
+			Screen.DrawText(SmallFont,Font.CR_WHITE,(320.-len)/2.,ypos,fname[1],DTA_Clean,true);
+			ypos += SmallFont.GetHeight()+6;
+		}
+		else
+		{
+			len = BigFont.StringWidth(mname);
+			Screen.DrawText(BigFont,Font.CR_RED,(320.-len)/2.,ypos,mname,DTA_Clean,true);
+			ypos += BigFont.GetHeight()+6;
+		}
+		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) )
+		{
+			len = SmallFont.StringWidth("[Cleared]");
+			Screen.DrawText(SmallFont,Font.CR_GOLD,(320.-len)/2.,ypos,"[Cleared]",DTA_Clean,true);
+			ypos += SmallFont.GetHeight()+4;
+			int maxlen = 0, h1, m1, s1, h2, m2, s2, ki1, ki2, it1, it2, sc1, sc2;
+			String ctime, ptime, ckills, citems, csecrets;
+			[s1, s2] = SpooktoberGlobals.GetTimes(tdata.HitLine.args[2]-2);
+			[ki1, ki2] = SpooktoberGlobals.GetKills(tdata.HitLine.args[2]-2);
+			[it1, it2] = SpooktoberGlobals.GetItems(tdata.HitLine.args[2]-2);
+			[sc1, sc2] = SpooktoberGlobals.GetSecrets(tdata.HitLine.args[2]-2);
+			h1 = s1/3600;
+			m1 = (s1%3600)/60;
+			s1 = s1%60;
+			h2 = s2/3600;
+			m2 = (s2%3600)/60;
+			s2 = s2%60;
+			if ( h1 > 0 ) ctime = String.Format("%02d:%02d:%02d",h1,m1,s1);
+			else ctime = String.Format("%02d:%02d",m1,s1);
+			if ( h2 > 0 ) ptime = String.Format("%02d:%02d:%02d",h2,m2,s2);
+			else ptime = String.Format("%02d:%02d",m2,s2);
+			len = ConFont.StringWidth("Time: "..ctime);
+			if ( len > maxlen ) maxlen = len;
+			len = ConFont.StringWidth("Par: "..ptime);
+			if ( len > maxlen ) maxlen = len;
+			ckills = String.Format("%d/%d",ki1,ki2);
+			len = ConFont.StringWidth("Kills: "..ckills);
+			if ( len > maxlen ) maxlen = len;
+			citems = String.Format("%d/%d",it1,it2);
+			len = ConFont.StringWidth("Items: "..citems);
+			if ( len > maxlen ) maxlen = len;
+			csecrets = String.Format("%d/%d",sc1,sc2);
+			len = ConFont.StringWidth("Secrets: "..csecrets);
+			if ( len > maxlen ) maxlen = len;
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Time:",DTA_Clean,true);
+			len = ConFont.StringWidth(ctime);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ctime,DTA_Clean,true);
+			ypos += ConFont.GetHeight()+1;
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Par:",DTA_Clean,true);
+			len = ConFont.StringWidth(ptime);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ptime,DTA_Clean,true);
+			ypos += ConFont.GetHeight()+1;
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Kills:",DTA_Clean,true);
+			len = ConFont.StringWidth(ckills);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ckills,DTA_Clean,true);
+			ypos += ConFont.GetHeight()+1;
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Items:",DTA_Clean,true);
+			len = ConFont.StringWidth(citems);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,citems,DTA_Clean,true);
+			ypos += ConFont.GetHeight()+1;
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Secrets:",DTA_Clean,true);
+			len = ConFont.StringWidth(csecrets);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,csecrets,DTA_Clean,true);
+		}
+		else
+		{
+			len = SmallFont.StringWidth("[Not cleared]");
+			Screen.DrawText(SmallFont,Font.CR_BLACK,(320.-len)/2.,ypos,"[Not cleared]",DTA_Clean,true);
+		}
+	}
+
 	override void WorldUnloaded( WorldEvent e )
 	{
-		if ( (level.levelnum > 1) && (level.levelnum < 14) )
-			SpooktoberGlobals.SetCompletion(level.levelnum-2);
+		SpooktoberGlobals.SetCompletion(level.levelnum-2);
 		if ( level.levelnum != 1 ) return;
-		// adjust player size back to normal
+		// adjust player sizes back to normal
 		// there's no "PlayerLeft" event so it has to be done here
 		for ( int i=0; i<MAXPLAYERS; i++ )
 		{
@@ -97,49 +276,12 @@ Class SpooktoberHandler : EventHandler
 		}
 	}
 
-	override void WorldLoaded( WorldEvent e )
-	{
-		if ( level.levelnum != -1 ) return;
-		// TODO put all the progression unlocks here
-		switch ( SpooktoberGlobals.GetStage() )
-		{
-		case 1:
-			// unlock east wing
-			break;
-		case 2:
-			// east wing unlocked
-			break;
-		case 3:
-			// unlock west wing
-			break;
-		case 4:
-			// west wing unlocked
-			break;
-		case 5:
-			// unlock second floor
-			break;
-		case 6:
-			// second floor unlocked
-			break;
-		case 7:
-			// unlock basement
-			break;
-		case 8:
-			// basement unlocked
-			break;
-		default:
-			// do nothing
-			break;
-		}
-		// advance the stage
-		SpooktoberGlobals.AdvanceStage();
-	}
-
 	override void PlayerEntered( PlayerEvent e )
 	{
 		if ( level.levelnum != 1 ) return;
 		// no items at all while in the hub, please
 		players[e.playernumber].mo.ClearInventory();
+		players[e.playernumber].mo.Health = players[e.playernumber].mo.SpawnHealth();
 		// adjust player size (too lazy to rescale map itself)
 		let mo = players[e.playernumber].mo;
 		let d = GetDefaultByType(mo.GetClass());

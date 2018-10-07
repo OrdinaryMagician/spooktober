@@ -320,9 +320,274 @@ Model "mkThiefBarrel"
 	Model 0 "barrel_d.3d"
 	SurfaceSkin 0 0 "BARREL2.png"
 	Scale 0.0008 0.0008 0.0016
-	ZOffset 24
+	ZOffset 25
 	AngleOffset 90
 	FrameIndex MODL A 0 0
+}
+Model "mkThiefBox"
+{
+	Path "models/thief"
+	Model 0 "wcratec_d.3d"
+	SurfaceSkin 0 0 "WCRATE.png"
+	Scale 0.0008 0.0008 0.0008
+	ZOffset 12.5
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefBoxOpen"
+{
+	Path "models/thief"
+	Model 0 "wcrate_d.3d"
+	SurfaceSkin 0 0 "WCRATE.png"
+	Scale 0.0008 0.0008 0.0008
+	ZOffset 12.5
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefBoxLid"
+{
+	Path "models/thief"
+	Model 0 "wcratel_d.3d"
+	SurfaceSkin 0 0 "WCRATE.png"
+	Scale 0.0008 0.0008 0.0008
+	ZOffset 0.5
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefArmoire"
+{
+	Path "models/thief"
+	Model 0 "armiore_d.3d"
+	SurfaceSkin 0 0 "ARMWOOD.png"
+	SurfaceSkin 0 1 "ARMIORLT.png"
+	SurfaceSkin 0 2 "ARMIORTR.png"
+	SurfaceSkin 0 3 "ARMOIRFT.png"
+	Scale 0.0005 0.002 0.002
+	ZOffset 53
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefBrokenVase1"
+{
+	Path "models/thief"
+	Model 0 "bvile_d.3d"
+	SurfaceSkin 0 0 "VILE3.png"
+	Scale 0.001 0.001 0.001
+	ZOffset 10
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefBrokenVase2"
+{
+	Path "models/thief"
+	Model 0 "bvile2_d.3d"
+	SurfaceSkin 0 0 "VILE3.png"
+	Scale 0.001 0.001 0.001
+	ZOffset 7
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefBrokenVase3"
+{
+	Path "models/thief"
+	Model 0 "bvile4_d.3d"
+	SurfaceSkin 0 0 "VILE1.png"
+	SurfaceSkin 0 1 "IBOWL.png"
+	Scale 0.002 0.002 0.0005
+	ZOffset 8
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefCandlestick"
+{
+	Path "models/thief"
+	Model 0 "canstick_d.3d"
+	SurfaceSkin 0 0 "CHAND3.png"
+	SurfaceSkin 0 1 "GOLDTOP.png"
+	SurfaceSkin 0 2 "GCANDEL.png"
+	Scale 0.0004 0.0004 0.0008
+	ZOffset 15
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefCandlestickFancy"
+{
+	Path "models/thief"
+	Model 0 "trcandle_d.3d"
+	SurfaceSkin 0 0 "TGOB.png"
+	SurfaceSkin 0 1 "GCANDEL.png"
+	Scale 0.0004 0.0004 0.0008
+	ZOffset 16
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefSkull"
+{
+	Path "models/thief"
+	Model 0 "skull_d.3d"
+	SurfaceSkin 0 0 "SKULL.png"
+	SurfaceSkin 0 1 "SKULL2.png"
+	Scale 0.0002 0.0002 0.0002
+	ZOffset 4
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefSkullGold"
+{
+	Path "models/thief"
+	Model 0 "skull_d.3d"
+	SurfaceSkin 0 0 "gSKULL.png"
+	SurfaceSkin 0 1 "GSKULL2.png"
+	Scale 0.0002 0.0002 0.0002
+	ZOffset 4
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefGobletFancy1"
+{
+	Path "models/thief"
+	Model 0 "trgoblet_d.3d"
+	SurfaceSkin 0 0 "tgob.png"
+	Scale 0.0004 0.0004 0.0004
+	ZOffset 4
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefGobletFancy2"
+{
+	Path "models/thief"
+	Model 0 "trgoble2_d.3d"
+	SurfaceSkin 0 0 "TVASE2.png"
+	Scale 0.0004 0.0004 0.0004
+	ZOffset 4
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefVaseFancy1"
+{
+	Path "models/thief"
+	Model 0 "trvase_d.3d"
+	SurfaceSkin 0 0 "TVASE.png"
+	Scale 0.0004 0.0004 0.0004
+	ZOffset 7
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefVaseFancy2"
+{
+	Path "models/thief"
+	Model 0 "trvase2_d.3d"
+	SurfaceSkin 0 0 "TVASE2.png"
+	Scale 0.0004 0.0004 0.0004
+	ZOffset 7
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefVaseFancy3"
+{
+	Path "models/thief"
+	Model 0 "trvase3_d.3d"
+	SurfaceSkin 0 0 "TVASE.png"
+	Scale 0.0004 0.0004 0.0004
+	ZOffset 7
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefVaseFancy4"
+{
+	Path "models/thief"
+	Model 0 "trvase4_d.3d"
+	SurfaceSkin 0 0 "TVASE2.png"
+	Scale 0.0004 0.0004 0.0004
+	ZOffset 7
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefVial"
+{
+	Path "models/thief"
+	Model 0 "vial_d.3d"
+	SurfaceSkin 0 0 "vial1.png"
+	Scale 0.0003 0.0003 0.0003
+	ZOffset 8
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefProtrudingBook"
+{
+	Path "models/thief"
+	Model 0 "probook_d.3d"
+	SurfaceSkin 0 0 "pbook.png"
+	SurfaceSkin 0 1 "PAGES.png"
+	Scale 0.0008 0.0005 0.0005
+	Offset -0.25 0 8
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+}
+Model "mkThiefProtrudingBookReusable"
+{
+	Path "models/thief"
+	Model 0 "probook_d.3d"
+	SurfaceSkin 0 0 "pbook.png"
+	SurfaceSkin 0 1 "PAGES.png"
+	Scale 0.0008 0.0005 0.0005
+	Offset -0.25 0 8
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+}
+Model "mkThiefStool"
+{
+	Path "models/thief"
+	Model 0 "stool_d.3d"
+	SurfaceSkin 0 0 "WDPLNK2.png"
+	Scale 0.0004 0.0004 0.0006
+	ZOffset 8
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefDesk"
+{
+	Path "models/thief"
+	Model 0 "desk_d.3d"
+	SurfaceSkin 0 0 "CAB1.png"
+	SurfaceSkin 0 1 "CAB4.png"
+	SurfaceSkin 0 2 "CAB5.png"
+	Scale 0.001 0.002 0.001
+	ZOffset 20
+	AngleOffset -90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefTableFancy1"
+{
+	Path "models/thief"
+	Model 0 "tablefan_d.3d"
+	SurfaceSkin 0 0 "CAB5.png"
+	SurfaceSkin 0 1 "CAB1.png"
+	SurfaceSkin 0 2 "CAB2.png"
+	SurfaceSkin 0 3 "CAB4.png"
+	Scale 0.001 0.002 0.001
+	ZOffset 20
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefTableFancy2"
+{
+	Path "models/thief"
+	Model 0 "tablfan2_d.3d"
+	SurfaceSkin 0 0 "CAB1.png"
+	SurfaceSkin 0 1 "CAB2.png"
+	SurfaceSkin 0 2 "CAB4.png"
+	SurfaceSkin 0 3 "CAB5.png"
+	SurfaceSkin 0 4 "CAB5.png"
+	SurfaceSkin 0 5 "CAB5.png"
+	Scale 0.002 0.002 0.001
+	ZOffset 20
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+	FrameIndex MODL C 0 2
+	FrameIndex MODL D 0 3
 }
 Model "mkThiefChairOrnate"
 {
@@ -336,5 +601,78 @@ Model "mkThiefChairOrnate"
 	Scale 0.0004 0.0006 0.0012
 	ZOffset 22
 	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefFootlocker"
+{
+	Path "models/thief"
+	Model 0 "footlock_d.3d"
+	SurfaceSkin 0 0 "BOXBACK.png"
+	SurfaceSkin 0 1 "BOXSIDES.png"
+	SurfaceSkin 0 2 "LOCKBOX.png"
+	SurfaceSkin 0 3 "RUSTS.png"
+	SurfaceSkin 0 4 "RUSTSLOT.png"
+	SurfaceSkin 0 5 "GRAYS.png"
+	SurfaceSkin 0 6 "BOXTOP.png"
+	SurfaceSkin 0 7 "BOXSIDES.png"
+	Scale 0.0008 0.0008 0.0008
+	ZOffset 20
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+	FrameIndex MODL C 0 2
+	FrameIndex MODL D 0 3
+	FrameIndex MODL E 0 4
+	FrameIndex MODL F 0 5
+	FrameIndex MODL G 0 6
+	FrameIndex MODL H 0 7
+	FrameIndex MODL I 0 8
+	FrameIndex MODL J 0 9
+	FrameIndex MODL K 0 10
+	FrameIndex MODL L 0 11
+	FrameIndex MODL M 0 12
+	FrameIndex MODL N 0 13
+	FrameIndex MODL O 0 14
+	FrameIndex MODL P 0 15
+}
+Model "mkThiefCthulhu"
+{
+	Path "models/thief"
+	Model 0 "cthulhu_d.3d"
+	SurfaceSkin 0 0 "STAT4C.png"
+	SurfaceSkin 0 1 "cthuludeat.png"
+	Scale 0.0016 0.0018 0.004
+	Offset -14 0 88
+	FrameIndex MODL A 0 0
+}
+Model "mkThiefBedFancy"
+{
+	Path "models/thief"
+	Model 0 "fanbed_d.3d"
+	SurfaceSkin 0 0 "HEADWOOD.png"
+	SurfaceSkin 0 1 "BOARDS.png"
+	SurfaceSkin 0 2 "bed.png"
+	Scale 0.002 0.002 0.002
+	ZOffset 41
+	FrameIndex MODL A 0 0
+}
+Model "mkBarrier"
+{
+	Path "models"
+	Model 0 "Flat_d.3d"
+	Skin 0 "RBARRIER"
+	Scale 0.01 1 1.2
+	AngleOffset 90
+	ZOffset 64
+	FrameIndex MODL A 0 0
+}
+Model "mkBarrierTall"
+{
+	Path "models"
+	Model 0 "Flat_d.3d"
+	Skin 0 "RBARRIE2"
+	Scale 0.01 1 4.8
+	AngleOffset 90
+	ZOffset 256
 	FrameIndex MODL A 0 0
 }

@@ -3,6 +3,6 @@ version "3.5"
 #include "zscript/common/helpers.zsc"
 #include "zscript/common/handler.zsc"
 #include "zscript/common/hud.zsc"
-#include "zscript/common/statscreen.zsc"
-#include "zscript/marisa/hubdialogue.zsc"
+
+#include "zscript/marisa/dialogueseq.zsc"
 #include "zscript/marisa/mapstuff.zsc"

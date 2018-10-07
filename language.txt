@@ -2,41 +2,69 @@
 // Hub Dialogues
 
 HUBD_1 = "Brother Marcus";
-// 1: Initial
+// Initial
 HUBD_11 = "Ah, hello. You must be the man they call \"Doom Slayer\", am I correct? I'm glad you're here.";
-HUBD_12 = "You see, we came to this mansion in order to cleanse it from evil. However, it appears we underestimated the forces at work here.";
+HUBD_12 = "You see, we came to this mansion in order to cleanse it from evil. However, it appears we underestimated the forces at work.";
 HUBD_13 = "The master of this house of horrors has set barriers around many parts of the mansion, trapping my brothers inside.";
-HUBD_14 = "Seeing as you are quite skilled in... your profession... I'm sure you could be of assistance, so hear me out.";
-HUBD_15 = "You may have noticed those large paintings already. They are portals to other worlds, each more terrifying than the last.";
-HUBD_16 = "We believe that by exterminating the evil within these paintings, we can break the barriers blocking the other areas of the house.";
-HUBD_17 = "Once I reunite with my brothers, we should be able to draw out the evil master. Then... he's all yours, I guess...";
-//
+HUBD_14 = "Seeing as you are quite skilled in... your profession... I'm sure you could be of assistance, so please, hear me out.";
+HUBD_15 = "You may have noticed those large paintings already. These are portals to other worlds, each more terrifying than the last.";
+HUBD_16 = "We believe that by exterminating the evil within them, the barriers will weaken, clearing the way to the rest of the mansion.";
+HUBD_17 = "Once my brothers and I are all reunited, we should be able to draw out the evil master. Then... he's all yours, I guess...";
+// Dialogue exhausted
 HUBD_18 = "There is great evil within these walls...";
-// 3: Unlocked East Wing
+// Unlocked East Wing
 HUBD_19 = "The east wing has been opened, please seek brother James. He should be in the dining room.";
-//
+// Dialogue exhausted
 HUBD_110 = "I haven't seen such a wild storm in years...";
-// 5: Unlocked West Wing
+// Unlocked West Wing
 HUBD_111 = "The west wing is clear. Brother Gunther should be somewhere around.";
-//
+// Dialogue exhausted
 HUBD_112 = "Hmm... The oppressive atmosphere of this place seems weaker than before...";
-// 7: Unlocked Second Floor
+// Unlocked Second Floor
 HUBD_113 = "So, the second floor is next. If I remember correctly, brother Sigmund was up there.";
 HUBD_114 = "He's probably in the study, that man sure loves to read...";
-//
+// Dialogue exhausted
 HUBD_115 = "I must say, I'm impressed by how easily you're handling this...";
-// 9: Unlocked Basement
+// Unlocked Basement
 HUBD_116 = "I can feel a great surge of power down in the basement. The fiend must be hiding there.";
 HUBD_117 = "We will go on ahead and reunite with brother Alfred. It's time to get to the bottom of this...";
-// 10: Moved to Basement
+// Moved to Basement
 HUBD_118 = "The final painting... So this is where he's hiding...";
 HUBD_119 = "Well, I'm sure you are eager to confront the beast, so let's not waste any time.";
-//
+// Dialogue exhausted
 HUBD_120 = "Good luck, friend...";
-// 11: All Clear
+// All Clear
 HUBD_121 = "It is done, then... Many thanks, friend. We would have long perished without your help.";
+// Dialogue exhausted
+HUBD_121 = "Farewell, and good luck in your future endeavors.";
 
 HUBD_2 = "Brother James";
 HUBD_3 = "Brother Gunther";
 HUBD_4 = "Brother Sigmund";
 HUBD_5 = "Brother Alfred";
+
+// Map Names
+// stored here so the map scripts have easy access to them
+SP_HUB = "Gallery Of Spooks - by: Marisa Kirisame";
+SP_SPOOK01 = "Untitled - by: N/A";
+SP_SPOOK02 = "Untitled - by: N/A";
+SP_SPOOK03 = "Untitled - by: N/A";
+SP_SPOOK04 = "Untitled - by: N/A";
+SP_SPOOK05 = "Untitled - by: N/A";
+SP_SPOOK06 = "Untitled - by: N/A";
+SP_SPOOK07 = "Untitled - by: N/A";
+SP_SPOOK08 = "Untitled - by: N/A";
+SP_SPOOK09 = "Untitled - by: N/A";
+SP_SPOOK10 = "Untitled - by: N/A";
+SP_SPOOK11 = "Untitled - by: N/A";
+SP_SPOOK12 = "Untitled - by: N/A";
+SP_SPOOK13 = "Nightmare Fuel Arena - by: Marisa Kirisame";
+SP_SECRET01 = "Untitled - by: N/A";
+SP_SECRET02 = "Untitled - by: N/A";
+SP_SECRET03 = "Untitled - by: N/A";
+SP_SECRET04 = "Untitled - by: N/A";
+SP_SECRET05 = "Golden Slaughterer - by: Marisa Kirisame";
+
+// Exit Text
+// TODO write something here
+SP_EXTXT = "Thanks for playing!";
