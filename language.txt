@@ -36,7 +36,7 @@ HUBD_120 = "Good luck, friend...";
 // All Clear
 HUBD_121 = "It is done, then... Many thanks, friend. We would have long perished without your help.";
 // Dialogue exhausted
-HUBD_121 = "Farewell, and good luck in your future endeavors.";
+HUBD_122 = "Farewell, and good luck in your future endeavors.";
 
 HUBD_2 = "Brother James";
 HUBD_3 = "Brother Gunther";

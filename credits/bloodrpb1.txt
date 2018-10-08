@@ -1,0 +1,15 @@
+Information:
+Source: Blood + expansions + pre-releases
+Count: ~1200
+Palette: Truecolor PNGs
+Format: Textures folder
+Anims/Switches: ZDoom compatible
+Description: Textures from Blood, its expansions, and its pre-releases
+
+Credits:
+Conversion: Ceeb
+Author: Monolith Productions, Sunstorm Interactive
+Submitted: Ceeb
+
+Description:
+Textures from Blood (incl. alpha and beta versions), Plasma Pak, Cryptic Passage
