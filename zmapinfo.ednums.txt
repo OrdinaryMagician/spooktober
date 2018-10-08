@@ -69,4 +69,5 @@ DoomEdNums
 	6465 = mkThiefProtrudingBookReusable
 	6466 = mkThiefCthulhu
 	6467 = mkThiefVial
+	6468 = mkFireBrazier2
 }

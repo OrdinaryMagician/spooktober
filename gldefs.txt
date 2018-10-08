@@ -29,6 +29,20 @@ object mkFireBrazier
 	frame KFR1H { light MKBRAZIER }
 }
 
+flickerlight2 MKBRAZIER2
+{
+	color 1.0 0.8 0.0
+	size 204
+	secondarySize 212
+	interval 0.1
+	offset 0 8 0
+	attenuate 1
+}
+object mkFireBrazier2
+{
+	frame FFR1 { light MKBRAZIER2 }
+}
+
 flickerlight2 MKTORCH
 {
 	color 0.85 0.7 0.0

@@ -26,7 +26,7 @@ Class mkDialogueSequence : HUDMessageBase
 		{
 			if ( cur <= 0 ) break;
 			String part = lines.StringAt(i).Left(cur);
-			Screen.DrawText(SmallFont,col,pos.x,pos.y,part,DTA_VirtualWidth,320,DTA_VirtualHeight,200,DTA_Alpha,dimalpha);
+			Screen.DrawText(SmallFont,col,pos.x,pos.y,part,DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
 			pos.y += SmallFont.GetHeight();
 			cur -= lines.StringAt(i).Length();
 		}
@@ -175,15 +175,15 @@ Class mkDialogueSequence : HUDMessageBase
 		if ( p != players[consoleplayer] ) return;
 		// draw textbox area
 		Vector2 pos, sz;
-		[pos, sz] = Screen.VirtualToRealCoords((10,140),(300,50),(320,200));
+		[pos, sz] = Screen.VirtualToRealCoords((10,140),(300,50),(320,200),true);
 		Screen.Dim("Black",dimalpha*0.75,int(pos.x),int(pos.y),int(sz.x),int(sz.y));
 		// draw header (if any)
 		if ( header )
 		{
 			int ln = SmallFont.StringWidth(header);
-			[pos, sz] = Screen.VirtualToRealCoords((12,125),(ln+6,12),(320,200));
+			[pos, sz] = Screen.VirtualToRealCoords((12,125),(ln+6,12),(320,200),true);
 			Screen.Dim("Black",dimalpha*0.75,int(pos.x),int(pos.y),int(sz.x),int(sz.y));
-			Screen.DrawText(SmallFont,Font.CR_RED,15,127,header,DTA_VirtualWidth,320,DTA_VirtualHeight,200,DTA_Alpha,dimalpha);
+			Screen.DrawText(SmallFont,Font.CR_RED,15,127,header,DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
 		}
 		// draw text, if any
 		if ( charcnt > 0 )
@@ -191,7 +191,7 @@ Class mkDialogueSequence : HUDMessageBase
 			DrawText();
 			// draw blinking "next" marker
 			if ( (gametic%16 < 8) && (charcnt > TotalLength()) )
-				Screen.DrawText(SmallFont,Font.CR_RED,300,180,">",DTA_VirtualWidth,320,DTA_VirtualHeight,200,DTA_Alpha,dimalpha);
+				Screen.DrawText(SmallFont,Font.CR_RED,300,180,">",DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
 		}
 	}
 }

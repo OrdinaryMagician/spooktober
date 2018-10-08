@@ -54,11 +54,11 @@ Class SpooktoberGlobals : Thinker
 		v.mapitems[n][1] = level.total_items;
 		v.mapsecrets[n][0] = level.found_secrets;
 		v.mapsecrets[n][1] = level.total_secrets;
-		if ( (n <= 12) && GetFullCompletion(4) ) v.stage = max(10,v.stage);
-		else if ( (n <= 11) && GetFullCompletion(3) ) v.stage = max(8,v.stage);
-		else if ( (n <= 8) && GetFullCompletion(2) ) v.stage = max(6,v.stage);
-		else if ( (n <= 5) && GetFullCompletion(1) ) v.stage = max(4,v.stage);
-		else if ( (n <= 2) && GetFullCompletion(0) ) v.stage = max(2,v.stage);
+		if ( (n <= 12) && GetFullCompletion(4) ) v.stage = max(5,v.stage);
+		else if ( (n <= 11) && GetFullCompletion(3) ) v.stage = max(4,v.stage);
+		else if ( (n <= 8) && GetFullCompletion(2) ) v.stage = max(3,v.stage);
+		else if ( (n <= 5) && GetFullCompletion(1) ) v.stage = max(2,v.stage);
+		else if ( (n <= 2) && GetFullCompletion(0) ) v.stage = max(1,v.stage);
 	}
 
 	static clearscope bool GetCompletion( int n )
@@ -114,18 +114,6 @@ Class SpooktoberGlobals : Thinker
 		return false;
 	}
 
-	static void AdvanceStage()
-	{
-		let v = GetInstance();
-		if ( !v ) return;
-		if ( GetFullCompletion(4) ) v.stage = max(10,v.stage);
-		else if ( GetFullCompletion(3) ) v.stage = max(9,v.stage);
-		else if ( GetFullCompletion(2) ) v.stage = max(7,v.stage);
-		else if ( GetFullCompletion(1) ) v.stage = max(5,v.stage);
-		else if ( GetFullCompletion(0) ) v.stage = max(3,v.stage);
-		else v.stage = max(1,v.stage);
-	}
-
 	static clearscope int GetStage()
 	{
 		let v = GetInstance();
@@ -156,6 +144,14 @@ Class SpooktoberHandler : EventHandler
 		g.mapsecrets[0][1] = 4;*/
 	}
 
+	override void WorldLinePreActivated( WorldEvent e )
+	{
+		if ( level.levelnum != 1 ) return;
+		// prevent transition doors from being activated while in use
+		if ( (e.ActivatedLine.special != 226) || (e.ActivatedLine.args[0] != 21) ) return;
+		if ( e.Thing.player && e.Thing.player.cheats&CF_TOTALLYFROZEN ) e.ShouldActivate = false;
+	}
+
 	override void WorldTick()
 	{
 		if ( level.levelnum != 1 ) return;
@@ -167,17 +163,18 @@ Class SpooktoberHandler : EventHandler
 	override void RenderOverlay( RenderEvent e )
 	{
 		if ( level.levelnum != 1 ) return;
+		if ( automapactive ) return;
 		// check that we're tracing the midtex of a level painting
 		if ( (tdata.HitType != TRACE_HitWall) || (tdata.LinePart != 1) || (tdata.HitLine.special != 80) || (tdata.HitLine.args[0] != 10) ) return;
 		// get map name from levelnum
 		String mname = "???";
-		if ( (tdata.HitLine.args[2] >= 2) || (tdata.HitLine.args[2] <= 14) )
+		if ( (tdata.HitLine.args[2] >= 2) && (tdata.HitLine.args[2] <= 14) )
 			mname = StringTable.Localize(String.Format("$SP_SPOOK%02d",tdata.HitLine.args[2]));
-		else if ( (tdata.HitLine.args[2] >= 15) || (tdata.HitLine.args[2] <= 19) )
-			mname = StringTable.Localize(String.Format("$SP_SECRET%02d",tdata.HitLine.args[2]));
+		else if ( (tdata.HitLine.args[2] >= 15) && (tdata.HitLine.args[2] <= 19) )
+			mname = StringTable.Localize(String.Format("$SP_SECRET%02d",tdata.HitLine.args[2]-14));
 		double ypos;
-		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) ) ypos = 140.;
-		else ypos = 180.;
+		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) ) ypos = 110.;
+		else ypos = 160.;
 		int len;
 		// format name
 		if ( mname.IndexOf(" - by: ") != -1 )
@@ -185,22 +182,22 @@ Class SpooktoberHandler : EventHandler
 			Array<String> fname;
 			mname.Split(fname," - by: ");
 			len = BigFont.StringWidth(fname[0]);
-			Screen.DrawText(BigFont,Font.CR_RED,(320.-len)/2.,ypos,fname[0],DTA_Clean,true);
+			Screen.DrawText(BigFont,Font.CR_RED,(320.-len)/2.,ypos,fname[0],DTA_Bottom320x200,true);
 			ypos += BigFont.GetHeight()+2;
 			len = SmallFont.StringWidth(fname[1]);
-			Screen.DrawText(SmallFont,Font.CR_WHITE,(320.-len)/2.,ypos,fname[1],DTA_Clean,true);
+			Screen.DrawText(SmallFont,Font.CR_WHITE,(320.-len)/2.,ypos,fname[1],DTA_Bottom320x200,true);
 			ypos += SmallFont.GetHeight()+6;
 		}
 		else
 		{
 			len = BigFont.StringWidth(mname);
-			Screen.DrawText(BigFont,Font.CR_RED,(320.-len)/2.,ypos,mname,DTA_Clean,true);
+			Screen.DrawText(BigFont,Font.CR_RED,(320.-len)/2.,ypos,mname,DTA_Bottom320x200,true);
 			ypos += BigFont.GetHeight()+6;
 		}
 		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) )
 		{
 			len = SmallFont.StringWidth("[Cleared]");
-			Screen.DrawText(SmallFont,Font.CR_GOLD,(320.-len)/2.,ypos,"[Cleared]",DTA_Clean,true);
+			Screen.DrawText(SmallFont,Font.CR_GOLD,(320.-len)/2.,ypos,"[Cleared]",DTA_Bottom320x200,true);
 			ypos += SmallFont.GetHeight()+4;
 			int maxlen = 0, h1, m1, s1, h2, m2, s2, ki1, ki2, it1, it2, sc1, sc2;
 			String ctime, ptime, ckills, citems, csecrets;
@@ -231,30 +228,30 @@ Class SpooktoberHandler : EventHandler
 			csecrets = String.Format("%d/%d",sc1,sc2);
 			len = ConFont.StringWidth("Secrets: "..csecrets);
 			if ( len > maxlen ) maxlen = len;
-			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Time:",DTA_Clean,true);
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Time:",DTA_Bottom320x200,true);
 			len = ConFont.StringWidth(ctime);
-			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ctime,DTA_Clean,true);
-			ypos += ConFont.GetHeight()+1;
-			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Par:",DTA_Clean,true);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ctime,DTA_Bottom320x200,true);
+			ypos += ConFont.GetHeight();
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Par:",DTA_Bottom320x200,true);
 			len = ConFont.StringWidth(ptime);
-			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ptime,DTA_Clean,true);
-			ypos += ConFont.GetHeight()+1;
-			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Kills:",DTA_Clean,true);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ptime,DTA_Bottom320x200,true);
+			ypos += ConFont.GetHeight();
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Kills:",DTA_Bottom320x200,true);
 			len = ConFont.StringWidth(ckills);
-			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ckills,DTA_Clean,true);
-			ypos += ConFont.GetHeight()+1;
-			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Items:",DTA_Clean,true);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ckills,DTA_Bottom320x200,true);
+			ypos += ConFont.GetHeight();
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Items:",DTA_Bottom320x200,true);
 			len = ConFont.StringWidth(citems);
-			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,citems,DTA_Clean,true);
-			ypos += ConFont.GetHeight()+1;
-			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Secrets:",DTA_Clean,true);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,citems,DTA_Bottom320x200,true);
+			ypos += ConFont.GetHeight();
+			Screen.DrawText(ConFont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Secrets:",DTA_Bottom320x200,true);
 			len = ConFont.StringWidth(csecrets);
-			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,csecrets,DTA_Clean,true);
+			Screen.DrawText(ConFont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,csecrets,DTA_Bottom320x200,true);
 		}
 		else
 		{
 			len = SmallFont.StringWidth("[Not cleared]");
-			Screen.DrawText(SmallFont,Font.CR_BLACK,(320.-len)/2.,ypos,"[Not cleared]",DTA_Clean,true);
+			Screen.DrawText(SmallFont,Font.CR_BLACK,(320.-len)/2.,ypos,"[Not cleared]",DTA_Bottom320x200,true);
 		}
 	}
 

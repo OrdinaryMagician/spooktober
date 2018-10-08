@@ -180,7 +180,7 @@ Class mkFootstepMaker : Thinker
 		{
 			"1:rug02", "1:rug02a", "1:mkThiefSofa",
 			"1:mkThiefSofaChair", "1:mkThiefChairOrnate",
-			"1:mkThiefBedFancy",
+			"1:mkThiefBedFancy", "1:rug18",
 			"4:floor4",
 			"6:tile",
 			"7:frame3b", "7:palslant", "7:mkThiefChair",
@@ -189,7 +189,7 @@ Class mkFootstepMaker : Thinker
 			"7:mkThiefBox", "7:mkThiefBoxOpen", "7:mkThiefBoxLid",
 			"7:mkThiefArmoire", "7:mkThiefStool", "7:mkThiefDesk",
 			"7:mkThiefTableFancy1", "7:mkThiefTableFancy2",
-			"7:mkThiefFootlocker"
+			"7:mkThiefFootlocker", "7:frame3"
 		};
 		String tx;
 		bool dummy;
@@ -1421,6 +1421,41 @@ Class mkFireBrazier : SwitchableDecoration
 		Stop;
 	}
 }
+Class mkFireBrazier2 : SwitchableDecoration
+{
+	Default
+	{
+		//$Title Toggleable Fire Brazier (Flame)
+		//$Category Marisa Kirisame
+		Radius 16;
+		Height 16;
+		-SOLID;
+	}
+	States
+	{
+	Spawn:
+		FFR1 A 0 Bright;
+		Goto Inactive;
+	Active:
+		FFR1 A 0 Bright
+		{
+			if ( !args[0] ) A_PlaySound("hexen/ignite",0,0.8);
+			args[0] = 0;
+			A_PlaySound("thief/firelp",CHAN_BODY,1.0,true,3.0);
+		}
+		FFR1 ABCDEFGH 3 Bright;
+		Goto Active+1;
+	Inactive:
+		TNT1 A 0
+		{
+			if ( args[0] ) return ResolveState("Active");
+			A_StopSound(CHAN_BODY);
+			return ResolveState(null);
+		}
+		TNT1 A -1;
+		Stop;
+	}
+}
 Class mkWallTorch : SwitchableDecoration
 {
 	Default
@@ -1497,6 +1532,30 @@ Class mkBarrier : Actor
 		Super.PostBeginPlay();
 		A_PlaySound("thief/egloop",CHAN_BODY,1.0,true,2.0);
 	}
+	override void Activate( Actor activator )
+	{
+		SetStateLabel("FadeIn");
+		let li = LineIdIterator.Create(tid);
+		int l;
+		while ( (l = li.Next()) != -1 )
+			level.lines[l].flags |= Line.ML_BLOCKEVERYTHING;
+		let ti = ActorIterator.Create(tid+100);
+		Actor a;
+		while ( a = ti.Next() )
+			a.bDORMANT = false;
+	}
+	override void Deactivate( Actor activator )
+	{
+		SetStateLabel("FadeOut");
+		let li = LineIdIterator.Create(tid);
+		int l;
+		while ( (l = li.Next()) != -1 )
+			level.lines[l].flags &= ~Line.ML_BLOCKEVERYTHING;
+		let ti = ActorIterator.Create(tid+100);
+		Actor a;
+		while ( a = ti.Next() )
+			a.bDORMANT = true;
+	}
 	Default
 	{
 		//$Title Barrier FX
@@ -1512,6 +1571,14 @@ Class mkBarrier : Actor
 	Spawn:
 		MODL A -1 BRIGHT;
 		Stop;
+	FadeIn:
+		MODL A 1 BRIGHT A_FadeIn(0.1,FTF_CLAMP);
+		MODL A 0 BRIGHT A_JumpIf(alpha>=1.0,"Spawn");
+		Wait;
+	FadeOut:
+		MODL A 1 BRIGHT A_FadeOut(0.1,FTF_CLAMP);
+		MODL A 0 BRIGHT A_JumpIf(alpha<=0.0,"Spawn");
+		Wait;
 	}
 }
 Class mkBarrierTall : mkBarrier
