@@ -14,9 +14,14 @@ A Halloween 2018 map pack for Doom.
 
 ### Current status
 
+Maps completed: 0
+Slots taken: 14
+Slots left: 2
+
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)
+
 - **???**: Large House of Illusions - leodoom85
 - **???**: Haunted Hospitality - FishyClockwork
 - **???**: Untitled Map - Caligari87
@@ -24,11 +29,10 @@ A Halloween 2018 map pack for Doom.
 - **???**: Untitled Map - Pixel Eater
 - **???**: Horrible Night - UndeadRyker
 - **???**: Untitled Map - CardBoxNeko
-- **???**: Untitled Map - Rachael
 - **???**: Untitled Map - zrrion the insect
+- **???**: Untitled Map - Batandy
+- **???**: Untitled Map - Rachael
 - **???**: Untitled Map - A.Gamma
 - **???**: Untitled Map - Camper125Lv
 - **???**: Hidden Castle - Giraffe Man
 - **???**: Untitled Map - CanSteam
-- **???**: Free Slot
-- **???**: Free Slot
