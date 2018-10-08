@@ -178,9 +178,9 @@ Class mkFootstepMaker : Thinker
 	{
 		static const String materials[] =
 		{
-			"1:rug02", "1:rug02a", "1:mkThiefSofa",
+			"1:rug02", "1:rug18", "1:mkThiefSofa",
 			"1:mkThiefSofaChair", "1:mkThiefChairOrnate",
-			"1:mkThiefBedFancy", "1:rug18",
+			"1:mkThiefBedFancy",
 			"4:floor4",
 			"6:tile",
 			"7:frame3b", "7:palslant", "7:mkThiefChair",

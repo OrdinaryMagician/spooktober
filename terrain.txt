@@ -1,0 +1,66 @@
+// liquid terrain defs for thief textures
+terrain thiefwater
+{
+	footclip 10
+	liquid
+}
+
+terrain thieflava
+{
+	footclip 10
+	liquid
+	damageamount 5
+	damagetype lava
+	damagetimemask 31
+}
+
+// water
+floor blin thiefwater
+floor blin_1 thiefwater
+floor blin_2 thiefwater
+floor blin_3 thiefwater
+floor blin_4 thiefwater
+floor blin_5 thiefwater
+floor blin_6 thiefwater
+floor blin_7 thiefwater
+floor blin_8 thiefwater
+floor blin_9 thiefwater
+floor blin_10 thiefwater
+floor blin_11 thiefwater
+floor blin_12 thiefwater
+floor blin_13 thiefwater
+floor grin thiefwater
+floor grin_1 thiefwater
+floor grin_2 thiefwater
+floor grin_3 thiefwater
+floor grin_4 thiefwater
+floor grin_5 thiefwater
+floor grin_6 thiefwater
+floor grin_7 thiefwater
+floor grin_8 thiefwater
+floor grin_9 thiefwater
+floor grin_10 thiefwater
+floor grin_11 thiefwater
+floor grin_12 thiefwater
+floor grin_13 thiefwater
+floor vmin thiefwater
+floor vmin_1 thiefwater
+floor vmin_2 thiefwater
+floor vmin_3 thiefwater
+floor vmin_4 thiefwater
+floor vmin_5 thiefwater
+floor vmin_6 thiefwater
+floor vmin_7 thiefwater
+floor vmin_8 thiefwater
+floor vmin_9 thiefwater
+floor vmin_10 thiefwater
+floor vmin_11 thiefwater
+floor vmin_12 thiefwater
+floor vmin_13 thiefwater
+// lava
+floor l3in thieflava
+floor l4in thieflava
+floor l4in_1 thieflava
+floor l4in_2 thieflava
+floor l4in_3 thieflava
+floor l4in_4 thieflava
