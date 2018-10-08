@@ -1,0 +1,66 @@
+                    + G O T H I C  D M (II)  T E X T U R E S +
+อออออออออออออออออออออออออออออออออฤ๚.þ**þ.๚ฤอออออออออออออออออออออออออออออออออ
+Title                   : Gothic DeathMatch (II) Graphical Resource PWAD
+Primary Graphics Artist : Anthony Czerwonka (adelusion@aol.com)
+Secondary Designer(s)   : Nick Baker        (nbaker1@aol.com)
+			: Ola Bj๖rling      (ola@techno.org)
+                        : Matthew Dixon     (curtdixon@shaw.wave.ca)
+			: Travers Dunne     (tjdun2@mugc.cc.monash.edu.au)
+                        : Iikka Kernen     (iikka@ionstorm.com)
+			: Chris Martin      (hypostimus@aol.com)
+                        : Michal Mesko      (mmesko@isnet.sk)
+                        : Andrei Romanov    (roman@castel.nl)
+			: Dan Twomey        (dan@twomey.com)
+Description             : This PWAD contains all of the walls and flats that
+                        : can be found in the original GOTHICDM and GOTHIC2.
+http://cdrom.com/pub/idgames/levels/doom2/deathmatch/megawads/gothicdm.zip
+http://cdrom.com/pub/idgames/levels/doom2/deathmatch/megawads/gothic2.zip
+อออออออออออออออออออออออออออออออออฤ๚.þ**þ.๚ฤอออออออออออออออออออออออออออออออออ
+Episode and Level #     : N/A
+Single Player           : N/A
+Cooperative 2-4 Player  : N/A
+Deathmatch 2-4 Player   : N/A
+Difficulty Settings     : N/A
+New Sounds              : N/A
+New Graphics            : Yes
+New Music               : N/A
+Demos Replaced          : N/A
+Editor(s) used          : NWT and various versions of DeuSF and WinTex.
+                        : Graphical programs used to create the individual
+                          textures are in far too great a number to even
+                          begin to list. Special thank you to the authors of
+                          the various utilities used. You are the best.
+Known Bugs              : N/A
+อออออออออออออออออออออออออออออออออฤ๚.þ**þ.๚ฤอออออออออออออออออออออออออออออออออ
+* Copyright / Permissions *
+Authors MAY NOT use the textures and/or flats found in this PWAD as a base to
+build additional levels UNLESS they include the disclaimer below somewhere in
+the TXT file accompanying said level. This is all we ask of you. Please obey
+and respect our collective graphical talents and wishes by doing us this
+small favor in return for the use of our textures. Thank you.
+อออออออออออออออออออออออออออออออออฤ๚.þ**þ.๚ฤอออออออออออออออออออออออออออออออออ
+* DISCLAIMER *
+This PWAD contains select texture(s) and flat(s) that can originally be found
+in GothicDM or Gothic2. Credit and thanks go out to the artist(s) of said
+flat(s) and texture(s) and also to the rest of the Gothic Crew (1997/98). The
+ORIGINAL GothicDM(2).ZIP can be found at CDROM.COM. Each said PKZIP archive
+contains thirty-two professional quality levels and music.
+http://cdrom.com/pub/idgames/levels/doom2/deathmatch/megawads/gothicdm.zip
+http://cdrom.com/pub/idgames/levels/doom2/deathmatch/megawads/gothic2.zip
+อออออออออออออออออออออออออออออออออฤ๚.þ**þ.๚ฤอออออออออออออออออออออออออออออออออ
+You MAY distribute GothicTX.ZIP, a graphical resource for DOOM(2) editing,
+provided you include this file (GothicTX.TXT) and any others the are contained
+within the original PKZIP archive (Desc.SDI and File_ID.DIZ) with absolutely
+no modifications. You may the complete GothicTX.ZIP in any electronic format
+(BBS, Diskette, CD, etc) as long as you include this file intact. Thank you.
+
+If you have any questions or comments do not hesitate to e-mail us.
+
+* Where to get this WAD *
+Misc. Elite WWW Pages
+CDROM.COM
+Many others...
+
+
+
+// END OF FILE. JUNE 30 1998.
