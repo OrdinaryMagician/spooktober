@@ -182,7 +182,7 @@ Class mkFootstepMaker : Thinker
 			"1:mkThiefSofaChair", "1:mkThiefChairOrnate",
 			"1:mkThiefBedFancy",
 			"4:floor4",
-			"6:tile",
+			"6:tile", "6:ftile3",
 			"7:frame3b", "7:palslant", "7:mkThiefChair",
 			"7:mkThiefTable",
 			"7:mkThiefTableCabinet", "7:mkThiefBarrel",
