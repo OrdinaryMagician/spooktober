@@ -66,8 +66,14 @@ DoomEdNums
 	6462 = mkThiefVaseFancy3
 	6463 = mkThiefVaseFancy4
 	6464 = mkThiefProtrudingBook
-	6465 = mkThiefProtrudingBookReusable
+	6465 = mkThiefButton
 	6466 = mkThiefCthulhu
 	6467 = mkThiefVial
 	6468 = mkFireBrazier2
+	6469 = mkThiefSwitch
+	6470 = mkThiefSwitchBlank
+	6471 = mkThiefSwitchArc
+	6472 = mkThiefSwitchArcBlank
+	6473 = mkThiefSwitchThrow
+	6474 = mkThiefSwitchWheel
 }

@@ -455,7 +455,7 @@ Model "mkThiefGobletFancy1"
 Model "mkThiefGobletFancy2"
 {
 	Path "models/thief"
-	Model 0 "trgoble2_d.3d"
+	Model 0 "trgoblet_d.3d"
 	SurfaceSkin 0 0 "TVASE2.png"
 	Scale 0.0004 0.0004 0.0004
 	ZOffset 4
@@ -475,7 +475,7 @@ Model "mkThiefVaseFancy1"
 Model "mkThiefVaseFancy2"
 {
 	Path "models/thief"
-	Model 0 "trvase2_d.3d"
+	Model 0 "trvase_d.3d"
 	SurfaceSkin 0 0 "TVASE2.png"
 	Scale 0.0004 0.0004 0.0004
 	ZOffset 7
@@ -513,18 +513,6 @@ Model "mkThiefVial"
 	FrameIndex MODL A 0 0
 }
 Model "mkThiefProtrudingBook"
-{
-	Path "models/thief"
-	Model 0 "probook_d.3d"
-	SurfaceSkin 0 0 "pbook.png"
-	SurfaceSkin 0 1 "PAGES.png"
-	Scale 0.0008 0.0005 0.0005
-	Offset -0.25 0 8
-	AngleOffset 90
-	FrameIndex MODL A 0 0
-	FrameIndex MODL B 0 1
-}
-Model "mkThiefProtrudingBookReusable"
 {
 	Path "models/thief"
 	Model 0 "probook_d.3d"
@@ -675,4 +663,145 @@ Model "mkBarrierTall"
 	AngleOffset 90
 	ZOffset 512
 	FrameIndex MODL A 0 0
+}
+Model "mkThiefButton"
+{
+	Path "models/thief"
+	Model 0 "button_d.3d"
+	SurfaceSkin 0 0 "RUSTSB.png"
+	SurfaceSkin 0 1 "RUSTS.png"
+	SurfaceSkin 0 2 "RED.png"
+	Scale 0.0002 0.0002 0.0002
+	AngleOffset 90
+	Offset -1 0 4
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+}
+Model "mkThiefSwitch"
+{
+	Path "models/thief"
+	Model 0 "swchup_d.3d"
+	SurfaceSkin 0 0 "SWCHUP.png"
+	SurfaceSkin 0 1 "RUSTS.png"
+	SurfaceSkin 0 2 "GRAYS.png"
+	SurfaceSkin 0 3 "RED.png"
+	Scale 0.0006 0.0006 0.0006
+	AngleOffset 90
+	Offset -2 0 8
+	FrameIndex MODL A 0 1
+	FrameIndex MODL B 0 0
+}
+Model "mkThiefSwitchBlank"
+{
+	Path "models/thief"
+	Model 0 "swchupb_d.3d"
+	SurfaceSkin 0 0 "SWCHUPB.png"
+	SurfaceSkin 0 1 "RUSTS.png"
+	SurfaceSkin 0 2 "GRAYS.png"
+	SurfaceSkin 0 3 "RED.png"
+	Scale 0.0006 0.0006 0.0006
+	AngleOffset 90
+	Offset -2 0 8
+	FrameIndex MODL A 0 1
+	FrameIndex MODL B 0 0
+}
+Model "mkThiefSwitchArc"
+{
+	Path "models/thief"
+	Model 0 "swcharc_d.3d"
+	SurfaceSkin 0 0 "SWCHARC.png"
+	SurfaceSkin 0 1 "RUSTS.png"
+	SurfaceSkin 0 2 "GRAYS.png"
+	SurfaceSkin 0 3 "RED.png"
+	Scale 0.0006 0.0006 0.0006
+	AngleOffset 90
+	Offset -2 0 8
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+	FrameIndex MODL C 0 2
+	FrameIndex MODL D 0 3
+	FrameIndex MODL E 0 4
+	FrameIndex MODL F 0 5
+	FrameIndex MODL G 0 6
+	FrameIndex MODL H 0 7
+	FrameIndex MODL I 0 8
+	FrameIndex MODL J 0 9
+}
+Model "mkThiefSwitchArcBlank"
+{
+	Path "models/thief"
+	Model 0 "swcharcb_d.3d"
+	SurfaceSkin 0 0 "SWCHARCB.png"
+	SurfaceSkin 0 1 "RUSTS.png"
+	SurfaceSkin 0 2 "GRAYS.png"
+	SurfaceSkin 0 3 "RED.png"
+	Scale 0.0006 0.0006 0.0006
+	AngleOffset 90
+	Offset -2 0 8
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+	FrameIndex MODL C 0 2
+	FrameIndex MODL D 0 3
+	FrameIndex MODL E 0 4
+	FrameIndex MODL F 0 5
+	FrameIndex MODL G 0 6
+	FrameIndex MODL H 0 7
+	FrameIndex MODL I 0 8
+	FrameIndex MODL J 0 9
+}
+Model "mkThiefSwitchThrow"
+{
+	Path "models/thief"
+	Model 0 "swchthr_d.3d"
+	SurfaceSkin 0 0 "SWCHTHR.png"
+	SurfaceSkin 0 1 "RUSTSCON.png"
+	SurfaceSkin 0 2 "RUSTS.png"
+	SurfaceSkin 0 3 "GRAYS.png"
+	SurfaceSkin 0 4 "RED.png"
+	Scale 0.0006 0.0006 0.0006
+	AngleOffset 90
+	Offset 5 0 8
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+	FrameIndex MODL C 0 2
+	FrameIndex MODL D 0 3
+	FrameIndex MODL E 0 4
+	FrameIndex MODL F 0 5
+	FrameIndex MODL G 0 6
+	FrameIndex MODL H 0 7
+	FrameIndex MODL I 0 8
+	FrameIndex MODL J 0 9
+}
+Model "mkThiefSwitchWheel"
+{
+	Path "models/thief"
+	Model 0 "swchwhe_d.3d"
+	SurfaceSkin 0 0 "WHEEBAC.png"
+	SurfaceSkin 0 1 "RUSTS.png"
+	SurfaceSkin 0 2 "GRAYS.png"
+	SurfaceSkin 0 3 "RED.png"	// should be REDHANT but it would be inconsistent with all other switches
+	SurfaceSkin 0 4 "WHEELG.png"
+	Scale 0.0006 0.0006 0.0006
+	AngleOffset 90
+	Offset -1 0 8
+	FrameIndex MODL A 0 0
+	FrameIndex MODL B 0 1
+	FrameIndex MODL C 0 2
+	FrameIndex MODL D 0 3
+	FrameIndex MODL E 0 4
+	FrameIndex MODL F 0 5
+	FrameIndex MODL G 0 6
+	FrameIndex MODL H 0 7
+	FrameIndex MODL I 0 8
+	FrameIndex MODL J 0 9
+	FrameIndex MODL K 0 10
+	FrameIndex MODL L 0 11
+	FrameIndex MODL M 0 12
+	FrameIndex MODL N 0 13
+	FrameIndex MODL O 0 14
+	FrameIndex MODL P 0 15
+	FrameIndex MODL Q 0 16
+	FrameIndex MODL R 0 17
+	FrameIndex MODL S 0 18
+	FrameIndex MODL T 0 19
 }

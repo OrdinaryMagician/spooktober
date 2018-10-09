@@ -40,6 +40,11 @@ thief/egloop	EGPEDLP2
 thief/egzap	EGZAP
 thief/doorw1o	DOORW1O
 thief/doorw1c	DOORW1C
+thief/bookbtn	B_BOOK
+thief/swthrow1	LVTHROW1
+thief/swthrow2	LVTHROW2
+thief/swsmall	LVSCOPE
+thief/switch	LVWALL
 
 thief/lcarpet FTCAR_J
 thief/carpet1 FTCAR_P1

@@ -158,11 +158,13 @@ Class mkMonk5 : mkMonkBase
 	}
 }
 
+// thinker that plays footsteps for a player
+// I could externalize the texture/actor material listings, but I'm lazy
 Class mkFootstepMaker : Thinker
 {
 	PlayerPawn mo;
 	bool lastground, init;
-	double lastvelz, prevvelz;
+	double lastvelz, prevvelz, lastfloorz;
 
 	static void AttachTo( PlayerPawn mo )
 	{
@@ -176,6 +178,15 @@ Class mkFootstepMaker : Thinker
 
 	private int GetFloorMaterial()
 	{
+		// materials:
+		// 0: none
+		// 1: carpet
+		// 2: dirt/gravel
+		// 3: grass
+		// 4: metal
+		// 5: stone (default)
+		// 6: tile
+		// 7: wood
 		static const String materials[] =
 		{
 			"1:rug02", "1:rug18", "1:mkThiefSofa",
@@ -286,28 +297,43 @@ Class mkFootstepMaker : Thinker
 			init = true;
 			lastground = true;
 			mo.player.onground = true;
+			lastfloorz = mo.floorz;
 			return;
 		}
 		double ang = level.time/(20*TICRATE/35.)*360.;
+		bool forcefootstep = false;
 		if ( mo.player.onground && !mo.bNoGravity && !lastground && (mo.waterlevel < 3) )
 		{
-			double vol = clamp(-(lastvelz-8)*0.05,0.01,1.0);
-			if ( (mo.waterlevel > 0) || mo.GetFloorTerrain().IsLiquid && !mo.bOnMobj ) PlayWetLand(vol);
-			else PlayLand(vol);
+			if ( lastvelz < -4 )
+			{
+				double vol = clamp(-(lastvelz-4)*0.05,0.01,1.0);
+				if ( (mo.waterlevel > 0) || mo.GetFloorTerrain().IsLiquid && !mo.bOnMobj ) PlayWetLand(vol);
+				else PlayLand(vol);
+			}
+			else forcefootstep = true;
 		}
-		if ( (abs(sin(ang)) >= 1.0) && mo.player.onground && lastground && (mo.player.jumptics == 0) && (mo.player.cmd.forwardmove || mo.player.cmd.sidemove) && (mo.waterlevel < 3) )
+		if ( forcefootstep || ((abs(sin(ang)) >= 1.0) && mo.player.onground && lastground && (mo.player.jumptics == 0) && (mo.player.cmd.forwardmove || mo.player.cmd.sidemove) && (mo.waterlevel < 3)) )
 		{
 			double vol = abs(mo.vel.xy.length())*0.03;
+			if ( forcefootstep ) vol = max(vol,clamp(-lastvelz*0.05,0.01,1.0));
 			if ( (mo.waterlevel > 0) || mo.GetFloorTerrain().IsLiquid && !mo.bOnMobj ) PlayWetStep(vol);
 			else PlayStep(vol);
 		}
 		lastground = mo.player.onground;
 		lastvelz = prevvelz;
+		if ( mo.player.onground ) lastfloorz = mo.floorz;
 		prevvelz = mo.vel.z;
 	}
 }
 
 // collision models
+// because most thief decorations expect collision boxes to have independent
+// width/length, these have to be used to cover the gaps
+// Y Scale controls radius and X scale controls height
+// (they're in that order because SLADE is a special boy)
+// the AMBUSH flag makes them shootable
+// the Score property controls the footstep material
+// (see above class for reference on materials)
 Class mkBlockActor : Actor
 {
 	Default
@@ -972,68 +998,6 @@ Class mkThiefVial : Actor
 	}
 }
 
-Class mkThiefProtrudingBook : Actor
-{
-	override bool Used( Actor user )
-	{
-		if ( InStateSequence(CurState,FindState("Activated")) ) return false;
-		SetStateLabel("Activated");
-		return level.ExecuteSpecial(special,user,null,false,args[0],args[1],args[2],args[3],args[4]);
-	}
-
-	Default
-	{
-		//$Title Thief Protruding Book
-		//$Category Marisa Kirisame
-		Radius 2;
-		Height 16;
-		-SOLID;
-		+NOGRAVITY;
-	}
-	States
-	{
-	Spawn:
-		MODL A -1;
-		Stop;
-	Activated:
-		MODL A 15;
-		MODL B -1;
-		Stop;
-	}
-}
-
-Class mkThiefProtrudingBookReusable : Actor
-{
-	override bool Used( Actor user )
-	{
-		if ( InStateSequence(CurState,FindState("Activated")) ) return false;
-		SetStateLabel("Activated");
-		return level.ExecuteSpecial(special,user,null,false,args[0],args[1],args[2],args[3],args[4]);
-	}
-
-	Default
-	{
-		//$Title Thief Protruding Book (Reusable)
-		//$Category Marisa Kirisame
-		Radius 2;
-		Height 16;
-		-SOLID;
-		+NOGRAVITY;
-	}
-	States
-	{
-	Spawn:
-		MODL A -1;
-		Stop;
-	Activated:
-		MODL A 15;
-		MODL B 30;
-		MODL B 15;
-		MODL A 0;
-		Goto Spawn;
-	}
-}
-
 Class mkThiefCthulhu : Actor
 {
 	Default
@@ -1386,6 +1350,9 @@ Class mkSpookPainting1 : mkThiefPainting
 }
 
 // toggleable lights from 20 heretics
+//
+// notes: arg0 controls whether they're on at spawn or not
+
 Class mkFireBrazier : SwitchableDecoration
 {
 	Default
@@ -1595,5 +1562,415 @@ Class mkBarrierTall : mkBarrier
 	Spawn:
 		MODL A -1 BRIGHT;
 		Stop;
+	}
+}
+
+/*
+	notes on buttons/switches:
+
+	AMBUSH flag: reusable
+	STANDSTILL flag: starts in the ON position (only for switches)
+
+	some of these execute their specials with a delay
+
+	remember to place them against the surface with a distance of their radius.
+*/
+
+Class mkThiefProtrudingBook : Actor
+{
+	override bool Used( Actor user )
+	{
+		if ( InStateSequence(CurState,FindState("Activated")) )
+		{
+			if ( user.player ) user.A_PlaySound("*usefail",CHAN_VOICE,1.0,false,ATTN_IDLE);
+			return false;
+		}
+		A_PlaySound("thief/bookbtn",CHAN_BODY,0.2);
+		target = user;
+		SetStateLabel("Activated");
+		return true;
+	}
+
+	Default
+	{
+		//$Title Thief Protruding Book
+		//$Category Marisa Kirisame
+		Radius 2;
+		Height 16;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Activated:
+		MODL A 10;
+		MODL B 3
+		{
+			A_PlaySound("thief/button");
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+			if ( !bAMBUSH ) A_SetTics(-1);
+		}
+		MODL B 15;
+		MODL A 0;
+		Goto Spawn;
+	}
+}
+
+Class mkThiefButton : Actor
+{
+	override bool Used( Actor user )
+	{
+		if ( InStateSequence(CurState,FindState("Activated")) )
+		{
+			if ( user.player ) user.A_PlaySound("*usefail",CHAN_VOICE,1.0,false,ATTN_IDLE);
+			return false;
+		}
+		target = user;
+		SetStateLabel("Activated");
+		return true;
+	}
+
+	Default
+	{
+		//$Title Thief Button
+		//$Category Marisa Kirisame
+		Radius 4;
+		Height 8;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Activated:
+		MODL A 5;
+		MODL B 3
+		{
+			A_PlaySound("thief/button");
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+			if ( !bAMBUSH ) A_SetTics(-1);
+		}
+		MODL B 10;
+		MODL A 0;
+		Goto Spawn;
+	}
+}
+
+Class mkThiefSwitch : Actor
+{
+	override bool Used( Actor user )
+	{
+		if ( InStateSequence(CurState,FindState("Activated")) || InStateSequence(CurState,FindState("Activated2")) )
+		{
+			if ( user.player ) user.A_PlaySound("*usefail",CHAN_VOICE,1.0,false,ATTN_IDLE);
+			return false;
+		}
+		A_PlaySound("thief/switch");
+		target = user;
+		if ( InStateSequence(CurState,FindState("Spawn")) ) SetStateLabel("Activated");
+		else SetStateLabel("Activated2");
+		return true;
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if ( bSTANDSTILL ) SetStateLabel("Spawn2");
+	}
+
+	Default
+	{
+		//$Title Thief Switch
+		//$Category Marisa Kirisame
+		Radius 8;
+		Height 16;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Spawn2:
+		MODL B -1;
+		Stop;
+	Activated:
+		MODL A 10;
+		MODL B 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+			if ( bAMBUSH ) return ResolveState("Spawn2");
+			A_SetTics(-1);
+			return ResolveState(null);
+		}
+		Stop;
+	Activated2:
+		MODL B 10;
+		MODL A 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+		}
+		Goto Spawn;
+	}
+}
+
+Class mkThiefSwitchBlank : mkThiefSwitch
+{
+	Default
+	{
+		//$Title Thief Switch (Blank)
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Spawn2:
+		MODL B -1;
+		Stop;
+	Activated:
+		MODL A 10;
+		MODL B 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+			if ( bAMBUSH ) return ResolveState("Spawn2");
+			A_SetTics(-1);
+			return ResolveState(null);
+		}
+		Stop;
+	Activated2:
+		MODL B 10;
+		MODL A 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+		}
+		Goto Spawn;
+	}
+}
+
+Class mkThiefSwitchArc : Actor
+{
+	override bool Used( Actor user )
+	{
+		if ( InStateSequence(CurState,FindState("Activated")) || InStateSequence(CurState,FindState("Activated2")) )
+		{
+			if ( user.player ) user.A_PlaySound("*usefail",CHAN_VOICE,1.0,false,ATTN_IDLE);
+			return false;
+		}
+		A_PlaySound("thief/swsmall");
+		target = user;
+		if ( CurState == FindState("Spawn") ) SetStateLabel("Activated");
+		else SetStateLabel("Activated2");
+		return true;
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if ( bSTANDSTILL ) SetStateLabel("Spawn2");
+	}
+
+	Default
+	{
+		//$Title Thief Switch (Arc)
+		//$Category Marisa Kirisame
+		Radius 8;
+		Height 16;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Spawn2:
+		MODL J -1;
+		Stop;
+	Activated:
+		MODL ABCDEFGHIJ 1;
+		MODL J 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+			if ( bAMBUSH ) return ResolveState("Spawn2");
+			A_SetTics(-1);
+			return ResolveState(null);
+		}
+		Stop;
+	Activated2:
+		MODL JIHGFEDCBA 1;
+		MODL A 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+		}
+		Goto Spawn;
+	}
+}
+
+Class mkThiefSwitchArcBlank : mkThiefSwitchArc
+{
+	Default
+	{
+		//$Title Thief Switch (Arc, Blank)
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Spawn2:
+		MODL J -1;
+		Stop;
+	Activated:
+		MODL ABCDEFGHIJ 1;
+		MODL J 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+			if ( bAMBUSH ) return ResolveState("Spawn2");
+			A_SetTics(-1);
+			return ResolveState(null);
+		}
+		Stop;
+	Activated2:
+		MODL JIHGFEDCBA 1;
+		MODL A 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+		}
+		Goto Spawn;
+	}
+}
+
+Class mkThiefSwitchThrow : Actor
+{
+	override bool Used( Actor user )
+	{
+		if ( InStateSequence(CurState,FindState("Activated")) || InStateSequence(CurState,FindState("Activated2")) )
+		{
+			if ( user.player ) user.A_PlaySound("*usefail",CHAN_VOICE,1.0,false,ATTN_IDLE);
+			return false;
+		}
+		target = user;
+		if ( InStateSequence(CurState,FindState("Spawn")) )
+		{
+			A_PlaySound("thief/swthrow1");
+			SetStateLabel("Activated");
+		}
+		else
+		{
+			A_PlaySound("thief/swthrow2");
+			SetStateLabel("Activated2");
+		}
+		return true;
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if ( bSTANDSTILL ) SetStateLabel("Spawn2");
+	}
+
+	Default
+	{
+		//$Title Thief Switch (Throw)
+		//$Category Marisa Kirisame
+		Radius 8;
+		Height 16;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Spawn2:
+		MODL J -1;
+		Stop;
+	Activated:
+		MODL ABCDEFGHIJ 1;
+		MODL J 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+			if ( bAMBUSH ) return ResolveState("Spawn2");
+			A_SetTics(-1);
+			return ResolveState(null);
+		}
+		Stop;
+	Activated2:
+		MODL J 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+		}
+		MODL JIHGFEDCBA 1;
+		MODL A 0;
+		Goto Spawn;
+	}
+}
+
+Class mkThiefSwitchWheel : Actor
+{
+	override bool Used( Actor user )
+	{
+		if ( InStateSequence(CurState,FindState("Activated")) || InStateSequence(CurState,FindState("Activated2")) )
+		{
+			if ( user.player ) user.A_PlaySound("*usefail",CHAN_VOICE,1.0,false,ATTN_IDLE);
+			return false;
+		}
+		A_PlaySound("thief/swsmall");
+		target = user;
+		if ( InStateSequence(CurState,FindState("Spawn")) ) SetStateLabel("Activated");
+		else SetStateLabel("Activated2");
+		return true;
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if ( bSTANDSTILL ) SetStateLabel("Spawn2");
+	}
+
+	Default
+	{
+		//$Title Thief Switch (Wheel)
+		//$Category Marisa Kirisame
+		Radius 8;
+		Height 16;
+		-SOLID;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	Spawn2:
+		MODL A -1;
+		Stop;
+	Activated:
+		MODL ABCDEFGHIJKLMNOPQRSTA 1;
+		MODL A 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+			if ( bAMBUSH ) return ResolveState("Spawn2");
+			A_SetTics(-1);
+			return ResolveState(null);
+		}
+		Stop;
+	Activated2:
+		MODL ATSRQPONMLKJIHGFEDCBA 1;
+		MODL A 0
+		{
+			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
+		}
+		Goto Spawn;
 	}
 }
