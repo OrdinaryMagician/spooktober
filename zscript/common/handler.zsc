@@ -2,10 +2,10 @@
 Class SpooktoberGlobals : Thinker
 {
 	bool completion[18];
-	int maptimes[18][2];
-	int mapkills[18][2];
-	int mapitems[18][2];
-	int mapsecrets[18][2];
+	int maptimes[2][18];
+	int mapkills[2][18];
+	int mapitems[2][18];
+	int mapsecrets[2][18];
 	bool hastalked, secretending;
 	int stage;
 

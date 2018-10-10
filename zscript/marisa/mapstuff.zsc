@@ -191,9 +191,9 @@ Class mkFootstepMaker : Thinker
 		{
 			"1:rug02", "1:rug18", "1:mkThiefSofa",
 			"1:mkThiefSofaChair", "1:mkThiefChairOrnate",
-			"1:mkThiefBedFancy",
+			"1:mkThiefBedFancy", "1:b28",
 			"4:floor4",
-			"6:tile", "6:ftile3",
+			"6:tile", "6:ftile3", "6:ftile4", "6:tile_",
 			"7:frame3b", "7:palslant", "7:mkThiefChair",
 			"7:mkThiefTable",
 			"7:mkThiefTableCabinet", "7:mkThiefBarrel",
@@ -430,7 +430,6 @@ Class mkThiefChair : Actor
 		Radius 10;
 		Height 18;
 		+SOLID;
-		+PUSHABLE;
 		+CANPASS;
 		+ACTLIKEBRIDGE;
 	}
@@ -491,7 +490,6 @@ Class mkThiefChairOrnate : Actor
 		Radius 16;
 		Height 16;
 		+SOLID;
-		+PUSHABLE;
 		+CANPASS;
 		+ACTLIKEBRIDGE;
 	}
@@ -753,7 +751,6 @@ Class mkThiefStool : Actor
 		Radius 8;
 		Height 16;
 		+SOLID;
-		+PUSHABLE;
 		+CANPASS;
 		+ACTLIKEBRIDGE;
 	}
@@ -841,7 +838,13 @@ Class mkThiefTableFancy2 : Actor
 	States
 	{
 	Spawn:
-		MODL ABCD -1;
+		MODL A -1;
+		Stop;
+		MODL B -1;
+		Stop;
+		MODL C -1;
+		Stop;
+		MODL D -1;
 		Stop;
 	}
 }
@@ -1348,6 +1351,20 @@ Class mkSpookPainting1 : mkThiefPainting
 		Stop;
 	}
 }
+Class mkVigoPainting : mkThiefPainting
+{
+	Default
+	{
+		//$Title Vigo the Carpathian Painting
+		//$Category Marisa Kirisame
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
 
 // toggleable lights from 20 heretics
 //
@@ -1492,6 +1509,28 @@ Class mkChandelier : SwitchableDecoration
 		Stop;
 	}
 }
+Class mkBarrierExplLight : DynamicLight
+{
+	double lifetime;
+	Default
+	{
+		DynamicLight.Type "Point";
+		Args 255,0,0,500;
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		lifetime = 1.0;
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		if ( globalfreeze || level.frozen ) return;
+		args[LIGHT_RED] = int(255*lifetime);
+		lifetime -= 0.02;
+		if ( lifetime <= 0 ) Destroy();
+	}
+}
 Class mkBarrier : Actor
 {
 	override void PostBeginPlay()
@@ -1499,9 +1538,28 @@ Class mkBarrier : Actor
 		Super.PostBeginPlay();
 		A_PlaySound("thief/egloop",CHAN_BODY,1.0,true,2.0);
 	}
+	void ParticlePoof()
+	{
+		FLineTraceData d;
+		double distl, distr, distz;
+		LineTrace(angle+90,radius,0,TRF_THRUACTORS,4,data:d);
+		distr = d.Distance-4.0;
+		LineTrace(angle-90,radius,0,TRF_THRUACTORS,4,data:d);
+		distl = -(d.Distance-4.0);
+		for ( double i=distl; i<=distr; i+=4.0 )
+		{
+			// get height at this spot
+			LineTrace(angle,height,-90,TRF_THRUACTORS,4,0,i,data:d);
+			distz = d.Distance-8;
+			for ( double j=4; j<=distz; j+=4.0 )
+			{
+				Color c = Color(30,0,0)*Random[Barrier](4,8);
+				A_SpawnParticle(c,SPF_FULLBRIGHT|SPF_RELATIVE,Random[Barrier](50,70),FRandom[Barrier](8,32),0,0,i+FRandom[Barrier](-2,2),j+FRandom[Barrier](-2,2),FRandom[Barrier](0.4,2.4),FRandom[Barrier](-0.2,0.2),FRandom[Barrier](-0.2,0.2),0,0,0.01,1.0,-1,-0.2);
+			}
+		}
+	}
 	override void Activate( Actor activator )
 	{
-		SetStateLabel("FadeIn");
 		let li = LineIdIterator.Create(tid);
 		int l;
 		while ( (l = li.Next()) != -1 )
@@ -1510,10 +1568,11 @@ Class mkBarrier : Actor
 		Actor a;
 		while ( a = ti.Next() )
 			a.bDORMANT = false;
+		A_PlaySound("thief/egloop",CHAN_BODY,1.0,true,2.0);
+		SetStateLabel("FadeIn");
 	}
 	override void Deactivate( Actor activator )
 	{
-		SetStateLabel("FadeOut");
 		let li = LineIdIterator.Create(tid);
 		int l;
 		while ( (l = li.Next()) != -1 )
@@ -1521,7 +1580,13 @@ Class mkBarrier : Actor
 		let ti = ActorIterator.Create(tid+100);
 		Actor a;
 		while ( a = ti.Next() )
+		{
 			a.bDORMANT = true;
+			Spawn("mkBarrierExplLight",a.pos);
+		}
+		A_StopSound(CHAN_BODY);
+		ParticlePoof();
+		SetStateLabel("FadeOut");
 	}
 	Default
 	{
@@ -1539,13 +1604,13 @@ Class mkBarrier : Actor
 		MODL A -1 BRIGHT;
 		Stop;
 	FadeIn:
-		MODL A 1 BRIGHT A_FadeIn(0.1,FTF_CLAMP);
+		MODL A 1 BRIGHT A_FadeIn(0.05,FTF_CLAMP);
 		MODL A 0 BRIGHT A_JumpIf(alpha>=1.0,"Spawn");
-		Wait;
+		Loop;
 	FadeOut:
-		MODL A 1 BRIGHT A_FadeOut(0.1,FTF_CLAMP);
+		MODL A 1 BRIGHT A_FadeOut(0.3,FTF_CLAMP);
 		MODL A 0 BRIGHT A_JumpIf(alpha<=0.0,"Spawn");
-		Wait;
+		Loop;
 	}
 }
 Class mkBarrierTall : mkBarrier

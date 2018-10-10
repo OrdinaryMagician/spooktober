@@ -1,0 +1,143 @@
+Actor NTomb1 26000
+{
+Radius 15
+Height 68
++SOLID
+States
+{
+Spawn:
+	NTOM A -1
+	Stop
+}
+}
+
+Actor NTomb2 26001
+{
+Radius 15
+Height 62
++SOLID
+States
+{
+Spawn:
+	NTOM B -1
+	Stop
+}
+}
+
+Actor NTomb3 26002
+{
+Radius 15
+Height 48
++SOLID
+States
+{
+Spawn:
+	NTOM C -1
+	Stop
+}
+}
+
+Actor NTomb4 26003
+{
+Radius 15
+Height 43
++SOLID
+States
+{
+Spawn:
+	NTOM D -1
+	Stop
+}
+}
+
+Actor NTomb5 26004
+{
+Radius 12
+Height 35
++SOLID
+States
+{
+Spawn:
+	NTOM E -1
+	Stop
+}
+}
+
+Actor AGTree1 26005
+{
+Radius 10
+Height 129
++SOLID
+States
+{
+Spawn:
+	AGTR A -1
+	Stop
+}
+}
+
+Actor AGTree2 26006
+{
+Radius 15
+Height 183
++SOLID
+States
+{
+Spawn:
+	AGTR B -1
+	Stop
+}
+}
+
+Actor AGTree3 26007
+{
+Radius 15
+Height 183
++SOLID
+States
+{
+Spawn:
+	AGTR C -1
+	Stop
+}
+}
+
+Actor AGPumpkin 26008
+{
+Radius 15
+Height 32
++SOLID
+States
+{
+Spawn:
+	AGPK A -1
+	Stop
+}
+}
+
+Actor AGTorch 26009
+{
+Radius 15
+Height 43
++NOGRAVITY
+States
+{
+Spawn:
+	AGTC ABCD 4 Bright
+	Loop
+}
+}
+
+Actor AGSpiderToy 26010
+{
+Radius 10
+Height 36
++NOGRAVITY
++SPAWNCEILING
+States
+{
+Spawn:
+	AGSP A -1
+	Stop
+}
+}

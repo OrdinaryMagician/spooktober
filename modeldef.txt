@@ -222,7 +222,7 @@ Model "mkSeacatPainting1"
 	Model 0 "paintingp_d.3d"
 	SurfaceSkin 0 0 "SEACAT1.png"
 	SurfaceSkin 0 1 "FRAME.png"
-	Scale 0.0002 0.0011 0.001
+	Scale 0.0002 0.001 0.0012
 	Offset 2 0 0
 	AngleOffset 90
 	FrameIndex MODL A 0 0
@@ -233,7 +233,7 @@ Model "mkSeacatPainting2"
 	Model 0 "paintingp_d.3d"
 	SurfaceSkin 0 0 "SEACAT2.png"
 	SurfaceSkin 0 1 "FRAME.png"
-	Scale 0.0002 0.0011 0.001
+	Scale 0.0002 0.001 0.0012
 	Offset 2 0 0
 	AngleOffset 90
 	FrameIndex MODL A 0 0
@@ -289,6 +289,17 @@ Model "mkSpookPainting1"
 	SurfaceSkin 0 0 "SPOOK1.png"
 	SurfaceSkin 0 1 "FRAME.png"
 	Scale 0.0002 0.001 0.0012
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+Model "mkVigoPainting"
+{
+	Path "models/thief"
+	Model 0 "paintingp_d.3d"
+	SurfaceSkin 0 0 "VIGO.png"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.001 0.0014
 	Offset 2 0 0
 	AngleOffset 90
 	FrameIndex MODL A 0 0
@@ -428,7 +439,7 @@ Model "mkThiefSkull"
 	SurfaceSkin 0 1 "SKULL2.png"
 	Scale 0.0002 0.0002 0.0002
 	ZOffset 4
-	AngleOffset 90
+	AngleOffset -90
 	FrameIndex MODL A 0 0
 }
 Model "mkThiefSkullGold"
@@ -439,7 +450,7 @@ Model "mkThiefSkullGold"
 	SurfaceSkin 0 1 "GSKULL2.png"
 	Scale 0.0002 0.0002 0.0002
 	ZOffset 4
-	AngleOffset 90
+	AngleOffset -90
 	FrameIndex MODL A 0 0
 }
 Model "mkThiefGobletFancy1"

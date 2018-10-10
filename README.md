@@ -14,25 +14,24 @@ A Halloween 2018 map pack for Doom.
 
 ### Current status
 
-Maps completed: 0
-Slots taken: 14
-Slots left: 2
+Maps completed: 2 / 19
+Slots taken: 14 / 16
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
-- **SPOOK02**: A Baron's Nightmare - Rachael
+- **SPOOK02**: A Baron's Nightmare - Rachael [completed]
+- **SPOOK08**: The Graveyard Shift - Batandy [completed]
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
+- **SECRET01**: Uncle Reggie's Basement - Giraffe Man
+- **SECRET04**: Mansion of Despair - QuakedoomNukem Cz
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)
 
 - **???**: Large House of Illusions - leodoom85
 - **???**: Haunted Hospitality - FishyClockwork
 - **???**: Untitled Map - Caligari87
-- **???**: Mansion of Despair - QuakedoomNukem Cz
 - **???**: Untitled Map - Pixel Eater
 - **???**: Horrible Night - UndeadRyker
 - **???**: Untitled Map - CardBoxNeko
 - **???**: Untitled Map - zrrion the insect
-- **???**: Untitled Map - Batandy
 - **???**: Untitled Map - A.Gamma
 - **???**: Untitled Map - Camper125Lv
-- **???**: Hidden Castle - Giraffe Man
 - **???**: Untitled Map - CanSteam

@@ -76,4 +76,5 @@ DoomEdNums
 	6472 = mkThiefSwitchArcBlank
 	6473 = mkThiefSwitchThrow
 	6474 = mkThiefSwitchWheel
+	6475 = mkVigoPainting
 }
