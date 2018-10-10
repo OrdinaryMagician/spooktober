@@ -19,6 +19,7 @@ Slots taken: 14
 Slots left: 2
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
+- **SPOOK02**: A Baron's Nightmare - Rachael
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)
 
@@ -31,7 +32,6 @@ Slots left: 2
 - **???**: Untitled Map - CardBoxNeko
 - **???**: Untitled Map - zrrion the insect
 - **???**: Untitled Map - Batandy
-- **???**: Untitled Map - Rachael
 - **???**: Untitled Map - A.Gamma
 - **???**: Untitled Map - Camper125Lv
 - **???**: Hidden Castle - Giraffe Man

@@ -1,0 +1,32 @@
+#library "SPOOK"
+#include "zcommon.acs"
+
+SCRIPT "Fi1" OPEN
+{
+	ACS_NamedExecute("MapFadeIn",0);
+}
+
+SCRIPT "Fi2" REOPEN
+{
+	ACS_NamedExecute("MapFadeIn",0);
+}
+
+SCRIPT "MapFadeIn" ( void )
+{
+	SetActivator(0,AAPTR_NULL);
+	ScriptCall("SpooktoberHandler","FadeInShader",1.0);
+	FadeRange(0,0,0,1.0,0,0,0,0.0,1.0);
+}
+
+SCRIPT "MapFadeOut" ( int next )
+{
+	SetActivator(0,AAPTR_NULL);
+	ScriptCall("SpooktoberUtil","FullFreeze");
+	ScriptCall("SpooktoberHandler","FadeOutShader",1.0);
+	FadeRange(0,0,0,0.0,0,0,0,1.0,1.0);
+	Delay(50);
+	ScriptCall("SpooktoberUtil","FullUnfreeze");
+	int ln = GetLevelInfo(LEVELINFO_LEVELNUM);
+	if ( ln == 1 ) Teleport_NewMap(next,0);
+	else Exit_Normal(next);
+}

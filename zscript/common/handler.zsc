@@ -126,6 +126,8 @@ Class SpooktoberGlobals : Thinker
 Class SpooktoberHandler : EventHandler
 {
 	transient FLineTraceData tdata;
+	double fspeed;
+	int fphase, ftic;
 
 	override void OnRegister()
 	{
@@ -154,6 +156,15 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldTick()
 	{
+		if ( fspeed > double.epsilon )
+		{
+			double str = (gametic-ftic)/(Thinker.TICRATE*fspeed);
+			if ( str > 1.0 )
+			{
+				Shader.SetEnabled(players[consoleplayer],"blurfade",false);
+				fspeed = 0;
+			}
+		}
 		if ( level.levelnum != 1 ) return;
 		// trace from consoleplayer and see what hits
 		PlayerPawn mo = players[consoleplayer].mo;
@@ -162,6 +173,14 @@ Class SpooktoberHandler : EventHandler
 
 	override void RenderOverlay( RenderEvent e )
 	{
+		// fader shader
+		if ( fspeed > double.epsilon )
+		{
+			PlayerInfo p = players[consoleplayer];
+			double str = clamp(((gametic-ftic)+e.fractic)/(Thinker.TICRATE*fspeed),0.0,1.0);
+			if ( fphase ) str = 1.0-str;
+			Shader.SetUniform1f(p,"blurfade","strength",str);
+		}
 		if ( level.levelnum != 1 ) return;
 		if ( automapactive ) return;
 		// check that we're tracing the midtex of a level painting
@@ -169,7 +188,7 @@ Class SpooktoberHandler : EventHandler
 		// get map name from levelnum
 		String mname = "???";
 		if ( (tdata.HitLine.args[2] >= 2) && (tdata.HitLine.args[2] <= 14) )
-			mname = StringTable.Localize(String.Format("$SP_SPOOK%02d",tdata.HitLine.args[2]));
+			mname = StringTable.Localize(String.Format("$SP_SPOOK%02d",tdata.HitLine.args[2]-1));
 		else if ( (tdata.HitLine.args[2] >= 15) && (tdata.HitLine.args[2] <= 19) )
 			mname = StringTable.Localize(String.Format("$SP_SECRET%02d",tdata.HitLine.args[2]-14));
 		double ypos;
@@ -257,6 +276,7 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldUnloaded( WorldEvent e )
 	{
+		Shader.SetEnabled(players[consoleplayer],"blurfade",false);
 		SpooktoberGlobals.SetCompletion(level.levelnum-2);
 		if ( level.levelnum != 1 ) return;
 		// adjust player sizes back to normal
@@ -288,5 +308,25 @@ Class SpooktoberHandler : EventHandler
 		mo.viewbob = d.viewbob*0.5;
 		// footsteps!
 		mkFootstepMaker.AttachTo(mo);
+	}
+
+	static void FadeInShader( double speed = 1.0 )
+	{
+		let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
+		if ( !hnd ) return;
+		hnd.fspeed = speed;
+		hnd.fphase = 1;
+		hnd.ftic = gametic;
+		Shader.SetEnabled(players[consoleplayer],"blurfade",true);
+	}
+
+	static void FadeOutShader( double speed = 1.0 )
+	{
+		let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
+		if ( !hnd ) return;
+		hnd.fspeed = speed;
+		hnd.fphase = 0;
+		hnd.ftic = gametic;
+		Shader.SetEnabled(players[consoleplayer],"blurfade",true);
 	}
 }

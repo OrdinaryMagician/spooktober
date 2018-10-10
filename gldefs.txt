@@ -1,4 +1,11 @@
 // Marisa
+hardwareshader postprocess scene
+{
+	Name "blurfade"
+	Uniform float strength
+	Shader "shaders/glsl/blurfade.fp" 330
+}
+
 hardwareshader texture "RBARRIER"
 {
 	Shader "shaders/glsl/bwarp.fp"
