@@ -295,12 +295,22 @@ Class SpooktoberHandler : EventHandler
 
 	override void PlayerEntered( PlayerEvent e )
 	{
-		if ( level.levelnum != 1 ) return;
-		// no items at all while in the hub, please
-		players[e.playernumber].mo.ClearInventory();
-		players[e.playernumber].mo.Health = players[e.playernumber].mo.SpawnHealth();
-		// adjust player size (too lazy to rescale map itself)
+		// loadout management
 		let mo = players[e.playernumber].mo;
+		mo.Health = mo.SpawnHealth();
+		mo.ClearInventory();
+		switch ( level.levelnum )
+		{
+		case 1:
+			// you get nothing
+			break;
+		default:
+			// give start items for player pawn (this allows mod support)
+			SpooktoberUtil.GiveStartItems(mo);
+			break;
+		}
+		if ( level.levelnum != 1 ) return;
+		// adjust player size (too lazy to rescale map itself)
 		let d = GetDefaultByType(mo.GetClass());
 		mo.A_SetSize(d.radius*1.3,d.height*1.4);
 		mo.scale = d.scale*1.4;

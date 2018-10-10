@@ -13,8 +13,6 @@ DefaultMap
 	SecretNext = "SPOOKHUB"
 	Cluster = 666
 	NoIntermission
-	ResetInventory
-	ResetHealth
 	ForgetState
 }
 

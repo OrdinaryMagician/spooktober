@@ -1,6 +1,7 @@
 // Useful shared code
 Class SpooktoberUtil abstract play
 {
+	// sets a lineid's light level (ACS doesn't have a function for this)
 	static void SetLineLight( int tag, int brightness, bool absolute = false )
 	{
 		let l = LineIdIterator.Create(tag);
@@ -17,6 +18,7 @@ Class SpooktoberUtil abstract play
 		}
 	}
 
+	// door transition teleport for hub
 	static void DoorMove( Actor whom, int angle )
 	{
 		if ( !whom ) return;
@@ -26,6 +28,7 @@ Class SpooktoberUtil abstract play
 		whom.pitch = 0;
 	}
 
+	// adds totallyfrozen and nogravity, clears velocity
 	static void FullFreeze( Actor whom )
 	{
 		if ( !whom || !whom.player )
@@ -36,13 +39,17 @@ Class SpooktoberUtil abstract play
 				players[i].cheats |= CF_TOTALLYFROZEN;
 				players[i].vel *= 0;
 				players[i].mo.vel *= 0;
+				players[i].mo.bNOGRAVITY = true;
 			}
 			return;
 		}
 		whom.player.cheats |= CF_TOTALLYFROZEN;
 		whom.player.vel *= 0;
 		whom.vel *= 0;
+		whom.bNOGRAVITY = true;
 	}
+
+	// removes totallyfrozen and nogravity
 	static void FullUnfreeze( Actor whom )
 	{
 		if ( !whom || !whom.player )
@@ -51,9 +58,53 @@ Class SpooktoberUtil abstract play
 			{
 				if ( !playeringame[i] ) continue;
 				players[i].cheats &= ~CF_TOTALLYFROZEN;
+				players[i].mo.bNOGRAVITY = false;
 			}
 			return;
 		}
 		whom.player.cheats &= ~CF_TOTALLYFROZEN;
+		whom.bNOGRAVITY = false;
+	}
+
+	// gives a player their start items
+	// replicates APlayerPawn::GiveDefaultInventory since it's not exported
+	static void GiveStartItems( Actor mo )
+	{
+		if ( !(mo is 'PlayerPawn') ) return;
+		DropItem di;
+		for ( di=mo.GetDropItems(); di; di=di.Next )
+		{
+			Class<Actor> ti = di.Name;
+			if ( !(ti is 'Inventory') )
+			{
+				Console.Printf(Font.TEXTCOLOR_ORANGE.."%s is not an inventory item and cannot be given to a player as start item.",ti.GetClassName());
+				continue;
+			}
+			Inventory itm = mo.FindInventory((Class<Inventory>)(ti));
+			if ( !itm )
+			{
+				itm = Inventory(Actor.Spawn(ti));
+				itm.bIGNORESKILL = true;
+				itm.Amount = di.Amount;
+				if ( itm is 'Weapon' ) Weapon(itm).AmmoGive1 = Weapon(itm).AmmoGive2 = 0;
+				Actor check;
+				bool res;
+				[res, check] = itm.CallTryPickup(mo);
+				if ( !res )
+				{
+					if ( check != mo )
+						ThrowAbortException("Cannot give morph items when starting a game");
+					itm.Destroy();
+					itm = null;
+				}
+			}
+			else
+			{
+				let def = GetDefaultByType((Class<Inventory>)(ti));
+				itm.Amount = clamp(itm.Amount+(di.Amount?di.Amount:def.Amount),0,itm.MaxAmount);
+			}
+			if ( itm && (itm is 'Weapon') && Weapon(itm).CheckAmmo(Weapon.EitherFire,false) )
+				mo.player.pendingweapon = Weapon(itm);	// setting also readyweapon like in the C++ version seems to make the weapon break
+		}
 	}
 }
