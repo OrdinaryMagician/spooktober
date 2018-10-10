@@ -47,7 +47,7 @@ HUBD_5 = "Brother Alfred";
 // stored here so the map scripts have easy access to them
 SP_HUB = "Gallery Of Spooks - by: Marisa Kirisame";
 SP_SPOOK01 = "Untitled - by: N/A";
-SP_SPOOK02 = "Untitled - by: N/A";
+SP_SPOOK02 = "A Baron's Nightmare - by: Rachael";
 SP_SPOOK03 = "Untitled - by: N/A";
 SP_SPOOK04 = "Untitled - by: N/A";
 SP_SPOOK05 = "Untitled - by: N/A";

@@ -50,6 +50,9 @@ Map SPOOK01 lookup "SP_SPOOK01"
 Map SPOOK02 lookup "SP_SPOOK02"
 {
 	levelnum = 3
+	Next = "SpookHub"
+	SecretNext = "SpookHub"
+	Music = "ETHEREAL"
 }
 
 Map SPOOK03 lookup "SP_SPOOK03"
