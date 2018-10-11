@@ -1,0 +1,59 @@
+===========================================================================
+Title                   : Duke Nukem Texture Pack
+Filename                : dukeres.wad
+Date Finished           : April 17th, 2006
+Author                  : Daniel "Tormentor667" Gimmer
+Web Page                : http://www.tormentor667.de
+Email Address           : webmaster@tormentor667.de
+Description             : Resource WAD as base for level designers
+Credits goes to         : id Software for DooM(tm) & Quake(tm)/Quake(tm)2
+			  3D Realms for Duke Nukem
+
+Demo Wad		: None yet, but "Stronghold" will include a bonus map
+			  by "Chopkinsca" that fully takes the advantage of these
+			  beautiful textures!
+===========================================================================
+
+* Play Information *
+
+Map #                   : N/A
+Sourceport		: Works with all, no specific lumps!
+Single Player           : N/A
+Cooperative 2-4 Player  : N/A
+Deathmatch 2-4 Player   : N/A
+Difficulty Settings     : N/A
+New Sounds              : N/A
+New Music               : N/A
+New Graphics            : That's what it's supposed to have ;)
+
+
+* Construction *
+
+Source                  : All the textures from "Duke Nukem - Atomic Edition" 
+			  converted to the doom palette and added to a WAD with
+			  all the necassary PNAMES/TEXTURE1 entries!
+Build Time              : 5 Weeks
+Editor(s) used          : XWE, Adobe Photoshop
+Known Bugs              : None
+
+
+* Description *
+
+This is a complete conversion of all textures from the "Duke Nukem - Atomic Edition"
+working with the standard doom palette. It covers everything from space base textures
+over bio-flesh stuffage to city like downtown walls. The wad itself has about 850 new
+textures and over 200 new flats making it a total count of more than 1000 new textures,
+enough resources to build a complete map based on this resource pack! Good luck while
+trying ;)
+
+* Other Information *
+
+Where to Get		: http://www.tormentor667.de & hopefully /idgames
+
+Copy Information	: 1. You ARE ALLOWED to use this wad as a base to create new
+			     additional levels AS LONG as you keep the credits of the
+			     original authors in your text file or just refer to this
+			     texture wad, whatever you like!
+
+			  2. You ARE ALLOWED add these textures to another resource
+			     wad as long as you keep credits as mentioned in 1.

@@ -1,0 +1,9 @@
+Credits:
+Submitted: Jimmy
+Author: Jimmy / id Software
+Original font: The Doom status bar font
+Idea Base: It's a nice font, somewhat similar to ZDoom's CONFONT but not monospaced, and is the right size for a smallfont. :)
+
+Additional Credits:
+- Nash for suggesting the lowercase glyphs for the smaller variant
+- Hellser for suggesting the lowercase glyphs for the larger variant

@@ -7,7 +7,6 @@ Class mkDialogueSequence1 : mkDialogueSequence
 		{
 		case 0:
 			SetHeader("$HUBD_1");
-			SetVoice("misc/i_pkup");
 			StartText("$HUBD_11");
 			break;
 		case 1:
@@ -43,17 +42,696 @@ Class mkDialogueSequence2 : mkDialogueSequence
 		switch( state )
 		{
 		case 0:
-			header = StringTable.Localize("$HUBD_1");
+			SetHeader("$HUBD_1");
 			StartText("$HUBD_18");
 			break;
 		case 1:
-			seqnum = 0;
+			EndSeq(2);
 			break;
 		}
 	}
 }
 
-// Base classe of monks tending to the gallery
+Class mkDialogueSequence3 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_19");
+			break;
+		case 1:
+			EndSeq(4);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence4 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_110");
+			break;
+		case 1:
+			EndSeq(4);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence5 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_111");
+			break;
+		case 1:
+			EndSeq(6);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence6 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_112");
+			break;
+		case 1:
+			EndSeq(6);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence7 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_113");
+			break;
+		case 1:
+			StartText("$HUBD_114");
+			break;
+		case 2:
+			EndSeq(8);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence8 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_115");
+			break;
+		case 1:
+			EndSeq(8);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence9 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_116");
+			break;
+		case 1:
+			StartText("$HUBD_117");
+			break;
+		case 2:
+			EventHandler.SendNetworkEvent("movetobasement");
+			EndSeq(10);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence10 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_118");
+			break;
+		case 1:
+			StartText("$HUBD_119");
+			break;
+		case 2:
+			EventHandler.SendNetworkEvent("dispelbosspainting");
+			EndSeq(11);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence11 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_120");
+			break;
+		case 1:
+			EndSeq(11);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence12 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_121");
+			break;
+		case 1:
+			EndSeq(13);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence13 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_122");
+			break;
+		case 1:
+			EndSeq(13);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence14 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_21");
+			break;
+		case 1:
+			EndSeq(15);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence15 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_22");
+			break;
+		case 1:
+			StartText("$HUBD_23");
+			break;
+		case 2:
+			StartText("$HUBD_24");
+			break;
+		case 3:
+			EndSeq(16);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence16 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_25");
+			break;
+		case 1:
+			EndSeq(16);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence17 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_26");
+			break;
+		case 1:
+			StartText("$HUBD_27");
+			break;
+		case 2:
+			EndSeq(18);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence18 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_28");
+			break;
+		case 1:
+			EndSeq(18);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence19 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_29");
+			break;
+		case 1:
+			StartText("$HUBD_210");
+			break;
+		case 2:
+			EndSeq(20);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence20 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_211");
+			break;
+		case 1:
+			EndSeq(20);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence21 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_212");
+			break;
+		case 1:
+			EndSeq(21);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence22 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_213");
+			break;
+		case 1:
+			EndSeq(22);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence23 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_2");
+			StartText("$HUBD_214");
+			break;
+		case 1:
+			EndSeq(23);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence24 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_3");
+			StartText("$HUBD_31");
+			break;
+		case 1:
+			StartText("$HUBD_32");
+			break;
+		case 2:
+			EndSeq(25);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence25 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_3");
+			StartText("$HUBD_33");
+			break;
+		case 1:
+			EndSeq(25);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence26 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_3");
+			StartText("$HUBD_34");
+			break;
+		case 1:
+			EndSeq(27);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence27 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_3");
+			StartText("$HUBD_35");
+			break;
+		case 1:
+			EndSeq(27);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence28 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_3");
+			StartText("$HUBD_36");
+			break;
+		case 1:
+			EndSeq(28);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence29 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_3");
+			StartText("$HUBD_37");
+			break;
+		case 1:
+			EndSeq(29);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence30 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_3");
+			StartText("$HUBD_38");
+			break;
+		case 1:
+			EndSeq(30);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence31 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_4");
+			StartText("$HUBD_41");
+			break;
+		case 1:
+			EndSeq(32);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence32 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_4");
+			StartText("$HUBD_42");
+			break;
+		case 1:
+			EndSeq(32);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence33 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_4");
+			StartText("$HUBD_43");
+			break;
+		case 1:
+			EndSeq(33);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence34 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_4");
+			StartText("$HUBD_44");
+			break;
+		case 1:
+			EndSeq(34);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence35 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_4");
+			StartText("$HUBD_45");
+			break;
+		case 1:
+			SetHeader("$HUBD_4");
+			StartText("$HUBD_46");
+			break;
+		case 2:
+			EndSeq(35);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence36 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_5");
+			SetVoice("");
+			StartText("$HUBD_51");
+			break;
+		case 1:
+			EndSeq(36);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence37 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_5");
+			SetVoice("");
+			StartText("$HUBD_52");
+			break;
+		case 1:
+			EndSeq(37);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence38 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$HUBD_5");
+			SetVoice("");
+			StartText("$HUBD_53");
+			break;
+		case 1:
+			EndSeq(38);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence39 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$BOSSHDR");
+			SetTextEffect(TE_SHIVER);
+			SetTextSpeed(3);
+			SetVoice("misc/bossvoice");
+			SetVoiceVolume(1.);
+			SetTextColor(Font.CR_BLACK);
+			StartText("$BOSSDLG1");
+			break;
+		case 1:
+			StartText("$BOSSDLG2");
+			break;
+		case 2:
+			StartText("$BOSSDLG3");
+			break;
+		case 3:
+			StartText("$BOSSDLG4");
+			break;
+		case 4:
+			StartText("$BOSSDLG5");
+			break;
+		case 5:
+			EndSeq(0);
+			break;
+		}
+	}
+}
+
+// Base classes of monks tending to the gallery
 Class mkMonkBase : Actor abstract
 {
 	override bool Used( Actor user )

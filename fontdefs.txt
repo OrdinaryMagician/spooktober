@@ -1,1 +1,4 @@
-
+DietLogFont
+{
+	Template DLGFN%03d
+}

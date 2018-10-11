@@ -17,6 +17,7 @@ misc/wind3 wind32
 misc/wind4 wind33
 misc/growl growl
 misc/wah stower51
+misc/bossvoice bvoice
 
 seacat/flangefemale flangefm
 

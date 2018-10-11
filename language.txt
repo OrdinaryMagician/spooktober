@@ -1,33 +1,34 @@
 [enu default]
+DEFPNAME = "the one they call \cfDoomguy\c-";
 // Hub Dialogues
 
-HUBD_1 = "Brother Marcus";
+HUBD_1 = "\cuBrother Marcus\c-";
 // Initial
-HUBD_11 = "Ah, hello. You must be the man they call \"Doom Slayer\", am I correct? I'm glad you're here.";
+HUBD_11 = "Ah, hello. You must be %pn, am I correct? I'm glad you're here.";
 HUBD_12 = "You see, we came to this mansion in order to cleanse it from evil. However, it appears we underestimated the forces at work.";
-HUBD_13 = "The master of this house of horrors has set barriers around many parts of the mansion, trapping my brothers inside.";
+HUBD_13 = "The master of this house of horrors has set \cdbarriers\c- around many parts of the mansion, trapping my brothers inside.";
 HUBD_14 = "Seeing as you are quite skilled in... your profession... I'm sure you could be of assistance, so please, hear me out.";
-HUBD_15 = "You may have noticed those large paintings already. These are portals to other worlds, each more terrifying than the last.";
-HUBD_16 = "We believe that by exterminating the evil within them, the barriers will weaken, clearing the way to the rest of the mansion.";
+HUBD_15 = "You may have noticed those \cdlarge paintings\c- already. These are portals to other worlds, each more terrifying than the last.";
+HUBD_16 = "We believe that by exterminating the evil within them, the \cdbarriers\c- will weaken, clearing the way to the rest of the mansion.";
 HUBD_17 = "Once my brothers and I are all reunited, we should be able to draw out the evil master. Then... he's all yours, I guess...";
 // Dialogue exhausted
 HUBD_18 = "There is great evil within these walls...";
-// Unlocked East Wing
-HUBD_19 = "The east wing has been opened, please seek brother James. He should be in the dining room.";
+// Unlocked West Wing
+HUBD_19 = "The \cdwest wing\c- is clear. \cmBrother James\c- should be somewhere around.";
 // Dialogue exhausted
 HUBD_110 = "I haven't seen such a wild storm in years...";
-// Unlocked West Wing
-HUBD_111 = "The west wing is clear. Brother Gunther should be somewhere around.";
+// Unlocked East Wing
+HUBD_111 = "The \cdeast wing\c- has been opened, please seek \cfBrother Gunther\c-. He should be in the \cddining room\c-.";
 // Dialogue exhausted
 HUBD_112 = "Hmm... The oppressive atmosphere of this place seems weaker than before...";
 // Unlocked Second Floor
-HUBD_113 = "So, the second floor is next. If I remember correctly, brother Sigmund was up there.";
-HUBD_114 = "He's probably in the study, that man sure loves to read...";
+HUBD_113 = "So, the \cdsecond floor\c- is next. If I remember correctly, \crBrother Sigmund\c- was up there.";
+HUBD_114 = "He's probably in the \cdstudy\c-, deep into some book. Probably didn't even noticed he was trapped...";
 // Dialogue exhausted
 HUBD_115 = "I must say, I'm impressed by how easily you're handling this...";
 // Unlocked Basement
-HUBD_116 = "I can feel a great surge of power down in the basement. The fiend must be hiding there.";
-HUBD_117 = "We will go on ahead and reunite with brother Alfred. It's time to get to the bottom of this...";
+HUBD_116 = "I can feel a great surge of power down in the \cdbasement\c-. The fiend must be hiding there.";
+HUBD_117 = "We will go on ahead and reunite with \ceBrother Alfred\c-. It's time to get to the bottom of this...";
 // Moved to Basement
 HUBD_118 = "The final painting... So this is where he's hiding...";
 HUBD_119 = "Well, I'm sure you are eager to confront the beast, so let's not waste any time.";
@@ -38,10 +39,77 @@ HUBD_121 = "It is done, then... Many thanks, friend. We would have long perished
 // Dialogue exhausted
 HUBD_122 = "Farewell, and good luck in your future endeavors.";
 
-HUBD_2 = "Brother James";
-HUBD_3 = "Brother Gunther";
-HUBD_4 = "Brother Sigmund";
-HUBD_5 = "Brother Alfred";
+HUBD_2 = "\cmBrother James\c-";
+// Initial
+HUBD_21 = "You broke the barrier? Thank you.";
+// Part 2
+HUBD_22 = "Something really isn't right with this place. It's not just the obvious fact that it's cursed, though.";
+HUBD_23 = "I am sure you've noticed it too. This house feels... unnatural.";
+HUBD_24 = "Whoever created it surely did not know what a house is supposed to look like!";
+// Dialogue exhausted
+HUBD_25 = "There sure is nothing like warming up next to a fireplace in a rainy night...";
+// Unlocked East Wing
+HUBD_26 = "I heard another barrier shatter. Was it the \cdeast wing\c-?";
+HUBD_27 = "I seem to recall there being a suspicious \cdlocked door\c- in there.";
+// Dialogue exhausted
+HUBD_28 = "Some of these paintings really give me the creeps...";
+// Unlocked Second Floor
+HUBD_29 = "That the \cdsecond floor\c-? \crBrother Sigmund\c- was up there when all hell broke loose.";
+HUBD_210 = "I'd be careful around him, he's quite short tempered.";
+// Dialogue exhausted
+HUBD_211 = "I hope that this is all over soon...";
+// Unlocked Basement
+HUBD_212 = "Ah, it is time, then? I'll be down there shortly.";
+// In Basement
+HUBD_213 = "That's... quite the painting, I must say.";
+// All Clear
+HUBD_214 = "Ahhh, finally it's over. Thank you!";
+
+HUBD_3 = "\cfBrother Gunther\c-";
+// Initial
+HUBD_31 = "Ah, hello there. You're the one \cuBrother Marcus\c- called to our rescue, right?";
+HUBD_32 = "Quite impressive that you've gotten this far. Keep it up!";
+// Dialogue exhausted
+HUBD_33 = "Did you see the locked door up the hall? I wonder what's up with that...";
+// Unlocked Second Floor
+HUBD_34 = "Going up to the \cdsecond floor\c-? Good. Do tell me if you find any food in there, I'm starving...";
+// Dialogue exhausted
+HUBD_35 = "Geez... there's not a single thing to eat in here...";
+// Unlocked Basement
+HUBD_36 = "That must've been the last barrier, huh? I'll drop in down there soon.";
+// In Basement
+HUBD_37 = "Lord almighty! That thing's gigantic!";
+// All Clear
+HUBD_38 = "Finally... we can return home. Ah, I hope there's something good for dinner tonight.";
+
+HUBD_4 = "\crBrother Sigmund\c-";
+// Initial
+HUBD_41 = "Hmmm... Was it you making all that noise down there? Could you please keep it down? I'm trying to read here.";
+// Dialogue exhausted
+HUBD_42 = "This library is quite impressive, I must say. So much knowledge in one place...";
+// Unlocked Basement
+HUBD_43 = "Do I really have to go down there now? Drat! I was getting to the best part of this novel...";
+// In Basement
+HUBD_44 = "Let's get this over with. I have some books that need readin'";
+// All Clear
+HUBD_45 = "Well, I guess it's time to go. I sure hope this damned place doesn't come crashing down after we leave.";
+HUBD_46 = "There are so many valuable books in here, it would be a shame if they were lost.";
+
+HUBD_5 = "\ceBrother Alfred\c-";
+// Initial
+HUBD_51 = "\cm*the monk doesn't say a word, but he seems thankful for the rescue*\c-";
+// In Basement
+HUBD_52 = "\cm*he appears to be wishing you luck*\c-";
+// All Clear
+HUBD_53 = "\cm*the man looks at you and smiles*\c-";
+
+BOSSHDR = "\ctNightmare Lord\c-";
+// Initial
+BOSSDLG1 = "SO, YOU HAVE BROKEN THE SEALS? HOW FOOLISH...";
+BOSSDLG2 = "DO YOU KNOW, MORTAL, WHAT YOU HAVE DONE? THE BARRIERS YOU HAVE DESTROYED WERE NOT OF MY CREATION.";
+BOSSDLG3 = "THE DEMONS, FEARING MY POWER, CREATED THIS MANSION AS A PRISON, AND LOCKED ME IN THIS CURSED PAINTING.";
+BOSSDLG4 = "NOW, THANKS TO YOU I AM FREE AGAIN... FREE TO DESTROY THE WORLD!";
+BOSSDLG5 = "OH... DO YOU REALLY THINK YOU CAN STOP ME? I DARE YOU... I DARE YOU TO EVEN TRY!";
 
 // Map Names
 // stored here so the map scripts have easy access to them
@@ -59,11 +127,11 @@ SP_SPOOK10 = "Untitled - by: N/A";
 SP_SPOOK11 = "Untitled - by: N/A";
 SP_SPOOK12 = "Untitled - by: N/A";
 SP_SPOOK13 = "Nightmare Fuel Arena - by: Marisa Kirisame";
-SP_SECRET01 = "Uncle Reggie's Basement - by: Giraffe Man";
-SP_SECRET02 = "Untitled - by: N/A";
+SP_SECRET01 = "\cdUncle Reggie's Basement\c- - by: Giraffe Man";
+SP_SECRET02 = "\cnUntitled\c- - by: N/A";
 SP_SECRET03 = "Untitled - by: N/A";
 SP_SECRET04 = "Untitled - by: N/A";
-SP_SECRET05 = "Golden Slaughterer - by: Marisa Kirisame";
+SP_SECRET05 = "\cxGolden Slaughterer\c- - by: Marisa Kirisame";
 
 // Exit Text
 // TODO write something here
