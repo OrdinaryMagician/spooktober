@@ -128,7 +128,7 @@ Class SpooktoberHandler : EventHandler
 	transient FLineTraceData tdata;
 	double fspeed;
 	int fphase, ftic;
-	ui Font titlefont, authorfont, statsfont;
+	transient ui Font titlefont, authorfont, statsfont;
 
 	override void OnRegister()
 	{

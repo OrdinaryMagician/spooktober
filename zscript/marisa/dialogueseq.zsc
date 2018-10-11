@@ -7,7 +7,7 @@ Class mkDialogueSequence : HUDMessageBase
 	bool bStarted, bInText;
 	BrokenLines lines;
 	String header, voice;
-	Font headerfont, textfont, cursorfont;
+	Font tfont;
 
 	enum ETextEffect
 	{
@@ -33,7 +33,6 @@ Class mkDialogueSequence : HUDMessageBase
 		self.voice = "misc/i_pkup";
 		self.col = Font.CR_WHITE;
 		self.tspeed = 1;
-		self.headerfont = self.cursorfont = self.textfont = Font.GetFont('STAT_LWR');
 		self.vvol = 0.5;
 		return self;
 	}
@@ -43,13 +42,14 @@ Class mkDialogueSequence : HUDMessageBase
 		for ( int i=0; i<part.length(); i++ )
 		{
 			// TODO process color escapes
-			Screen.DrawChar(textfont,col,pos.x+RandomShiver(),pos.y+RandomShiver(),part.CharCodeAt(i),DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
-			pos.x += textfont.GetCharWidth(part.CharCodeAt(i));
+			Screen.DrawChar(tfont,col,pos.x+RandomShiver(),pos.y+RandomShiver(),part.CharCodeAt(i),DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
+			pos.x += tfont.GetCharWidth(part.CharCodeAt(i));
 		}
 	}
 
 	private void DrawText()
 	{
+		if ( !tfont ) tfont = Font.GetFont('STAT_LWR');
 		int cur = charcnt;
 		Vector2 pos = (15,164);
 		for ( int i=0; i<lines.Count(); i++ )
@@ -57,8 +57,8 @@ Class mkDialogueSequence : HUDMessageBase
 			if ( cur <= 0 ) break;
 			String part = lines.StringAt(i).Left(cur);
 			if ( fx == TE_Shiver ) DrawShiver(part,pos);
-			else Screen.DrawText(textfont,col,pos.x,pos.y,part,DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
-			pos.y += textfont.GetHeight()+1;
+			else Screen.DrawText(tfont,col,pos.x,pos.y,part,DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
+			pos.y += tfont.GetHeight()+1;
 			cur -= lines.StringAt(i).Length();
 		}
 	}
@@ -110,7 +110,8 @@ Class mkDialogueSequence : HUDMessageBase
 		if ( pname ~== "Player" ) pname = StringTable.Localize("$DEFPNAME");
 		else pname = "\cf"..pname.."\c-";
 		loc.Replace("%pn",pname);
-		lines = textfont.BreakLines(loc,290);
+		if ( !tfont ) tfont = Font.GetFont('STAT_LWR');
+		lines = tfont.BreakLines(loc,290);
 		charcnt = 0;
 		bInText = true;
 	}
@@ -226,13 +227,14 @@ Class mkDialogueSequence : HUDMessageBase
 		Vector2 pos, sz;
 		[pos, sz] = Screen.VirtualToRealCoords((10,160),(300,30),(320,200),true);
 		Screen.Dim("Black",dimalpha*0.75,int(pos.x),int(pos.y),int(sz.x),int(sz.y));
+		if ( !tfont ) tfont = Font.GetFont('STAT_LWR');
 		// draw header (if any)
 		if ( header )
 		{
-			int ln = headerfont.StringWidth(header);
+			int ln = tfont.StringWidth(header);
 			[pos, sz] = Screen.VirtualToRealCoords((12,145),(ln+6,12),(320,200),true);
 			Screen.Dim("Black",dimalpha*0.75,int(pos.x),int(pos.y),int(sz.x),int(sz.y));
-			Screen.DrawText(headerfont,Font.CR_RED,15,148,header,DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
+			Screen.DrawText(tfont,Font.CR_RED,15,148,header,DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
 		}
 		// draw text, if any
 		if ( charcnt > 0 )
@@ -240,7 +242,7 @@ Class mkDialogueSequence : HUDMessageBase
 			DrawText();
 			// draw blinking "next" marker
 			if ( (gametic%16 < 8) && (charcnt > TotalLength()) )
-				Screen.DrawText(cursorfont,Font.CR_RED,300,180,">",DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
+				Screen.DrawText(tfont,Font.CR_RED,300,180,">",DTA_Bottom320x200,true,DTA_Alpha,dimalpha);
 		}
 	}
 }
