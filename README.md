@@ -22,6 +22,7 @@ Slots taken: 15 / 16
 - **SPOOK05**: The Unpowered Spaceship - CanSteam [completed]
 - **SPOOK06**: Avarice - UndeadRyker
 - **SPOOK08**: The Graveyard Shift - Batandy [completed]
+- **SPOOK11**: Large House of Illusions - leodoom85
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man
 - **SECRET02**: The Crimson Flow - Rachael
@@ -29,7 +30,6 @@ Slots taken: 15 / 16
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)
 
-- **???**: Large House of Illusions - leodoom85
 - **???**: Haunted Hospitality - FishyClockwork
 - **???**: Untitled Map - Caligari87
 - **???**: Untitled Map - Pixel Eater

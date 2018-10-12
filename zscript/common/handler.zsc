@@ -2,6 +2,7 @@
 Class SpooktoberGlobals : Thinker
 {
 	bool completion[18];
+	bool unlocks[5];
 	int maptimes[2][18];
 	int mapkills[2][18];
 	int mapitems[2][18];
@@ -39,6 +40,20 @@ Class SpooktoberGlobals : Thinker
 		return vars;
 	}
 
+	static void SetUnlock( int n )
+	{
+		let v = GetInstance();
+		if ( !v ) return;
+		v.unlocks[n] = true;
+	}
+
+	static clearscope bool GetUnlock( int n )
+	{
+		let v = GetInstance();
+		if ( !v ) return false;
+		return v.unlocks[n];
+	}
+
 	static void SetCompletion( int n )
 	{
 		if ( (n < 0) || (n > 17) ) return;
@@ -47,7 +62,7 @@ Class SpooktoberGlobals : Thinker
 		v.completion[n] = true;
 		// store the stats
 		v.maptimes[n][0] = level.maptime/Thinker.TICRATE;
-		v.maptimes[n][1] = level.partime/Thinker.TICRATE;
+		v.maptimes[n][1] = level.partime;	// this one is in seconds
 		v.mapkills[n][0] = level.killed_monsters;
 		v.mapkills[n][1] = level.total_monsters;
 		v.mapitems[n][0] = level.found_items;

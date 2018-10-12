@@ -103,10 +103,10 @@ thief/wood3 FTWOO_P3
 thief/wood4 FTWOO_P4
 $random thief/wood { thief/wood1 thief/wood2 thief/wood3 thief/wood4 }
 thief/lwater FTWAT_J
-thief/water1 FTWAT_P1
-thief/water2 FTWAT_P2
-thief/water3 FTWAT_P3
-thief/water4 FTWAT_P4
+thief/water1 FTWAT_1
+thief/water2 FTWAT_2
+thief/water3 FTWAT_3
+thief/water4 FTWAT_4
 $random thief/water { thief/water1 thief/water2 thief/water3 thief/water4 }
 
 hexen/ignite	TORCH2
