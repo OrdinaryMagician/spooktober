@@ -1,8 +1,8 @@
 version "3.6"
 
-#include "zscript/common/helpers.zsc"
-#include "zscript/common/handler.zsc"
-#include "zscript/common/hud.zsc"
-
+#include "zscript/marisa/helpers.zsc"
+#include "zscript/marisa/handler.zsc"
+#include "zscript/marisa/hud.zsc"
 #include "zscript/marisa/dialogueseq.zsc"
 #include "zscript/marisa/mapstuff.zsc"
+#include "zscript/marisa/seacat.zsc"

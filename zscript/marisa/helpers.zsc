@@ -1,0 +1,204 @@
+// Useful shared code
+Class SpooktoberUtil abstract play
+{
+	// sets a lineid's light level (ACS doesn't have a function for this)
+	static void SetLineLight( int tag, int brightness, bool absolute = false )
+	{
+		let l = LineIdIterator.Create(tag);
+		int i;
+		while ( (i = l.Next()) != -1 )
+		{
+			for ( int j=0; j<2; j++ )
+			{
+				if ( !level.lines[i].sidedef[j] ) continue;
+				level.lines[i].sidedef[0].light = brightness;
+				if ( absolute ) level.lines[i].sidedef[0].flags |= Side.WALLF_ABSLIGHTING;
+				else level.lines[i].sidedef[0].flags &= ~Side.WALLF_ABSLIGHTING;
+			}
+		}
+	}
+
+	static void SetSectorPlaneLight( int tag, int part, int brightness )
+	{
+		let s = SectorTagIterator.Create(tag);
+		int i;
+		while ( (i = s.Next()) != -1 )
+			level.sectors[i].SetPlaneLight(part,brightness);
+	}
+
+	// door transition teleport for hub
+	static void DoorMove( Actor whom, int angle )
+	{
+		if ( !whom ) return;
+		Vector2 movedir = Actor.RotateVector((128,0),angle);
+		whom.SetOrigin(whom.Vec3Offset(movedir.x,movedir.y,0),false);
+		whom.angle = angle;
+		whom.pitch = 0;
+	}
+
+	// adds totallyfrozen and nogravity, clears velocity
+	static void FullFreeze( Actor whom )
+	{
+		if ( !whom || !whom.player )
+		{
+			for ( int i=0; i<MAXPLAYERS; i++ )
+			{
+				if ( !playeringame[i] ) continue;
+				players[i].cheats |= CF_TOTALLYFROZEN;
+				players[i].vel *= 0;
+				players[i].mo.vel *= 0;
+				players[i].mo.PlayIdle();
+			}
+			return;
+		}
+		whom.player.cheats |= CF_TOTALLYFROZEN;
+		whom.player.vel *= 0;
+		whom.vel *= 0;
+		PlayerPawn(whom).PlayIdle();
+	}
+
+	// removes totallyfrozen and nogravity
+	static void FullUnfreeze( Actor whom )
+	{
+		if ( !whom || !whom.player )
+		{
+			for ( int i=0; i<MAXPLAYERS; i++ )
+			{
+				if ( !playeringame[i] ) continue;
+				players[i].cheats &= ~CF_TOTALLYFROZEN;
+			}
+			return;
+		}
+		whom.player.cheats &= ~CF_TOTALLYFROZEN;
+	}
+
+	// gives a player their start items
+	// replicates APlayerPawn::GiveDefaultInventory since it's not exported
+	static void GiveStartItems( Actor mo )
+	{
+		if ( !(mo is 'PlayerPawn') ) return;
+		DropItem di;
+		for ( di=mo.GetDropItems(); di; di=di.Next )
+		{
+			Class<Actor> ti = di.Name;
+			if ( !(ti is 'Inventory') )
+			{
+				Console.Printf(Font.TEXTCOLOR_ORANGE.."%s is not an inventory item and cannot be given to a player as start item.",ti.GetClassName());
+				continue;
+			}
+			Inventory itm = mo.FindInventory((Class<Inventory>)(ti));
+			if ( !itm )
+			{
+				itm = Inventory(Actor.Spawn(ti));
+				itm.bIGNORESKILL = true;
+				itm.Amount = di.Amount;
+				if ( itm is 'Weapon' ) Weapon(itm).AmmoGive1 = Weapon(itm).AmmoGive2 = 0;
+				Actor check;
+				bool res;
+				[res, check] = itm.CallTryPickup(mo);
+				if ( !res )
+				{
+					if ( check != mo )
+						ThrowAbortException("Cannot give morph items when starting a game");
+					itm.Destroy();
+					itm = null;
+				}
+			}
+			else
+			{
+				let def = GetDefaultByType((Class<Inventory>)(ti));
+				itm.Amount = clamp(itm.Amount+(di.Amount?di.Amount:def.Amount),0,itm.MaxAmount);
+			}
+			if ( itm && (itm is 'Weapon') && Weapon(itm).CheckAmmo(Weapon.EitherFire,false) )
+				mo.player.pendingweapon = Weapon(itm);	// setting also readyweapon like in the C++ version seems to make the weapon break
+		}
+	}
+}
+
+// lite version, only useful for GetAxes
+Class st_Matrix4Lite
+{
+	private double m[16];
+
+	st_Matrix4Lite init()
+	{
+		int i;
+		for ( i=0; i<16; i++ ) m[i] = 0;
+		return self;
+	}
+
+	static st_Matrix4Lite create()
+	{
+		return new("st_Matrix4Lite").init();
+	}
+
+	static st_Matrix4Lite identity()
+	{
+		st_Matrix4Lite o = st_Matrix4Lite.create();
+		for ( int i=0; i<4; i++ ) o.set(i,i,1);
+		return o;
+	}
+
+	double get( int c, int r )
+	{
+		return m[r*4+c];
+	}
+
+	void set( int c, int r, double v )
+	{
+		m[r*4+c] = v;
+	}
+
+	st_Matrix4Lite mul( st_Matrix4Lite o )
+	{
+		st_Matrix4Lite r = st_Matrix4Lite.create();
+		int i, j;
+		for ( i=0; i<4; i++ ) for ( j=0; j<4; j++ )
+			r.set(j,i,get(0,i)*o.get(j,0)+get(1,i)*o.get(j,1)+get(2,i)*o.get(j,2)+get(3,i)*o.get(j,3));
+		return r;
+	}
+
+	Vector3 vmat( Vector3 o )
+	{
+		double x, y, z, w;
+		x = get(0,0)*o.x+get(1,0)*o.y+get(2,0)*o.z+get(3,0);
+		y = get(0,1)*o.x+get(1,1)*o.y+get(2,1)*o.z+get(3,1);
+		z = get(0,2)*o.x+get(1,2)*o.y+get(2,2)*o.z+get(3,2);
+		w = get(0,3)*o.x+get(1,3)*o.y+get(2,3)*o.z+get(3,3);
+		return (x,y,z)/w;
+	}
+
+	static st_Matrix4Lite rotate( Vector3 axis, double theta )
+	{
+		st_Matrix4Lite r = st_Matrix4Lite.identity();
+		double s, c, oc;
+		s = sin(theta);
+		c = cos(theta);
+		oc = 1.0-c;
+		r.set(0,0,oc*axis.x*axis.x+c);
+		r.set(1,0,oc*axis.x*axis.y-axis.z*s);
+		r.set(2,0,oc*axis.x*axis.z+axis.y*s);
+		r.set(0,1,oc*axis.y*axis.x+axis.z*s);
+		r.set(1,1,oc*axis.y*axis.y+c);
+		r.set(2,1,oc*axis.y*axis.z-axis.x*s);
+		r.set(0,2,oc*axis.z*axis.x-axis.y*s);
+		r.set(1,2,oc*axis.z*axis.y+axis.x*s);
+		r.set(2,2,oc*axis.z*axis.z+c);
+		return r;
+	}
+
+	// UE-like axes from rotation
+	static Vector3, Vector3, Vector3 getaxes( double pitch, double yaw, double roll )
+	{
+		Vector3 x = (1,0,0), y = (0,-1,0), z = (0,0,1);	// y inverted for left-handed result
+		st_Matrix4Lite mRoll = st_Matrix4Lite.rotate((1,0,0),roll);
+		st_Matrix4Lite mPitch = st_Matrix4Lite.rotate((0,1,0),pitch);
+		st_Matrix4Lite mYaw = st_Matrix4Lite.rotate((0,0,1),yaw);
+		st_Matrix4Lite mRot = mRoll.mul(mYaw);
+		mRot = mRot.mul(mPitch);
+		x = mRot.vmat(x);
+		y = mRot.vmat(y);
+		z = mRot.vmat(z);
+		return x, y, z;
+	}
+}

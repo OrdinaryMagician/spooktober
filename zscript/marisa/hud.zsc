@@ -1,0 +1,10 @@
+Class SpooktoberHUD : DoomStatusBar
+{
+	override void Draw( int state, double TicFrac )
+	{
+		if ( (level.mapname ~== "SPOOKHUB") && !automapactive )
+			Super.Draw(-1,TicFrac);
+		else
+			Super.Draw(state,TicFrac);
+	}
+}

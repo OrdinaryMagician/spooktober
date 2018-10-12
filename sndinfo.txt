@@ -4,6 +4,7 @@ sjas/act_distant SJAS01
 //////// Marisa
 $pitchshiftrange 0
 
+// from unreal
 rain/rain rainM1
 rain/rain2 rainM2
 rain/thunder1 thund1
@@ -13,20 +14,40 @@ rain/thunder4 lightn10
 rain/thunder5 lightn11
 rain/thunder6 lightn12
 $random rain/thunder { rain/thunder1 rain/thunder2 rain/thunder3 rain/thunder4 rain/thunder5 rain/thunder6 }
-
 misc/wind1 wind40
 misc/wind2 wind30
 misc/wind3 wind32
 misc/wind4 wind33
 misc/growl growl
 misc/wah stower51
+// from other sources
+misc/scase1 dsshell1
+misc/scase2 dsshell2
+misc/scase3 dsshell3
+$random misc/scase { misc/scase1 misc/scase2 misc/scase3 }
+satyr/see dssyrsit
+satyr/die dssyrdth
+goat/step step
+goat/brake skid
+goat/hit axe5
+goat/hitwall hamwal1
+goat/thump dsthump
+// from .blank
 misc/bossvoice bvoice
+// from .flow
 misc/lka lka
-
 $musicvolume D_MIRROR 0.35
-
+// from umineko
+seacat/ahahawav ahaha
+seacat/distclock dclk
 seacat/flangefemale flangefm
-
+seacat/loudthunder lthunder
+seacat/rfire r_fire
+seacat/rreload r_reload
+seacat/rainloop rain4l
+seacat/z1 z1
+$limit seacat/z1 32
+// ambiences
 $ambient 6400 rain/rain point 1.5 continuous 0.5
 $ambient 6401 rain/rain2 world continuous 0.5
 $ambient 6402 misc/wind1 point 1.0 continuous 0.25
@@ -36,7 +57,7 @@ $ambient 6405 misc/wind4 point 1.0 continuous 0.25
 $ambient 6406 misc/growl point 2.0 continuous 0.5
 $ambient 6407 misc/wah point 3.0 continuous 0.25
 $ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
-
+// from thief
 thief/firelp1	FIRELP1
 thief/firelp8	FIRELP8
 thief/firelp9	FIRELP9
@@ -59,7 +80,7 @@ thief/swthrow1	LVTHROW1
 thief/swthrow2	LVTHROW2
 thief/swsmall	LVSCOPE
 thief/switch	LVWALL
-
+// thief footsteps
 thief/lcarpet FTCAR_J
 thief/carpet1 FTCAR_P1
 thief/carpet2 FTCAR_P2
@@ -108,7 +129,7 @@ thief/water2 FTWAT_2
 thief/water3 FTWAT_3
 thief/water4 FTWAT_4
 $random thief/water { thief/water1 thief/water2 thief/water3 thief/water4 }
-
+// from hexen
 hexen/ignite	TORCH2
 
 ////////

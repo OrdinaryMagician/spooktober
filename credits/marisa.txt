@@ -1,1 +1,2 @@
 Texture/sound/model resources taken from Thief: The Dark Project and Thief 2: The Metal Age.
+Some additional stuff taken from Unreal, Umineko and .flow.

@@ -145,5 +145,6 @@ Map SECRET05 lookup "SP_SECRET05"
 {
 	CheckSwitchRange
 	EvenLighting
+	Music = "D_DDOOR"
 	levelnum = 19
 }
