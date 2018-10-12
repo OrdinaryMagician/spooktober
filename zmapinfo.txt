@@ -66,6 +66,9 @@ Map SPOOK04 lookup "SP_SPOOK04"
 
 Map SPOOK05 lookup "SP_SPOOK05"
 {
+	music = "THANTOS"
+	sky1 = "spacesky"
+	lightmode = 3
 	levelnum = 6
 }
 

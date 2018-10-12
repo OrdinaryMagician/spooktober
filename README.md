@@ -14,16 +14,17 @@ A Halloween 2018 map pack for Doom.
 
 ### Current status
 
-Maps completed: 2 / 19
-Slots taken: 14 / 16
+Maps completed: 3 / 19
+Slots taken: 15 / 16
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
 - **SPOOK02**: A Baron's Nightmare - Rachael [completed]
-- **SPOOK05**: Untitled Map - CanSteam
+- **SPOOK05**: The Unpowered Spaceship - CanSteam [completed]
 - **SPOOK06**: Avarice - UndeadRyker
 - **SPOOK08**: The Graveyard Shift - Batandy [completed]
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man
+- **SECRET02**: The Crimson Flow - Rachael
 - **SECRET03**: Abandoned Warehouse - CardBoxNeko
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)

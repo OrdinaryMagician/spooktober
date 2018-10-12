@@ -103,6 +103,8 @@ HUBD_52 = "\cm*he appears to be wishing you luck*\c-";
 // All Clear
 HUBD_53 = "\cm*the man looks at you and smiles*\c-";
 
+// Boss Dialogues
+
 BOSSHDR = "\ctNightmare Lord\c-";
 // Initial
 BOSSDLG1 = "SO, YOU HAVE BROKEN THE SEALS? HOW FOOLISH...";
@@ -111,6 +113,12 @@ BOSSDLG3 = "THE DEMONS, FEARING MY POWER, CREATED THIS MANSION AS A PRISON, AND 
 BOSSDLG4 = "NOW, THANKS TO YOU I AM FREE AGAIN... FREE TO DESTROY THE WORLD!";
 BOSSDLG5 = "OH... DO YOU REALLY THINK YOU CAN STOP ME? I DARE YOU... I DARE YOU TO EVEN TRY!";
 
+// SECRET01 Dialogues
+REGGHDR = "\cbUncle Reggie\c-";
+
+// SECRET05 Dialogues
+BEATHDR = "\cxBeatrice\c-";
+
 // Map Names
 // stored here so the map scripts have easy access to them
 SP_HUB = "Gallery Of Spooks - by: Marisa Kirisame";
@@ -118,7 +126,7 @@ SP_SPOOK01 = "Untitled - by: N/A";
 SP_SPOOK02 = "A Baron's Nightmare - by: Rachael";
 SP_SPOOK03 = "Untitled - by: N/A";
 SP_SPOOK04 = "Untitled - by: N/A";
-SP_SPOOK05 = "Untitled - by: CanSteam";
+SP_SPOOK05 = "The Unpowered Spaceship - by: CanSteam";
 SP_SPOOK06 = "Avarice - by: UndeadRyker";
 SP_SPOOK07 = "Untitled - by: N/A";
 SP_SPOOK08 = "The Graveyard Shift - by: Batandy";
