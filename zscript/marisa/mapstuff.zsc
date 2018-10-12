@@ -2717,3 +2717,72 @@ Class mkThiefSwitchWheel : Actor
 		Goto Spawn;
 	}
 }
+
+Class mkMirrorMan : Actor
+{
+	bool bActive;
+	int cdown;
+
+	override void Activate( Actor activator )
+	{
+		bActive = true;
+		SetStateLabel("Active");
+	}
+
+	override void Deactivate( Actor activator )
+	{
+		bActive = false;
+		SetStateLabel("Spawn");
+	}
+
+	private bool ConsoleplayerOut()
+	{
+		let mo = players[consoleplayer].mo;
+		return !CheckSight(mo);
+	}
+
+	private bool InConsoleplayerLOS()
+	{
+		let mo = players[consoleplayer].mo;
+		Vector3 sc = level.SphericalCoords(mo.pos,pos,(mo.angle,mo.pitch));
+		return (abs(sc.x)<90)||(abs(sc.y)>60);
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		// become invisible if active and seen by consoleplayer
+		if ( !bActive || ConsoleplayerOut() || InConsoleplayerLOS() ) alpha = max(alpha-0.16,0.0);
+		else
+		{
+			if ( cdown-- < 0 )
+			{
+				cdown = Random[MirrorMan](90,280);
+				if ( !Random[MirrorMan](0,3) )
+					A_PlaySound("misc/lka",CHAN_VOICE);
+			}
+			alpha = min(alpha+0.08,1.0);
+		}
+		A_SoundVolume(CHAN_VOICE,alpha);
+	}
+
+	Default
+	{
+		//$Title Mirror Man
+		//$Category Marisa Kirisame
+		RenderStyle "Translucent";
+		Scale 0.17;
+		-SOLID;
+		+NOGRAVITY;
+	}
+
+	States
+	{
+	Spawn:
+		TNT1 A -1;
+		Stop;
+	Active:
+		MRMN A -1;
+		Stop;
+	}
+}

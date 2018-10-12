@@ -19,9 +19,12 @@ Slots taken: 14 / 16
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
 - **SPOOK02**: A Baron's Nightmare - Rachael [completed]
+- **SPOOK05**: Untitled Map - CanSteam
+- **SPOOK06**: Avarice - UndeadRyker
 - **SPOOK08**: The Graveyard Shift - Batandy [completed]
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man
+- **SECRET03**: Abandoned Warehouse - CardBoxNeko
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)
 
@@ -29,9 +32,6 @@ Slots taken: 14 / 16
 - **???**: Haunted Hospitality - FishyClockwork
 - **???**: Untitled Map - Caligari87
 - **???**: Untitled Map - Pixel Eater
-- **???**: Horrible Night - UndeadRyker
-- **???**: Untitled Map - CardBoxNeko
 - **???**: Untitled Map - zrrion the insect
 - **???**: Untitled Map - A.Gamma
 - **???**: Untitled Map - Camper125Lv
-- **???**: Untitled Map - CanSteam

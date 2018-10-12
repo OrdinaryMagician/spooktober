@@ -48,7 +48,7 @@ Map SPOOK01 lookup "SP_SPOOK01"
 Map SPOOK02 lookup "SP_SPOOK02"
 {
 	levelnum = 3
-	Par = 180
+	Par = 100
 	Next = "SpookHub"
 	SecretNext = "SpookHub"
 	Music = "ETHEREAL"
@@ -71,6 +71,9 @@ Map SPOOK05 lookup "SP_SPOOK05"
 
 Map SPOOK06 lookup "SP_SPOOK06"
 {
+	sky1 = "URSK6", 0.00666
+	par = 1
+	music = "CDE-WINT"
 	levelnum = 7
 }
 

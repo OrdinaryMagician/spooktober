@@ -297,6 +297,10 @@ Class SpooktoberHandler : EventHandler
 		case 1:
 			// you get nothing
 			break;
+		case 17:
+			// fist only
+			mo.GiveInventory("Fist",1);
+			break;
 		default:
 			// give start items for player pawn (this allows mod support)
 			SpooktoberUtil.GiveStartItems(mo);

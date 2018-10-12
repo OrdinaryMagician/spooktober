@@ -18,6 +18,14 @@ Class SpooktoberUtil abstract play
 		}
 	}
 
+	static void SetSectorPlaneLight( int tag, int part, int brightness )
+	{
+		let s = SectorTagIterator.Create(tag);
+		int i;
+		while ( (i = s.Next()) != -1 )
+			level.sectors[i].SetPlaneLight(part,brightness);
+	}
+
 	// door transition teleport for hub
 	static void DoorMove( Actor whom, int angle )
 	{
@@ -39,14 +47,14 @@ Class SpooktoberUtil abstract play
 				players[i].cheats |= CF_TOTALLYFROZEN;
 				players[i].vel *= 0;
 				players[i].mo.vel *= 0;
-				players[i].mo.bNOGRAVITY = true;
+				players[i].mo.PlayIdle();
 			}
 			return;
 		}
 		whom.player.cheats |= CF_TOTALLYFROZEN;
 		whom.player.vel *= 0;
 		whom.vel *= 0;
-		whom.bNOGRAVITY = true;
+		PlayerPawn(whom).PlayIdle();
 	}
 
 	// removes totallyfrozen and nogravity
@@ -58,12 +66,10 @@ Class SpooktoberUtil abstract play
 			{
 				if ( !playeringame[i] ) continue;
 				players[i].cheats &= ~CF_TOTALLYFROZEN;
-				players[i].mo.bNOGRAVITY = false;
 			}
 			return;
 		}
 		whom.player.cheats &= ~CF_TOTALLYFROZEN;
-		whom.bNOGRAVITY = false;
 	}
 
 	// gives a player their start items

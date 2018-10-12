@@ -77,4 +77,5 @@ DoomEdNums
 	6473 = mkThiefSwitchThrow
 	6474 = mkThiefSwitchWheel
 	6475 = mkVigoPainting
+	6476 = mkMirrorMan
 }
