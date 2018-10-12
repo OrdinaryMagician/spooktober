@@ -123,7 +123,9 @@ Map SECRET01 lookup "SP_SECRET01"
 
 Map SECRET02 lookup "SP_SECRET02"
 {
+	EvenLighting
 	levelnum = 16
+	music = "crunatus"
 }
 
 Map SECRET03 lookup "SP_SECRET03"
