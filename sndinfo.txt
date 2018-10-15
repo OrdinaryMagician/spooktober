@@ -32,6 +32,7 @@ goat/brake skid
 goat/hit axe5
 goat/hitwall hamwal1
 goat/thump dsthump
+tim/grunt timgrunt
 // from .blank
 misc/bossvoice bvoice
 // from .flow

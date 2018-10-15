@@ -18,6 +18,30 @@ Class SpooktoberUtil abstract play
 		}
 	}
 
+	// marks lines as seen/unseen in automap
+	static void ShowLine( Actor activator, int tag, bool show = true, bool noforce = false )
+	{
+		let l = LineIdIterator.Create(tag);
+		int i;
+		while ( (i = l.Next()) != -1 )
+		{
+			if ( show )
+			{
+				level.lines[i].flags &= ~Line.ML_DONTDRAW;
+				if ( noforce ) continue;
+				level.lines[i].flags |= Line.ML_MAPPED;
+				level.lines[i].validcount = 1;
+			}
+			else
+			{
+				level.lines[i].flags |= Line.ML_DONTDRAW;
+				if ( noforce ) continue;
+				level.lines[i].flags &= ~Line.ML_MAPPED;
+				level.lines[i].validcount = 0;
+			}
+		}
+	}
+
 	static void SetSectorPlaneLight( int tag, int part, int brightness )
 	{
 		let s = SectorTagIterator.Create(tag);
@@ -48,6 +72,7 @@ Class SpooktoberUtil abstract play
 				players[i].vel *= 0;
 				players[i].mo.vel *= 0;
 				players[i].mo.PlayIdle();
+				players[i].mo.bNODAMAGE = true;
 			}
 			return;
 		}
@@ -55,6 +80,7 @@ Class SpooktoberUtil abstract play
 		whom.player.vel *= 0;
 		whom.vel *= 0;
 		PlayerPawn(whom).PlayIdle();
+		whom.bNODAMAGE = true;
 	}
 
 	// removes totallyfrozen and nogravity
@@ -66,10 +92,12 @@ Class SpooktoberUtil abstract play
 			{
 				if ( !playeringame[i] ) continue;
 				players[i].cheats &= ~CF_TOTALLYFROZEN;
+				players[i].mo.bNODAMAGE = false;
 			}
 			return;
 		}
 		whom.player.cheats &= ~CF_TOTALLYFROZEN;
+		whom.bNODAMAGE = false;
 	}
 
 	// gives a player their start items

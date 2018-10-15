@@ -869,7 +869,8 @@ Class mkFootstepMaker : Thinker
 		{
 			"1:rug02", "1:rug18", "1:mkThiefSofa",
 			"1:mkThiefSofaChair", "1:mkThiefChairOrnate",
-			"1:mkThiefBedFancy", "1:b28",
+			"1:mkThiefBedFancy", "1:b28", "1:rug04",
+			"3:plant05",
 			"4:floor4",
 			"6:tile", "6:ftile3", "6:ftile4", "6:tile_",
 			"7:frame3b", "7:palslant", "7:mkThiefChair",
@@ -878,7 +879,8 @@ Class mkFootstepMaker : Thinker
 			"7:mkThiefBox", "7:mkThiefBoxOpen", "7:mkThiefBoxLid",
 			"7:mkThiefArmoire", "7:mkThiefStool", "7:mkThiefDesk",
 			"7:mkThiefTableFancy1", "7:mkThiefTableFancy2",
-			"7:mkThiefFootlocker", "7:frame3"
+			"7:mkThiefFootlocker", "7:frame3", "7:palbasic",
+			"7:woodpnl", "7:wdplain"
 		};
 		String tx;
 		bool dummy;
@@ -1975,10 +1977,26 @@ Class mkSilentPainting1 : mkThiefPainting
 }
 Class mkTimPainting1 : mkThiefPainting
 {
+	override bool Used( Actor user )
+	{
+		// check range
+		if ( user.pos.z+user.height < pos.z-32*scale.x ) return false;
+		if ( user.pos.z > pos.z+32*scale.x ) return false;
+		A_PlaySound("tim/grunt",CHAN_VOICE,attenuation:ATTN_NONE);
+		if ( bCOUNTSECRET ) level.GiveSecret(user);
+		bCOUNTSECRET = false;
+		return true;
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		A_SetSize(32*scale.x);
+	}
 	Default
 	{
 		//$Title Tim Allen Painting #1
 		//$Category Marisa Kirisame
+		+COUNTSECRET;
 	}
 	States
 	{
@@ -1989,6 +2007,19 @@ Class mkTimPainting1 : mkThiefPainting
 }
 Class mkAmnesiaPainting1 : mkThiefPainting
 {
+	override void Activate( Actor activator )
+	{
+		if ( tracer ) tracer.Activate(activator);
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		tracer = Spawn("mkAmnesiaPainting2",pos);
+		tracer.scale = scale;
+		tracer.angle = angle;
+	}
+
 	Default
 	{
 		//$Title Amnesia Painting #1
@@ -2003,10 +2034,33 @@ Class mkAmnesiaPainting1 : mkThiefPainting
 }
 Class mkAmnesiaPainting2 : mkThiefPainting
 {
+	int tact;
+	double talpha;
+
+	override void Activate( Actor activator )
+	{
+		tact = Random[Amnesia](1,4);
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		// fade to insanity ver when player is far away
+		double dist = Vec3To(players[consoleplayer].mo).length();
+		talpha = clamp((dist-250)*0.002,0.0,0.999999);
+		if ( tact )
+		{
+			talpha = min(1.0,talpha+tact/4.);
+			tact--;
+		}
+		alpha = talpha;
+	}
+
 	Default
 	{
 		//$Title Amnesia Painting #2
 		//$Category Marisa Kirisame
+		RenderStyle "Translucent";
+		Alpha 0.0;
 	}
 	States
 	{

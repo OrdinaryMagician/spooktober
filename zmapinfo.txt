@@ -31,7 +31,6 @@ Episode SPOOKHUB
 
 Map SPOOKHUB lookup "SP_HUB"
 {
-	CheckSwitchRange
 	EvenLighting
 	RememberState
 	Music = "D_SPKHUB"
@@ -114,7 +113,6 @@ Map SPOOK12 lookup "SP_SPOOK12"
 
 Map SPOOK13 lookup "SP_SPOOK13"
 {
-	CheckSwitchRange
 	EvenLighting
 	levelnum = 14
 }
@@ -143,7 +141,6 @@ Map SECRET04 lookup "SP_SECRET04"
 
 Map SECRET05 lookup "SP_SECRET05"
 {
-	CheckSwitchRange
 	EvenLighting
 	Music = "D_DDOOR"
 	levelnum = 19

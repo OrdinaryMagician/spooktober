@@ -15,7 +15,7 @@ A Halloween 2018 map pack for Doom.
 ### Current status
 
 Maps completed: 3 / 19
-Slots taken: 15 / 16
+Slots taken: 14 / 16
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
 - **SPOOK02**: A Baron's Nightmare - Rachael [completed]
@@ -31,7 +31,6 @@ Slots taken: 15 / 16
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)
 
 - **???**: Haunted Hospitality - FishyClockwork
-- **???**: Untitled Map - Caligari87
 - **???**: Untitled Map - Pixel Eater
 - **???**: Untitled Map - zrrion the insect
 - **???**: Untitled Map - A.Gamma

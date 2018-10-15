@@ -80,6 +80,50 @@ object mkChandelier
 	frame CHDLC { light MKCHANDELIER }
 }
 
+pointlight GOATBALL
+{
+    color 0.5 0.0 1.0
+    size 96
+	attenuate 1
+}
+
+flickerlight GOATBALL_X1
+{
+    color 0.6 0.45 0.9
+    size 120
+    secondarySize 132
+    chance 0.25
+	attenuate 1
+}
+
+flickerlight GOATBALL_X2
+{
+    color 0.4 0.3 0.6
+    size 144
+    secondarySize 156
+    chance 0.25
+	attenuate 1
+}
+
+flickerlight GOATBALL_X3
+{
+    color 0.2 0.15 0.45
+    size 168
+    secondarySize 180
+    chance 0.25
+	attenuate 1
+}
+
+object mkGoatBall
+{
+    frame BALGA { light GOATBALL    }
+    frame BALGB { light GOATBALL    }
+
+    frame BALGC { light GOATBALL_X1 }
+    frame BALGD { light GOATBALL_X2 }
+    frame BALGE { light GOATBALL_X3 }
+}
+
 // batandy
 Pointlight AgPumpkinLight
 {

@@ -35,7 +35,7 @@ DoomEdNums
 	6431 = mkSilentPainting1
 	6432 = mkTimPainting1
 	6433 = mkAmnesiaPainting1
-	6434 = mkAmnesiaPainting2
+	6434 = mkVigoPainting
 	6435 = mkSpookPainting1
 	6436 = mkThiefChair
 	6437 = mkThiefTable
@@ -76,6 +76,6 @@ DoomEdNums
 	6472 = mkThiefSwitchArcBlank
 	6473 = mkThiefSwitchThrow
 	6474 = mkThiefSwitchWheel
-	6475 = mkVigoPainting
+	//6475 = mkNightmareLord
 	6476 = mkMirrorMan
 }
