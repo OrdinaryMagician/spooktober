@@ -317,6 +317,10 @@ Class mkDialogueHandler : EventHandler
 		}
 		else if ( e.Name ~== "talkedtofirstmonk" )
 			SpooktoberGlobals.TalkedToFirstMonk();
+		else if ( e.Name ~== "movetobasement" )
+			level.ExecuteSpecial(80,null,null,false,202);
+		else if ( e.Name ~== "dispelbosspainting" )
+			level.ExecuteSpecial(80,null,null,false,203);
 	}
 
 	static void StartDialogueSequence( Actor speaker, Actor speakee, int seqnum, bool bOrientSpeaker = true, bool bOrientSpeakee = true )

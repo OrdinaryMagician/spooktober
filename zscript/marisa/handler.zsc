@@ -141,14 +141,20 @@ Class SpooktoberGlobals : Thinker
 Class SpooktoberHandler : EventHandler
 {
 	transient FLineTraceData tdata;
-	double fspeed;
-	int fphase, ftic;
+	double fspeed[MAXPLAYERS];
+	int fphase[MAXPLAYERS], ftic[MAXPLAYERS];
 	transient ui Font titlefont, authorfont, statsfont;
+	int tcnt;
 
 	override void OnRegister()
 	{
 		// initialize globals
 		SpooktoberGlobals.MakeInstance();
+	}
+
+	override void WorldLoaded( WorldEvent e )
+	{
+		tcnt = 0;
 	}
 
 	override void WorldLinePreActivated( WorldEvent e )
@@ -161,13 +167,18 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldTick()
 	{
-		if ( fspeed > double.epsilon )
+		tcnt++;
+		for ( int i=0; i<MAXPLAYERS; i++ )
 		{
-			double str = (gametic-ftic)/(Thinker.TICRATE*fspeed);
-			if ( str > 1.0 )
+			if ( !playeringame[i] ) continue;
+			if ( fspeed[i] > double.epsilon )
 			{
-				Shader.SetEnabled(players[consoleplayer],"blurfade",false);
-				fspeed = 0;
+				double str = (level.totaltime-ftic[i])/(Thinker.TICRATE*fspeed[i]);
+				if ( str > 1.0 )
+				{
+					Shader.SetEnabled(players[i],"blurfade",false);
+					fspeed[i] = 0;
+				}
 			}
 		}
 		if ( level.levelnum != 1 ) return;
@@ -178,12 +189,14 @@ Class SpooktoberHandler : EventHandler
 
 	override void RenderOverlay( RenderEvent e )
 	{
+		// guarantee smooth transition
+		if ( tcnt <= 1 ) Screen.Dim("Black",1.0,0,0,Screen.GetWidth(),Screen.GetHeight());
 		// fader shader
-		if ( fspeed > double.epsilon )
+		if ( fspeed[consoleplayer] > double.epsilon )
 		{
 			PlayerInfo p = players[consoleplayer];
-			double str = clamp(((gametic-ftic)+e.fractic)/(Thinker.TICRATE*fspeed),0.0,1.0);
-			if ( fphase ) str = 1.0-str;
+			double str = clamp(((level.totaltime-ftic[consoleplayer])+e.fractic)/(Thinker.TICRATE*fspeed[consoleplayer]),0.0,1.0);
+			if ( fphase[consoleplayer] ) str = 1.0-str;
 			Shader.SetUniform1f(p,"blurfade","strength",str);
 		}
 		if ( (level.levelnum != 1) || automapactive || !SpooktoberGlobals.HasTalkedToFirstMonk() ) return;
@@ -283,7 +296,6 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldUnloaded( WorldEvent e )
 	{
-		Shader.SetEnabled(players[consoleplayer],"blurfade",false);
 		SpooktoberGlobals.SetCompletion(level.levelnum-2);
 		if ( level.levelnum != 1 ) return;
 		// adjust player sizes back to normal
@@ -331,23 +343,49 @@ Class SpooktoberHandler : EventHandler
 		mkFootstepMaker.AttachTo(mo);
 	}
 
-	static void FadeInShader( double speed = 1.0 )
+	static void FadeInShader( Actor camera, double speed = 1.0 )
 	{
 		let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
 		if ( !hnd ) return;
-		hnd.fspeed = speed;
-		hnd.fphase = 1;
-		hnd.ftic = gametic;
-		Shader.SetEnabled(players[consoleplayer],"blurfade",true);
+		if ( camera && camera.player )
+		{
+			int n = camera.PlayerNumber();
+			hnd.fspeed[n] = speed;
+			hnd.fphase[n] = 1;
+			hnd.ftic[n] = level.totaltime;
+			Shader.SetEnabled(players[n],"blurfade",true);
+			return;
+		}
+		for ( int i=0; i<MAXPLAYERS; i++ )
+		{
+			if ( !playeringame[i] ) continue;
+			hnd.fspeed[i] = speed;
+			hnd.fphase[i] = 1;
+			hnd.ftic[i] = level.totaltime;
+			Shader.SetEnabled(players[i],"blurfade",true);
+		}
 	}
 
-	static void FadeOutShader( double speed = 1.0 )
+	static void FadeOutShader( Actor camera, double speed = 1.0 )
 	{
 		let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
 		if ( !hnd ) return;
-		hnd.fspeed = speed;
-		hnd.fphase = 0;
-		hnd.ftic = gametic;
-		Shader.SetEnabled(players[consoleplayer],"blurfade",true);
+		if ( camera && camera.player )
+		{
+			int n = camera.PlayerNumber();
+			hnd.fspeed[n] = speed;
+			hnd.fphase[n] = 0;
+			hnd.ftic[n] = level.totaltime;
+			Shader.SetEnabled(players[n],"blurfade",true);
+			return;
+		}
+		for ( int i=0; i<MAXPLAYERS; i++ )
+		{
+			if ( !playeringame[i] ) continue;
+			hnd.fspeed[i] = speed;
+			hnd.fphase[i] = 0;
+			hnd.ftic[i] = level.totaltime;
+			Shader.SetEnabled(players[i],"blurfade",true);
+		}
 	}
 }
