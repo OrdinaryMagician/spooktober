@@ -48,16 +48,6 @@ seacat/rreload r_reload
 seacat/rainloop rain4l
 seacat/z1 z1
 $limit seacat/z1 32
-// ambiences
-$ambient 6400 rain/rain point 1.5 continuous 0.5
-$ambient 6401 rain/rain2 world continuous 0.5
-$ambient 6402 misc/wind1 point 1.0 continuous 0.25
-$ambient 6403 misc/wind2 point 1.0 continuous 0.25
-$ambient 6404 misc/wind3 point 1.0 continuous 0.25
-$ambient 6405 misc/wind4 point 1.0 continuous 0.25
-$ambient 6406 misc/growl point 2.0 continuous 0.5
-$ambient 6407 misc/wah point 3.0 continuous 0.25
-$ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
 // from thief
 thief/firelp1	FIRELP1
 thief/firelp8	FIRELP8
@@ -81,6 +71,9 @@ thief/swthrow1	LVTHROW1
 thief/swthrow2	LVTHROW2
 thief/swsmall	LVSCOPE
 thief/switch	LVWALL
+thief/eees1	EEES1
+thief/eees2	EEES2
+thief/eees3	EEES3
 // thief footsteps
 thief/lcarpet FTCAR_J
 thief/carpet1 FTCAR_P1
@@ -132,5 +125,19 @@ thief/water4 FTWAT_4
 $random thief/water { thief/water1 thief/water2 thief/water3 thief/water4 }
 // from hexen
 hexen/ignite	TORCH2
+// ambiences
+$ambient 6400 rain/rain point 1.5 continuous 0.5
+$ambient 6401 rain/rain2 world continuous 0.5
+$ambient 6402 misc/wind1 point 1.0 continuous 0.25
+$ambient 6403 misc/wind2 point 1.0 continuous 0.25
+$ambient 6404 misc/wind3 point 1.0 continuous 0.25
+$ambient 6405 misc/wind4 point 1.0 continuous 0.25
+$ambient 6406 misc/growl point 2.0 continuous 0.5
+$ambient 6407 misc/wah point 3.0 continuous 0.25
+$ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
+$ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
+$ambient 6409 thief/eees1 point 0.8 continuous 0.6
+$ambient 6410 thief/eees2 point 0.8 continuous 0.6
+$ambient 6411 thief/eees3 point 0.6 continuous 0.8
 
 ////////

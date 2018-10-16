@@ -18,6 +18,19 @@ Class SpooktoberUtil abstract play
 		}
 	}
 
+	static void SetDaylight( int tag )
+	{
+		let ai = ActorIterator.Create(tag);
+		Actor a;
+		while ( a = ai.Next() )
+		{
+			a.args[0] = 255;
+			a.args[1] = 160;
+			a.args[2] = 32;
+			a.args[3] *= 2; // this part can't be done in acs
+		}
+	}
+
 	// marks lines as seen/unseen in automap
 	static void ShowLine( Actor activator, int tag, bool show = true, bool noforce = false )
 	{

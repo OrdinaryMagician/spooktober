@@ -2274,16 +2274,17 @@ Class mkBarrier : Actor
 	{
 		FLineTraceData d;
 		double distl, distr, distz;
-		LineTrace(angle+90,radius,0,TRF_THRUACTORS,4,data:d);
-		distr = d.Distance-4.0;
-		LineTrace(angle-90,radius,0,TRF_THRUACTORS,4,data:d);
-		distl = -(d.Distance-4.0);
-		for ( double i=distl; i<=distr; i+=4.0 )
+		LineTrace(angle+90,radius,0,TRF_THRUACTORS,8,data:d);
+		distr = d.Distance-8.0;
+		LineTrace(angle-90,radius,0,TRF_THRUACTORS,8,data:d);
+		distl = d.Distance-8.0;
+		double minor, major;
+		for ( double i=-distl; i<=distr; i+=8.0 )
 		{
 			// get height at this spot
-			LineTrace(angle,height,-90,TRF_THRUACTORS,4,0,i,data:d);
-			distz = d.Distance-8;
-			for ( double j=4; j<=distz; j+=4.0 )
+			LineTrace(angle,height,-90,TRF_THRUACTORS,8,0,i,data:d);
+			distz = d.Distance-16;
+			for ( double j=8; j<=distz; j+=8.0 )
 			{
 				Color c = Color(30,0,0)*Random[Barrier](4,8);
 				A_SpawnParticle(c,SPF_FULLBRIGHT|SPF_RELATIVE,Random[Barrier](50,70),FRandom[Barrier](8,32),0,0,i+FRandom[Barrier](-2,2),j+FRandom[Barrier](-2,2),FRandom[Barrier](0.4,2.4),FRandom[Barrier](-0.2,0.2),FRandom[Barrier](-0.2,0.2),0,0,0.01,1.0,-1,-0.2);
@@ -2838,5 +2839,42 @@ Class mkMirrorMan : Actor
 	Active:
 		MRMN A -1;
 		Stop;
+	}
+}
+
+// A spooky thing
+Class mkLookAtMe : Actor
+{
+	private bool InConsoleplayerLOS( Actor a )
+	{
+		double vfov = CVar.GetCVar('fov',players[consoleplayer]).GetFloat()*0.5;
+		double hfov = atan(Screen.GetAspectRatio()*tan(vfov));
+		let mo = players[consoleplayer].mo;
+		Vector3 ppos = mo.Vec2OffsetZ(0,0,mo.player.viewz);
+		Vector3 tpos = a.Vec3Offset(0,0,a.height*0.5);
+		Vector3 sc = level.SphericalCoords(ppos,tpos,(mo.angle,mo.pitch));
+		return ((abs(sc.x)<hfov)&&(abs(sc.y)<vfov));
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		let ai = ActorIterator.Create(args[0]);
+		Actor a;
+		while ( a = ai.Next() )
+		{
+			// can the consoleplayer see it?
+			if ( InConsoleplayerLOS(a) ) continue;
+			a.angle = a.AngleTo(players[consoleplayer].mo);
+		}
+	}
+
+	Default
+	{
+		//$Title Look At Me
+		//$Category Marisa Kirisame
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
 	}
 }

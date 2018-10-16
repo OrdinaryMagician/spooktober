@@ -78,4 +78,5 @@ DoomEdNums
 	6474 = mkThiefSwitchWheel
 	//6475 = mkNightmareLord
 	6476 = mkMirrorMan
+	6477 = mkLookAtMe
 }

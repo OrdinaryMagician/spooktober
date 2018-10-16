@@ -1,2 +1,4 @@
 D_SPKHUB : Dark Bloo Inn - Paper Mario: Color Splash
+D_NARENA, D_NTLORD : Dummied out Dark Souls 3 tracks
+D_NTMARI : Final boss theme (no official title) from Silent Hill 2
 ETHEREAL, CRUNATUS, OCCULT, SIMPLE : Original compositions by SpeedySPCFan

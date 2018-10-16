@@ -124,6 +124,16 @@ object mkGoatBall
     frame BALGE { light GOATBALL_X3 }
 }
 
+skybox ACIDSKY fliptop
+{
+	textures/thief/skyhw/acide.png
+	textures/thief/skyhw/acids.png
+	textures/thief/skyhw/acidw.png
+	textures/thief/skyhw/acidn.png
+	textures/thief/skyhw/acidt.png
+	textures/thief/skyhw/acidb.png
+}
+
 // batandy
 Pointlight AgPumpkinLight
 {
