@@ -7,7 +7,7 @@ Class SpooktoberGlobals : Thinker
 	int mapkills[2][18];
 	int mapitems[2][18];
 	int mapsecrets[2][18];
-	bool hastalked, secretending;
+	bool hastalked;
 	int stage;
 
 	static void TalkedToFirstMonk()
@@ -54,21 +54,24 @@ Class SpooktoberGlobals : Thinker
 		return v.unlocks[n];
 	}
 
-	static void SetCompletion( int n )
+	static void SetCompletion( int n, bool forced = false )
 	{
 		if ( (n < 0) || (n > 17) ) return;
 		let v = GetInstance();
 		if ( !v ) return;
 		v.completion[n] = true;
-		// store the stats
-		v.maptimes[n][0] = level.maptime/Thinker.TICRATE;
-		v.maptimes[n][1] = level.partime;	// this one is in seconds
-		v.mapkills[n][0] = level.killed_monsters;
-		v.mapkills[n][1] = level.total_monsters;
-		v.mapitems[n][0] = level.found_items;
-		v.mapitems[n][1] = level.total_items;
-		v.mapsecrets[n][0] = level.found_secrets;
-		v.mapsecrets[n][1] = level.total_secrets;
+		if ( !forced )
+		{
+			// store the stats
+			v.maptimes[n][0] = level.maptime/Thinker.TICRATE;
+			v.maptimes[n][1] = level.partime;	// this one is in seconds
+			v.mapkills[n][0] = level.killed_monsters;
+			v.mapkills[n][1] = level.total_monsters;
+			v.mapitems[n][0] = level.found_items;
+			v.mapitems[n][1] = level.total_items;
+			v.mapsecrets[n][0] = level.found_secrets;
+			v.mapsecrets[n][1] = level.total_secrets;
+		}
 		if ( (n <= 12) && GetFullCompletion(4) ) v.stage = max(5,v.stage);
 		else if ( (n <= 11) && GetFullCompletion(3) ) v.stage = max(4,v.stage);
 		else if ( (n <= 8) && GetFullCompletion(2) ) v.stage = max(3,v.stage);
@@ -199,9 +202,32 @@ Class SpooktoberHandler : EventHandler
 			if ( fphase[consoleplayer] ) str = 1.0-str;
 			Shader.SetUniform1f(p,"blurfade","strength",str);
 		}
-		if ( (level.levelnum != 1) || automapactive || !SpooktoberGlobals.HasTalkedToFirstMonk() ) return;
-		// check that we're tracing the midtex of a level painting
-		if ( (tdata.HitType != TRACE_HitWall) || (tdata.LinePart != 1) || (tdata.HitLine.special != 80) || (tdata.HitLine.args[0] != 10) ) return;
+		if ( (level.levelnum != 1) || automapactive ) return;
+		if ( (tdata.HitType != TRACE_HitWall) || (tdata.LinePart != 1) || (tdata.HitLine.special != 80) ) return;
+		// painting info overlays
+		if ( !titlefont ) titlefont = Font.GetFont('GRGW_LWR');
+		if ( !authorfont ) authorfont = Font.GetFont('GARGSMAL');
+		if ( !statsfont ) statsfont = Font.GetFont('DietLogFont');
+		if ( tdata.HitLine.args[0] == 13 )
+		{
+			// author painting
+			String aname = StringTable.Localize(String.Format("$SP_AUTHOR%d",tdata.HitLine.args[2]));
+			String atitle = StringTable.Localize(String.Format("$SP_TITLE%d",tdata.HitLine.args[2]));
+			String amessage = StringTable.Localize(String.Format("$SP_MESSAGE%d",tdata.HitLine.args[2]));
+			double ypos = 150;
+			int len;
+			len = titlefont.StringWidth(aname);
+			Screen.DrawText(titlefont,Font.CR_WHITE,(320.-len)/2,ypos,aname,DTA_Bottom320x200,true);
+			ypos += titlefont.GetHeight()+2;
+			len = authorfont.StringWidth(atitle);
+			Screen.DrawText(authorfont,Font.CR_GOLD,(320.-len)/2.,ypos,atitle,DTA_Bottom320x200,true);
+			ypos += authorfont.GetHeight()+6;
+			len = statsfont.StringWidth(amessage);
+			Screen.DrawText(statsfont,Font.CR_GREEN,(320.-len)/2.,ypos,amessage,DTA_Bottom320x200,true);
+			return;
+		}
+		if ( (tdata.HitLine.args[0] != 10) || !SpooktoberGlobals.HasTalkedToFirstMonk() ) return;
+		// level painting
 		// get map name from levelnum
 		String mname = "???";
 		if ( (tdata.HitLine.args[2] >= 2) && (tdata.HitLine.args[2] <= 14) )
@@ -212,9 +238,6 @@ Class SpooktoberHandler : EventHandler
 		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) ) ypos = 110.;
 		else ypos = 150.;
 		int len;
-		if ( !titlefont ) titlefont = Font.GetFont('GRGW_LWR');
-		if ( !authorfont ) authorfont = Font.GetFont('GARGSMAL');
-		if ( !statsfont ) statsfont = Font.GetFont('DietLogFont');
 		// format name
 		if ( mname.IndexOf(" - by: ") != -1 )
 		{
@@ -341,6 +364,57 @@ Class SpooktoberHandler : EventHandler
 		mo.viewbob = d.viewbob*0.5;
 		// footsteps!
 		mkFootstepMaker.AttachTo(mo);
+	}
+
+	override void NetworkProcess( ConsoleEvent e )
+	{
+		if ( level.levelnum != 1 ) return;
+		if ( e.Name ~== "debug_skipnext" )
+		{
+			SpooktoberGlobals.TalkedToFirstMonk();
+			int stage = SpooktoberGlobals.GetStage();
+			switch ( stage )
+			{
+			case 0:
+				SpooktoberGlobals.HasTalkedToFirstMonk();
+				SpooktoberGlobals.SetCompletion(0,true);
+				SpooktoberGlobals.SetCompletion(1,true);
+				SpooktoberGlobals.SetCompletion(2,true);
+				break;
+			case 1:
+				SpooktoberGlobals.SetCompletion(3,true);
+				SpooktoberGlobals.SetCompletion(4,true);
+				SpooktoberGlobals.SetCompletion(5,true);
+				break;
+			case 2:
+				SpooktoberGlobals.SetCompletion(6,true);
+				SpooktoberGlobals.SetCompletion(7,true);
+				SpooktoberGlobals.SetCompletion(8,true);
+				break;
+			case 3:
+				SpooktoberGlobals.SetCompletion(9,true);
+				SpooktoberGlobals.SetCompletion(10,true);
+				SpooktoberGlobals.SetCompletion(11,true);
+				break;
+			case 4:
+				let li = LineIdIterator.Create(305);
+				int l;
+				if ( ((l = li.Next()) != -1) && level.lines[l].flags&Line.ML_BLOCKEVERYTHING )
+					level.ExecuteSpecial(80,null,null,false,201,0,5);
+				SpooktoberGlobals.SetCompletion(12,true);
+				break;
+			}
+			level.ExecuteSpecial(80,null,null,false,200);
+		}
+		else if ( e.Name ~== "debug_skipall" )
+		{
+			let g = SpooktoberGlobals.GetInstance();
+			for ( int i=0; i<18; i++ ) g.completion[i] = true;
+			for ( int i=0; i<5; i++ ) g.unlocks[i] = true;
+			g.hastalked = true;
+			g.stage = 5;
+			level.ExecuteSpecial(80,null,null,false,-int('DebugFinish'));
+		}
 	}
 
 	static void FadeInShader( Actor camera, double speed = 1.0 )

@@ -33,11 +33,5 @@ TEXTURE bdwal1
 TEXTURE bwal1
 	RANGE bwal1_5 TICS 5 OSCILLATE
 // thief/waterhw
-TEXTURE blin
-	RANGE blin_13 TICS 5
-TEXTURE grin
-	RANGE grin_13 TICS 5
 TEXTURE l4in
 	RANGE l4in_4 TICS 5
-TEXTURE vmin
-	RANGE vmin_13 TICS 5

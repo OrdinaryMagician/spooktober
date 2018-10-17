@@ -247,6 +247,36 @@ Class mkDialogueSequence : HUDMessageBase
 	}
 }
 
+Class mkSmoothLookTo : Thinker
+{
+	Actor target;
+	double angle, pitch, speed;
+
+	static void LookTowards( Actor target, double angle, double pitch, double speed )
+	{
+		let slt = new("mkSmoothLookTo");
+		slt.ChangeStatNum(STAT_USER);
+		slt.target = target;
+		slt.angle = angle;
+		slt.pitch = pitch;
+		slt.speed = speed;
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		double iangle, ipitch;
+		iangle = Actor.DeltaAngle(target.angle,angle);
+		ipitch = Actor.DeltaAngle(target.pitch,pitch);
+		iangle = Clamp(iangle,-speed,speed);
+		ipitch = Clamp(ipitch,-speed,speed);
+		target.A_SetAngle(target.angle+iangle,SPF_INTERPOLATE);
+		target.A_SetPitch(target.pitch+ipitch,SPF_INTERPOLATE);
+		if ( (abs(iangle) < double.epsilon) && (abs(ipitch) < double.epsilon) )
+			Destroy();
+	}
+}
+
 // Main handler for all interactive dialogues with the monks
 Class mkDialogueHandler : EventHandler
 {
@@ -254,7 +284,16 @@ Class mkDialogueHandler : EventHandler
 	Actor speaker, speakee;
 	PlayerInfo starter;
 	bool orientspeaker, orientspeakee;
-	double oldang;
+	double oldang, oldpt;
+
+	// gets the pitch needed for one actor to look at another in the face
+	static double FaceToFace( Actor a, Actor b )
+	{
+		Vector3 otherpos = level.Vec3Diff(b.Vec3Offset(0,0,b.height),a.Vec3Offset(0,0,a.height));
+		double dist = otherpos.length();
+		if ( dist > 0 ) return asin(otherpos.z/dist);
+		return 0;
+	}
 
 	override void PostUiTick()
 	{
@@ -279,13 +318,11 @@ Class mkDialogueHandler : EventHandler
 			if ( orientspeaker )
 			{
 				oldang = speaker.angle;
-				speaker.angle = speaker.AngleTo(speakee);
+				oldpt = speaker.pitch;
+				mkSmoothLookTo.LookTowards(speaker,speaker.AngleTo(speakee),FaceToFace(speaker,speakee),12.0);
 			}
 			if ( orientspeakee )
-			{
-				speakee.A_SetAngle(speakee.AngleTo(speaker),SPF_INTERPOLATE);
-				speakee.A_SetPitch(0,SPF_INTERPOLATE);	// no PitchTo yet
-			}
+				mkSmoothLookTo.LookTowards(speakee,speakee.AngleTo(speaker),FaceToFace(speakee,speaker),3.0);
 			speakee.vel *= 0;	// stap
 			starter.vel *= 0;	// STAHP
 			starter.cheats |= CF_TOTALLYFROZEN; // freeze!
@@ -295,7 +332,8 @@ Class mkDialogueHandler : EventHandler
 			// thaw player and return camera
 			starter.cheats &= ~CF_TOTALLYFROZEN;
 			starter.camera = speakee;
-			if ( orientspeaker ) speaker.angle = oldang;
+			if ( orientspeaker )
+				mkSmoothLookTo.LookTowards(speaker,oldang,oldpt,12.0);
 			seqnum = 0;
 		}
 		else if ( e.Name ~== "dialogue_setcam" )

@@ -80,7 +80,7 @@ HUBD_36 = "That must've been the last barrier, huh? I'll drop in down there soon
 // In Basement
 HUBD_37 = "Lord almighty! That thing's gigantic!";
 // All Clear
-HUBD_38 = "Finally... we can return home. Ah, I hope there's something good for dinner tonight.";
+HUBD_38 = "Finally... we can return home. Ah, I hope there's something good for breakfast today.";
 
 HUBD_4 = "\crBrother Sigmund\c-";
 // Initial
@@ -154,3 +154,58 @@ SP_SECRET05 = "\cxGolden Slaughterer\c- - by: Marisa Kirisame";
 // Exit Text
 // TODO write something here
 SP_EXTXT = "Thanks for playing!";
+
+// Author credits
+SP_AUTHOR0 = "Marisa Kirisame";
+SP_AUTHOR1 = "leodoom85";
+SP_AUTHOR2 = "FishyClockwork";
+SP_AUTHOR3 = "QuakedoomNukem Cz";
+SP_AUTHOR4 = "Pixel Eater";
+SP_AUTHOR5 = "UndeadRyker";
+SP_AUTHOR6 = "CardBoxNeko";
+SP_AUTHOR7 = "zrrion the insect";
+SP_AUTHOR8 = "Batandy";
+SP_AUTHOR9 = "Rachael";
+SP_AUTHOR10 = "A.Gamma";
+SP_AUTHOR11 = "Camper125Lv";
+SP_AUTHOR12 = "Giraffe Man";
+SP_AUTHOR13 = "CanSteam";
+SP_AUTHOR14 = "SpeedySPCFan";
+SP_AUTHOR15 = "Caligari87";
+SP_AUTHOR16 = "SLADE 3";
+
+SP_TITLE0 = "Mapper, Scripter, Magician";
+SP_TITLE1 = "Mapper, Speedrunner";
+SP_TITLE2 = "Mapper";
+SP_TITLE3 = "Mapper";
+SP_TITLE4 = "Mapper";
+SP_TITLE5 = "Mapper";
+SP_TITLE6 = "Mapper";
+SP_TITLE7 = "Mapper";
+SP_TITLE8 = "Mapper";
+SP_TITLE9 = "Mapper";
+SP_TITLE10 = "Mapper";
+SP_TITLE11 = "Mapper";
+SP_TITLE12 = "Mapper";
+SP_TITLE13 = "Mapper";
+SP_TITLE14 = "Composer";
+SP_TITLE15 = "Tester";
+SP_TITLE16 = "Program that crashes all the time";
+
+SP_MESSAGE0 = "\"I'd say this surpasses my 20 Heretics map.\"";
+SP_MESSAGE1 = "";
+SP_MESSAGE2 = "~ Should lay off the coffee ~";
+SP_MESSAGE3 = "";
+SP_MESSAGE4 = "";
+SP_MESSAGE5 = "";
+SP_MESSAGE6 = "";
+SP_MESSAGE7 = "";
+SP_MESSAGE8 = "";
+SP_MESSAGE9 = "\"GLaDOS has not found me yet.\"";
+SP_MESSAGE10 = "";
+SP_MESSAGE11 = "";
+SP_MESSAGE12 = "";
+SP_MESSAGE13 = "";
+SP_MESSAGE14 = "";
+SP_MESSAGE15 = "";
+SP_MESSAGE16 = "\"SLADE has crashed unexpectedly.\"";

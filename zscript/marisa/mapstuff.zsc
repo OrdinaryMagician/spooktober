@@ -745,8 +745,7 @@ Class mkMonkBase : Actor abstract
 	Default
 	{
 		+SOLID;
-		Radius 12;
-		Height 72;
+		+INTERPOLATEANGLES;
 	}
 }
 
@@ -758,6 +757,8 @@ Class mkMonk1 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.21;
 		YScale 1.26;
+		Radius 12;
+		Height 72;
 		Tag "$HUBD_1";
 	}
 	States
@@ -775,6 +776,8 @@ Class mkMonk2 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.24;
 		YScale 1.18;
+		Radius 12;
+		Height 67;
 		Tag "$HUBD_2";
 	}
 	States
@@ -792,6 +795,8 @@ Class mkMonk3 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.43;
 		YScale 1.25;
+		Radius 14;
+		Height 76;
 		Tag "$HUBD_3";
 	}
 	States
@@ -809,6 +814,8 @@ Class mkMonk4 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.23;
 		YScale 1.46;
+		Radius 12;
+		Height 89;
 		Tag "$HUBD_4";
 	}
 	States
@@ -826,6 +833,8 @@ Class mkMonk5 : mkMonkBase
 		//$Category Marisa Kirisame
 		XScale 1.31;
 		YScale 1.28;
+		Radius 13;
+		Height 78;
 		Tag "$HUBD_5";
 	}
 	States
@@ -869,7 +878,7 @@ Class mkFootstepMaker : Thinker
 		{
 			"1:rug02", "1:rug18", "1:mkThiefSofa",
 			"1:mkThiefSofaChair", "1:mkThiefChairOrnate",
-			"1:mkThiefBedFancy", "1:b28", "1:rug04",
+			"1:mkThiefBedFancy", "1:b28", "1:rug04", "1:rug28rn",
 			"3:plant05",
 			"4:floor4",
 			"6:tile", "6:ftile3", "6:ftile4", "6:tile_",
@@ -880,7 +889,7 @@ Class mkFootstepMaker : Thinker
 			"7:mkThiefArmoire", "7:mkThiefStool", "7:mkThiefDesk",
 			"7:mkThiefTableFancy1", "7:mkThiefTableFancy2",
 			"7:mkThiefFootlocker", "7:frame3", "7:palbasic",
-			"7:woodpnl", "7:wdplain"
+			"7:woodpnl", "7:wdplain", "7:creat2"
 		};
 		String tx;
 		bool dummy;

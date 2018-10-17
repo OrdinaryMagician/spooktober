@@ -15,6 +15,49 @@ hardwareshader texture "RBARRIE2"
 	Shader "shaders/glsl/bwarp.fp"
 }
 
+hardwareshader texture "blin"
+{
+	Shader "shaders/glsl/dlwarp.fp"
+}
+
+hardwareshader texture "grin"
+{
+	Shader "shaders/glsl/dlwarp.fp"
+	Speed 0.6
+}
+
+hardwareshader texture "l4in"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+hardwareshader texture "l4in_1"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+hardwareshader texture "l4in_2"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+hardwareshader texture "l4in_3"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+hardwareshader texture "l4in_4"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+
+hardwareshader texture "vmin"
+{
+	Shader "shaders/glsl/dlwarp.fp"
+	Speed 0.4
+}
+
 flickerlight2 MKBRAZIER
 {
 	color 1.0 0.8 0.0

@@ -1,2 +1,1 @@
-Music: Planet Thantos by Yasunori Mitsuda
 Textures: CageTex, Doom Potpourry, Black Green Tech Texture Pack
