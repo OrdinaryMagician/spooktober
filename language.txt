@@ -146,8 +146,8 @@ SP_SPOOK11 = "Large House of Illusions - by: leodoom85";
 SP_SPOOK12 = "Untitled - by: N/A";
 SP_SPOOK13 = "\ctNightmare Fuel Arena\c- - by: Marisa Kirisame";
 SP_SECRET01 = "\cdUncle Reggie's Basement\c- - by: Giraffe Man";
-SP_SECRET02 = "\crThe Crimson Flow\c- - by: Rachael";
-SP_SECRET03 = "\cuAbandoned Warehouse\c- - by: CardBoxNeko";
+SP_SECRET02 = "\cuAbandoned Warehouse\c- - by: CardBoxNeko";
+SP_SECRET03 = "\crThe Crimson Flow\c- - by: Rachael";
 SP_SECRET04 = "\cpMansion of Despair\c- - by: QuakedoomNukem Cz";
 SP_SECRET05 = "\cxGolden Slaughterer\c- - by: Marisa Kirisame";
 
