@@ -14,24 +14,23 @@ A Halloween 2018 map pack for Doom.
 
 ### Current status
 
-Maps completed: 3 / 19
+Maps completed: 5 / 19
 Slots taken: 14 / 16
 
-- **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
+- **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
+- **SPOOK01**: Haunted Hospitality - FishyClockwork
 - **SPOOK02**: A Baron's Nightmare - Rachael [completed]
+- **SPOOK03**: Untitled Map - Pixel Eater
+- **SPOOK04**: Untitled Map - zrrion the insect
 - **SPOOK05**: The Unpowered Spaceship - CanSteam [completed]
 - **SPOOK06**: Avarice - UndeadRyker
+- **SPOOK07**: Untitled Map - A.Gamma
 - **SPOOK08**: The Graveyard Shift - Batandy [completed]
+- **SPOOK09**: Untitled Map - Camper125Lv
 - **SPOOK11**: Large House of Illusions - leodoom85
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man
-- **SECRET02**: The Crimson Flow - Rachael
-- **SECRET03**: Abandoned Warehouse - CardBoxNeko
+- **SECRET02**: Abandoned Warehouse - CardBoxNeko
+- **SECRET03**: The Crimson Flow - Rachael [completed]
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)
-
-- **???**: Haunted Hospitality - FishyClockwork
-- **???**: Untitled Map - Pixel Eater
-- **???**: Untitled Map - zrrion the insect
-- **???**: Untitled Map - A.Gamma
-- **???**: Untitled Map - Camper125Lv

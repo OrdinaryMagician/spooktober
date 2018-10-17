@@ -132,15 +132,15 @@ BEATHDR = "\cxBeatrice\c-";
 // Map Names
 // stored here so the map scripts have easy access to them
 SP_HUB = "Gallery Of Spooks - by: Marisa Kirisame";
-SP_SPOOK01 = "Untitled - by: N/A";
+SP_SPOOK01 = "Haunted Hospitality - by: FishyClockwork";
 SP_SPOOK02 = "A Baron's Nightmare - by: Rachael";
-SP_SPOOK03 = "Untitled - by: N/A";
-SP_SPOOK04 = "Untitled - by: N/A";
+SP_SPOOK03 = "Untitled - by: Pixel Eater";
+SP_SPOOK04 = "Untitled - by: zrrion the insect";
 SP_SPOOK05 = "The Unpowered Spaceship - by: CanSteam";
 SP_SPOOK06 = "Avarice - by: UndeadRyker";
-SP_SPOOK07 = "Untitled - by: N/A";
+SP_SPOOK07 = "Untitled - by: A.Gamma";
 SP_SPOOK08 = "The Graveyard Shift - by: Batandy";
-SP_SPOOK09 = "Untitled - by: N/A";
+SP_SPOOK09 = "Untitled - by: Camper125Lv";
 SP_SPOOK10 = "Untitled - by: N/A";
 SP_SPOOK11 = "Large House of Illusions - by: leodoom85";
 SP_SPOOK12 = "Untitled - by: N/A";
