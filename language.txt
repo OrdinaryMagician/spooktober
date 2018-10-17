@@ -132,7 +132,7 @@ BEATHDR = "\cxBeatrice\c-";
 // Map Names
 // stored here so the map scripts have easy access to them
 SP_HUB = "Gallery Of Spooks - by: Marisa Kirisame";
-SP_SPOOK01 = "Haunted Hospitality - by: FishyClockwork";
+SP_SPOOK01 = "Rottingsoul Hotel - by: FishyClockwork";
 SP_SPOOK02 = "A Baron's Nightmare - by: Rachael";
 SP_SPOOK03 = "Untitled - by: Pixel Eater";
 SP_SPOOK04 = "Untitled - by: zrrion the insect";
