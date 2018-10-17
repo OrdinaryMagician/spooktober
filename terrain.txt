@@ -1,12 +1,38 @@
 // liquid terrain defs for thief textures
 terrain thiefwater
 {
+	splash Water
 	footclip 10
 	liquid
 }
 
+terrain thiefslime
+{
+	splash SludgeGreenBrown
+	footclip 10
+	liquid
+}
+
+terrain thiefblood
+{
+	splash Blood
+	footclip 10
+	liquid
+}
+
+terrain thieflavasmoke
+{
+	splash LavaSmoke
+	footclip 0
+	liquid
+	damageamount 5
+	damagetype lava
+	damagetimemask 31
+}
+
 terrain thieflava
 {
+	splash Lava
 	footclip 10
 	liquid
 	damageamount 5
@@ -16,12 +42,14 @@ terrain thieflava
 
 // water
 floor blin thiefwater
-floor grin thiefwater
-floor vmin thiefwater
+floor grin thiefslime
+floor vmin thiefblood
 // lava
+floor l2in thieflavasmoke
 floor l3in thieflava
 floor l4in thieflava
 floor l4in_1 thieflava
 floor l4in_2 thieflava
 floor l4in_3 thieflava
 floor l4in_4 thieflava
+floor lava128 thieflavasmoke
