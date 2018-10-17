@@ -147,4 +147,5 @@ Map SECRET05 lookup "SP_SECRET05"
 	EvenLighting
 	Music = "D_DDOOR"
 	levelnum = 19
+	Sky1 = "Blk"
 }

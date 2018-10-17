@@ -15,6 +15,13 @@ hardwareshader texture "RBARRIE2"
 	Shader "shaders/glsl/bwarp.fp"
 }
 
+hardwareshader texture "DSPACE"
+{
+	Shader "shaders/glsl/differentspace.fp"
+	Texture "layer1" "DSP1"
+	Texture "layer2" "DSP2"
+}
+
 hardwareshader texture "blin"
 {
 	Shader "shaders/glsl/dlwarp.fp"

@@ -572,3 +572,21 @@ Class Model1887 : DoomWeapon
 		Wait;
 	}
 }
+
+Class mkSkySphere : Actor
+{
+	Default
+	{
+		Radius 32;
+		Height 32;
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1 BRIGHT;
+		Stop;
+	}
+}

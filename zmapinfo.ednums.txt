@@ -79,4 +79,5 @@ DoomEdNums
 	//6475 = mkNightmareLord
 	6476 = mkMirrorMan
 	6477 = mkLookAtMe
+	6478 = mkSkySphere
 }

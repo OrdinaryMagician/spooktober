@@ -816,3 +816,12 @@ Model "mkThiefSwitchWheel"
 	FrameIndex MODL S 0 18
 	FrameIndex MODL T 0 19
 }
+Model "mkSkySphere"
+{
+	Path "models"
+	Model 0 "Sphere.obj"
+	Skin 0 "DSPACE"
+	Scale 16 16 16
+	DONTCULLBACKFACES
+	FrameIndex MODL A 0 0
+}
