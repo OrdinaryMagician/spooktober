@@ -36,6 +36,15 @@ Class mkDialogueSequence39 : mkDialogueSequence
 
 Class mkNightmareLord : Actor
 {
+	int dstage, scnt;
+
+	override void Activate( Actor activator )
+	{
+		if ( dstage == 0 )
+			mkDialogueHandler.StartDialogueSequence(self,activator,39,false,false);
+		dstage++;
+	}
+
 	Default
 	{
 		//$Title Nightmare Lord
@@ -46,7 +55,7 @@ Class mkNightmareLord : Actor
 		Height 140;
 		Mass 2000;
 		Painchance 32;
-		Speed 15;
+		Speed 13;
 		MONSTER;
 		+DROPOFF;
 		+BOSS;
@@ -69,19 +78,53 @@ Class mkNightmareLord : Actor
 		NLRD M -1;
 		Stop;
 	Idle:
-		NLRD MN 10 A_Look();
+		NLRD MMMMMNNNNNN 2 A_Look();
 		Loop;
 	See:
-		NLRD MNOP 6 A_Chase();
+		NLRD M 0 { invoker.scnt = 0; }
+		NLRD MMNNOOPP 3
+		{
+			scnt++;
+			if ( !(scnt%4) )
+				A_PlaySound("nightmarelord/step",CHAN_5);
+			A_Chase();
+			// Ideas:
+			// Dash towards target when far
+			// Teleport near player when out of sight for too long
+			// Teleport to random spot every now and then like D'Sparil
+			// Chance to strafe if being aimed at by a player
+		}
 		Loop;
 	Pain:
 		NLRD Q 3;
 		NLRD Q 6 A_Pain();
+		// Ideas:
+		// Random chance of teleporting to a random spot on pain
 		Goto See;
 	Missile:
-		NLRD # 5;
+		NLRD # 10 A_Log("// TODO Boss Ranged Attack");
+		// Ideas:
+		// Large homing bolt when far away
+		// Small bolt barrage
+		// Dual homing bolts like IA3 D'Sparil
+		// Homing floor hugger blast
+		// Rain of sparks
+		// Random chance to do a quick charge towards the player for melee
+		Goto See;
+	Melee:
+		NLRD # 10 A_Log("// TODO Boss Melee Attack");
+		// Ideas:
+		// Whack 'em with the staff
+		// Radius blast with knockback
+		// Grab and throw (with magic)
 		Goto See;
 	Death:
+		NLRD Q 0 A_Log("// TODO Boss Death");
+		// How it'll work
+		// Floats upwards for a while, begins emiting sparks and glowing more and more
+		// Eventually just pops out of existence with a CORK sfx, only to create a massive,
+		// loud blast immediately afterwards
+		// then the map ends
 		NLRD Q 140 A_Scream();
 		NLRD Q 0 A_NoBlocking();
 		Stop;

@@ -359,6 +359,8 @@ Class mkDialogueHandler : EventHandler
 			level.ExecuteSpecial(80,null,null,false,202);
 		else if ( e.Name ~== "dispelbosspainting" )
 			level.ExecuteSpecial(80,null,null,false,203);
+		else if ( e.Name ~== "activateboss" )
+			level.ExecuteSpecial(80,null,null,false,13);
 	}
 
 	static void StartDialogueSequence( Actor speaker, Actor speakee, int seqnum, bool bOrientSpeaker = true, bool bOrientSpeakee = true )
