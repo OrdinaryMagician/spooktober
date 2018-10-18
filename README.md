@@ -20,7 +20,7 @@ Slots taken: 14 / 16
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
 - **SPOOK01**: Haunted Hospitality - FishyClockwork
 - **SPOOK02**: A Baron's Nightmare - Rachael [completed]
-- **SPOOK03**: Untitled Map - Pixel Eater
+- **SPOOK03**: Pumpkin Head - Pixel Eater
 - **SPOOK04**: Untitled Map - zrrion the insect
 - **SPOOK05**: The Unpowered Spaceship - CanSteam [completed]
 - **SPOOK06**: Avarice - UndeadRyker

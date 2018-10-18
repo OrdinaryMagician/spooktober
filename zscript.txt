@@ -6,3 +6,5 @@ version "3.6"
 #include "zscript/marisa/dialogueseq.zsc"
 #include "zscript/marisa/mapstuff.zsc"
 #include "zscript/marisa/seacat.zsc"
+
+#include "zscript/pixeleater/phead.zsc"

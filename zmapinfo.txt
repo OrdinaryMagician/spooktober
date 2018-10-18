@@ -3,7 +3,7 @@ include "zmapinfo.ednums.txt"
 GameInfo
 {
 	StatusBarClass = "SpooktoberHUD"
-	AddEventHandlers = "SpooktoberHandler", "mkDialogueHandler"
+	AddEventHandlers = "SpooktoberHandler", "mkDialogueHandler", "MapShader"
 }
 
 DefaultMap
@@ -48,14 +48,15 @@ Map SPOOK02 lookup "SP_SPOOK02"
 {
 	levelnum = 3
 	Par = 100
-	Next = "SpookHub"
-	SecretNext = "SpookHub"
 	Music = "ETHEREAL"
 }
 
 Map SPOOK03 lookup "SP_SPOOK03"
 {
 	levelnum = 4
+	sky1 = "SKY1", 0.008
+	par = 30
+	music = "MikeMyer"
 }
 
 Map SPOOK04 lookup "SP_SPOOK04"

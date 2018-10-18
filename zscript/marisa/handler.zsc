@@ -346,7 +346,15 @@ Class SpooktoberHandler : EventHandler
 		case 1:
 			// you get nothing
 			break;
+		case 4:
+			// scythe instead of fist
+			mo.GiveInventory("Scyth",1);
+			mo.GiveInventory("Pistol",1);
+			mo.GiveInventory("Clip",50);
+			break;
+		case 14:
 		case 17:
+		case 19:
 			// fist only
 			mo.GiveInventory("Fist",1);
 			break;

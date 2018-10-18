@@ -215,3 +215,39 @@ Frame AGTCB { Light AgTorchLight2 }
 Frame AGTCC { Light AgTorchLight }
 Frame AGTCD { Light AgTorchLight2 }
 }
+
+// pixel eater
+hardwareshader postprocess screen
+{
+	name "Screemish"
+	shader "shaders/glsl/Screemish.fp" 330
+}
+
+pointlight SpookerBody
+{
+	color 0.25 0.25 0.25
+	size 16
+	subtractive 1
+	dontlightself 1
+}
+
+flickerlight2 SpookerSpit
+{
+	color 0.45 0.0 0.0
+	size 22
+	secondarySize 26
+	interval 0.005
+	attenuate 1
+	subtractive 0
+	dontlightself 1
+}
+
+object Spooker
+{
+	frame SARG { light SpookerBody }
+}
+
+object SpookerBall
+{
+	frame BAL7 { light SpookerSpit }
+}

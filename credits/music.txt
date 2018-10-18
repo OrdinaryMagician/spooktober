@@ -7,3 +7,4 @@ D_DEEP : Deep Red theme
 THANTOS : Planet Thantos - Yasunori Mitsuda
 C9_DARK : Dark Clouds - C9-La Creme
 CDE-WINT : Winter Frontiers - CDE
+MikeMyer : Halloween main theme

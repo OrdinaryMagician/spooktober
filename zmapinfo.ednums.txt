@@ -81,3 +81,20 @@ DoomEdNums
 	6477 = mkLookAtMe
 	6478 = mkSkySphere
 }
+// Pixel Eater
+DoomEdNums
+{
+	11000 = WitchSoul
+	11001 = Spooker
+	11002 = DarkKnight
+	11003 = MegasFear
+	11004 = TheBuried
+	11005 = WitchBrewer
+	11006 = Plasmaster
+	11007 = PumpKing
+	11008 = BoneyOne
+	11009 = PeelinDemon
+	11010 = Candolier
+	11011 = Scyth
+	11012 = ChainedDown
+}
