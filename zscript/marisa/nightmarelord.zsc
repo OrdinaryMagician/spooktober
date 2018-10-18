@@ -1,0 +1,89 @@
+// The big boss
+Class mkDialogueSequence39 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$BOSSHDR");
+			SetTextEffect(TE_SHIVER);
+			SetTextSpeed(3);
+			SetVoice("misc/bossvoice");
+			SetVoiceVolume(1.);
+			SetTextColor(Font.CR_BLACK);
+			StartText("$BOSSDLG1");
+			break;
+		case 1:
+			StartText("$BOSSDLG2");
+			break;
+		case 2:
+			StartText("$BOSSDLG3");
+			break;
+		case 3:
+			StartText("$BOSSDLG4");
+			break;
+		case 4:
+			StartText("$BOSSDLG5");
+			break;
+		case 5:
+			SendNetworkEvent("activateboss");
+			EndSeq(0);
+			break;
+		}
+	}
+}
+
+Class mkNightmareLord : Actor
+{
+	Default
+	{
+		//$Title Nightmare Lord
+		//$Category Marisa Kirisame
+		Health 13000;
+		Scale 2.0;
+		Radius 32;
+		Height 140;
+		Mass 2000;
+		Painchance 32;
+		Speed 15;
+		MONSTER;
+		+DROPOFF;
+		+BOSS;
+		+DONTMORPH;
+		+NORADIUSDMG;
+		+NOTARGET;
+		+NOICEDEATH;
+		+FLOORCLIP;
+		+BOSSDEATH;
+		BloodColor "Purple";
+		SeeSound "nightmarelord/see";
+		PainSound "nightmarelord/pain";
+		DeathSound "nightmarelord/death";
+		Obituary "%o succumbed to the Nightmare Lord.";
+		Tag "$BOSSHDR";
+	}
+	States
+	{
+	Spawn:
+		NLRD M -1;
+		Stop;
+	Idle:
+		NLRD MN 10 A_Look();
+		Loop;
+	See:
+		NLRD MNOP 6 A_Chase();
+		Loop;
+	Pain:
+		NLRD Q 3;
+		NLRD Q 6 A_Pain();
+		Goto See;
+	Missile:
+		NLRD # 5;
+		Goto See;
+	Death:
+		NLRD Q 140 A_Scream();
+		NLRD Q 0 A_NoBlocking();
+		Stop;
+	}
+}

@@ -697,40 +697,6 @@ Class mkDialogueSequence38 : mkDialogueSequence
 	}
 }
 
-Class mkDialogueSequence39 : mkDialogueSequence
-{
-	override void DialogueSeq( int state )
-	{
-		switch( state )
-		{
-		case 0:
-			SetHeader("$BOSSHDR");
-			SetTextEffect(TE_SHIVER);
-			SetTextSpeed(3);
-			SetVoice("misc/bossvoice");
-			SetVoiceVolume(1.);
-			SetTextColor(Font.CR_BLACK);
-			StartText("$BOSSDLG1");
-			break;
-		case 1:
-			StartText("$BOSSDLG2");
-			break;
-		case 2:
-			StartText("$BOSSDLG3");
-			break;
-		case 3:
-			StartText("$BOSSDLG4");
-			break;
-		case 4:
-			StartText("$BOSSDLG5");
-			break;
-		case 5:
-			EndSeq(0);
-			break;
-		}
-	}
-}
-
 // Base classes of monks tending to the gallery
 Class mkMonkBase : Actor abstract
 {

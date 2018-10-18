@@ -139,5 +139,31 @@ $ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
 $ambient 6409 thief/eees1 point 0.8 continuous 0.6
 $ambient 6410 thief/eees2 point 0.8 continuous 0.6
 $ambient 6411 thief/eees3 point 0.6 continuous 0.8
+// various sources
+nightmarelord/see DEESACT3
+nightmarelord/death DEESDIE5
+nightmarelord/pain1 DEESPAI1
+nightmarelord/pain2 DEESPAI2
+nightmarelord/pain3 DEESPAI3
+$random nightmarelord/pain { nightmarelord/pain1 nightmarelord/pain2 nightmarelord/pain3 }
+nightmarelord/cast SORATK
+nightmarelord/pop CORK
+nightmarelord/appear SORRISE
+nightmarelord/disappear BISHAPP
+nightmarelord/strafe BLUR6
+nightmarelord/dash POP
+nightmarelord/spark1 flxaszh1
+nightmarelord/spark2 flxaszh2
+nightmarelord/spark3 flxaszh3
+nightmarelord/spark4 flxaszh4
+nightmarelord/spark5 flxaszh5
+nightmarelord/spark6 flxaszh6
+nightmarelord/spark7 flxaszh7
+$random nightmarelord/spark { nightmarelord/spark1 nightmarelord/spark2 nightmarelord/spark3 nightmarelord/spark4 nightmarelord/spark5 nightmarelord/spark6 nightmarelord/spark7 }
+nightmarelord/sparkhit1 hspafle1
+nightmarelord/sparkhit2 hspafle2
+nightmarelord/sparkhit3 hspafle3
+$random nightmarelord/sparkhit { nightmarelord/sparkhit1 nightmarelord/sparkhit2 nightmarelord/sparkhit3 }
+nightmarelord/explode bfg8fire
 
 ////////
