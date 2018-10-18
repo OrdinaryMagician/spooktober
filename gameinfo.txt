@@ -1,4 +1,4 @@
 iwad = "doom2.wad"
 startuptitle = "Spooktober Community Map Project"
-load = "lights.pk3"
+load = "lights.pk3", "brightmaps.pk3"
 startupcolors = "ff 98 00", "30 30 30"
