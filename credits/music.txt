@@ -1,4 +1,4 @@
-ETHEREAL, CRUNATUS, OCCULT, SIMPLE, D_SPKHUB : Original compositions by SpeedySPCFan
+ETHEREAL, CRUNATUS, OCCULT, SIMPLE, D_SPKHUB, ORGANIC : Original compositions by SpeedySPCFan
 D_NARENA, D_NTLORD : Dummied out Dark Souls 3 tracks
 D_NTMARI : Final boss theme (no official title) from Silent Hill 2
 D_DDOOR, D_BEATO, D_GSLTR, D_WALTZ : "At Death's Door", "Organ Short #600 Million in C Minor", "Goldenslaughterer", "String Quartet #1 in G Major - I.Allegro" from Umineko
@@ -7,4 +7,4 @@ D_DEEP : Deep Red theme
 THANTOS : Planet Thantos - Yasunori Mitsuda
 C9_DARK : Dark Clouds - C9-La Creme
 CDE-WINT : Winter Frontiers - CDE
-MikeMyer : Halloween main theme
+MIKEMYER : Halloween main theme

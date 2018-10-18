@@ -4,7 +4,7 @@ A Halloween 2018 map pack for Doom.
 
 ### Submission rules
 
-- Maps must be horror themed.
+- Maps should be horror themed and/or follow a Halloween-fitting style.
 - Custom resources are allowed, along with new monsters and items/weapons.
 - Maps must be in UDMF format.
 - All maps are to be played from pistol start (or any starting items of the
@@ -18,7 +18,7 @@ Maps completed: 5 / 19
 Slots taken: 14 / 16
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
-- **SPOOK01**: Haunted Hospitality - FishyClockwork
+- **SPOOK01**: Rottingsoul Hotel - FishyClockwork
 - **SPOOK02**: A Baron's Nightmare - Rachael [completed]
 - **SPOOK03**: Pumpkin Head - Pixel Eater
 - **SPOOK04**: Untitled Map - zrrion the insect
@@ -27,7 +27,9 @@ Slots taken: 14 / 16
 - **SPOOK07**: Untitled Map - A.Gamma
 - **SPOOK08**: The Graveyard Shift - Batandy [completed]
 - **SPOOK09**: Untitled Map - Camper125Lv
+- **SPOOK10**: *Free Slot*
 - **SPOOK11**: Large House of Illusions - leodoom85
+- **SPOOK12**: *Free Slot*
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man
 - **SECRET02**: Abandoned Warehouse - CardBoxNeko

@@ -147,7 +147,7 @@ SP_SPOOK12 = "Untitled - by: N/A";
 SP_SPOOK13 = "\ctNightmare Fuel Arena\c- - by: Marisa Kirisame";
 SP_SECRET01 = "\cdUncle Reggie's Basement\c- - by: Giraffe Man";
 SP_SECRET02 = "\cuAbandoned Warehouse\c- - by: CardBoxNeko";
-SP_SECRET03 = "\crThe Crimson Flow\c- - by: Rachael";
+SP_SECRET03 = "\c[crimson]The Crimson Flow\c- - by: Rachael";
 SP_SECRET04 = "\cpMansion of Despair\c- - by: QuakedoomNukem Cz";
 SP_SECRET05 = "\cxGolden Slaughterer\c- - by: Marisa Kirisame";
 
@@ -204,7 +204,7 @@ SP_MESSAGE8 = "";
 SP_MESSAGE9 = "\"GLaDOS has not found me yet.\"";
 SP_MESSAGE10 = "";
 SP_MESSAGE11 = "";
-SP_MESSAGE12 = "";
+SP_MESSAGE12 = "\"Script and Share, until it is done...\"";
 SP_MESSAGE13 = "";
 SP_MESSAGE14 = "";
 SP_MESSAGE15 = "";

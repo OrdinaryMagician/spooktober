@@ -134,7 +134,7 @@ Map SECRET03 lookup "SP_SECRET03"
 {
 	EvenLighting
 	levelnum = 17
-	music = "crunatus"
+	music = "organic"
 	Par = 45
 }
 
