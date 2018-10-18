@@ -34,6 +34,12 @@ Class mkDialogueSequence39 : mkDialogueSequence
 	}
 }
 
+// Souls-style health bar for the final boss
+// TODO
+Class mkBossHealthBar : HUDMessageBase
+{
+}
+
 Class mkNightmareLord : Actor
 {
 	int dstage, scnt;
@@ -45,11 +51,63 @@ Class mkNightmareLord : Actor
 		dstage++;
 	}
 
+	// Ideas:
+	// Dash towards target when far
+	// Teleport near player when out of sight for too long
+	// Teleport to random spot every now and then like D'Sparil
+	// Chance to strafe if being aimed at by a player
+	action void A_DecideChase()
+	{
+	}
+
+	// Ideas:
+	// Random chance of teleporting to a random spot on pain
+	action void A_TryEvasion()
+	{
+	}
+
+	// Ideas:
+	// Large homing bolt when far away
+	// Small bolt barrage
+	// Dual homing bolts like IA3 D'Sparil
+	// Homing floor hugger blast
+	// Rain of sparks
+	// Random chance to do a quick charge towards the player for melee
+	action void A_DecideRanged()
+	{
+	}
+
+	// Ideas:
+	// Whack 'em with the staff
+	// Radius blast with knockback
+	// Grab and throw (with magic)
+	action void A_DecideMelee()
+	{
+	}
+
+	// How it'll work
+	// Floats upwards for a while, begins emiting sparks and glowing more and more
+	// Eventually just pops out of existence with a CORK sfx, only to create a massive,
+	// loud blast immediately afterwards
+	// then the map ends
+	action void A_Levitate()
+	{
+	}
+	action void A_Spark()
+	{
+	}
+	action void A_Pop()
+	{
+	}
+	action void A_Splode()
+	{
+	}
+
 	Default
 	{
 		//$Title Nightmare Lord
 		//$Category Marisa Kirisame
-		Health 13000;
+		Health 30000;
 		Scale 2.0;
 		Radius 32;
 		Height 140;
@@ -88,43 +146,22 @@ Class mkNightmareLord : Actor
 			if ( !(scnt%4) )
 				A_PlaySound("nightmarelord/step",CHAN_5);
 			A_Chase();
-			// Ideas:
-			// Dash towards target when far
-			// Teleport near player when out of sight for too long
-			// Teleport to random spot every now and then like D'Sparil
-			// Chance to strafe if being aimed at by a player
+			A_DecideChase();
 		}
 		Loop;
 	Pain:
 		NLRD Q 3;
-		NLRD Q 6 A_Pain();
-		// Ideas:
-		// Random chance of teleporting to a random spot on pain
+		NLRD Q 3 A_Pain();
+		NLRD Q 3 A_TryEvasion();
 		Goto See;
 	Missile:
 		NLRD # 10 A_Log("// TODO Boss Ranged Attack");
-		// Ideas:
-		// Large homing bolt when far away
-		// Small bolt barrage
-		// Dual homing bolts like IA3 D'Sparil
-		// Homing floor hugger blast
-		// Rain of sparks
-		// Random chance to do a quick charge towards the player for melee
 		Goto See;
 	Melee:
 		NLRD # 10 A_Log("// TODO Boss Melee Attack");
-		// Ideas:
-		// Whack 'em with the staff
-		// Radius blast with knockback
-		// Grab and throw (with magic)
 		Goto See;
 	Death:
 		NLRD Q 0 A_Log("// TODO Boss Death");
-		// How it'll work
-		// Floats upwards for a while, begins emiting sparks and glowing more and more
-		// Eventually just pops out of existence with a CORK sfx, only to create a massive,
-		// loud blast immediately afterwards
-		// then the map ends
 		NLRD Q 140 A_Scream();
 		NLRD Q 0 A_NoBlocking();
 		Stop;
