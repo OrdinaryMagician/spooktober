@@ -27,7 +27,7 @@ Class mkDialogueSequence39 : mkDialogueSequence
 			StartText("$BOSSDLG5");
 			break;
 		case 5:
-			SendNetworkEvent("activateboss");
+			EventHandler.SendNetworkEvent("activateboss");
 			EndSeq(0);
 			break;
 		}
