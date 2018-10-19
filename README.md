@@ -15,10 +15,10 @@ A Halloween 2018 map pack for Doom.
 ### Current status
 
 Maps completed: 5 / 19
-Slots taken: 14 / 16
+Slots taken: 13 / 16
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
-- **SPOOK01**: Rottingsoul Hotel - FishyClockwork
+- **SPOOK01**: *Free Slot*
 - **SPOOK02**: A Baron's Nightmare - Rachael [completed]
 - **SPOOK03**: Pumpkin Head - Pixel Eater
 - **SPOOK04**: Untitled Map - zrrion the insect
