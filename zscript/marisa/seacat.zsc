@@ -501,6 +501,7 @@ Class Model1887 : DoomWeapon
 		Weapon.AmmoGive 8;
 		Weapon.AmmoType "Shell";
 		Inventory.PickupMessage "You got the model 1887 shotgun!";
+		+WEAPON.CHEATNOTWEAPON;
 	}
 	action void A_FireShot()
 	{

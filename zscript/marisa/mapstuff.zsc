@@ -2853,3 +2853,159 @@ Class mkLookAtMe : Actor
 		+DONTSPLASH;
 	}
 }
+
+// SPOOK13 Skybox things
+Class mkFloatingIsland : Actor
+{
+	Vector3 anchorpos;
+	double aphase, aspeed, aamp;
+
+	Default
+	{
+		//$Title Floating Island
+		//$Category Marisa Kirisame
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+		+FORCEXYBILLBOARD;
+		Scale 0.4;
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		anchorpos = pos;
+		aphase = FRandom[Island](-16,16);
+		aspeed = FRandom[Island](0.3,0.9);
+		aamp = FRandom[Island](8.0,12.0);
+		SetState(FindState("Spawn")+Random[Island](0,10));
+		Scale += (FRandom[Island](-0.1,0.1),FRandom[Island](-0.1,0.1));
+		Scale *= FRandom[Island](0.8,1.2);
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		SetOrigin(anchorpos+(0,0,sin((level.totaltime+aphase)*aspeed)*aamp),true);
+	}
+	States
+	{
+	Spawn:
+		FISL ABCDEFGHIJK -1;
+		Stop;
+	}
+}
+
+Class mkTopFlare : Actor
+{
+	Default
+	{
+		//$Title Top Flare
+		//$Category Marisa Kirisame
+		RenderStyle "Add";
+		Scale 1.2;
+		Alpha 0.5;
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+		+ROLLSPRITE;
+		+ROLLCENTER;
+		+FLATSPRITE;
+		+INTERPOLATEANGLES;
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		let l = Spawn("mkTopFlare2",pos+(0,0,1));
+		l.ChangeTid(tid);
+		Spawn("mkBottomFlare",(pos.x,pos.y,4));
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		roll += 0.3;
+		A_SetScale(1.2+sin(level.totaltime*0.1)*0.4);
+	}
+	States
+	{
+	Spawn:
+		TFLR A -1;
+		Stop;
+	}
+}
+
+Class mkTopFlare2 : Actor
+{
+	Default
+	{
+		RenderStyle "Add";
+		Scale 1.2;
+		Alpha 0.5;
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+		+ROLLSPRITE;
+		+ROLLCENTER;
+		+FLATSPRITE;
+		+INTERPOLATEANGLES;
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		roll -= 0.2;
+		A_SetScale(1.2+cos(level.totaltime*0.1)*0.4);
+	}
+	States
+	{
+	Spawn:
+		TFLR B -1;
+		Stop;
+	}
+}
+
+Class mkBottomFlare : Actor
+{
+	Default
+	{
+		Scale 3.0;
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+		+ROLLSPRITE;
+		+ROLLCENTER;
+		+FLATSPRITE;
+		+INTERPOLATEANGLES;
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		roll -= 0.1;
+		A_SetScale(1.8+cos(level.totaltime*0.1)*0.3);
+	}
+	States
+	{
+	Spawn:
+		TFLR C -1;
+		Stop;
+	}
+}
+
+Class mkDimCube : Actor
+{
+	Default
+	{
+		//$Title Dim Cube
+		//$Category Marisa Kirisame
+		RenderStyle "Translucent";
+		Alpha 0.0;
+		Radius 32;
+		Height 32;
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1 Bright;
+		Stop;
+	}
+}

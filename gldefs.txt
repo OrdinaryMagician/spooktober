@@ -6,6 +6,20 @@ hardwareshader postprocess scene
 	Shader "shaders/glsl/blurfade.fp" 330
 }
 
+hardwareshader postprocess screen
+{
+	Name "marifx_grading"
+	Uniform vec3 grademul
+	Uniform vec3 gradepow
+	Uniform vec3 gradecol
+	Uniform float gradecolfact
+	Uniform float gradesatmul
+	Uniform float gradesatpow
+	Uniform float gradevalmul
+	Uniform float gradevalpow
+	Shader "shaders/glsl/marifx_grading.fp" 330
+}
+
 hardwareshader texture "RBARRIER"
 {
 	Shader "shaders/glsl/bwarp.fp"

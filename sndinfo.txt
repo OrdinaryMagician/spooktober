@@ -20,6 +20,11 @@ misc/wind3 wind32
 misc/wind4 wind33
 misc/growl growl
 misc/wah stower51
+misc/ulava lava31
+misc/wind5 wind21
+misc/uquake quake31
+misc/stnloop4 stnloop4
+misc/adend60 adend60
 // from other sources
 misc/scase1 dsshell1
 misc/scase2 dsshell2
@@ -139,6 +144,8 @@ $ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
 $ambient 6409 thief/eees1 point 0.8 continuous 0.6
 $ambient 6410 thief/eees2 point 0.8 continuous 0.6
 $ambient 6411 thief/eees3 point 0.6 continuous 0.8
+$ambient 6412 misc/ulava point 1.0 continuous 1.0
+$ambient 6413 misc/wind5 point 0.3 continuous 0.2
 // various sources
 nightmarelord/see DEESACT3
 nightmarelord/death DEESDIE5

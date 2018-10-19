@@ -1,6 +1,5 @@
 ETHEREAL, CRUNATUS, OCCULT, SIMPLE, D_SPKHUB, ORGANIC : Original compositions by SpeedySPCFan
 D_NARENA, D_NTLORD : Dummied out Dark Souls 3 tracks
-D_NTMARI : Final boss theme (no official title) from Silent Hill 2
 D_DDOOR, D_BEATO, D_GSLTR, D_WALTZ : "At Death's Door", "Organ Short #600 Million in C Minor", "Goldenslaughterer", "String Quartet #1 in G Major - I.Allegro" from Umineko
 D_MIRROR : Edited version of Smile's Theme from .flow
 D_DEEP : Deep Red theme

@@ -7,7 +7,7 @@ Class mkDialogueSequence : HUDMessageBase
 	bool bStarted, bInText;
 	BrokenLines lines;
 	String header, voice;
-	Font tfont;
+	transient Font tfont;
 
 	enum ETextEffect
 	{

@@ -2,3 +2,8 @@
 	playrepeat thief/doors1o
 	stopsound thief/doors1c
 end
+
+:UnrealStoneLift
+	playrepeat misc/stnloop4
+	stopsound misc/adend60
+end

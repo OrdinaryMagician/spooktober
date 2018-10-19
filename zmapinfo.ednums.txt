@@ -80,6 +80,9 @@ DoomEdNums
 	6476 = mkMirrorMan
 	6477 = mkLookAtMe
 	6478 = mkSkySphere
+	6479 = mkFloatingIsland
+	6480 = mkTopFlare
+	6481 = mkDimCube
 }
 // Pixel Eater
 DoomEdNums

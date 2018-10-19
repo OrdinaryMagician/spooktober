@@ -1,10 +1,11 @@
-Class SpooktoberHUD : DoomStatusBar
+// Completely blank HUD, stores class of previous HUD
+Class NullHUD : BaseStatusBar
 {
-	override void Draw( int state, double TicFrac )
+	Class<BaseStatusBar> oldbar;
+
+	override void Init()
 	{
-		if ( (level.mapname ~== "SPOOKHUB") && !automapactive )
-			Super.Draw(-1,TicFrac);
-		else
-			Super.Draw(state,TicFrac);
+		Super.Init();
+		SetSize(0,320,200);
 	}
 }

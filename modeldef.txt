@@ -825,3 +825,12 @@ Model "mkSkySphere"
 	DONTCULLBACKFACES
 	FrameIndex MODL A 0 0
 }
+Model "mkDimCube"
+{
+	Path "models"
+	Model 0 "Cube.obj"
+	Skin 0 "Blk"
+	Scale 16 16 16
+	DONTCULLBACKFACES
+	FrameIndex MODL A 0 0
+}

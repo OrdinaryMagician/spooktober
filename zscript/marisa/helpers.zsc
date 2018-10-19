@@ -154,6 +154,71 @@ Class SpooktoberUtil abstract play
 				mo.player.pendingweapon = Weapon(itm);	// setting also readyweapon like in the C++ version seems to make the weapon break
 		}
 	}
+
+}
+
+// pretty cutting-edge stuff
+Class Spook13Dimmer : Thinker
+{
+	Array<Actor> lights;
+	Actor skylight;
+	Array<Actor> suns;
+	Actor skydim;
+	double speed, str, maxstr;
+	bool reverse;
+
+	static void Init( double speed, double maxstr, double initstr = 0.0, bool reverse = false )
+	{
+		let s = new("Spook13Dimmer");
+		s.speed = speed/TICRATE;
+		if ( reverse )
+		{
+			s.str = maxstr;
+			s.maxstr = initstr;
+		}
+		else
+		{
+			s.str = initstr;
+			s.maxstr = maxstr;
+		}
+		s.reverse = reverse;
+		s.ChangeStatNum(STAT_USER);
+		ActorIterator ai;
+		Actor a;
+		ai = ActorIterator.Create(313);
+		while ( (a = ai.Next()) )
+			s.lights.Push(a);
+		ai = ActorIterator.Create(314);
+		s.skylight = ai.Next();
+		ai = ActorIterator.Create(413);
+		s.skydim = ai.Next();
+		ai = ActorIterator.Create(414);
+		while ( (a = ai.Next()) )
+			s.suns.Push(a);
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		if ( reverse ) str = max(str-speed,maxstr);
+		else str = min(str+speed,maxstr);
+		for ( int i=0; i<lights.Size(); i++ )
+		{
+			lights[i].args[0] = int(128*(1-str));
+			lights[i].args[1] = int(96*(1-str));
+			lights[i].args[2] = int(16*(1-str));
+		}
+		skylight.args[0] = int(255*(1-str));
+		skylight.args[1] = int(192*(1-str));
+		skylight.args[2] = int(32*(1-str));
+		suns[0].alpha = 0.5*(1-str);
+		suns[1].alpha = 0.5*(1-str);
+		skydim.alpha = str;
+		if ( reverse && (str <= maxstr) )
+			Destroy();
+		if ( !reverse && (str >= maxstr) )
+			Destroy();
+	}
 }
 
 // lite version, only useful for GetAxes

@@ -140,6 +140,12 @@ Class SpooktoberGlobals : Thinker
 	}
 }
 
+Struct marifx_gradingvars
+{
+	Vector3 grademul, gradepow, gradecol;
+	float gradecolfact, gradesatmul, gradesatpow, gradevalmul, gradevalpow;
+};
+
 // main handler of various events
 Class SpooktoberHandler : EventHandler
 {
@@ -148,6 +154,12 @@ Class SpooktoberHandler : EventHandler
 	int fphase[MAXPLAYERS], ftic[MAXPLAYERS];
 	transient ui Font titlefont, authorfont, statsfont;
 	int tcnt;
+	// color grading (with transitions)
+	marifx_gradingvars gvars, gvars_in, gvars_out;
+	float gphase, gspeed;
+	bool genabled;
+	Actor bossenemy;
+	ui mkBossHealthBar bossbar;
 
 	override void OnRegister()
 	{
@@ -155,9 +167,93 @@ Class SpooktoberHandler : EventHandler
 		SpooktoberGlobals.MakeInstance();
 	}
 
+	override void PostUiTick()
+	{
+		if ( !bossenemy || bossbar ) return;
+		bossbar = new("mkBossHealthBar").Init(bossenemy,bossenemy.GetTag());
+		StatusBar.AttachMessage(bossbar);
+	}
+
 	override void WorldLoaded( WorldEvent e )
 	{
 		tcnt = 0;
+		gvars.grademul = (1.0,1.0,1.0);
+		gvars.gradepow = (1.0,1.0,1.0);
+		gvars.gradecol = (1.0,1.0,1.0);
+		gvars.gradecolfact = 0.0;
+		gvars.gradesatmul = 1.0;
+		gvars.gradesatpow = 1.0;
+		gvars.gradevalmul = 1.0;
+		gvars.gradevalpow = 1.0;
+		if ( level.levelnum == 14 )
+			GradingTransition(0,0);
+		if ( level.levelnum == 19 )
+			GradingTransition(2,0);
+	}
+
+	static void GradingTransition( int preset, double speed = 1.0 )
+	{
+		let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
+		if ( !hnd ) return;
+		switch ( preset )
+		{
+		case 0:
+			// initial preset
+			hnd.gvars_out.grademul = (1.12,1.03,0.88);
+			hnd.gvars_out.gradepow = (1.07,1.03,1.05);
+			hnd.gvars_out.gradecol = (-0.46,-0.31,-0.42);
+			hnd.gvars_out.gradecolfact = -0.18;
+			hnd.gvars_out.gradesatmul = 0.97;
+			hnd.gvars_out.gradesatpow = 1.12;
+			hnd.gvars_out.gradevalmul = 0.95;
+			hnd.gvars_out.gradevalpow = 1.18;
+			break;
+		case 1:
+			// nightmare lord preset
+			hnd.gvars_out.grademul = (1.08,1.02,1.13);
+			hnd.gvars_out.gradepow = (1.02,1.11,0.84);
+			hnd.gvars_out.gradecol = (-0.11,-0.09,-0.33);
+			hnd.gvars_out.gradecolfact = -0.19;
+			hnd.gvars_out.gradesatmul = 0.82;
+			hnd.gvars_out.gradesatpow = 1.22;
+			hnd.gvars_out.gradevalmul = 0.9;
+			hnd.gvars_out.gradevalpow = 1.25;
+			break;
+		case 2:
+			// seacat preset
+			hnd.gvars_out.grademul = (1.01,0.96,1.03);
+			hnd.gvars_out.gradepow = (0.86,1.08,0.77);
+			hnd.gvars_out.gradecol = (-0.21,-0.08,-0.33);
+			hnd.gvars_out.gradecolfact = -0.13;
+			hnd.gvars_out.gradesatmul = 1.21;
+			hnd.gvars_out.gradesatpow = 1.33;
+			hnd.gvars_out.gradevalmul = 0.92;
+			hnd.gvars_out.gradevalpow = 1.21;
+			break;
+		}
+		hnd.genabled = true;
+		hnd.gphase = 0;
+		hnd.gspeed = speed/Thinker.TICRATE;
+		if ( speed <= 0 )
+		{
+			hnd.gspeed = 0;
+			hnd.gvars.grademul = hnd.gvars_out.grademul;
+			hnd.gvars.gradepow = hnd.gvars_out.gradepow;
+			hnd.gvars.gradecol = hnd.gvars_out.gradecol;
+			hnd.gvars.gradecolfact = hnd.gvars_out.gradecolfact;
+			hnd.gvars.gradesatmul = hnd.gvars_out.gradesatmul;
+			hnd.gvars.gradesatpow = hnd.gvars_out.gradesatpow;
+			hnd.gvars.gradevalmul = hnd.gvars_out.gradevalmul;
+			hnd.gvars.gradevalpow = hnd.gvars_out.gradevalpow;
+		}
+		hnd.gvars_in.grademul = hnd.gvars.grademul;
+		hnd.gvars_in.gradepow = hnd.gvars.gradepow;
+		hnd.gvars_in.gradecol = hnd.gvars.gradecol;
+		hnd.gvars_in.gradecolfact = hnd.gvars.gradecolfact;
+		hnd.gvars_in.gradesatmul = hnd.gvars.gradesatmul;
+		hnd.gvars_in.gradesatpow = hnd.gvars.gradesatpow;
+		hnd.gvars_in.gradevalmul = hnd.gvars.gradevalmul;
+		hnd.gvars_in.gradevalpow = hnd.gvars.gradevalpow;
 	}
 
 	override void WorldLinePreActivated( WorldEvent e )
@@ -171,6 +267,24 @@ Class SpooktoberHandler : EventHandler
 	override void WorldTick()
 	{
 		tcnt++;
+		if ( gspeed > 0 )
+		{
+			gphase += gspeed;
+			gphase = min(gphase,1);
+			gvars.grademul = gvars_in.grademul*(1-gphase)+gvars_out.grademul*gphase;
+			gvars.gradepow = gvars_in.gradepow*(1-gphase)+gvars_out.gradepow*gphase;
+			gvars.gradecol = gvars_in.gradecol*(1-gphase)+gvars_out.gradecol*gphase;
+			gvars.gradecolfact = gvars_in.gradecolfact*(1-gphase)+gvars_out.gradecolfact*gphase;
+			gvars.gradesatmul = gvars_in.gradesatmul*(1-gphase)+gvars_out.gradesatmul*gphase;
+			gvars.gradesatpow = gvars_in.gradesatpow*(1-gphase)+gvars_out.gradesatpow*gphase;
+			gvars.gradevalmul = gvars_in.gradevalmul*(1-gphase)+gvars_out.gradevalmul*gphase;
+			gvars.gradevalpow = gvars_in.gradevalpow*(1-gphase)+gvars_out.gradevalpow*gphase;
+			if ( gphase >= 1 )
+			{
+				gphase = 0;
+				gspeed = 0;
+			}
+		}
 		for ( int i=0; i<MAXPLAYERS; i++ )
 		{
 			if ( !playeringame[i] ) continue;
@@ -192,12 +306,24 @@ Class SpooktoberHandler : EventHandler
 
 	override void RenderOverlay( RenderEvent e )
 	{
+		PlayerInfo p = players[consoleplayer];
+		Shader.SetEnabled(p,"marifx_grading",genabled);
+		if ( genabled )
+		{
+			Shader.SetUniform3f(p,"marifx_grading","grademul",gvars.grademul);
+			Shader.SetUniform3f(p,"marifx_grading","gradepow",gvars.gradepow);
+			Shader.SetUniform3f(p,"marifx_grading","gradecol",gvars.gradecol);
+			Shader.SetUniform1f(p,"marifx_grading","gradecolfact",gvars.gradecolfact);
+			Shader.SetUniform1f(p,"marifx_grading","gradesatmul",gvars.gradesatmul);
+			Shader.SetUniform1f(p,"marifx_grading","gradesatpow",gvars.gradesatpow);
+			Shader.SetUniform1f(p,"marifx_grading","gradevalmul",gvars.gradevalmul);
+			Shader.SetUniform1f(p,"marifx_grading","gradevalpow",gvars.gradevalpow);
+		}
 		// guarantee smooth transition
 		if ( tcnt <= 1 ) Screen.Dim("Black",1.0,0,0,Screen.GetWidth(),Screen.GetHeight());
 		// fader shader
 		if ( fspeed[consoleplayer] > double.epsilon )
 		{
-			PlayerInfo p = players[consoleplayer];
 			double str = clamp(((level.totaltime-ftic[consoleplayer])+e.fractic)/(Thinker.TICRATE*fspeed[consoleplayer]),0.0,1.0);
 			if ( fphase[consoleplayer] ) str = 1.0-str;
 			Shader.SetUniform1f(p,"blurfade","strength",str);
@@ -376,6 +502,12 @@ Class SpooktoberHandler : EventHandler
 
 	override void NetworkProcess( ConsoleEvent e )
 	{
+		if ( !e.IsManual && (e.Name ~== "activateboss") )
+		{
+			let ai = ActorIterator.Create(13);
+			bossenemy = Actor(ai.Next());
+			return;
+		}
 		if ( level.levelnum != 1 ) return;
 		if ( e.Name ~== "debug_skipnext" )
 		{
@@ -468,6 +600,32 @@ Class SpooktoberHandler : EventHandler
 			hnd.fphase[i] = 0;
 			hnd.ftic[i] = level.totaltime;
 			Shader.SetEnabled(players[i],"blurfade",true);
+		}
+	}
+
+	override void UiTick()
+	{
+		// replace hud with invisible hud when in the hub
+		if ( level.levelnum == 1 )
+		{
+			if ( StatusBar is 'NullHUD' ) return;
+			// set null hud
+			let n = new("NullHUD");
+			n.Init();
+			n.oldbar = StatusBar.GetClass();
+			StatusBar.Destroy();
+			StatusBar = n;
+			StatusBar.AttachToPlayer(players[consoleplayer]);
+			StatusBar.NewGame();
+		}
+		else if ( StatusBar is 'NullHUD' )
+		{
+			let n = BaseStatusBar(new(NullHUD(StatusBar).oldbar));
+			n.Init();
+			StatusBar.Destroy();
+			StatusBar = n;
+			StatusBar.AttachToPlayer(players[consoleplayer]);
+			StatusBar.NewGame();
 		}
 	}
 }

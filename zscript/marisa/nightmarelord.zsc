@@ -34,10 +34,78 @@ Class mkDialogueSequence39 : mkDialogueSequence
 	}
 }
 
-// Souls-style health bar for the final boss
-// TODO
+// Souls-style health bar for a boss
 Class mkBossHealthBar : HUDMessageBase
 {
+	String tname;
+	Actor target;
+	transient font tfont;
+	TextureID bbar_r, bbar_d;
+	double alpha;
+	DynamicValueInterpolator ihealth;
+	int thealth, hmax;
+	int oldhealth[10];
+
+	mkBossHealthBar Init( Actor target, String tname )
+	{
+		self.target = target;
+		self.tname = tname;
+		alpha = 0.0;
+		thealth = target.health;
+		hmax = target.SpawnHealth();
+		ihealth = DynamicValueInterpolator.Create(thealth,0.25,1,max(8,hmax/100));
+		for ( int i=0; i<10; i++ ) oldhealth[i] = thealth;
+		bbar_r = TexMan.CheckForTexture("bbar_r",TexMan.Type_Any);
+		bbar_d = TexMan.CheckForTexture("bbar_d",TexMan.Type_Any);
+		return self;
+	}
+
+	override bool Tick()
+	{
+		if ( target )
+		{
+			thealth = target.health;
+			alpha = min(alpha+0.08,1.0);
+		}
+		else
+		{
+			thealth = 0;
+			alpha = max(alpha-0.02,0.0);
+		}
+		oldhealth[0] = thealth;
+		if ( thealth > oldhealth[9] )
+			for ( int i=9; i>0; i-- )
+				oldhealth[i] = thealth;
+		ihealth.Update(oldhealth[9]);
+		for ( int i=9; i>0; i-- )
+			oldhealth[i] = oldhealth[i-1];
+		return (!target && (alpha<=0.0));
+	}
+
+	override void OnDestroy()
+	{
+		Super.OnDestroy();
+		ihealth.Destroy();
+	}
+
+	double GetHealth( bool delay = false )
+	{
+		double hf;
+		if ( delay ) hf = clamp(ihealth.GetValue(),0,hmax)/double(hmax);
+		else hf = clamp(thealth,0,hmax)/double(hmax);
+		return 256*hf;
+	}
+
+	override void Draw( int bottom, int visibility )
+	{
+		if ( !tfont ) tfont = Font.GetFont('STAT_LWR');
+		Vector2 pos, sz;
+		[pos, sz] = Screen.VirtualToRealCoords((31,15),(258,8),(320,200),true);
+		Screen.Dim("Black",alpha*0.75,int(pos.x),int(pos.y),int(sz.x),int(sz.y));
+		Screen.DrawText(tfont,Font.CR_RED,(320-tfont.StringWidth(tname))/2,24,tname,DTA_Bottom320x200,true,DTA_Alpha,alpha);
+		Screen.DrawTexture(bbar_d,false,32,16,DTA_Bottom320x200,true,DTA_Alpha,alpha*0.5,DTA_DestWidthF,GetHealth(true));
+		Screen.DrawTexture(bbar_r,false,32,16,DTA_Bottom320x200,true,DTA_Alpha,alpha,DTA_DestWidthF,GetHealth());
+	}
 }
 
 Class mkNightmareLord : Actor
@@ -53,8 +121,8 @@ Class mkNightmareLord : Actor
 
 	// Ideas:
 	// Dash towards target when far
-	// Teleport near player when out of sight for too long
 	// Teleport to random spot every now and then like D'Sparil
+	// Chance for that teleport to be near target
 	// Chance to strafe if being aimed at by a player
 	action void A_DecideChase()
 	{
@@ -62,6 +130,7 @@ Class mkNightmareLord : Actor
 
 	// Ideas:
 	// Random chance of teleporting to a random spot on pain
+	// Small chance that after the teleport, decoys will be summoned
 	action void A_TryEvasion()
 	{
 	}
@@ -89,7 +158,6 @@ Class mkNightmareLord : Actor
 	// Floats upwards for a while, begins emiting sparks and glowing more and more
 	// Eventually just pops out of existence with a CORK sfx, only to create a massive,
 	// loud blast immediately afterwards
-	// then the map ends
 	action void A_Levitate()
 	{
 	}
@@ -113,8 +181,10 @@ Class mkNightmareLord : Actor
 		Height 140;
 		Mass 2000;
 		Painchance 32;
+		MeleeRange 80;
 		Speed 13;
 		MONSTER;
+		+LOOKALLAROUND;
 		+DROPOFF;
 		+BOSS;
 		+DONTMORPH;
@@ -155,10 +225,10 @@ Class mkNightmareLord : Actor
 		NLRD Q 3 A_TryEvasion();
 		Goto See;
 	Missile:
-		NLRD # 10 A_Log("// TODO Boss Ranged Attack");
+		NLRD # 1 A_Log("// TODO Boss Ranged Attack");
 		Goto See;
 	Melee:
-		NLRD # 10 A_Log("// TODO Boss Melee Attack");
+		NLRD # 1 A_Log("// TODO Boss Melee Attack");
 		Goto See;
 	Death:
 		NLRD Q 0 A_Log("// TODO Boss Death");

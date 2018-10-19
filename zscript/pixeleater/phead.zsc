@@ -32,6 +32,7 @@ class Scyth : Fist
 		Obituary "You got harvested by the Reaper's red thumb" ;
 		Tag "Scyth" ;
 		Weapon.SlotNumber 1;
+		+WEAPON.CHEATNOTWEAPON;
 	}
 	States
 	{
