@@ -85,7 +85,7 @@ Class mkBossHealthBar : HUDMessageBase
 	override void OnDestroy()
 	{
 		Super.OnDestroy();
-		ihealth.Destroy();
+		if ( ihealth ) ihealth.Destroy();
 	}
 
 	double GetHealth( bool delay = false )
@@ -108,31 +108,228 @@ Class mkBossHealthBar : HUDMessageBase
 	}
 }
 
+Class StompDust : Actor
+{
+	Default
+	{
+
+		RenderStyle "Translucent";
+		Alpha 0.5;
+		Scale 1.5;
+		Gravity 0.5;
+		+NOBLOCKMAP;
+		+DONTSPLASH;
+		+MISSILE;
+		+STEPMISSILE;
+		+THRUACTORS;
+	}
+	States
+	{
+	Spawn:
+		SDST A 1
+		{
+			A_FadeOut(0.02);
+			A_SetScale(scale.x*1.01,scale.y*0.99);
+		}
+		Wait;
+	Death:
+		SDST A 1
+		{
+			A_FadeOut(0.06);
+			A_SetScale(scale.x*1.01,scale.y*0.99);
+		}
+		Wait;
+	}
+}
+
 Class mkNightmareLord : Actor
 {
-	int dstage, scnt;
+	int scnt, dcnt, strafedir;
+	int teletic, evadetic, dashtic;
+	Array<Actor> telespots;
+	bool bGrabbing;
+
+	override String GetObituary( Actor victim, Actor inflictor, Name mod, bool playerattack )
+	{
+		if ( mod == 'Stomp' )
+			return "%o was stomped away by the Nightmare Lord.";
+		else if ( mod == 'Choke' )
+			return "%o couldn't break free from the Nightmare Lord's grasp.";
+		else if ( mod == 'Throw' )
+			return "%o was blown away by the Nightmare Lord.";
+		return Obituary;
+	}
 
 	override void Activate( Actor activator )
 	{
-		if ( dstage == 0 )
-			mkDialogueHandler.StartDialogueSequence(self,activator,39,false,false);
-		dstage++;
+		if ( !InStateSequence(CurState,FindState("Spawn")) ) return;
+		mkDialogueHandler.StartDialogueSequence(self,activator,39,false,false);
 	}
 
-	// Ideas:
-	// Dash towards target when far
-	// Teleport to random spot every now and then like D'Sparil
-	// Chance for that teleport to be near target
-	// Chance to strafe if being aimed at by a player
-	action void A_DecideChase()
+	override void PostBeginPlay()
 	{
+		Super.PostBeginPlay();
+		// construct tele spot array
+		let ai = ActorIterator.Create(113);
+		Actor a;
+		while ( a = ai.Next() ) telespots.Push(a);
 	}
 
-	// Ideas:
-	// Random chance of teleporting to a random spot on pain
-	// Small chance that after the teleport, decoys will be summoned
-	action void A_TryEvasion()
+	int CountDecoys()
 	{
+		let ti = ThinkerIterator.Create("mkNightmareLordDecoy");
+		int n = 0;
+		while ( ti.Next() ) n++;
+		return n;
+	}
+
+	Actor FindClosestTeleSpot()
+	{
+		double dist = double.infinity;
+		int f = Random[NLord](0,telespots.Size()-1);
+		for ( int i=0; i<telespots.Size(); i++ )
+		{
+			double tdist = telespots[i].Distance2D(target);
+			if ( tdist > dist ) continue;
+			dist = tdist;
+			f = i;
+		}
+		return telespots[f];
+	}
+
+	Actor FindFarthestTeleSpot()
+	{
+		double dist = 0;
+		int f = Random[NLord](0,telespots.Size()-1);
+		for ( int i=0; i<telespots.Size(); i++ )
+		{
+			double tdist = telespots[i].Distance2D(target);
+			if ( tdist < dist ) continue;
+			dist = tdist;
+			f = i;
+		}
+		return telespots[f];
+	}
+
+	void A_DecideChase()
+	{
+		if ( !target ) return;
+		double dist = Distance2D(target);
+		if ( (level.totaltime > teletic+200) && !Random[NLord](0,50) && (dist < 800) )
+		{
+			if ( !Random[NLord](0,3) )
+				tracer = FindClosestTeleSpot();
+			else tracer = telespots[Random[NLord](0,telespots.Size()-1)];
+			score = 0;
+			teletic = level.totaltime;
+			SetStateLabel("Teleout");
+			return;
+		}
+		if ( (level.totaltime > dashtic+50) && !Random[NLord](0,20) && (dist > 1000) && !LineTrace(AngleTo(target),dist-(radius+target.radius),0,0,32) )
+		{
+			dashtic = level.totaltime;
+			SetStateLabel("Dash");
+			return;
+		}
+		Vector3 sc = level.SphericalCoords(target.pos,pos,(target.angle,target.pitch));
+		if ( !Random[NLord](0,30) && target.CheckSight(self) && (sc.z < 600) && (abs(sc.x) < 15) && (abs(sc.y) < 15) )
+		{
+			double ang = AngleTo(target);
+			Vector2 dir[2];
+			int sdir[2];
+			dir[0] = RotateVector((0,1),ang);
+			dir[1] = RotateVector((0,-1),ang);
+			sdir[0] = 1;
+			sdir[1] = -1;
+			strafedir = 0;
+			int ca = 1, cb = 0;
+			if ( Random[NLord](0,1) )
+			{
+				ca = 0;
+				cb = 1;
+			}
+			if ( CheckMove(pos.xy+dir[ca]*speed*2) )
+				strafedir = sdir[ca];
+			else if ( CheckMove(pos.xy+dir[cb]*speed*2) )
+				strafedir = sdir[cb];
+			if ( strafedir != 0 ) SetStateLabel("Strafe");
+		}
+	}
+
+	// Spawns decoys on 2 other tele spots
+	void A_SpawnDecoys()
+	{
+		// decoys can't spawn more of themselves
+		if ( self is 'mkNightmareLordDecoy' ) return;
+		// too many decoys
+		if ( CountDecoys() >= 4 ) return;
+		Array<Actor> picked;
+		picked.Copy(telespots);
+		int i;
+		for ( i=0; i<picked.Size(); i++ )
+		{
+			if ( picked[i] != tracer ) continue;
+			picked.Delete(i);
+			break;
+		}
+		Actor aspot, bspot;
+		i = Random[NLord](0,picked.Size()-1);
+		aspot = picked[i];
+		picked.Delete(i);
+		i = Random[NLord](0,picked.Size()-1);
+		bspot = picked[i];
+		Actor s;
+		s = Spawn("mkNightmareLordDecoy",aspot.pos);
+		s.target = target;
+		s.master = self;
+		s.bSHOOTABLE = false;
+		s.SetStateLabel("TeleIn");
+		s = Spawn("mkNightmareLordDecoy",bspot.pos);
+		s.target = target;
+		s.master = self;
+		s.bSHOOTABLE = false;
+		s.SetStateLabel("TeleIn");
+	}
+
+	void A_DashTowards()
+	{
+		A_FaceTarget(3);
+		Vector2 dir = (cos(angle),sin(angle));
+		bool moved = TryMove(pos.xy+dir*speed*2,int(maxdropoffheight));
+		if ( CheckMeleeRange() )
+		{
+			SetStateLabel("Melee");
+			return;
+		}
+		if ( !moved )
+		{
+			SetStateLabel("See");
+			return;
+		}
+		if ( abs(DeltaAngle(angle,AngleTo(target))) > 90 ) dcnt -= 2;
+	}
+
+	void A_Strafe()
+	{
+		A_FaceTarget(5);
+		Vector2 dir = RotateVector((0,strafedir),angle);
+		bool moved = TryMove(pos.xy+dir*speed*1.5,int(maxdropoffheight));
+		if ( !moved )
+		{
+			SetStateLabel("See");
+			return;
+		}
+	}
+
+	void A_TryEvasion()
+	{
+		if ( level.totaltime < evadetic+80 ) return;
+		if ( !target || Random[NLord](0,9) ) return;
+		evadetic = level.totaltime;
+		if ( !Random[NLord](0,3) ) score = 1;
+		else score = 0;
+		tracer = FindFarthestTeleSpot();
+		SetStateLabel("Teleout");
 	}
 
 	// Ideas:
@@ -142,32 +339,146 @@ Class mkNightmareLord : Actor
 	// Homing floor hugger blast
 	// Rain of sparks
 	// Random chance to do a quick charge towards the player for melee
-	action void A_DecideRanged()
+	void A_DecideRanged()
 	{
+		if ( !target ) return;
+		double dist = Distance2D(target);
+		if ( !Random[NLord](0,15) )
+		{
+			A_Log("// TODO rain of sparks");
+			return;
+		}
+		if ( !Random[NLord](0,4) && (dist > 900) )
+		{
+			A_Log("// TODO homing bolt");
+			return;
+		}
+		if ( !Random[NLord](0,4) )
+		{
+			A_Log("// TODO bolt barrage");
+			return;
+		}
+		if ( !Random[NLord](0,5) )
+		{
+			A_Log("// TODO dual bolts");
+			return;
+		}
+		if ( !Random[NLord](0,6) )
+		{
+			A_Log("// TODO homing floor blast");
+			return;
+		}
+		SetStateLabel("Dash");
 	}
 
 	// Ideas:
 	// Whack 'em with the staff
 	// Radius blast with knockback
 	// Grab and throw (with magic)
-	action void A_DecideMelee()
+	void A_DecideMelee()
 	{
+		if ( !target ) return;
+		A_FaceTarget();
+		Vector3 sc = level.SphericalCoords(pos,target.pos,(angle,pitch));
+		if ( !Random[NLord](0,2) )
+		{
+			SetStateLabel("Grab");
+			return;
+		}
+		if ( !Random[NLord](0,2) )
+		{
+			A_Log("// TODO staff attack");
+			return;
+		}
+		SetStateLabel("DoRadiusBlast");
+	}
+
+	void A_SpawnBlast()
+	{
+		A_PlaySound("nightmarelord/stomp",CHAN_5,1.0,false,0.8);
+		A_PlaySound("nightmarelord/stomp",CHAN_6,1.0,false,0.4);
+		A_QuakeEx(3,3,3,20,0,600,"",QF_RELATIVE|QF_SCALEDOWN,falloff:300);
+		let bi = BlockThingsIterator.Create(self,MeleeRange*1.5);
+		while ( bi.Next() )
+		{
+			let t = bi.Thing;
+			if ( !t || !t.bSHOOTABLE || (t is 'mkNightmareLord') ) continue;
+			t.vel.xy = Vec2To(t).unit()*(2000/t.mass);
+			t.vel.z = 6;
+			int dmg = Random[NLord](3,5)*3;
+			if ( self is 'mkNightmareLordDecoy' ) dmg /= 3;
+			t.DamageMobj(self,self,dmg,'Stomp',DMG_THRUSTLESS|DMG_EXPLOSION);
+		}
+		for ( int i=0; i<360; i+=10 )
+		{
+			let s = Spawn("StompDust",pos);
+			s.vel.xy = (cos(i),sin(i))*9.0;
+		}
+	}
+
+	void A_AttemptGrab()
+	{
+		if ( !target ) return;
+		Vector3 sc = level.SphericalCoords(pos,target.pos,(angle,pitch));
+		if ( (abs(sc.x) < 60) && (sc.z < meleerange*2.5) )
+		{
+			tracer = target;
+			scnt = Random[NLord](80,120);
+			SetStateLabel("Grabbed");
+		}
+	}
+
+	bool A_KeepGrab()
+	{
+		if ( !tracer || (tracer.Health <= 0) ) return true;
+		PainChance = 8;
+		if ( !Random[NLord](0,10) ) tracer.DamageMobj(self,self,1,'Choke',DMG_THRUSTLESS);
+		Vector2 aimdir = (cos(angle),sin(angle))*(radius+tracer.radius+48);
+		Vector3 dest = Vec3Offset(aimdir.x,aimdir.y,height*0.6);
+		Vector3 tdir = level.Vec3Diff(tracer.pos,dest);
+		double tl = tdir.length();
+		if ( tl > double.epsilon ) tdir = tdir.unit()*min(tl,3);
+		tracer.vel = tdir;
+		tracer.A_SetAngle(tracer.angle+sin(level.totaltime*3.2)*1.2,SPF_INTERPOLATE);
+		tracer.A_SetPitch(tracer.pitch+cos(level.totaltime*3.3)*0.6,SPF_INTERPOLATE);
+		scnt--;
+		return (scnt <= 0);
+	}
+
+	void A_Throw()
+	{
+		if ( !tracer ) return;
+		A_PlaySound("nightmarelord/grabthrow",CHAN_7);
+		tracer.A_PlaySound("nightmarelord/grabthrow",CHAN_7);
+		tracer.vel.xy = (cos(angle),sin(angle))*(5000/tracer.mass);
+		tracer.vel.z = 9;
+		int dmg = Random[NLord](3,5)*5;
+		if ( self is 'mkNightmareLordDecoy' ) dmg /= 3;
+		tracer.DamageMobj(self,self,dmg,'Throw',DMG_THRUSTLESS|DMG_EXPLOSION);
+	}
+
+	bool CheckFeet()
+	{
+		bool dummy;
+		Actor onmobj;
+		[dummy, onmobj] = TestMobjZ(true);
+		return (onmobj || pos.z <= floorz);
 	}
 
 	// How it'll work
 	// Floats upwards for a while, begins emiting sparks and glowing more and more
 	// Eventually just pops out of existence with a CORK sfx, only to create a massive,
 	// loud blast immediately afterwards
-	action void A_Levitate()
+	void A_Levitate()
 	{
 	}
-	action void A_Spark()
+	void A_Spark()
 	{
 	}
-	action void A_Pop()
+	void A_Pop()
 	{
 	}
-	action void A_Splode()
+	void A_Splode()
 	{
 	}
 
@@ -180,11 +491,15 @@ Class mkNightmareLord : Actor
 		Radius 32;
 		Height 140;
 		Mass 2000;
+		MaxStepHeight 32;
 		Painchance 32;
-		MeleeRange 80;
 		Speed 13;
+		Gravity 3;
+		Species "NightmareLord";
+		DamageFactor "BFGSplash", 0.25;
 		MONSTER;
 		+LOOKALLAROUND;
+		+NOTELEFRAG;
 		+DROPOFF;
 		+BOSS;
 		+DONTMORPH;
@@ -193,6 +508,7 @@ Class mkNightmareLord : Actor
 		+NOICEDEATH;
 		+FLOORCLIP;
 		+BOSSDEATH;
+		+THRUSPECIES;
 		BloodColor "Purple";
 		SeeSound "nightmarelord/see";
 		PainSound "nightmarelord/pain";
@@ -209,7 +525,11 @@ Class mkNightmareLord : Actor
 		NLRD MMMMMNNNNNN 2 A_Look();
 		Loop;
 	See:
-		NLRD M 0 { invoker.scnt = 0; }
+		NLRD M 0
+		{
+			scnt = 0;
+			PainChance = GetDefaultByType(GetClass()).PainChance;
+		}
 		NLRD MMNNOOPP 3
 		{
 			scnt++;
@@ -220,20 +540,170 @@ Class mkNightmareLord : Actor
 		}
 		Loop;
 	Pain:
-		NLRD Q 3;
+		NLRD Q 0
+		{
+			if ( bGrabbing )
+			{
+				bGrabbing = false;
+				vel -= (cos(angle),sin(angle))*12;
+			}
+			PainChance = GetDefaultByType(GetClass()).PainChance;
+		}
 		NLRD Q 3 A_Pain();
-		NLRD Q 3 A_TryEvasion();
+		NLRD QQ 3 A_TryEvasion();
 		Goto See;
 	Missile:
-		NLRD # 1 A_Log("// TODO Boss Ranged Attack");
+		NLRD # 3 A_DecideRanged();
 		Goto See;
 	Melee:
-		NLRD # 1 A_Log("// TODO Boss Melee Attack");
+		NLRD # 3 A_DecideMelee();
+		Goto See;
+	DoRadiusBlast:
+		NLRD M 4 A_PlaySound("nightmarelord/pain3");
+		NLRD M 2 { vel.z = 16; }
+		NLRD M 1 A_JumpIf(CheckFeet(),1);
+		Goto DoRadiusBlast+2;
+		NLRD M 25 A_SpawnBlast();
+		Goto See;
+	Grab:
+		NLRD M 15;
+		NLRD M 0 A_PlaySound("nightmarelord/attack",CHAN_VOICE,1.0,false,ATTN_NONE);
+		NLRD UUUUUUUUUU 4 A_AttemptGrab();
+		NLRD M 10;
+		Goto See;
+	Grabbed:
+		NLRD U 0
+		{
+			if ( !Random[NLord](0,4) )
+				A_PlaySound("nightmarelord/grabtaunt",CHAN_VOICE,1.0,false,ATTN_NONE);
+		}
+		NLRD U 1 A_JumpIf(A_KeepGrab(),1);
+		Wait;
+		NLRD U 15 A_Throw();
+		NLRD M 10;
 		Goto See;
 	Death:
-		NLRD Q 0 A_Log("// TODO Boss Death");
+		NLRD Q 0
+		{
+			A_Log("// TODO Boss Death");
+			A_KillChildren();
+		}
 		NLRD Q 140 A_Scream();
 		NLRD Q 0 A_NoBlocking();
 		Stop;
+	TeleOut:
+		NLRD G 9;
+		NLRD G 0
+		{
+			bSHOOTABLE = false;
+			A_PlaySound("nightmarelord/disappear",CHAN_6,1.0,false,0.3);
+		}
+		NLRD HIJKL 3;
+		TNT1 A 70 { bSOLID = false; }
+		NLRD L 0
+		{
+			bSOLID = true;
+			TeleportMove(tracer.pos,true);
+			angle = tracer.angle;
+			if ( score > 0 ) A_SpawnDecoys();
+		}
+	TeleIn:
+		NLRD L 0 A_PlaySound("nightmarelord/appear",CHAN_6,1.0,false,0.3);
+		NLRD LKJIH 3;
+		NLRD G 9
+		{
+			bSHOOTABLE = true;
+			A_FaceTarget();
+		}
+		Goto See;
+	Dash:
+		NLRD M 0
+		{
+			scnt = 0;
+			dcnt = Random[NLord](60,40);
+			A_FaceTarget();
+			A_PlaySound("nightmarelord/dash",CHAN_6,1.0,false,0.3);
+		}
+		NLRD M 1
+		{
+			scnt++;
+			if ( !(scnt%2) )
+			{
+				let s = Spawn("mkNAfterImage",pos);
+				s.angle = angle;
+				s.frame = frame;
+			}
+			A_DashTowards();
+			dcnt--;
+			if ( dcnt <= 0 ) return ResolveState("See");
+			else return ResolveState(null);
+		}
+		Goto Dash+1;
+	Strafe:
+		NLRD M 0
+		{
+			scnt = 0;
+			dcnt = Random[NLord](12,16);
+			A_FaceTarget();
+			A_PlaySound("nightmarelord/strafe",CHAN_6,1.0,false,0.3);
+		}
+		NLRD M 1
+		{
+			scnt++;
+			if ( !(scnt%2) )
+			{
+				let s = Spawn("mkNAfterImage",pos);
+				s.angle = angle;
+				s.frame = frame;
+			}
+			A_Strafe();
+			dcnt--;
+			if ( dcnt <= 0 ) return ResolveState("See");
+			else return ResolveState(null);
+		}
+		Goto Strafe+1;
+	}
+}
+
+Class mkNAfterImage : Actor
+{
+	Default
+	{
+		Scale 2.0;
+		RenderStyle "Translucent";
+		Alpha 0.5;
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+	}
+	States
+	{
+	Spawn:
+		NLRD # 1 A_FadeOut(0.03);
+		Wait;
+	}
+}
+
+// Very fake
+// Goes down easily, deals reduced damage and has less attacks
+Class mkNightmareLordDecoy : mkNightmareLord
+{
+	Default
+	{
+		Health 100;
+		Painchance 128;
+		SeeSound "";
+		PainSound "";
+		DeathSound "";
+		Species "NightmareLord";
+	}
+	States
+	{
+	Death:
+		NLRD G 0 A_NoBlocking();
+		NLRD GFEDCBA 3;
+		NLRD A 140;
+		NLRD A 1 A_FadeOut();
+		Wait;
 	}
 }

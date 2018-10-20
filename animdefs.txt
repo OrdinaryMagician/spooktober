@@ -1,5 +1,8 @@
 //// marisa
 
+TEXTURE nlttele1
+	RANGE nlttele4 TICS 4
+
 // animdefs for thief textures
 
 // thief/mech

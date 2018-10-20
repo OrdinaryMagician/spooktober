@@ -5,7 +5,8 @@ Class mkDialogueSequence : HUDMessageBase
 	int seqnum, curstate, curdelay, delaycnt, charcnt, col, tspeed, fx, rss;
 	double dimalpha, vvol;
 	bool bStarted, bInText;
-	BrokenLines lines;
+	transient BrokenLines lines;
+	String savedtext;
 	String header, voice;
 	transient Font tfont;
 
@@ -49,6 +50,7 @@ Class mkDialogueSequence : HUDMessageBase
 
 	private void DrawText()
 	{
+		if ( !lines ) StartText(savedtext,true);
 		if ( !tfont ) tfont = Font.GetFont('STAT_LWR');
 		int cur = charcnt;
 		Vector2 pos = (15,164);
@@ -101,9 +103,10 @@ Class mkDialogueSequence : HUDMessageBase
 		seqnum = 0;
 	}
 
-	protected void StartText( string cont )
+	protected void StartText( string cont, bool rebuild = false )
 	{
 		String loc = cont;
+		savedtext = cont;
 		if ( cont.CharAt(0) == "$" ) loc = StringTable.Localize(cont);
 		// replace player name
 		String pname = p.GetUserName();
@@ -112,6 +115,8 @@ Class mkDialogueSequence : HUDMessageBase
 		loc.Replace("%pn",pname);
 		if ( !tfont ) tfont = Font.GetFont('STAT_LWR');
 		lines = tfont.BreakLines(loc,290);
+		// these two mustn't be reset on BrokenLines rebuilding
+		if ( rebuild ) return;
 		charcnt = 0;
 		bInText = true;
 	}
@@ -124,6 +129,7 @@ Class mkDialogueSequence : HUDMessageBase
 
 	private int TotalLength()
 	{
+		if ( !lines ) StartText(savedtext,true);
 		int len = 0;
 		for ( int i=0; i<lines.Count(); i++ )
 			len += lines.StringAt(i).Length();
@@ -132,6 +138,7 @@ Class mkDialogueSequence : HUDMessageBase
 
 	private String GetChar( int pos )
 	{
+		if ( !lines ) StartText(savedtext,true);
 		int cur = pos;
 		for ( int i=0; i<lines.Count(); i++ )
 		{
@@ -280,7 +287,7 @@ Class mkSmoothLookTo : Thinker
 // Main handler for all interactive dialogues with the monks
 Class mkDialogueHandler : EventHandler
 {
-	int seqtime, seqnum;
+	transient int seqtime, seqnum;
 	Actor speaker, speakee;
 	PlayerInfo starter;
 	bool orientspeaker, orientspeakee;

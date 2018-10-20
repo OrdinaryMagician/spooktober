@@ -6,7 +6,7 @@ hardwareshader postprocess scene
 	Shader "shaders/glsl/blurfade.fp" 330
 }
 
-hardwareshader postprocess screen
+hardwareshader postprocess scene
 {
 	Name "marifx_grading"
 	Uniform vec3 grademul

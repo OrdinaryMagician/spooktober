@@ -3009,3 +3009,91 @@ Class mkDimCube : Actor
 		Stop;
 	}
 }
+
+Class TFogSpeck : Actor
+{
+	double rollvel;
+	Default
+	{
+		RenderStyle "Translucent";
+		Alpha 0.0;
+		Scale 0.5;
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+		+FORCEXYBILLBOARD;
+		+ROLLSPRITE;
+		+ROLLCENTER;
+		Translation "0:255=#[255,0,0]";
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		rollvel = FRandom[Tele](2,8)*RandomPick[Tele](-1,1);
+		scale *= FRandom[Tele](0.6,1.4);
+		vel.z = FRandom[Tele](0.8,1.2);
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		roll += rollvel;
+	}
+	States
+	{
+	Spawn:
+		TFGS A 1 Bright A_FadeIn(0.05);
+		TFGS A 0 A_JumpIf(alpha>=1.0,"Death");
+		Loop;
+	Death:
+		TFGS A 1 Bright A_FadeOut(0.01);
+		Wait;
+	}
+}
+
+Class mkTeleportBeacon : Actor
+{
+	double ialpha;
+
+	override void Tick()
+	{
+		Super.Tick();
+		ialpha = min(ialpha+0.02,1.0);
+		let mo = players[consoleplayer].mo;
+		double dist = Distance2D(mo);
+		alpha = ialpha*clamp((dist-500)*0.0015,0.0,0.999999);
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		A_PlaySound("misc/wind4",CHAN_BODY,0.5,true,2.0);
+		let l = Spawn("PointLightAttenuated",pos+(0,0,32));
+		l.args[0] = 255;
+		l.args[1] = 0;
+		l.args[2] = 0;
+		l.args[3] = 200;
+	}
+
+	Default
+	{
+		RenderStyle "Add";
+		Alpha 0.0;
+		Scale 2.0;
+		Radius 64;
+		Height 4096;
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+		+FORCEYBILLBOARD;
+	}
+	States
+	{
+	Spawn:
+		TBCN A 1 Bright
+		{
+			for ( int i=0; i<4; i++ )
+				Spawn("TFogSpeck",Vec3Offset(FRandom[Tele](-32,32),FRandom[Tele](-32,32),0));
+		}
+		Wait;
+	}
+}

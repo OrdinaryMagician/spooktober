@@ -177,5 +177,9 @@ nightmarelord/step2 NLSTEP2
 nightmarelord/step3 NLSTEP3
 nightmarelord/step4 NLSTEP4
 $random nightmarelord/step { nightmarelord/step1 nightmarelord/step2 nightmarelord/step3 nightmarelord/step4 }
+nightmarelord/stomp STHMP1
+nightmarelord/grabtaunt DEESACT1
+nightmarelord/grabthrow THROW9
+nightmarelord/attack DEESATK5
 
 ////////

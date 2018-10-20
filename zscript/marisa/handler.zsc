@@ -216,7 +216,7 @@ Class SpooktoberHandler : EventHandler
 			hnd.gvars_out.gradecolfact = -0.19;
 			hnd.gvars_out.gradesatmul = 0.82;
 			hnd.gvars_out.gradesatpow = 1.22;
-			hnd.gvars_out.gradevalmul = 0.9;
+			hnd.gvars_out.gradevalmul = 1.15;
 			hnd.gvars_out.gradevalpow = 1.25;
 			break;
 		case 2:
@@ -611,11 +611,11 @@ Class SpooktoberHandler : EventHandler
 			if ( StatusBar is 'NullHUD' ) return;
 			// set null hud
 			let n = new("NullHUD");
-			n.Init();
 			n.oldbar = StatusBar.GetClass();
 			StatusBar.Destroy();
 			StatusBar = n;
 			StatusBar.AttachToPlayer(players[consoleplayer]);
+			n.Init();
 			StatusBar.NewGame();
 		}
 		else if ( StatusBar is 'NullHUD' )
