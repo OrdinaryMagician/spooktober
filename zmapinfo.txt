@@ -75,7 +75,7 @@ Map SPOOK06 lookup "SP_SPOOK06"
 {
 	sky1 = "URSK6", 0.00666
 	par = 1
-	music = "CDE-WINT"
+	music = "OCCULT"
 	levelnum = 7
 }
 
