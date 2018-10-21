@@ -56,7 +56,7 @@ Map SPOOK03 lookup "SP_SPOOK03"
 	sky1 = "SKY1", 0.008
 	par = 30
 	//music = "MikeMyer"
-	music = "silvereye"
+	music = "silvreye"
 }
 
 Map SPOOK04 lookup "SP_SPOOK04"
