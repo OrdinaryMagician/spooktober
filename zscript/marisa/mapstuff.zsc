@@ -3057,7 +3057,7 @@ Class mkTeleportBeacon : Actor
 	override void Tick()
 	{
 		Super.Tick();
-		ialpha = min(ialpha+0.02,1.0);
+		ialpha = min(ialpha+0.003,1.0);
 		let mo = players[consoleplayer].mo;
 		double dist = Distance2D(mo);
 		alpha = ialpha*clamp((dist-500)*0.0015,0.0,0.999999);

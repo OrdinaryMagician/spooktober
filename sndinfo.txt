@@ -153,6 +153,7 @@ nightmarelord/pain1 DEESPAI1
 nightmarelord/pain2 DEESPAI2
 nightmarelord/pain3 DEESPAI3
 $random nightmarelord/pain { nightmarelord/pain1 nightmarelord/pain2 nightmarelord/pain3 }
+nightmarelord/zap SORZAP
 nightmarelord/cast SORATK
 nightmarelord/pop CORK
 nightmarelord/appear SORRISE

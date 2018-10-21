@@ -198,6 +198,248 @@ skybox ACIDSKY fliptop
 	textures/thief/skyhw/acidb.png
 }
 
+flickerlight NLORDBALLBIG
+{
+	color 0.6 0.1 1.0
+	size 88
+	secondarySize 96
+	chance 0.5
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X1
+{
+	color 0.6 0.1 1.0
+	size 96
+	secondarySize 108
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X2
+{
+	color 0.48 0.08 0.8
+	size 120
+	secondarySize 132
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X3
+{
+	color 0.35 0.06 0.6
+	size 132
+	secondarySize 138
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X4
+{
+	color 0.24 0.04 0.4
+	size 123
+	secondarySize 138
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X5
+{
+	color 0.12 0.02 0.2
+	size 123
+	secondarySize 138
+	chance 0.3
+	attenuate 1
+}
+
+flickerlight NLORDBALLSM
+{
+	color 0.6 0.1 1.0
+	size 44
+	secondarySize 48
+	chance 0.5
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X1
+{
+	color 0.6 0.1 1.0
+	size 48
+	secondarySize 54
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X2
+{
+	color 0.48 0.08 0.8
+	size 60
+	secondarySize 66
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X3
+{
+	color 0.35 0.06 0.6
+	size 66
+	secondarySize 69
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X4
+{
+	color 0.24 0.04 0.4
+	size 62
+	secondarySize 69
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X5
+{
+	color 0.12 0.02 0.2
+	size 62
+	secondarySize 69
+	chance 0.3
+	attenuate 1
+}
+
+object mkBigBolt
+{
+	frame FXNLA { light NLORDBALLBIG }
+	frame FXNLB { light NLORDBALLBIG }
+	frame FXNLC { light NLORDBALLBIG }
+
+	frame FXNLG { light NLORDBALLBIG_X1 }
+	frame FXNLH { light NLORDBALLBIG_X2 }
+	frame FXNLI { light NLORDBALLBIG_X3 }
+	frame FXNLJ { light NLORDBALLBIG_X4 }
+	frame FXNLK { light NLORDBALLBIG_X5 }
+	frame FXNLL { light NLORDBALLBIG_X5 }
+}
+object mkBigBoltDecoy
+{
+	frame FXNLA { light NLORDBALLBIG }
+	frame FXNLB { light NLORDBALLBIG }
+	frame FXNLC { light NLORDBALLBIG }
+
+	frame FXNLG { light NLORDBALLBIG_X1 }
+	frame FXNLH { light NLORDBALLBIG_X2 }
+	frame FXNLI { light NLORDBALLBIG_X3 }
+	frame FXNLJ { light NLORDBALLBIG_X4 }
+	frame FXNLK { light NLORDBALLBIG_X5 }
+	frame FXNLL { light NLORDBALLBIG_X5 }
+}
+object mkSplitBolt
+{
+	frame FXNLA { light NLORDBALLBIG }
+	frame FXNLB { light NLORDBALLBIG }
+	frame FXNLC { light NLORDBALLBIG }
+
+	frame FXNLG { light NLORDBALLBIG_X1 }
+	frame FXNLH { light NLORDBALLBIG_X2 }
+	frame FXNLI { light NLORDBALLBIG_X3 }
+	frame FXNLJ { light NLORDBALLBIG_X4 }
+	frame FXNLK { light NLORDBALLBIG_X5 }
+	frame FXNLL { light NLORDBALLBIG_X5 }
+}
+object mkSplitBoltDecoy
+{
+	frame FXNLA { light NLORDBALLBIG }
+	frame FXNLB { light NLORDBALLBIG }
+	frame FXNLC { light NLORDBALLBIG }
+
+	frame FXNLG { light NLORDBALLBIG_X1 }
+	frame FXNLH { light NLORDBALLBIG_X2 }
+	frame FXNLI { light NLORDBALLBIG_X3 }
+	frame FXNLJ { light NLORDBALLBIG_X4 }
+	frame FXNLK { light NLORDBALLBIG_X5 }
+	frame FXNLL { light NLORDBALLBIG_X5 }
+}
+
+object mkSmolBolt
+{
+	frame FXNLA { light NLORDBALLSM }
+	frame FXNLB { light NLORDBALLSM }
+	frame FXNLC { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+object mkSmolBoltDecoy
+{
+	frame FXNLA { light NLORDBALLSM }
+	frame FXNLB { light NLORDBALLSM }
+	frame FXNLC { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+object mkBigSpeck
+{
+	frame FXNLD { light NLORDBALLSM }
+	frame FXNLE { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+object mkFallingBolt
+{
+	frame FXNLM { light NLORDBALLSM }
+	frame FXNLN { light NLORDBALLSM }
+	frame FXNLO { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+object mkFallingBoltDecoy
+{
+	frame FXNLM { light NLORDBALLSM }
+	frame FXNLN { light NLORDBALLSM }
+	frame FXNLO { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+
+flickerlight NLORDATK
+{
+	color 0.6 0.2 1.0
+	size 96
+	secondarySize 108
+	chance 0.5
+	attenuate 1
+}
+
+object mkNightmareLord
+{
+	frame NLRDR { light NLORDATK }
+	frame NLRDS { light NLORDATK }
+	frame NLRDT { light NLORDATK }
+	frame NLRDV { light NLORDATK }
+	frame NLRDW { light NLORDATK }
+}
+object mkNightmareLordDecoy
+{
+	frame NLRDR { light NLORDATK }
+	frame NLRDS { light NLORDATK }
+	frame NLRDT { light NLORDATK }
+	frame NLRDV { light NLORDATK }
+	frame NLRDW { light NLORDATK }
+}
+
 // batandy
 Pointlight AgPumpkinLight
 {

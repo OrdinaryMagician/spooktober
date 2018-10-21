@@ -1,2 +1,92 @@
-generator Model1887			BulletChip
-generator mkGoatBall			BaronScorch
+decal NLordScorch1
+{
+	pic BFGSCRC1
+	shade "00 00 00"
+	randomflipx
+	randomflipy
+}
+decal NLordScorchSmall1
+{
+	pic BFGSCRC1
+	shade "00 00 00"
+	x-scale 0.5
+	y-scale 0.5
+	randomflipx
+	randomflipy
+}
+
+decal NLordScorch2
+{
+	pic BFGSCRC2
+	shade "00 00 00"
+	randomflipx
+	randomflipy
+}
+decal NLordScorchSmall2
+{
+	pic BFGSCRC2
+	shade "00 00 00"
+	x-scale 0.5
+	y-scale 0.5
+	randomflipx
+	randomflipy
+}
+
+decal NLordLightning1
+{
+	pic FXNLJ0
+	add 1.0
+	fullbright
+	animator GoAway2
+	lowerdecal NLordScorch1
+}
+decal NLordLightningSmall1
+{
+	pic FXNLJ0
+	add 1.0
+	x-scale 0.5
+	y-scale 0.5
+	fullbright
+	animator GoAway2
+	lowerdecal NLordScorchSmall1
+}
+
+decal NLordLightning2
+{
+	pic FXNLK0
+	add 1.0
+	fullbright
+	animator GoAway2
+	lowerdecal NLordScorch2
+}
+decal NLordLightningSmall2
+{
+	pic FXNLK0
+	add 1.0
+	x-scale 0.5
+	y-scale 0.5
+	fullbright
+	animator GoAway2
+	lowerdecal NLordScorchSmall2
+}
+
+decalgroup NLordLightning
+{
+	NLordLightning1	1
+	NLordLightning2	1
+}
+decalgroup NLordLightningSmall
+{
+	NLordLightningSmall1	1
+	NLordLightningSmall2	1
+}
+
+generator mkBigBolt		NLordLightning
+generator mkBigBoltDecoy	NLordLightning
+generator mkSplitBolt		NLordLightning
+generator mkSplitBoltDecoy	NLordLightning
+generator mkSmolBolt		NLordLightningSmall
+generator mkSmolBoltDecoy	NLordLightningSmall
+
+generator Model1887		BulletChip
+generator mkGoatBall		BaronScorch
