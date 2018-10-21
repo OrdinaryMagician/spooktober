@@ -83,6 +83,7 @@ DoomEdNums
 	6479 = mkFloatingIsland
 	6480 = mkTopFlare
 	6481 = mkDimCube
+	6482 = mkSecret05FallHandler
 }
 // Pixel Eater
 DoomEdNums

@@ -192,6 +192,8 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldLoaded( WorldEvent e )
 	{
+		if ( !e.IsSaveGame )
+			level.ExecuteSpecial(80,null,null,false,-int('MapFadeIn'));
 		tcnt = 0;
 		gvars.grademul = (1.0,1.0,1.0);
 		gvars.gradepow = (1.0,1.0,1.0);
@@ -486,6 +488,7 @@ Class SpooktoberHandler : EventHandler
 		switch ( level.levelnum )
 		{
 		case 1:
+		case 19:
 			// you get nothing
 			break;
 		case 4:
@@ -496,7 +499,6 @@ Class SpooktoberHandler : EventHandler
 			break;
 		case 14:
 		case 16:
-		case 19:
 			// fist only
 			mo.GiveInventory("Fist",1);
 			break;

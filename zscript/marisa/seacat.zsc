@@ -41,28 +41,150 @@ Class mkSeacatFade : Actor
 	}
 }
 
+Class mkDialogueSequence40 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("??????");
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			StartText("$BEATDLG1");
+			break;
+		case 1:
+			StartText("$BEATDLG2");
+			break;
+		case 2:
+			StartText("$BEATDLG3");
+			break;
+		case 3:
+			StartText("$BEATDLG4");
+			break;
+		case 4:
+			SetHeader("$BEATHDR");
+			EventHandler.SendNetworkEvent("setspeakerframe",3);
+			StartText("$BEATDLG5");
+			break;
+		case 5:
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			StartText("$BEATDLG6");
+			break;
+		case 6:
+			StartText("$BEATDLG7");
+			break;
+		case 7:
+			StartText("$BEATDLG8");
+			break;
+		case 8:
+			EventHandler.SendNetworkEvent("setspeakerframe",3);
+			StartText("$BEATDLG9");
+			break;
+		case 9:
+			EventHandler.SendNetworkEvent("setspeakerframe",8);
+			S_Sound("seacat/ahahawav",CHAN_VOICE,1.0,ATTN_NONE);
+			SetTextSpeed(2);
+			SetTextEffect(TE_SHIVER);
+			StartText("$BEATDLG10");
+			break;
+		case 10:
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			SetTextSpeed(1);
+			SetTextEffect(TE_NONE);
+			StartText("$BEATDLG11");
+			break;
+		case 11:
+			EventHandler.SendNetworkEvent("setspeakerframe",3);
+			EventHandler.SendNetworkEvent("giveshotty");
+			StartText("$BEATDLG12");
+			break;
+		case 12:
+			StartText("$BEATDLG13");
+			break;
+		case 13:
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			StartText("$BEATDLG14");
+			break;
+		case 14:
+			EventHandler.SendNetworkEvent("setspeakerframe",8);
+			SetTextSpeed(2);
+			SetTextEffect(TE_SHIVER);
+			StartText("$BEATDLG15");
+			break;
+		case 15:
+			EventHandler.SendNetworkEvent("setspeakerframe",1);
+			S_Sound("seacat/ahahawav",CHAN_VOICE,1.0,ATTN_NONE);
+			EventHandler.SendNetworkEvent("activategoats");
+			EndSeq(0);
+			break;
+		}
+	}
+}
+
+Class mkDialogueSequence41 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$BEATHDR");
+			EventHandler.SendNetworkEvent("setspeakerframe",2);
+			StartText("$BEATDLG16");
+			break;
+		case 1:
+			EventHandler.SendNetworkEvent("setspeakerframe",6);
+			StartText("$BEATDLG17");
+			break;
+		case 2:
+			StartText("$BEATDLG18");
+			break;
+		case 3:
+			EventHandler.SendNetworkEvent("setspeakerframe",7);
+			StartText("$BEATDLG19");
+			break;
+		case 4:
+			EventHandler.SendNetworkEvent("setspeakerframe",4);
+			StartText("$BEATDLG20");
+			break;
+		case 5:
+			EventHandler.SendNetworkEvent("setspeakerframe",2);
+			StartText("$BEATDLG21");
+			break;
+		case 6:
+			EventHandler.SendNetworkEvent("setspeakerframe",9);
+			S_Sound("seacat/redtext",CHAN_WEAPON,1.0,ATTN_NONE);
+			StartText("$BEATDLG22");
+			break;
+		case 7:
+			EventHandler.SendNetworkEvent("setspeakerframe",1);
+			S_Sound("seacat/ahahawav",CHAN_VOICE,1.0,ATTN_NONE);
+			EventHandler.SendNetworkEvent("secret05exit");
+			EndSeq(0);
+			break;
+		}
+	}
+}
+
 // dialogue npc
-// A: greeting
-// D: taunt
-// B: ahaha.wav
-// C: defeat init
-// E: defeat end
 Class mkBeatrice : Actor
 {
-	override bool Used( Actor user )
+	override void Activate( Actor activator )
 	{
-		if ( !score ) return false;
-		mkDialogueHandler.StartDialogueSequence(self,user,score);
-		return true;
+		if ( !score )
+		{
+			SetStateLabel("FadeOut");
+			return;
+		}
+		mkDialogueHandler.StartDialogueSequence(self,activator,score);
 	}
 	Default
 	{
 		RenderStyle "Translucent";
 		Alpha 0;
-		Radius 16;
+		Radius 8;
 		Height 56;
 		Scale 0.056;
-		+SOLID;
 	}
 	override void PostBeginPlay()
 	{
@@ -72,42 +194,28 @@ Class mkBeatrice : Actor
 	States
 	{
 	Spawn:
-		BEAT A 1 A_FadeIn(0.02,FTF_CLAMP);
-		BEAT A 0 A_JumpIf(alpha>=1,"Idle");
-		Loop;
-	Idle:
-		BEAT A -1;
+		BEAT F 1;
+		BEAT F 1
+		{
+			if ( score == 41 )
+				frame = 4;
+		}
+		BEAT # 1 A_FadeIn(0.08,FTF_CLAMP);
+		BEAT # 0 A_JumpIf(alpha>=1,1);
+		Goto Spawn+2;
+		BEAT # -1;
 		Stop;
-	Taunt:
-		BEAT D -1;
-		Stop;
-	Ahaha:
-		BEAT B 90 A_PlaySound("seacat/ahahawav",CHAN_VOICE);
-		BEAT B 0
+	FadeOut:
+		BEAT # 0
 		{
 			let s = Spawn("mkSeacatFade");
 			s.target = self;
 		}
-		BEAT B 1 A_FadeOut(0.02);
+		BEAT # 1 A_FadeOut(0.08);
 		Wait;
-	Defeat:
-		BEAT C 1 A_FadeIn(0.02,FTF_CLAMP);
-		BEAT C 0 A_JumpIf(alpha>=1,"DefeatIdle");
-		Loop;
-	DefeatIdle:
-		BEAT C -1;
+	Cache:
+		BEAT ABCDEFGHI 0;
 		Stop;
-	DefeatIdle2:
-		BEAT E -1;
-		Stop;
-	DefeatFade:
-		BEAT E 0
-		{
-			let s = Spawn("mkSeacatFade");
-			s.target = self;
-		}
-		BEAT E 1 A_FadeOut(0.02);
-		Wait;
 	}
 }
 
@@ -857,5 +965,78 @@ Class mkSkySphere : Actor
 	Spawn:
 		MODL A -1 BRIGHT;
 		Stop;
+	}
+}
+
+// Auto-kills players and monsters that fall off the map
+// Ignores god mode and other cheats, so be careful
+// The way this works additionally screws with the resurrect cheat, but
+// considering how many things that cheat can break already, who cares
+Class mkSecret05FallEffect : Thinker
+{
+	Actor victim;
+	int tcnt;
+
+	static void AttachTo( Actor victim )
+	{
+		let t = ThinkerIterator.Create("mkSecret05FallEffect",STAT_USER);
+		mkSecret05FallEffect e;
+		while ( e = mkSecret05FallEffect(t.Next()) )
+		{
+			if ( e.victim == victim )
+				return;
+		}
+		if ( !victim.player && (victim.Health <= 0) && (victim.tics == -1) )
+		{
+			victim.A_FadeOut();
+			return;
+		}
+		e = new("mkSecret05FallEffect");
+		e.ChangeStatNum(STAT_USER);
+		e.victim = victim;
+		if ( victim.player ) victim.A_PlayerScream();
+		else victim.A_Scream();
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		victim.A_SetBlend("70 20 A0",min(1,tcnt/35.),1);
+		if ( victim.Health <= 0 )
+		{
+			if ( !victim.player ) Destroy();
+			return;
+		}
+		tcnt++;
+		if ( tcnt >= 50 )
+			victim.DamageMobj(null,null,int.max,'Void',DMG_FORCED|DMG_THRUSTLESS);
+	}
+}
+
+Class mkSecret05FallHandler : Actor
+{
+	transient ThinkerIterator ti;
+
+	override void Tick()
+	{
+		Super.Tick();
+		if ( !ti ) ti = ThinkerIterator.Create("Actor");
+		else ti.Reinit();
+		Actor a;
+		while ( a = Actor(ti.Next()) )
+		{
+			if ( !a.player && !a.bISMONSTER ) continue;
+			if ( a.pos.z <= -128 )
+				mkSecret05FallEffect.AttachTo(a);
+		}
+	}
+
+	Default
+	{
+		//$Title SECRET05 Fall Handler
+		//$Category Marisa Kirisame
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
 	}
 }

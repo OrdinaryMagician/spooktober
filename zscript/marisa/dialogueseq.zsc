@@ -269,6 +269,17 @@ Class mkSmoothLookTo : Thinker
 		slt.speed = speed;
 	}
 
+	static void LookTowardsTid( Actor target, int ttid, double speed )
+	{
+		let slt = new("mkSmoothLookTo");
+		slt.ChangeStatNum(STAT_USER);
+		slt.target = target;
+		Actor t = ActorIterator.Create(ttid).Next();
+		slt.angle = target.AngleTo(t);
+		slt.pitch = mkDialogueHandler.FaceToFace(target,t);
+		slt.speed = speed;
+	}
+
 	override void Tick()
 	{
 		Super.Tick();
@@ -368,6 +379,15 @@ Class mkDialogueHandler : EventHandler
 			level.ExecuteSpecial(80,null,null,false,203);
 		else if ( e.Name ~== "activateboss" )
 			level.ExecuteSpecial(80,null,null,false,13);
+		else if ( e.Name ~== "activategoats" )
+			level.ExecuteSpecial(80,null,null,false,4);
+		else if ( e.Name ~== "setspeakerframe" )
+			speaker.frame = e.Args[0];
+		else if ( e.Name ~== "giveshotty" )
+		{
+			speakee.GiveInventory("Fist",1);
+			speakee.GiveInventory("Model1887",1);
+		}
 	}
 
 	static void StartDialogueSequence( Actor speaker, Actor speakee, int seqnum, bool bOrientSpeaker = true, bool bOrientSpeakee = true )

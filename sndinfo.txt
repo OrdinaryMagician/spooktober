@@ -46,7 +46,6 @@ misc/lka lka
 $musicvolume D_MIRROR 0.35
 // from umineko
 seacat/ahahawav ahaha
-seacat/distclock dclk
 seacat/flangefemale flangefm
 seacat/flangestorm flangest
 seacat/loudthunder lthunder
@@ -55,6 +54,7 @@ seacat/rreload r_reload
 seacat/rainloop rain4l
 seacat/z1 z1
 $limit seacat/z1 32
+seacat/redtext redtext
 // from thief
 thief/firelp1	FIRELP1
 thief/firelp8	FIRELP8

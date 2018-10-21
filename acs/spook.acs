@@ -1,23 +1,15 @@
 #library "SPOOK"
 #include "zcommon.acs"
 
-SCRIPT "Fi1" OPEN
-{
-	ACS_NamedExecute("MapFadeIn",0);
-}
-
-SCRIPT "Fi2" REOPEN
-{
-	ACS_NamedExecute("MapFadeIn",0);
-}
-
+// Called by event handler, don't use directly
 SCRIPT "MapFadeIn" ( void )
 {
-	SetActivator(0,AAPTR_NULL);
 	ScriptCall("SpooktoberHandler","FadeInShader",1.0);
 	FadeRange(0,0,0,1.0,0,0,0,0.0,1.0);
 }
 
+// Call this in place of normal map exits
+// "next" argument is only used in the hub to pick the destination map
 SCRIPT "MapFadeOut" ( int next )
 {
 	SetActivator(0,AAPTR_NULL);

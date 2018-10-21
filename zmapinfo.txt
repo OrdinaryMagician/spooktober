@@ -115,7 +115,7 @@ Map SPOOK12 lookup "SP_SPOOK12"
 Map SPOOK13 lookup "SP_SPOOK13"
 {
 	EvenLighting
-	Par = 600
+	Par = 420
 	levelnum = 14
 	Sky1 = "ACIDSKY", 0.25
 	Music = "D_NARENA"
