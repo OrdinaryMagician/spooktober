@@ -167,6 +167,22 @@ Class SpooktoberHandler : EventHandler
 		SpooktoberGlobals.MakeInstance();
 	}
 
+	override void CheckReplacement( ReplaceEvent e )
+	{
+		if ( e.Replacee != 'mkNightmareLord' ) return;
+		switch ( G_SkillPropertyInt(SKILLP_ACSReturn) )
+		{
+		case 0:
+		case 1:
+			e.Replacement = 'mkNightmareLordEasy';
+			break;
+		case 3:
+		case 4:
+			e.Replacement = 'mkNightmareLordHard';
+			break;
+		}
+	}
+
 	override void PostUiTick()
 	{
 		if ( !bossenemy || bossbar ) return;

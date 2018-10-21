@@ -324,7 +324,7 @@ Class mkBigBolt : Actor
 	}
 	override int DoSpecialDamage( Actor target, int damage, Name damagetype )
 	{
-		target.vel.xy += Vec2To(target).unit()*(3000/target.mass);
+		target.vel.xy += Vec2To(target).unit()*(2000/target.mass);
 		target.vel.z += 8;
 		target.A_PlaySound("nightmarelord/sparkhit",CHAN_7);
 		if ( target.player ) target.A_SetBlend("White",1.0,10,"Purple",0.0);
@@ -399,8 +399,8 @@ Class mkSplitBolt : Actor
 	}
 	override int DoSpecialDamage( Actor target, int damage, Name damagetype )
 	{
-		target.vel.xy += Vec2To(target).unit()*(1600/target.mass);
-		target.vel.z += 6;
+		target.vel.xy += Vec2To(target).unit()*(1200/target.mass);
+		target.vel.z += 5;
 		target.A_PlaySound("nightmarelord/sparkhit",CHAN_7);
 		if ( target.player ) target.A_SetBlend("White",0.8,8,"Purple",0.0);
 		return damage;
@@ -575,6 +575,31 @@ Class mkFallingBoltDecoy : Actor
 	Default
 	{
 		DamageFunction (Random[NLord](2,4));
+	}
+}
+
+Class WallHitter : Thinker
+{
+	Actor victim, instigator;
+
+	static void AppendTo( Actor victim, Actor instigator )
+	{
+		let w = new("WallHitter");
+		w.ChangeStatNum(STAT_USER);
+		w.victim = victim;
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		if ( !victim ) Destroy();
+		if ( victim.BlockingLine || victim.BlockingMobj || (victim.pos.z <= floorz) )
+		{
+			int dmg = Random[NLord](4,6)*5;
+			if ( instigator is 'mkNightmareLordDecoy' ) dmg /= 3;
+			victim.DamageMobj(instigator,instigator,dmg,'Crash',DMG_THRUSTLESS);
+			Destroy();
+		}
 	}
 }
 
@@ -855,7 +880,7 @@ Class mkNightmareLord : Actor
 		if ( !target ) return false;
 		A_FaceTarget();
 		Vector3 sc = level.SphericalCoords(pos,target.pos,(angle,pitch));
-		if ( !Random[NLord](0,4) && (sc.z < meleerange*3) )
+		if ( !Random[NLord](0,5) && (sc.z < meleerange*3) )
 		{
 			SetStateLabel("Grab");
 			return true;
@@ -865,7 +890,7 @@ Class mkNightmareLord : Actor
 			SetStateLabel("StaffAttack");
 			return true;
 		}
-		if ( (!ranged || !Random[NLord](0,2)) && (sc.z < meleerange*1.8) )
+		if ( (!ranged || !Random[NLord](0,2)) && (sc.z < meleerange*2) )
 		{
 			SetStateLabel("DoRadiusBlast");
 			return true;
@@ -878,13 +903,13 @@ Class mkNightmareLord : Actor
 		A_PlaySound("nightmarelord/stomp",CHAN_5,1.0,false,0.8);
 		A_PlaySound("nightmarelord/stomp",CHAN_6,1.0,false,0.4);
 		A_QuakeEx(3,3,3,20,0,600,"",QF_RELATIVE|QF_SCALEDOWN,falloff:300);
-		let bi = BlockThingsIterator.Create(self,MeleeRange*1.5);
+		let bi = BlockThingsIterator.Create(self,MeleeRange*2);
 		while ( bi.Next() )
 		{
 			let t = bi.Thing;
 			if ( !t || !t.bSHOOTABLE || (t is 'mkNightmareLord') ) continue;
-			t.vel.xy = Vec2To(t).unit()*(1500/t.mass);
-			t.vel.z = 6;
+			t.vel.xy = Vec2To(t).unit()*(2500/t.mass);
+			t.vel.z = 8;
 			int dmg = Random[NLord](3,5)*3;
 			if ( self is 'mkNightmareLordDecoy' ) dmg /= 3;
 			t.DamageMobj(self,self,dmg,'Stomp',DMG_THRUSTLESS|DMG_EXPLOSION);
@@ -914,7 +939,7 @@ Class mkNightmareLord : Actor
 		if ( !tracer || (tracer.Health <= 0) ) return true;
 		bGrabbing = true;
 		PainChance = 12;
-		if ( !Random[NLord](0,10) ) tracer.DamageMobj(self,self,Random[NLord](1,3),'Choke',DMG_THRUSTLESS);
+		if ( !Random[NLord](0,15) ) tracer.DamageMobj(self,self,Random[NLord](1,3),'Choke',DMG_THRUSTLESS);
 		Vector2 aimdir = (cos(angle),sin(angle))*(radius+tracer.radius+48);
 		Vector3 dest = Vec3Offset(aimdir.x,aimdir.y,height*0.6);
 		Vector3 tdir = level.Vec3Diff(tracer.pos,dest);
@@ -933,8 +958,9 @@ Class mkNightmareLord : Actor
 		bGrabbing = false;
 		A_PlaySound("nightmarelord/grabthrow",CHAN_7);
 		tracer.A_PlaySound("nightmarelord/grabthrow",CHAN_7);
-		tracer.vel.xy = (cos(angle),sin(angle))*(3000/tracer.mass);
-		tracer.vel.z = 8;
+		tracer.vel.xy = (cos(angle),sin(angle))*(5000/tracer.mass);
+		tracer.vel.z = 16;
+		WallHitter.AppendTo(tracer,self);
 		int dmg = Random[NLord](3,5)*5;
 		if ( self is 'mkNightmareLordDecoy' ) dmg /= 3;
 		tracer.DamageMobj(self,self,dmg,'Throw',DMG_THRUSTLESS|DMG_EXPLOSION);
@@ -947,8 +973,8 @@ Class mkNightmareLord : Actor
 		if ( (abs(sc.x) < 60) && (sc.z < meleerange*4) )
 		{
 			target.A_PlaySound("nightmarelord/sparkhit",CHAN_7);
-			target.vel.xy = (cos(angle),sin(angle))*(5000/target.mass);
-			target.vel.z = 12;
+			target.vel.xy = (cos(angle),sin(angle))*(3000/target.mass);
+			target.vel.z = 8;
 			int dmg = Random[NLord](3,5)*7;
 			if ( self is 'mkNightmareLordDecoy' ) dmg /= 3;
 			target.DamageMobj(self,self,dmg,'Zapped',DMG_THRUSTLESS);
@@ -1025,7 +1051,7 @@ Class mkNightmareLord : Actor
 	{
 		//$Title Nightmare Lord
 		//$Category Marisa Kirisame
-		Health 30000;
+		Health 25000;
 		Scale 2.0;
 		Radius 32;
 		Height 140;
@@ -1038,6 +1064,7 @@ Class mkNightmareLord : Actor
 		DamageFactor "BFGSplash", 0.25;
 		MONSTER;
 		+LOOKALLAROUND;
+		+QUICKTORETALIATE;
 		+NOTELEFRAG;
 		+DROPOFF;
 		+BOSS;
@@ -1429,5 +1456,22 @@ Class mkNightmareLordDecoy : mkNightmareLord
 		NLRD A 140;
 		NLRD A 1 A_FadeOut();
 		Wait;
+	}
+}
+
+// Skill variations (just different health pools)
+Class mkNightmareLordEasy : mkNightmareLord	// ITYTD/HNTR
+{
+	Default
+	{
+		Health 20000;
+	}
+}
+
+Class mkNightmareLordHard : mkNightmareLord	// UV/NM
+{
+	Default
+	{
+		Health 30000;
 	}
 }
