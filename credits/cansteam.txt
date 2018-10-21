@@ -1,1 +1,7 @@
-Textures: CageTex, Doom Potpourry, Black Green Tech Texture Pack
+	TEXTURES(all gottem from the Realm667 texture repository)
+cagetex.wad
+DoomPotPourri.wad
+BlackGreenTechTexturesPack.wad
+	MUSIC	
+Planet Thantos (Bomberman 64: The Second Attack)
+Yasunori Mitsuda
