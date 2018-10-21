@@ -124,6 +124,9 @@ Map SPOOK13 lookup "SP_SPOOK13"
 Map SECRET01 lookup "SP_SECRET01"
 {
 	levelnum = 15
+	sky1 = "HELLSKY"
+	par = 300
+	sucktime = 1
 }
 
 Map SECRET02 lookup "SP_SECRET02"
