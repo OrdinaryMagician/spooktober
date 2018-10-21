@@ -767,10 +767,7 @@ Texture "APPIXE", 256, 256
 
 Texture "APCARD", 256, 256
 {
-	Patch "PAGWALL", 0, 0
-	{
-		Translation "0:255=@75[255,255,255]"
-	}
+	Patch "P_CARD", 0, 0
 	Patch "SPFRAME", 0, 0
 	{
 		Style Overlay
@@ -779,10 +776,7 @@ Texture "APCARD", 256, 256
 
 Texture "APAGAM", 256, 256
 {
-	Patch "PAGWALL", 0, 0
-	{
-		Translation "0:255=@75[255,255,255]"
-	}
+	Patch "P_GAM", 0, 0
 	Patch "SPFRAME", 0, 0
 	{
 		Style Overlay
@@ -791,10 +785,7 @@ Texture "APAGAM", 256, 256
 
 Texture "APZRR", 256, 256
 {
-	Patch "PAGWALL", 0, 0
-	{
-		Translation "0:255=@75[255,255,255]"
-	}
+	Patch "P_ZRR", 0, 0
 	Patch "SPFRAME", 0, 0
 	{
 		Style Overlay
@@ -803,10 +794,7 @@ Texture "APZRR", 256, 256
 
 Texture "APCAMP", 256, 256
 {
-	Patch "PAGWALL", 0, 0
-	{
-		Translation "0:255=@75[255,255,255]"
-	}
+	Patch "P_CAMP", 0, 0
 	Patch "SPFRAME", 0, 0
 	{
 		Style Overlay
@@ -815,10 +803,16 @@ Texture "APCAMP", 256, 256
 
 Texture "APCALI", 256, 256
 {
-	Patch "PAGWALL", 0, 0
+	Patch "P_CALI", 0, 0
+	Patch "SPFRAME", 0, 0
 	{
-		Translation "0:255=@75[255,255,255]"
+		Style Overlay
 	}
+}
+
+Texture "APJAX", 256, 256
+{
+	Patch "P_JAX", 0, 0
 	Patch "SPFRAME", 0, 0
 	{
 		Style Overlay

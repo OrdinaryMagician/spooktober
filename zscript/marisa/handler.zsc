@@ -238,10 +238,10 @@ Class SpooktoberHandler : EventHandler
 		case 2:
 			// seacat preset
 			hnd.gvars_out.grademul = (1.01,0.96,1.03);
-			hnd.gvars_out.gradepow = (0.86,1.08,0.77);
-			hnd.gvars_out.gradecol = (-0.21,-0.08,-0.33);
+			hnd.gvars_out.gradepow = (0.96,1.08,0.87);
+			hnd.gvars_out.gradecol = (-0.21,-0.08,-0.23);
 			hnd.gvars_out.gradecolfact = -0.13;
-			hnd.gvars_out.gradesatmul = 1.21;
+			hnd.gvars_out.gradesatmul = 0.98;
 			hnd.gvars_out.gradesatpow = 1.33;
 			hnd.gvars_out.gradevalmul = 0.92;
 			hnd.gvars_out.gradevalpow = 1.21;

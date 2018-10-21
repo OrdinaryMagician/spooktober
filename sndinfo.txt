@@ -48,6 +48,7 @@ $musicvolume D_MIRROR 0.35
 seacat/ahahawav ahaha
 seacat/distclock dclk
 seacat/flangefemale flangefm
+seacat/flangestorm flangest
 seacat/loudthunder lthunder
 seacat/rfire r_fire
 seacat/rreload r_reload
@@ -140,7 +141,6 @@ $ambient 6404 misc/wind3 point 1.0 continuous 0.25
 $ambient 6405 misc/wind4 point 1.0 continuous 0.25
 $ambient 6406 misc/growl point 2.0 continuous 0.5
 $ambient 6407 misc/wah point 3.0 continuous 0.25
-$ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
 $ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
 $ambient 6409 thief/eees1 point 0.8 continuous 0.6
 $ambient 6410 thief/eees2 point 0.8 continuous 0.6

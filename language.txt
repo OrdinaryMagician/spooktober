@@ -161,7 +161,8 @@ SP_AUTHOR11 = "Giraffe Man";
 SP_AUTHOR12 = "CanSteam";
 SP_AUTHOR13 = "SpeedySPCFan";
 SP_AUTHOR14 = "Caligari87";
-SP_AUTHOR15 = "SLADE 3";
+SP_AUTHOR15 = "Jaxxoon R";
+SP_AUTHOR16 = "SLADE 3";
 
 SP_TITLE0 = "Mapper, Scripter, Magician";
 SP_TITLE1 = "Mapper, Speedrunner";
@@ -178,7 +179,8 @@ SP_TITLE11 = "Mapper";
 SP_TITLE12 = "Mapper";
 SP_TITLE13 = "Composer";
 SP_TITLE14 = "Tester";
-SP_TITLE15 = "Program that crashes all the time";
+SP_TITLE15 = "Mapper";
+SP_TITLE16 = "Program that crashes all the time";
 
 SP_MESSAGE0 = "\"I'd say this surpasses my 20 Heretics map.\"";
 SP_MESSAGE1 = "";
@@ -195,4 +197,5 @@ SP_MESSAGE11 = "\"Script and Share, until it is done...\"";
 SP_MESSAGE12 = "";
 SP_MESSAGE13 = "";
 SP_MESSAGE14 = "";
-SP_MESSAGE15 = "\"SLADE has crashed unexpectedly.\"";
+SP_MESSAGE15 = "";
+SP_MESSAGE16 = "\"SLADE has crashed unexpectedly.\"";

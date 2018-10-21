@@ -43,8 +43,10 @@ Class mkSeacatFade : Actor
 
 // dialogue npc
 // A: greeting
+// D: taunt
 // B: ahaha.wav
-// C: defeat
+// C: defeat init
+// E: defeat end
 Class mkBeatrice : Actor
 {
 	override bool Used( Actor user )
@@ -76,6 +78,9 @@ Class mkBeatrice : Actor
 	Idle:
 		BEAT A -1;
 		Stop;
+	Taunt:
+		BEAT D -1;
+		Stop;
 	Ahaha:
 		BEAT B 90 A_PlaySound("seacat/ahahawav",CHAN_VOICE);
 		BEAT B 0
@@ -92,13 +97,16 @@ Class mkBeatrice : Actor
 	DefeatIdle:
 		BEAT C -1;
 		Stop;
+	DefeatIdle2:
+		BEAT E -1;
+		Stop;
 	DefeatFade:
-		BEAT C 0
+		BEAT E 0
 		{
 			let s = Spawn("mkSeacatFade");
 			s.target = self;
 		}
-		BEAT C 1 A_FadeOut(0.02);
+		BEAT E 1 A_FadeOut(0.02);
 		Wait;
 	}
 }
