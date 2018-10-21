@@ -33,6 +33,7 @@ $random misc/scase { misc/scase1 misc/scase2 misc/scase3 }
 satyr/see dssyrsit
 satyr/die dssyrdth
 goat/step step
+satyr/step hoof1
 goat/brake skid
 goat/hit axe5
 goat/hitwall hamwal1

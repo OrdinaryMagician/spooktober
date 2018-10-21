@@ -593,7 +593,7 @@ Class WallHitter : Thinker
 	{
 		Super.Tick();
 		if ( !victim ) Destroy();
-		if ( victim.BlockingLine || victim.BlockingMobj || (victim.pos.z <= floorz) )
+		if ( victim.BlockingLine || victim.BlockingMobj || (victim.pos.z <= victim.floorz) )
 		{
 			int dmg = Random[NLord](4,6)*5;
 			if ( instigator is 'mkNightmareLordDecoy' ) dmg /= 3;
