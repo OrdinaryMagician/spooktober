@@ -897,6 +897,7 @@ Class Model1887 : DoomWeapon
 		Weapon.AmmoUse 1;
 		Weapon.AmmoGive 8;
 		Weapon.AmmoType "Shell";
+		Weapon.UpSound "seacat/rreload";
 		Inventory.PickupMessage "You got the model 1887 shotgun!";
 		+WEAPON.CHEATNOTWEAPON;
 	}
@@ -1114,7 +1115,7 @@ Class mkSecret05ProximityTrigger : Actor
 		Actor a;
 		while ( a = Actor(ti.Next()) )
 		{
-			if ( Distance2D(a) > score ) continue;
+			if ( (Distance2D(a) > score) || !CheckSight(a) ) continue;
 			level.ExecuteSpecial(special,a,null,false,args[0],args[1],args[2],args[3],args[4]);
 			Destroy();
 			return;

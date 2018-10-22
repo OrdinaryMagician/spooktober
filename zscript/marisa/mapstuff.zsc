@@ -863,7 +863,8 @@ Class mkFootstepMaker : Thinker
 			"7:mkThiefArmoire", "7:mkThiefStool", "7:mkThiefDesk",
 			"7:mkThiefTableFancy1", "7:mkThiefTableFancy2",
 			"7:mkThiefFootlocker", "7:frame3", "7:palbasic",
-			"7:woodpnl", "7:wdplain", "7:creat2"
+			"7:woodpnl", "7:wdplain", "7:creat2",
+			"7:BigTree", "7:Stalagtite", "7:TorchTree",
 			"8:l2in", "8:l3in", "8:l4in", "8:l4in_1",
 			"8:l4in_2", "8:l4in_3", "8:l4in_4",
 			"8:lava128", "9:grin", "9:vmin", "10:blin"
@@ -2038,6 +2039,7 @@ Class mkTimPainting1 : mkThiefPainting
 		//$Title Tim Allen Painting #1
 		//$Category Marisa Kirisame
 		+COUNTSECRET;
+		+NOCLIP;
 	}
 	States
 	{

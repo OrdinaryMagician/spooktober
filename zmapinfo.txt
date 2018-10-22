@@ -154,3 +154,9 @@ Map SECRET05 lookup "SP_SECRET05"
 	levelnum = 19
 	Sky1 = "Blk"
 }
+
+DamageType Void
+{
+	NoArmor
+	Obituary = "%o got lost in the sea of fragments."
+}
