@@ -31,7 +31,7 @@ Class mkDialogueSequence : HUDMessageBase
 	{
 		self.seqnum = seqnum;
 		self.p = p;
-		self.voice = "misc/i_pkup";
+		self.voice = "misc/voice";
 		self.col = Font.CR_WHITE;
 		self.tspeed = 1;
 		self.vvol = 0.5;
@@ -168,7 +168,7 @@ Class mkDialogueSequence : HUDMessageBase
 			if ( !bSkip ) return;
 			bInText = false;
 			curstate++;
-			curdelay = 3;
+			curdelay = 5;
 			return;
 		}
 		// play sound on non-whitespace
@@ -388,6 +388,8 @@ Class mkDialogueHandler : EventHandler
 			speakee.GiveInventory("Fist",1);
 			speakee.GiveInventory("Model1887",1);
 		}
+		else if ( e.Name ~== "secret05exit" )
+			level.ExecuteSpecial(80,null,null,false,2);
 	}
 
 	static void StartDialogueSequence( Actor speaker, Actor speakee, int seqnum, bool bOrientSpeaker = true, bool bOrientSpeakee = true )

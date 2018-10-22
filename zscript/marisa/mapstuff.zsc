@@ -840,14 +840,22 @@ Class mkFootstepMaker : Thinker
 		// 5: stone (default)
 		// 6: tile
 		// 7: wood
+		// 8: lava
+		// 9: slime
+		// 10: water
 		static const String materials[] =
 		{
-			"1:rug02", "1:rug18", "1:mkThiefSofa",
+			"0:f_sky1", "0:blk",
+			"1:rug02", "1:rug18", "1:mkThiefSofa", "1:rug19",
 			"1:mkThiefSofaChair", "1:mkThiefChairOrnate",
 			"1:mkThiefBedFancy", "1:b28", "1:rug04", "1:rug28rn",
+			"1:rug17",
+			"2:clc07", "2:fcracks",
 			"3:plant05",
-			"4:floor4",
+			"4:floor4", "4:gate3", "4:nltele1", "4:nltele2",
+			"4:nltele3", "4:nltele4", "4:bronz128",
 			"6:tile", "6:ftile3", "6:ftile4", "6:tile_",
+			"6:blackmb", "6:huestone", "6:conrose2",
 			"7:frame3b", "7:palslant", "7:mkThiefChair",
 			"7:mkThiefTable",
 			"7:mkThiefTableCabinet", "7:mkThiefBarrel",
@@ -856,6 +864,9 @@ Class mkFootstepMaker : Thinker
 			"7:mkThiefTableFancy1", "7:mkThiefTableFancy2",
 			"7:mkThiefFootlocker", "7:frame3", "7:palbasic",
 			"7:woodpnl", "7:wdplain", "7:creat2"
+			"8:l2in", "8:l3in", "8:l4in", "8:l4in_1",
+			"8:l4in_2", "8:l4in_3", "8:l4in_4",
+			"8:lava128", "9:grin", "9:vmin", "10:blin"
 		};
 		String tx;
 		bool dummy;
@@ -901,11 +912,39 @@ Class mkFootstepMaker : Thinker
 		case 7:
 			mo.A_PlaySound("thief/wood",CHAN_7,vol);
 			break;
+		case 8:
+			mo.A_PlaySound("world/lavasizzlesmall",CHAN_7,vol);
+			break;
+		case 9:
+			mo.A_PlaySound("world/sludgegloopsmall",CHAN_7,vol);
+			break;
+		case 10:
+			mo.A_PlaySound("thief/water",CHAN_7,vol);
+			break;
 		}
 	}
 	private void PlayWetStep( double vol = 1.0 )
 	{
-		mo.A_PlaySound("thief/water",CHAN_7,vol);
+		TerrainDef t = mo.GetFloorTerrain();
+		if ( !t )
+		{
+			mo.A_PlaySound("thief/water",CHAN_7,vol);
+			return;
+		}
+		switch ( t.TerrainName )
+		{
+		case 'thiefslime':
+			mo.A_PlaySound("world/sludgegloopsmall",CHAN_7,vol);
+			break;
+		case 'thieflava':
+		case 'thieflavasmoke':
+			mo.A_PlaySound("world/lavasizzlesmall",CHAN_7,vol);
+			break;
+		default:
+			mo.A_PlaySound("thief/water",CHAN_7,vol);
+			break;
+		}
+
 	}
 	private void PlayLand( double vol = 1.0 )
 	{
@@ -932,11 +971,38 @@ Class mkFootstepMaker : Thinker
 		case 7:
 			mo.A_PlaySound("thief/lwood",CHAN_6,vol);
 			break;
+		case 8:
+			mo.A_PlaySound("world/lavasizzle",CHAN_6,vol);
+			break;
+		case 9:
+			mo.A_PlaySound("world/sludgegloop",CHAN_6,vol);
+			break;
+		case 10:
+			mo.A_PlaySound("thief/lwater",CHAN_6,vol);
+			break;
 		}
 	}
 	private void PlayWetLand( double vol = 1.0 )
 	{
-		mo.A_PlaySound("thief/lwater",CHAN_6,vol);
+		TerrainDef t = mo.GetFloorTerrain();
+		if ( !t )
+		{
+			mo.A_PlaySound("thief/lwater",CHAN_6,vol);
+			return;
+		}
+		switch ( t.TerrainName )
+		{
+		case 'thiefslime':
+			mo.A_PlaySound("world/sludgegloop",CHAN_6,vol);
+			break;
+		case 'thieflava':
+		case 'thieflavasmoke':
+			mo.A_PlaySound("world/lavasizzle",CHAN_6,vol);
+			break;
+		default:
+			mo.A_PlaySound("thief/lwater",CHAN_6,vol);
+			break;
+		}
 	}
 
 	override void Tick()

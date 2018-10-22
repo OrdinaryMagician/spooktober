@@ -241,11 +241,11 @@ Class SpooktoberHandler : EventHandler
 			// seacat preset
 			hnd.gvars_out.grademul = (1.01,0.96,1.03);
 			hnd.gvars_out.gradepow = (0.96,1.08,0.87);
-			hnd.gvars_out.gradecol = (-0.21,-0.08,-0.23);
+			hnd.gvars_out.gradecol = (-0.14,-0.03,-0.19);
 			hnd.gvars_out.gradecolfact = -0.13;
-			hnd.gvars_out.gradesatmul = 0.98;
-			hnd.gvars_out.gradesatpow = 1.33;
-			hnd.gvars_out.gradevalmul = 0.92;
+			hnd.gvars_out.gradesatmul = 0.93;
+			hnd.gvars_out.gradesatpow = 1.13;
+			hnd.gvars_out.gradevalmul = 0.82;
 			hnd.gvars_out.gradevalpow = 1.21;
 			break;
 		}
@@ -507,6 +507,9 @@ Class SpooktoberHandler : EventHandler
 			SpooktoberUtil.GiveStartItems(mo);
 			break;
 		}
+		// footsteps!
+		if ( (level.levelnum == 1) || (level.levelnum == 14) || (level.levelnum == 19) )
+			mkFootstepMaker.AttachTo(mo);
 		if ( level.levelnum != 1 ) return;
 		// adjust player size (too lazy to rescale map itself)
 		let d = GetDefaultByType(mo.GetClass());
@@ -514,8 +517,6 @@ Class SpooktoberHandler : EventHandler
 		mo.scale = d.scale*1.4;
 		mo.player.viewheight = mo.viewheight = 65;
 		mo.viewbob = d.viewbob*0.5;
-		// footsteps!
-		mkFootstepMaker.AttachTo(mo);
 	}
 
 	override void NetworkProcess( ConsoleEvent e )

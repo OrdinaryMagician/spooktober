@@ -7,3 +7,8 @@ end
 	playrepeat misc/stnloop4
 	stopsound misc/adend60
 end
+
+:UnrealWoodPlatform
+	playrepeat misc/wlloop31
+	stopsound misc/wlend31
+end

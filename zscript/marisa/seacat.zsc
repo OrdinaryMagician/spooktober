@@ -34,7 +34,7 @@ Class mkSeacatFade : Actor
 				a = FRandom[Butterflies](0,360);
 				s = FRandom[Butterflies](0,radius);
 				spot = (cos(a),sin(a));
-				A_SpawnParticle("FF FF FF",SPF_FULLBRIGHT,50,8,0,spot.x*s,spot.y*s,l+FRandom[Butterflies](-4,4),FRandom[Butterflies](0.6,1.0)+spot.x*0.4,spot.y*0.4,0.8,startalphaf:al);
+				A_SpawnParticle("FF FF FF",SPF_FULLBRIGHT,50,8,0,spot.x*s,spot.y*s,l+FRandom[Butterflies](-4,4),accelx:FRandom[Butterflies](0.03,0.06)+spot.x*0.02,accely:spot.y*0.02,accelz:0.04,startalphaf:al);
 			}
 		}
 		if ( (i+=step) >= height ) Destroy();
@@ -71,47 +71,63 @@ Class mkDialogueSequence40 : mkDialogueSequence
 			StartText("$BEATDLG6");
 			break;
 		case 6:
+			EventHandler.SendNetworkEvent("setspeakerframe",3);
 			StartText("$BEATDLG7");
 			break;
 		case 7:
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
 			StartText("$BEATDLG8");
 			break;
 		case 8:
-			EventHandler.SendNetworkEvent("setspeakerframe",3);
+			EventHandler.SendNetworkEvent("setspeakerframe",5);
 			StartText("$BEATDLG9");
 			break;
 		case 9:
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			StartText("$BEATDLG10");
+			break;
+		case 10:
+			EventHandler.SendNetworkEvent("setspeakerframe",3);
+			StartText("$BEATDLG11");
+			break;
+		case 11:
 			EventHandler.SendNetworkEvent("setspeakerframe",8);
 			S_Sound("seacat/ahahawav",CHAN_VOICE,1.0,ATTN_NONE);
 			SetTextSpeed(2);
 			SetTextEffect(TE_SHIVER);
-			StartText("$BEATDLG10");
-			break;
-		case 10:
-			EventHandler.SendNetworkEvent("setspeakerframe",0);
-			SetTextSpeed(1);
-			SetTextEffect(TE_NONE);
-			StartText("$BEATDLG11");
-			break;
-		case 11:
-			EventHandler.SendNetworkEvent("setspeakerframe",3);
-			EventHandler.SendNetworkEvent("giveshotty");
 			StartText("$BEATDLG12");
 			break;
 		case 12:
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			SetTextSpeed(1);
+			SetTextEffect(TE_NONE);
 			StartText("$BEATDLG13");
 			break;
 		case 13:
-			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			EventHandler.SendNetworkEvent("setspeakerframe",3);
+			EventHandler.SendNetworkEvent("giveshotty");
 			StartText("$BEATDLG14");
 			break;
 		case 14:
-			EventHandler.SendNetworkEvent("setspeakerframe",8);
-			SetTextSpeed(2);
-			SetTextEffect(TE_SHIVER);
 			StartText("$BEATDLG15");
 			break;
 		case 15:
+			StartText("$BEATDLG16");
+			break;
+		case 16:
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			StartText("$BEATDLG17");
+			break;
+		case 17:
+			StartText("$BEATDLG18");
+			break;
+		case 18:
+			EventHandler.SendNetworkEvent("setspeakerframe",8);
+			SetTextSpeed(2);
+			SetTextEffect(TE_SHIVER);
+			StartText("$BEATDLG19");
+			break;
+		case 19:
 			EventHandler.SendNetworkEvent("setspeakerframe",1);
 			S_Sound("seacat/ahahawav",CHAN_VOICE,1.0,ATTN_NONE);
 			EventHandler.SendNetworkEvent("activategoats");
@@ -130,33 +146,38 @@ Class mkDialogueSequence41 : mkDialogueSequence
 		case 0:
 			SetHeader("$BEATHDR");
 			EventHandler.SendNetworkEvent("setspeakerframe",2);
-			StartText("$BEATDLG16");
+			StartText("$BEATDLG20");
 			break;
 		case 1:
 			EventHandler.SendNetworkEvent("setspeakerframe",6);
-			StartText("$BEATDLG17");
+			StartText("$BEATDLG21");
 			break;
 		case 2:
-			StartText("$BEATDLG18");
+			StartText("$BEATDLG22");
 			break;
 		case 3:
 			EventHandler.SendNetworkEvent("setspeakerframe",7);
-			StartText("$BEATDLG19");
+			StartText("$BEATDLG23");
 			break;
 		case 4:
 			EventHandler.SendNetworkEvent("setspeakerframe",4);
-			StartText("$BEATDLG20");
+			StartText("$BEATDLG24");
 			break;
 		case 5:
 			EventHandler.SendNetworkEvent("setspeakerframe",2);
-			StartText("$BEATDLG21");
+			StartText("$BEATDLG25");
 			break;
 		case 6:
-			EventHandler.SendNetworkEvent("setspeakerframe",9);
-			S_Sound("seacat/redtext",CHAN_WEAPON,1.0,ATTN_NONE);
-			StartText("$BEATDLG22");
+			EventHandler.SendNetworkEvent("setspeakerframe",0);
+			StartText("$BEATDLG26");
 			break;
 		case 7:
+			EventHandler.SendNetworkEvent("setspeakerframe",9);
+			SetTextSpeed(0);
+			S_Sound("seacat/redtext",CHAN_WEAPON,1.0,ATTN_NONE);
+			StartText("$BEATDLG27");
+			break;
+		case 8:
 			EventHandler.SendNetworkEvent("setspeakerframe",1);
 			S_Sound("seacat/ahahawav",CHAN_VOICE,1.0,ATTN_NONE);
 			EventHandler.SendNetworkEvent("secret05exit");
@@ -200,7 +221,7 @@ Class mkBeatrice : Actor
 			if ( score == 41 )
 				frame = 4;
 		}
-		BEAT # 1 A_FadeIn(0.08,FTF_CLAMP);
+		BEAT # 1 A_FadeIn(0.02,FTF_CLAMP);
 		BEAT # 0 A_JumpIf(alpha>=1,1);
 		Goto Spawn+2;
 		BEAT # -1;
@@ -211,7 +232,7 @@ Class mkBeatrice : Actor
 			let s = Spawn("mkSeacatFade");
 			s.target = self;
 		}
-		BEAT # 1 A_FadeOut(0.08);
+		BEAT # 1 A_FadeOut(0.02);
 		Wait;
 	Cache:
 		BEAT ABCDEFGHI 0;
@@ -1001,15 +1022,24 @@ Class mkSecret05FallEffect : Thinker
 	override void Tick()
 	{
 		Super.Tick();
-		victim.A_SetBlend("70 20 A0",min(1,tcnt/35.),1);
 		if ( victim.Health <= 0 )
 		{
 			if ( !victim.player ) Destroy();
 			return;
 		}
+		victim.A_SetBlend("70 20 A0",min(1,tcnt/35.),35);
 		tcnt++;
-		if ( tcnt >= 50 )
+		if ( tcnt >= 60 )
+		{
 			victim.DamageMobj(null,null,int.max,'Void',DMG_FORCED|DMG_THRUSTLESS);
+			if ( victim.player )
+			{
+				// gay seacat babby jail
+				victim.SetOrigin((0,-1664,0),false);
+				victim.vel *= 0;
+				victim.player.vel *= 0;
+			}
+		}
 	}
 }
 
@@ -1034,6 +1064,66 @@ Class mkSecret05FallHandler : Actor
 	Default
 	{
 		//$Title SECRET05 Fall Handler
+		//$Category Marisa Kirisame
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+	}
+}
+
+Class mkSecret05OutsideWind : Actor
+{
+	double vol;
+
+	override void Tick()
+	{
+		Super.Tick();
+		let s = players[consoleplayer].mo.CurSector;
+		if ( (s.GetTexture(0) == skyflatnum) || (s.GetTexture(1) == skyflatnum) )
+			vol = min(0.5,vol+0.01);
+		else
+			vol = max(0,vol-0.01);
+		A_SoundVolume(CHAN_BODY,vol);
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		A_PlaySound("seacat/flangestorm",CHAN_BODY,0.001,true,ATTN_NONE);
+	}
+
+	Default
+	{
+		//$Title SECRET05 Outside Wind
+		//$Category Marisa Kirisame
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+	}
+}
+
+Class mkSecret05ProximityTrigger : Actor
+{
+	transient ThinkerIterator ti;
+
+	override void Tick()
+	{
+		Super.Tick();
+		if ( !ti ) ti = ThinkerIterator.Create("PlayerPawn");
+		else ti.Reinit();
+		Actor a;
+		while ( a = Actor(ti.Next()) )
+		{
+			if ( Distance2D(a) > score ) continue;
+			level.ExecuteSpecial(special,a,null,false,args[0],args[1],args[2],args[3],args[4]);
+			Destroy();
+			return;
+		}
+	}
+
+	Default
+	{
+		//$Title SECRET05 Proximity Trigger
 		//$Category Marisa Kirisame
 		+NOBLOCKMAP;
 		+NOGRAVITY;

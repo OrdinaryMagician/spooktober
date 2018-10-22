@@ -126,45 +126,57 @@ BEATDLG2 = "Well... if it isn't the bloodthirsty beast that's been \"ripping and
 BEATDLG3 = "You're quite infamous, you know... My servants break in cold sweat at the sound of your name.";
 BEATDLG4 = "But, enough about you. How about I introduce myself?";
 // set frame D
-BEATDLG5 = "I am \cxBeatrice\c-, the Endless Witch who has lived a thousand years, and has absolute power over life and death!";
+BEATDLG5 = "I am \cxBeatrice\c-, the Endless Witch who has lived for a thousand years!";
 // set frame A
-BEATDLG6 = "And of course, as you may have guessed already, I can also command the legions of hell to do my bidding.";
-BEATDLG7 = "Now... Don't take this personally, but you're kind of a thorn on my side.";
-BEATDLG8 = "I could just break you over and over again right here, right now, but that's just too easy...";
+BEATDLG6 = "With my powers I can kill and resurrect as many times as I please.";
 // set frame D
-BEATDLG9 = "Instead, I think it'd be more entertaining to watch how my most precious goats tear you to shreds and eat you up for dinner!";
+BEATDLG7 = "Life... death... they no longer have any meaning to me!";
+// set frame A
+BEATDLG8 = "And... of course, as you may have guessed already, I can also command the legions of hell to do my bidding.";
+// set frame F
+BEATDLG9 = "Now... Don't take this personally, but you're kind of a thorn on my side. With you around, my servants haven't been performing as well...";
+// set frame A
+BEATDLG10 = "I could just break you over and over again right here, right now... But that's just too easy.";
+// set frame D
+BEATDLG11 = "I think it'd be more entertaining to watch how my most precious goats tear you to shreds and eat you up for dinner!";
 // set frame I
 // play ahaha.wav
-BEATDLG10 = "Oh yes... that would be PERFECT! This fragment you've stepped into will soon be showered with your entrails! How absolutely delightful!";
+BEATDLG12 = "Yes, it's PERFECT! This fragment you've stepped into will soon be showered with your entrails! How absolutely delightful!";
 // set frame A
-BEATDLG11 = "But it wouldn't be fun if you don't at least put up some resistance, so...";
+BEATDLG13 = "But... without you having at least the slightest chance of victory it wouldn't be fun, so...";
 // set frame D
 // give model 1887
-BEATDLG12 = "Here! I'm feeling generous tonight. It's not quite the \"boomstick\" you're known to carry around, but it'll do.";
-BEATDLG13 = "It used to belong to an \cdold fool\c- who though he could get away from me after borrowing ten tons of gold.";
+BEATDLG14 = "Here! I'm feeling generous tonight. It's not quite the \"boomstick\" you're known to carry around, but it'll do.";
+BEATDLG15 = "This used to belong to an \cdold fool\c- who though he could get away from me after borrowing ten tons of gold.";
+BEATDLG16 = "Now he's nothing more than charred, crushed bones. Buried under the ruins of his pretty mansion.";
 // set frame A
-BEATDLG14 = "Oh... and before I forget...";
+BEATDLG17 = "... that's enough reminiscing for now. The goats are getting impatient, so I'll take my leave.";
+BEATDLG18 = "Oh... and before I forget...";
 // set frame I
-BEATDLG15 = "HAPPY HALLOWEEEEEEEEEEEEEEEN~~~!!!!!";
+BEATDLG19 = "HAPPY HALLOWEEEEEEEEEEEEEEEN~~~!!!!!";
 // set frame B
 // <insert ahaha.wav here>
 // begin goat invasion
 
 // Defeat
 // set frame C
-BEATDLG16 = "...";
-// set frame G
-BEATDLG17 = "You... What ARE you!?!?";
-BEATDLG18 = "Not ever in my thousand years as a witch have I seen someone like you! Are you even human!?";
-// set frame H
-BEATDLG19 = "Well... whatever... I admit my defeat. I never expected something like this could happen...";
-// set frame E
 BEATDLG20 = "...";
+// set frame G
+BEATDLG21 = "You... What ARE you!?!?";
+BEATDLG22 = "Not ever in my thousand years as a witch have I seen someone like you! Are you even human!?";
+// set frame H
+BEATDLG23 = "Well... whatever... I admit my defeat. I never expected something like this could happen...";
+// set frame E
+BEATDLG24 = "...";
 // set frame C
-BEATDLG21 = "You monster...";
+BEATDLG25 = "You monster...";
+// set frame E
+BEATDLG26 = "...";
+// set frame A
+BEATDLG26 = ". . .";
 // set frame J
 // <say it in red>
-BEATDLG22 = "\cgYOUR PET RABBIT WILL NEVER COME BACK\c-";
+BEATDLG27 = "\cgYOUR PET RABBIT WILL NEVER COME BACK\c-";
 // set frame B
 // <insert ahaha.wav here>
 // fade away, end map

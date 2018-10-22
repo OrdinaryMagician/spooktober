@@ -84,7 +84,10 @@ DoomEdNums
 	6480 = mkTopFlare
 	6481 = mkDimCube
 	6482 = mkSecret05FallHandler
+	6483 = mkSecret05OutsideWind
+	6484 = mkSecret05ProximityTrigger
 }
+
 // Pixel Eater
 DoomEdNums
 {

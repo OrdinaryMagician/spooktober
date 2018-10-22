@@ -25,6 +25,8 @@ misc/wind5 wind21
 misc/uquake quake31
 misc/stnloop4 stnloop4
 misc/adend60 adend60
+misc/wlloop31 wlloop31
+misc/wlend31 wlend31
 // from other sources
 misc/scase1 dsshell1
 misc/scase2 dsshell2
@@ -39,8 +41,11 @@ goat/hit axe5
 goat/hitwall hamwal1
 goat/thump dsthump
 tim/grunt timgrunt
+misc/voice dlgvoice
+$limit misc/voice 32
 // from .blank
 misc/bossvoice bvoice
+$limit misc/bossvoice 32
 // from .flow
 misc/lka lka
 $musicvolume D_MIRROR 0.35
