@@ -1074,23 +1074,30 @@ Class mkSecret05FallHandler : Actor
 
 Class mkSecret05OutsideWind : Actor
 {
-	double vol;
+	double vol, gvol;
 
 	override void Tick()
 	{
 		Super.Tick();
 		let s = players[consoleplayer].mo.CurSector;
 		if ( (s.GetTexture(0) == skyflatnum) || (s.GetTexture(1) == skyflatnum) )
-			vol = min(0.5,vol+0.01);
+			vol = min(1,vol+0.01);
 		else
 			vol = max(0,vol-0.01);
-		A_SoundVolume(CHAN_BODY,vol);
+		A_SoundVolume(CHAN_5,vol*0.5);
+		A_SoundVolume(CHAN_6,(1-vol)*0.5*gvol);
+		if ( args[0] )
+			gvol = max(0,gvol-0.04);
+		else
+			gvol = min(1,gvol+0.04);
 	}
 
 	override void PostBeginPlay()
 	{
 		Super.PostBeginPlay();
-		A_PlaySound("seacat/flangestorm",CHAN_BODY,0.001,true,ATTN_NONE);
+		gvol = 1;
+		A_PlaySound("seacat/flangestorm",CHAN_5,0.001,true,ATTN_NONE);
+		A_PlaySound("seacat/wind",CHAN_6,0.001,true,ATTN_NONE);
 	}
 
 	Default

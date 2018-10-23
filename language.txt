@@ -14,7 +14,7 @@ HUBD_17 = "Once my brothers and I are all reunited, we should be able to draw ou
 // Dialogue exhausted
 HUBD_18 = "There is great evil within these walls...";
 // Unlocked West Wing
-HUBD_19 = "The \cdwest wing\c- is clear. \cmBrother James\c- should be somewhere around.";
+HUBD_19 = "The \cdwest wing\c- is clear. \cmBrother James\c- and \csBrother Ramone\c- should be somewhere around.";
 // Dialogue exhausted
 HUBD_110 = "I haven't seen such a wild storm in years...";
 // Unlocked East Wing
@@ -31,21 +31,23 @@ HUBD_116 = "I can feel a great surge of power down in the \cdbasement\c-. The fi
 HUBD_117 = "We will go on ahead and reunite with \ceBrother Alfred\c-. It's time to get to the bottom of this...";
 // Moved to Basement
 HUBD_118 = "The final painting... So this is where he's hiding...";
-HUBD_119 = "Well, I'm sure you are eager to confront the beast, so let's not waste any time.";
+HUBD_119 = "We appear to be one man short. I suppose \csBrother Ramone\c- didn't make it, then...";
+HUBD_120 = "Well, I'm sure you are eager to confront the beast, so let's not waste any time.";
 // Dialogue exhausted
-HUBD_120 = "Good luck, friend...";
+HUBD_121 = "Good luck, friend...";
 // All Clear
-HUBD_121 = "It is done, then... Many thanks, friend. We would have long perished without your help.";
+HUBD_122 = "It is done, then... Many thanks, friend. We would all have long perished without your help.";
+HUBD_123 = "We shall pray for \csBrother Ramone\c-, and hope he may be rewarded in Heaven for his bravery.";
 // Dialogue exhausted
-HUBD_122 = "Farewell, and good luck in your future endeavors.";
+HUBD_124 = "Farewell, and good luck in your future endeavors.";
 
 HUBD_2 = "\cmBrother James\c-";
 // Initial
 HUBD_21 = "You broke the barrier? Thank you.";
 // Part 2
-HUBD_22 = "Something really isn't right with this place. It's not just the obvious fact that it's cursed, though.";
-HUBD_23 = "I am sure you've noticed it too. This house feels... unnatural.";
-HUBD_24 = "Whoever created it surely did not know what a house is supposed to look like!";
+HUBD_22 = "Something really isn't right with this place. It's not just the obvious fact that it's cursed, though. I am sure you've noticed it too.";
+HUBD_23 = "This house feels... unnatural. Whoever created it surely did not know what a house is supposed to look like! \csBrother Ramone\c- thought so too...";
+HUBD_24 = "He went off to check out that \cdhideous screaming painting\c-, fearless as he is. Though he probably didn't stand a chance against those fiends...";
 // Dialogue exhausted
 HUBD_25 = "There sure is nothing like warming up next to a fireplace in a rainy night...";
 // Unlocked East Wing

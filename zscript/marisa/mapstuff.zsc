@@ -192,6 +192,9 @@ Class mkDialogueSequence10 : mkDialogueSequence
 			StartText("$HUBD_119");
 			break;
 		case 2:
+			StartText("$HUBD_120");
+			break;
+		case 3:
 			EventHandler.SendNetworkEvent("dispelbosspainting");
 			EndSeq(11);
 			break;
@@ -207,7 +210,7 @@ Class mkDialogueSequence11 : mkDialogueSequence
 		{
 		case 0:
 			SetHeader("$HUBD_1");
-			StartText("$HUBD_120");
+			StartText("$HUBD_121");
 			break;
 		case 1:
 			EndSeq(11);
@@ -224,9 +227,13 @@ Class mkDialogueSequence12 : mkDialogueSequence
 		{
 		case 0:
 			SetHeader("$HUBD_1");
-			StartText("$HUBD_121");
+			StartText("$HUBD_122");
 			break;
 		case 1:
+			SetHeader("$HUBD_1");
+			StartText("$HUBD_123");
+			break;
+		case 2:
 			EndSeq(13);
 			break;
 		}
@@ -241,7 +248,7 @@ Class mkDialogueSequence13 : mkDialogueSequence
 		{
 		case 0:
 			SetHeader("$HUBD_1");
-			StartText("$HUBD_122");
+			StartText("$HUBD_124");
 			break;
 		case 1:
 			EndSeq(13);

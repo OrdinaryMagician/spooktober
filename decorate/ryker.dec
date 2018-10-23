@@ -1,0 +1,9 @@
+ACTOR DeadRMonk 26500
+{
+    States
+    {
+    Spawn:
+        RMNK F -1
+        Stop
+    }
+}

@@ -76,6 +76,7 @@ seacat/rainloop rain4l
 seacat/z1 z1
 $limit seacat/z1 32
 seacat/redtext redtext
+seacat/wind a5_14446
 // from thief
 thief/firelp1	FIRELP1
 thief/firelp8	FIRELP8

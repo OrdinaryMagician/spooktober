@@ -14,7 +14,7 @@ A Halloween 2018 map pack for Doom.
 
 ### Current status
 
-Maps completed: 6 / 19
+Maps completed: 7 / 19
 Slots taken: 18 / 19
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
@@ -23,7 +23,7 @@ Slots taken: 18 / 19
 - **SPOOK03**: Pumpkin Head - Pixel Eater
 - **SPOOK04**: Untitled Map - zrrion the insect
 - **SPOOK05**: The Unpowered Spaceship - CanSteam [completed]
-- **SPOOK06**: Avarice - UndeadRyker
+- **SPOOK06**: Avarice - UndeadRyker [completed]
 - **SPOOK07**: Untitled Map - A.Gamma
 - **SPOOK08**: The Graveyard Shift - Batandy [completed]
 - **SPOOK09**: Untitled Map - Camper125Lv
