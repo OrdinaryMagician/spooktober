@@ -1023,6 +1023,11 @@ Class mkSecret05FallEffect : Thinker
 	override void Tick()
 	{
 		Super.Tick();
+		if ( victim.pos.z > -240 )
+		{
+			Destroy();
+			return;
+		}
 		if ( victim.Health <= 0 )
 		{
 			if ( !victim.player ) Destroy();
@@ -1057,7 +1062,7 @@ Class mkSecret05FallHandler : Actor
 		while ( a = Actor(ti.Next()) )
 		{
 			if ( !a.player && !a.bISMONSTER ) continue;
-			if ( a.pos.z <= -128 )
+			if ( a.pos.z < -240 )
 				mkSecret05FallEffect.AttachTo(a);
 		}
 	}
