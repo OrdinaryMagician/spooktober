@@ -35,4 +35,4 @@ Slots taken: 18 / 19
 - **SECRET02**: Abandoned Warehouse - CardBoxNeko
 - **SECRET03**: The Crimson Flow - Rachael [completed]
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz
-- **SECRET05**: Golden Slaughterer - Marisa Kirisame (might not make the cut, but I'm keeping note of it here)
+- **SECRET05**: Golden Slaughterer - Marisa Kirisame
