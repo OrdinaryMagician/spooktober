@@ -1,8 +1,24 @@
 //////// UndeadRyker
 sjas/act_distant SJAS01
 
+
 //////// Marisa
 $pitchshiftrange 0
+
+// diabolist
+monster/diasit dsdiasit
+monster/diapai dsdiapai
+monster/diadth dsdiadth
+monster/diaact dsdiaact
+weapons/firbfi dsfirbfi
+weapons/firmfi dsfirmfi
+weapons/firex4 dsfirex4
+weapons/diasht dsdiasht
+weapons/firex3 dsfirex3
+
+ClericFlameFire         dshellfi
+ClericFlameExplode      dshellex
+ClericFlameCircle       dsfirex5
 
 // from unreal
 rain/rain rainM1

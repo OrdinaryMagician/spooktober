@@ -1,1 +1,4 @@
 #include "decorate/batandy.dec"
+
+// for Giraffe Man's map
+#include "decorate/diabolist.dec"

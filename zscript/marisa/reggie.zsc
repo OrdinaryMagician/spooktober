@@ -1,0 +1,141 @@
+// For Giraffe Man's map
+
+Class mkDialogueSequence42 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$REGGHDR");
+			StartText("$REGGDLG1");
+			break;
+		case 1:
+			StartText("$REGGDLG2");
+			break;
+		case 2:
+			StartText("$REGGDLG3");
+			break;
+		case 3:
+			EventHandler.SendNetworkEvent("reggiedropcan");
+			StartText("$REGGDLG4");
+			break;
+		case 4:
+			EventHandler.SendNetworkEvent("reggiemorph");
+			EndSeq(0);
+			break;
+		}
+	}}
+
+Class mkBeerCan : ShotShellC
+{
+	Default
+	{
+		BounceSound "";
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		roll = -90;
+	}
+	States
+	{
+	Spawn:
+		BCAN A 1 A_SetRoll(roll+invoker.rollvel);
+		Wait;
+	Bounce:
+		BCAN A 0 { invoker.rollvel = FRandom[Junk](10,30)*RandomPick[Junk](-1,1); }
+		Goto Spawn;
+	Death:
+		BCAN A -1 A_SetRoll(FRandom[Junk](-5,5)+RandomPick[Junk](0,180));
+		Stop;
+	}
+}
+
+Class mkUncleReggie : Actor
+{
+	override bool Used( Actor user )
+	{
+		Activate(user);
+		return true;
+	}
+
+	void A_DropCan()
+	{
+		Vector3 offset = (0,0,24);
+		offset.xy = RotateVector((0,12),angle);
+		let s = Spawn("mkBeerCan",Vec3Offset(offset.x,offset.y,offset.z));
+		s.vel.xy = RotateVector((0.2,0.8),angle);
+	}
+
+	override void Activate( Actor activator )
+	{
+		if ( !InStateSequence(CurState,FindState("Spawn")) ) return;
+		target = activator;
+		mkDialogueHandler.StartDialogueSequence(self,activator,42);
+		SetStateLabel("Dialogue");
+	}
+
+	Default
+	{
+		//$Title Uncle Reggie
+		//$Category Marisa Kirisame
+		RenderStyle "Translucent";
+		Activation THINGSPEC_NoDeathSpecial;
+		Radius 16;
+		Height 56;
+		+SOLID;
+	}
+	States
+	{
+	Spawn:
+		REGG A -1;
+		Stop;
+	Dialogue:
+		REGG A -1;
+		Stop;
+	DropCan:
+		REGG B -1 A_DropCan();
+		Stop;
+	Morph:
+		REGG C 50 A_QuakeEx(1,1,1,50,0,1200,flags:QF_RELATIVE|QF_SCALEUP,falloff:600);
+		REGG C 0
+		{
+			tracer = Spawn("Diabolist",pos);
+			tracer.scale = (1.0,0.7);
+			tracer.Deactivate(target);
+			tracer.angle = angle;
+			tracer.bSHOOTABLE = false;
+			tracer.special = special;
+			tracer.args[0] = args[0];
+			tracer.args[1] = args[1];
+			tracer.args[2] = args[2];
+			tracer.args[3] = args[3];
+			tracer.args[4] = args[4];
+			tracer.A_SetRenderStyle(0.0,STYLE_Translucent);
+			A_QuakeEx(1,1,1,50,0,1200,flags:QF_RELATIVE,falloff:600);
+		}
+		REGG C 1
+		{
+			tracer.A_FadeIn(0.02);
+			tracer.angle = AngleTo(target);
+			A_FadeOut(0.02,0);
+			tracer.scale.x += 0.01;
+			tracer.scale.y += 0.016;
+			scale.x += 0.01;
+			scale.y += 0.026;
+			return A_JumpIf(alpha<=0,1);
+		}
+		Wait;
+		TNT1 A 20 A_QuakeEx(1,1,1,30,0,1200,flags:QF_RELATIVE|QF_SCALEDOWN,falloff:600);
+		TNT1 A 0
+		{
+			tracer.A_SetRenderStyle(1.0,STYLE_Normal);
+			tracer.scale = (1.5,1.5);
+			tracer.bSHOOTABLE = true;
+			tracer.target = target;
+			tracer.Activate(target);
+		}
+		Stop;
+	}
+}

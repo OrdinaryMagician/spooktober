@@ -837,7 +837,7 @@ Class mkGoatServant : Actor
 }
 
 // based on realm667 weapon
-Class ShotShellC : DoomWeapon
+Class ShotShellC : Actor
 {
 	int deadtimer;
 	double rollvel;

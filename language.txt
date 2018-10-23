@@ -114,11 +114,16 @@ BOSSDLG4 = "NOW, THANKS TO YOU I AM FREE AGAIN... FREE TO DESTROY THE WORLD!";
 BOSSDLG5 = "OH... DO YOU REALLY THINK YOU CAN STOP ME? I DARE YOU... I DARE YOU TO EVEN TRY!";
 
 // SECRET01 Dialogues
-REGGHDR = "\cbUncle Reggie\c-";
+REGGHDR = "\coUncle Reggie\c-";
+// Initial
+REGGDLG1 = "I see you've made it out of my basement, boy.";
+REGGDLG2 = "You know, you're real persistent. But you really expect me to just let you go now?";
+REGGDLG3 = "Well, boy. If you won't play fair, then why should I?";
+REGGDLG4 = "Now, get ready for the whoppin' of a lifetime, boy, cause I ain't holding back!";
 
 // SECRET05 Dialogues
-BEATHDR = "\cxBeatrice\c-";
 
+BEATHDR = "\cxBeatrice\c-";
 // Initial
 // set frame A
 BEATDLG1 = "Hooooh? What do we have here?";

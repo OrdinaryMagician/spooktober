@@ -390,6 +390,10 @@ Class mkDialogueHandler : EventHandler
 		}
 		else if ( e.Name ~== "secret05exit" )
 			level.ExecuteSpecial(80,null,null,false,2);
+		else if ( e.Name ~== "reggiedropcan" )
+			speaker.SetStateLabel("DropCan");
+		else if ( e.Name ~== "reggiemorph" )
+			speaker.SetStateLabel("Morph");
 	}
 
 	static void StartDialogueSequence( Actor speaker, Actor speakee, int seqnum, bool bOrientSpeaker = true, bool bOrientSpeakee = true )

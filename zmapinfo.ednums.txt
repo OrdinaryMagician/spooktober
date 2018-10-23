@@ -86,6 +86,7 @@ DoomEdNums
 	6482 = mkSecret05FallHandler
 	6483 = mkSecret05OutsideWind
 	6484 = mkSecret05ProximityTrigger
+	6485 = mkUncleReggie
 }
 
 // Pixel Eater
