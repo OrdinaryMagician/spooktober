@@ -1,9 +1,9 @@
-ETHEREAL, CRUNATUS, OCCULT, SIMPLE, D_SPKHUB, ORGANIC, SILVREYE : Original compositions by SpeedySPCFan
+ethereal, crunatus, occult, simple, D_SPKHUB, organic, silvreye, orchest : Original compositions by SpeedySPCFan
 D_NARENA, D_NTLORD : Dummied out Dark Souls 3 tracks
 D_DDOOR, D_BEATO, D_GSLTR, D_WALTZ : "At Death's Door", "Organ Short #600 Million in C Minor", "Goldenslaughterer", "String Quartet #1 in G Major - I.Allegro" from Umineko
 D_MIRROR : Edited version of Smile's Theme from .flow
 D_DEEP : Deep Red theme
-THANTOS : Planet Thantos - Yasunori Mitsuda
 C9_DARK : Dark Clouds - C9-La Creme
 CDE-WINT : Winter Frontiers - CDE
-MIKEMYER : Halloween main theme
+VANDNBRG : Vandenburg Airfield from Deus Ex
+STEPS, DRIPS, MONSTER : Tracks from Alone in the Dark series

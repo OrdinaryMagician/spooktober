@@ -14,8 +14,8 @@ A Halloween 2018 map pack for Doom.
 
 ### Current status
 
-Maps completed: 7 / 19
-Slots taken: 18 / 19
+Maps completed: 8 / 19
+Slots taken: 19 / 19
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
 - **SPOOK01**: Untitled Map - Jaxxoon R
@@ -29,7 +29,7 @@ Slots taken: 18 / 19
 - **SPOOK09**: Untitled Map - Camper125Lv
 - **SPOOK10**: Untitled Map - Rachael
 - **SPOOK11**: Large House of Illusions - leodoom85
-- **SPOOK12**: *Free Slot*
+- **SPOOK12**: Alone in the Dark - ImpieTwo [completed]
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame [completed]
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man
 - **SECRET02**: Abandoned Warehouse - CardBoxNeko

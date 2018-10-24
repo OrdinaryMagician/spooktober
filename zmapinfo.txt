@@ -111,6 +111,7 @@ Map SPOOK11 lookup "SP_SPOOK11"
 Map SPOOK12 lookup "SP_SPOOK12"
 {
 	levelnum = 13
+	sky1 = "AITDSky"
 }
 
 Map SPOOK13 lookup "SP_SPOOK13"

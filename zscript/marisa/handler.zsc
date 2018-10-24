@@ -140,6 +140,51 @@ Class SpooktoberGlobals : Thinker
 	}
 }
 
+// replacer for maps that use it
+class SpooktoberBossBrain : BossBrain
+{
+	void A_BrainDieAlt()
+	{
+		// [RH] If noexit, then don't end the level.
+		if ( (deathmatch || alwaysapplydmflags) && sv_noexit )
+			return;
+		// New dmflag: Kill all boss spawned monsters before ending the level.
+		if ( sv_killbossmonst )
+		{
+			int count;	// Repeat until we have no more boss-spawned monsters.
+			ThinkerIterator it = ThinkerIterator.Create("Actor");
+			do			// (e.g. Pain Elementals can spawn more to kill upon death.)
+			{
+				Actor mo;
+				it.Reinit();
+				count = 0;
+				while ( mo = Actor(it.Next()) )
+				{
+					if ( mo.health > 0 && mo.bBossSpawned )
+					{
+						mo.DamageMobj(self,self,mo.health,'None',DMG_NO_ARMOR|DMG_FORCED|DMG_THRUSTLESS|DMG_NO_FACTOR);
+						// [Blue Shadow] If 'mo' is a RandomSpawner or another actor which can't be killed,
+						// it could cause this code to loop indefinitely. So only let it trigger a loop if it
+						// has been actually killed.
+						if (mo.bKilled) count++;
+					}
+				}
+			} while ( count != 0 );
+		}
+		//Exit_Normal(0);
+		level.ExecuteSpecial(80,target,null,false,-int('MapFadeOut'));
+	}
+
+	States
+	{
+	Death:
+		BBRN A 100 A_BrainScream();
+		BBRN AA 10;
+		BBRN A -1 A_BrainDieAlt();
+		Stop;
+	}
+}
+
 Struct marifx_gradingvars
 {
 	Vector3 grademul, gradepow, gradecol;
@@ -169,6 +214,11 @@ Class SpooktoberHandler : EventHandler
 
 	override void CheckReplacement( ReplaceEvent e )
 	{
+		if ( e.Replacee == 'BossBrain' )
+		{
+			e.Replacement = 'SpooktoberBossBrain';
+			return;
+		}
 		if ( e.Replacee != 'mkNightmareLord' ) return;
 		switch ( G_SkillPropertyInt(SKILLP_ACSReturn) )
 		{

@@ -191,7 +191,7 @@ BEATDLG27 = "\cgYOUR PET RABBIT WILL NEVER COME BACK\c-";
 // Map Names
 // stored here so the map scripts have easy access to them
 SP_HUB = "Gallery Of Spooks - by: Marisa Kirisame";
-SP_SPOOK01 = "Untitled - by: N/A";
+SP_SPOOK01 = "Untitled - by: Jaxxoon R";
 SP_SPOOK02 = "A Baron's Nightmare - by: Rachael";
 SP_SPOOK03 = "Pumpkin Head - by: Pixel Eater";
 SP_SPOOK04 = "Untitled - by: zrrion the insect";
@@ -200,9 +200,9 @@ SP_SPOOK06 = "Avarice - by: UndeadRyker";
 SP_SPOOK07 = "Untitled - by: A.Gamma";
 SP_SPOOK08 = "The Graveyard Shift - by: Batandy";
 SP_SPOOK09 = "Untitled - by: Camper125Lv";
-SP_SPOOK10 = "Untitled - by: N/A";
+SP_SPOOK10 = "Untitled - by: Rachael";
 SP_SPOOK11 = "Large House of Illusions - by: leodoom85";
-SP_SPOOK12 = "Untitled - by: N/A";
+SP_SPOOK12 = "Alone in the Dark - by: ImpieTwo";
 SP_SPOOK13 = "\ctNightmare Fuel Arena\c- - by: Marisa Kirisame";
 SP_SECRET01 = "\cdUncle Reggie's Basement\c- - by: Giraffe Man";
 SP_SECRET02 = "\cuAbandoned Warehouse\c- - by: CardBoxNeko";
@@ -231,7 +231,8 @@ SP_AUTHOR12 = "CanSteam";
 SP_AUTHOR13 = "SpeedySPCFan";
 SP_AUTHOR14 = "Caligari87";
 SP_AUTHOR15 = "Jaxxoon R";
-SP_AUTHOR16 = "SLADE 3";
+SP_AUTHOR16 = "ImpieTwo";
+SP_AUTHOR17 = "SLADE 3";
 
 SP_TITLE0 = "Mapper, Scripter, Magician";
 SP_TITLE1 = "Mapper, Speedrunner";
@@ -249,7 +250,8 @@ SP_TITLE12 = "Mapper";
 SP_TITLE13 = "Composer";
 SP_TITLE14 = "Tester";
 SP_TITLE15 = "Mapper";
-SP_TITLE16 = "Program that crashes all the time";
+SP_TITLE16 = "Mapper";
+SP_TITLE17 = "Program that crashes all the time";
 
 SP_MESSAGE0 = "\"I'd say this surpasses my 20 Heretics map.\"";
 SP_MESSAGE1 = "";
@@ -267,4 +269,5 @@ SP_MESSAGE12 = "";
 SP_MESSAGE13 = "";
 SP_MESSAGE14 = "";
 SP_MESSAGE15 = "";
-SP_MESSAGE16 = "\"SLADE has crashed unexpectedly.\"";
+SP_MESSAGE16 = "";
+SP_MESSAGE17 = "\"SLADE has crashed unexpectedly.\"";
