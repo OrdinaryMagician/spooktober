@@ -471,7 +471,7 @@ Class mkLesserGoatServant : Actor
 			if ( CheckIfTargetInLOS(360) && (targetdist > 500) && (Random[Goat]() < 12) && A_LungeAtTarget(true) )
 			{
 				FLineTraceData d;
-				LineTrace(AngleTo(target),Vec2To(target).length(),0,TRF_SOLIDACTORS,height/2,0,0,data:d);
+				LineTrace(AngleTo(target),Vec2To(target).length(),0,TRF_SOLIDACTORS,16,0,0,data:d);
 				if ( (d.HitType == TRACE_HitNone) || ((d.HitType == TRACE_HitActor) && (d.HitActor == target)) )
 					return ResolveState("Lunge");
 			}
@@ -733,7 +733,7 @@ Class mkGoatServant : Actor
 				if ( CheckFall() )
 					return ResolveState(null);
 				FLineTraceData d;
-				LineTrace(AngleTo(target),Vec2To(target).length(),0,TRF_SOLIDACTORS,height/2,0,0,data:d);
+				LineTrace(AngleTo(target),Vec2To(target).length(),0,TRF_SOLIDACTORS,16,0,0,data:d);
 				if ( (d.HitType == TRACE_HitNone) || ((d.HitType == TRACE_HitActor) && (d.HitActor == target)) )
 					return ResolveState("Charge");
 			}
@@ -1658,8 +1658,8 @@ Class mkSecret05GoatInvasion : Actor
 		}
 		for ( int i=0; i<2; i++ )
 		{
-			if ( !Random[Seacat](0,2) ) SpawnAmmo();
-			else SpawnHealing();
+			if ( Random[Seacat](0,2) || !SpawnHealing() )
+				SpawnAmmo();
 		}
 		// open the gates once we've run out of goats for this wave
 		// at the last wave, do the exit special instead
