@@ -152,6 +152,7 @@ Map SECRET04 lookup "SP_SECRET04"
 Map SECRET05 lookup "SP_SECRET05"
 {
 	EvenLighting
+	Par = 780
 	Music = "D_DDOOR"
 	levelnum = 19
 	Sky1 = "Blk"

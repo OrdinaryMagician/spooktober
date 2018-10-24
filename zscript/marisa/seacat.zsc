@@ -34,7 +34,7 @@ Class mkSeacatFade : Actor
 				a = FRandom[Butterflies](0,360);
 				s = FRandom[Butterflies](0,radius);
 				spot = (cos(a),sin(a));
-				A_SpawnParticle("FF FF FF",SPF_FULLBRIGHT,50,8,0,spot.x*s,spot.y*s,l+FRandom[Butterflies](-4,4),accelx:FRandom[Butterflies](0.03,0.06)+spot.x*0.02,accely:spot.y*0.02,accelz:0.04,startalphaf:al);
+				A_SpawnParticle("FF FF FF",SPF_FULLBRIGHT,Random[Butterflies](30,50),8,0,spot.x*s,spot.y*s,l+FRandom[Butterflies](-4,4),accelx:FRandom[Butterflies](0.03,0.06)+spot.x*0.02,accely:spot.y*0.02,accelz:0.04,startalphaf:al);
 			}
 		}
 		if ( (i+=step) >= height ) Destroy();
@@ -306,14 +306,13 @@ Class mkLesserGoatServant : Actor
 	{
 		MONSTER;
 		-SHOOTABLE;
-		+DROPOFF;
-		+NOINFIGHTSPECIES;
+		+LOOKALLAROUND;
 		Species "LesserGoat";
 		RenderStyle "Translucent";
 		DamageFactor "Magic", 0;
 		DamageFactor "AntiMagic", 999999999;
 		Alpha 0;
-		Health 100;
+		Health 60;
 		PainChance 150;
 		Scale 0.8;
 		Radius 20;
@@ -332,10 +331,20 @@ Class mkLesserGoatServant : Actor
 		let s = Spawn("mkSeacatFade");
 		s.target = self;
 	}
+	// turns out it can not be blocking
+	bool BlockingLineIsBlocking()
+	{
+		if ( !BlockingLine ) return false;
+		// one-sided
+		if ( !BlockingLine.sidedef[1] ) return true;
+		// blocks us
+		if ( BlockingLine.flags&(Line.ML_BLOCKING|Line.ML_BLOCKMONSTERS|Line.ML_BLOCKEVERYTHING) ) return true;
+		return false;
+	}
 	void A_GoatAttack()
 	{
 		if ( !target || !CheckMeleeRange() ) return;
-		int damage = random[Goat](2,3)*3;
+		int damage = random[Goat](2,3)*2;
 		A_PlaySound("imp/melee",CHAN_WEAPON);
 		int newdam = target.DamageMobj(self,self,damage,'Melee');
 		target.TraceBleed(newdam>0?newdam:damage,self);
@@ -377,7 +386,7 @@ Class mkLesserGoatServant : Actor
 			gravity = 1.0;
 			return (spitch < 40);
 		}
-		angle = AngleTo(target);
+		A_FaceTarget(30);
 		vel = flyspeed*(cos(angle)*cos(spitch),sin(angle)*cos(spitch),sin(-spitch));
 		vel.z += 1;
 		for ( int i=0; i<360; i+=30 )
@@ -386,7 +395,6 @@ Class mkLesserGoatServant : Actor
 			p.vel.xy = (cos(i),sin(i))*5;
 		}
 		A_PlaySound("goat/thump",CHAN_7,0.5);
-		A_PlaySound(SeeSound,CHAN_VOICE);
 		return true;
 	}
 	void A_CheckLunge( bool alt = false )
@@ -400,25 +408,28 @@ Class mkLesserGoatServant : Actor
 		bool dummy;
 		Actor onmobj;
 		[dummy, onmobj] = TestMobjZ(true);
-		if ( !CheckMeleeRange() && !BlockingMobj && !BlockingLine && (pos.z > floorz) && !onmobj ) return;
+		if ( !CheckMeleeRange() && !BlockingMobj && !BlockingLineIsBlocking() && (pos.z > floorz) && !onmobj ) return;
 		gravity = 1;
 		Actor hitactor;
 		if ( CheckMeleeRange() ) hitactor = target;
 		else hitactor = BlockingMobj?BlockingMobj:onmobj;
-		if ( hitactor )
+		if ( hitactor && hitactor.bSOLID )
 		{
-			int dmg = Random[Goat](6,9)*2;
+			int dmg = Random[Goat](4,6);
 			if ( hitactor is 'mkGoatServant' ) dmg = 0;
-			hitactor.DamageMobj(self,self,dmg,'Slam',DMG_THRUSTLESS);
-			Vector3 dirto = Vec3To(hitactor).unit();
-			hitactor.vel.xy = dirto.xy*(1000./hitactor.mass);
-			hitactor.vel.z = (500./hitactor.mass);
+			if ( hitactor.bSHOOTABLE )
+			{
+				hitactor.DamageMobj(self,self,dmg,'Slam',DMG_THRUSTLESS);
+				Vector3 dirto = Vec3To(hitactor).unit();
+				hitactor.vel.xy = dirto.xy*(1000./hitactor.mass);
+				hitactor.vel.z = (500./hitactor.mass);
+			}
 			if ( !hitactor.bSHOOTABLE || hitactor.bNOBLOOD ) A_PlaySound("goat/hitwall",CHAN_6);
 			else A_PlaySound("goat/hit",CHAN_6);
 			if ( alt ) SetStateLabel("Melee2_");
 			else SetStateLabel("Melee__");
 		}
-		else if ( BlockingLine )
+		else if ( BlockingLineIsBlocking() )
 		{
 			A_PlaySound("goat/hitwall",CHAN_6);
 			vel.xy = RotateVector((-4,0),angle);
@@ -431,12 +442,20 @@ Class mkLesserGoatServant : Actor
 	States
 	{
 	Spawn:
-		LGOA A 1 A_FadeIn(0.02,FTF_CLAMP);
+		LGOA A 1 A_FadeIn(0.04,FTF_CLAMP);
 		LGOA A 0 A_JumpIf(alpha>=1,"Idle");
 		Loop;
 	Idle:
-		LGOA A 0 { bSHOOTABLE = true; }
-		LGOA A 1 A_Look();
+		LGOA A 0 { bSHOOTABLE = true; sct = 0; }
+		LGOA AABBCCDD 4
+		{
+			if ( !(sct%4) )
+				A_PlaySound("satyr/step",CHAN_7,0.4,false,2.0);
+			sct++;
+			A_Wander();
+			A_Look();
+		}
+		Goto Idle+1;
 		Wait;
 	See:
 		LGOA A 0 { sct = 0; }
@@ -446,6 +465,8 @@ Class mkLesserGoatServant : Actor
 				A_PlaySound("satyr/step",CHAN_7,0.4,false,2.0);
 			sct++;
 			A_Chase();
+			if ( !target || (target.Health <= 0) )
+				return ResolveState(null);
 			double targetdist = Vec2To(target).length();
 			if ( CheckIfTargetInLOS(360) && (targetdist > 500) && (Random[Goat]() < 12) && A_LungeAtTarget(true) )
 			{
@@ -458,9 +479,16 @@ Class mkLesserGoatServant : Actor
 		}
 		Goto See+1;
 	Lunge:
+		LGOA A 0
+		{
+			A_PlaySound(SeeSound,CHAN_VOICE);
+			A_FaceTarget();
+		}
+		LGOA AAA 5 A_FaceTarget(15);
+		LGOA A 0 A_Jump(128,"Lunge2");
 		LGOA F 5 A_LungeAtTarget();
 		LGOA E 1 A_CheckLunge();
-		Goto Lunge+1;
+		Goto Lunge+6;
 	Lunge2:
 		LGOA Q 5 A_LungeAtTarget();
 		LGOA P 1 A_CheckLunge(true);
@@ -499,21 +527,24 @@ Class mkLesserGoatServant : Actor
 			Actor hitactor;
 			if ( CheckMeleeRange() ) hitactor = target;
 			else hitactor = BlockingMobj;
-			if ( hitactor )
+			if ( hitactor && hitactor.bSOLID )
 			{
-				int dmg = Random[Goat](6,9);
+				int dmg = Random[Goat](3,5);
 				if ( hitactor is 'mkGoatServant' ) dmg = 0;
-				hitactor.DamageMobj(self,self,dmg,'Slam',DMG_THRUSTLESS);
-				Vector3 dirto = Vec3To(hitactor).unit();
-				hitactor.vel.xy = dirto.xy*(500./hitactor.mass);
-				hitactor.vel.z = (300./hitactor.mass);
+				if ( hitactor.bSHOOTABLE )
+				{
+					hitactor.DamageMobj(self,self,dmg,'Slam',DMG_THRUSTLESS);
+					Vector3 dirto = Vec3To(hitactor).unit();
+					hitactor.vel.xy = dirto.xy*(500./hitactor.mass);
+					hitactor.vel.z = (300./hitactor.mass);
+				}
 				if ( !hitactor.bSHOOTABLE || hitactor.bNOBLOOD ) A_PlaySound("goat/hitwall",CHAN_6);
 				else A_PlaySound("goat/hit",CHAN_6);
 				vel.xy = RotateVector((-4,0),angle);
 				vel.z = 3;
 				return ResolveState("Recoil");
 			}
-			if ( BlockingLine )
+			if ( BlockingLineIsBlocking() )
 			{
 				A_PlaySound("goat/hitwall",CHAN_6);
 				vel.xy = RotateVector((-4,0),angle);
@@ -560,13 +591,13 @@ Class mkLesserGoatServant : Actor
 		LGOA KL 4;
 		LGOA M 3 A_QuakeEx(2,2,2,10,0,300,"",QF_RELATIVE|QF_SCALEDOWN,falloff:100);
 		LGOA N 3 A_PlaySound("goat/thump",CHAN_7,0.5);
-		LGOA O 300;
+		LGOA O 120;
 		LGOA O 0
 		{
 			let s = Spawn("mkSeacatFade",pos);
 			s.target = self;
 		}
-		LGOA O 1 A_FadeOut(0.02);
+		LGOA O 1 A_FadeOut(0.04);
 		Wait;
 	}
 }
@@ -587,7 +618,7 @@ Class mkGoatServant : Actor
 		MONSTER;
 		-SHOOTABLE;
 		+NOINFIGHTSPECIES;
-		+DROPOFF;
+		+LOOKALLAROUND;
 		Species "Goat";
 		RenderStyle "Translucent";
 		DamageFactor "Magic", 0;
@@ -606,6 +637,25 @@ Class mkGoatServant : Actor
 		PainSound "knight/pain";
 		DeathSound "knight/death";
 		HitObituary "%o was torn to shreds by a goat servant.";
+	}
+	bool CheckFall()
+	{
+		// advanced stuff for checking if the goat will run into the void and die
+		Vector3 oldpos = pos;
+		double angdest = AngleTo(target);
+		Vector2 dir = (cos(angdest),sin(angdest));
+		for ( int i=0; i<25; i++ )
+		{
+			if ( !TryMove(Vec2Offset(dir.x*25,dir.y*25),int(maxdropoffheight)) )
+				break;
+			if ( floorpic == skyflatnum )
+			{
+				SetOrigin(oldpos,false);
+				return true;
+			}
+		}
+		SetOrigin(oldpos,false);
+		return false;
 	}
 	override void PostBeginPlay()
 	{
@@ -647,13 +697,23 @@ Class mkGoatServant : Actor
 	States
 	{
 	Spawn:
-		GOAT A 1 A_FadeIn(0.02,FTF_CLAMP);
+		GOAT A 1 A_FadeIn(0.04,FTF_CLAMP);
 		GOAT A 0 A_JumpIf(alpha>=1,"Idle");
 		Loop;
 	Idle:
-		GOAT A 0 { bSHOOTABLE = true; }
-		GOAT A 1 A_Look();
-		Wait;
+		GOAT A 0 { bSHOOTABLE = true; sct = 0; }
+		GOAT AABBCCDD 4
+		{
+			if ( !(sct%4) )
+			{
+				A_QuakeEx(3,3,3,8,0,200,"",QF_RELATIVE|QF_SCALEDOWN,falloff:100);
+				A_PlaySound("goat/step",CHAN_7,0.1,false,2.0);
+			}
+			sct++;
+			A_Wander();
+			A_Look();
+		}
+		Goto Idle+1;
 	See:
 		GOAT A 0 { sct = 0; }
 		GOAT AABBCCDD 3
@@ -665,9 +725,13 @@ Class mkGoatServant : Actor
 			}
 			sct++;
 			A_Chase();
+			if ( !target || (target.Health <= 0) )
+				return ResolveState(null);
 			double targetdist = Vec2To(target).length();
 			if ( CheckIfTargetInLOS(360) && (targetdist > 500) && (Random[Goat]() < 25) )
 			{
+				if ( CheckFall() )
+					return ResolveState(null);
 				FLineTraceData d;
 				LineTrace(AngleTo(target),Vec2To(target).length(),0,TRF_SOLIDACTORS,height/2,0,0,data:d);
 				if ( (d.HitType == TRACE_HitNone) || ((d.HitType == TRACE_HitActor) && (d.HitActor == target)) )
@@ -677,7 +741,7 @@ Class mkGoatServant : Actor
 		}
 		Goto See+1;
 	Charge:
-		GOAT H 12
+		GOAT H 18
 		{
 			PainChance = 0;
 			A_FaceTarget();
@@ -699,15 +763,18 @@ Class mkGoatServant : Actor
 			Vector2 dir = (cos(angle),sin(angle));
 			bool moved = TryMove(pos.xy+dir*speed,int(maxdropoffheight));
 			if ( CheckMeleeRange() ) BlockingMobj = target;
-			if ( BlockingMobj )
+			if ( BlockingMobj && BlockingMobj.bSOLID )
 			{
 				Actor victim = BlockingMobj;
 				int dmg = Random[Goat](6,9)*4;
 				if ( victim is 'mkGoatServant' ) dmg = 0;
-				victim.DamageMobj(self,self,dmg,'Slam',DMG_THRUSTLESS);
-				Vector3 dirto = Vec3To(victim).unit();
-				victim.vel.xy = dirto.xy*(2000./victim.mass);
-				victim.vel.z = (900./victim.mass);
+				if ( victim.bSHOOTABLE )
+				{
+					victim.DamageMobj(self,self,dmg,'Slam',DMG_THRUSTLESS);
+					Vector3 dirto = Vec3To(victim).unit();
+					victim.vel.xy = dirto.xy*(2000./victim.mass);
+					victim.vel.z = (900./victim.mass);
+				}
 				if ( !victim.bSHOOTABLE || victim.bNOBLOOD ) A_PlaySound("goat/hitwall",CHAN_6);
 				else A_PlaySound("goat/hit",CHAN_6);
 				A_QuakeEx(6,6,6,10,0,500,"",QF_RELATIVE|QF_SCALEDOWN,falloff:200);
@@ -826,13 +893,13 @@ Class mkGoatServant : Actor
 			A_NoBlocking();
 			A_PlaySound("goat/thump",CHAN_7);
 		}
-		GOAT O 300;
+		GOAT O 120;
 		GOAT O 0
 		{
 			let s = Spawn("mkSeacatFade",pos);
 			s.target = self;
 		}
-		GOAT O 1 A_FadeOut(0.02);
+		GOAT O 1 A_FadeOut(0.04);
 		Wait;
 	}
 }
@@ -898,7 +965,7 @@ Class Model1887 : DoomWeapon
 		Weapon.AmmoUse 1;
 		Weapon.AmmoGive 8;
 		Weapon.AmmoType "Shell";
-		Weapon.UpSound "seacat/rreload";
+		Weapon.KickBack 200;
 		Inventory.PickupMessage "You got the model 1887 shotgun!";
 		+WEAPON.CHEATNOTWEAPON;
 	}
@@ -912,10 +979,10 @@ Class Model1887 : DoomWeapon
 		Vector3 x, y, z, dir;
 		double a, s;
 		[x, y, z] = st_Matrix4Lite.GetAxes(BulletSlope(),angle,roll);
-		for ( int i=0; i<11; i++ )
+		for ( int i=0; i<13; i++ )
 		{
 			a = FRandom[M1887](0,360);
-			s = FRandom[M1887](0,0.05);
+			s = FRandom[M1887](0,0.06);
 			dir = (x+y*cos(a)*s+z*sin(a)*s).unit();
 			LineAttack(atan2(dir.y,dir.x),PLAYERMISSILERANGE,asin(-dir.z),Random[GunShot](4,7)*3,'Hitscan',"BulletPuff");
 		}
@@ -1017,6 +1084,7 @@ Class mkSecret05FallEffect : Thinker
 		e = new("mkSecret05FallEffect");
 		e.ChangeStatNum(STAT_USER);
 		e.victim = victim;
+		if ( victim.Health <= 0 ) return;
 		if ( victim.player ) victim.A_PlayerScream();
 		else victim.A_Scream();
 	}
@@ -1024,7 +1092,7 @@ Class mkSecret05FallEffect : Thinker
 	override void Tick()
 	{
 		Super.Tick();
-		if ( victim.pos.z > -240 )
+		if ( !victim || (victim.pos.z > -240) )
 		{
 			Destroy();
 			return;
@@ -1090,7 +1158,7 @@ Class mkSecret05OutsideWind : Actor
 			vol = min(1,vol+0.01);
 		else
 			vol = max(0,vol-0.01);
-		A_SoundVolume(CHAN_5,vol*0.5);
+		A_SoundVolume(CHAN_5,vol);
 		A_SoundVolume(CHAN_6,(1-vol)*0.5*gvol);
 		if ( args[0] )
 			gvol = max(0,gvol-0.04);
@@ -1142,5 +1210,539 @@ Class mkSecret05ProximityTrigger : Actor
 		+NOBLOCKMAP;
 		+NOGRAVITY;
 		+DONTSPLASH;
+	}
+}
+
+// Big thing
+Class mkSecret05GoatInvasion : Actor
+{
+	Struct Wave
+	{
+		// wave counts
+		int lessergoats, goats;
+		int shellboxes, shells;
+		int medikits, stimpacks;
+		// maximum active goat budget
+		int goatbudget;
+		// spawnpoints
+		int goattid, ammotid, healthtid;
+		// world stuffs
+		int useline;	// line to use for activating this stage
+		int gate;	// gate that opens for this stage, then closes at start
+		int blockline;	// line that blocks while the gate closes on starting this stage
+		// completed
+		bool completed;
+	};
+
+	Wave waves[11];
+	int curwave;
+	Array<Actor> goatspawns, ammospawns, healthspawns;
+	Array<Actor> goats, ammos, healths;
+
+	int CountHealth()
+	{
+		let g = GetDefaultByType("mkGoatServant");
+		let lg = GetDefaultByType("mkLesserGoatServant");
+		// count up totals
+		int th = 0;
+		for ( int i=0; i<11; i++ )
+		{
+			th += waves[i].goats*g.Health;
+			th += waves[i].lessergoats*lg.Health;
+		}
+		for ( int i=0; i<goats.Size(); i++ )
+			th += max(0,goats[i].Health);
+		return th;
+	}
+
+	override void Tick()
+	{
+		// auto cleanup, needs to be called before Actor Tick
+		for ( int i=0; i<goats.Size(); i++ )
+		{
+			if ( goats[i] && (goats[i].Health > 0) ) continue;
+			goats.Delete(i--);
+		}
+		for ( int i=0; i<ammos.Size(); i++ )
+		{
+			if ( ammos[i] ) continue;
+			ammos.Delete(i--);
+		}
+		for ( int i=0; i<healths.Size(); i++ )
+		{
+			if ( healths[i] ) continue;
+			healths.Delete(i--);
+		}
+		Super.Tick();
+		// update health for boss bar
+		Health = CountHealth();
+	}
+
+	double AngleToRandomPlayer( Actor a )
+	{
+		Array<Actor> aplayers;
+		for ( int i=0; i<MAXPLAYERS; i++ )
+			if ( playeringame[i] && players[i].mo )
+				aplayers.Push(players[i].mo);
+		if ( aplayers.Size() == 0 )
+			ThrowAbortException("How in the hell are there no players?");
+		return a.AngleTo(aplayers[Random[Seacat](0,aplayers.Size()-1)]);
+	}
+
+	void Initialize()
+	{
+		// fill out waves
+		// 1
+		waves[0].lessergoats = 10;
+		waves[0].goatbudget = 2;
+		waves[0].shells = 6;
+		waves[0].stimpacks = 4;
+		waves[0].goattid = 201;
+		waves[0].ammotid = 301;
+		waves[0].healthtid = 401;
+		// 2
+		waves[1].lessergoats = 15;
+		waves[1].goatbudget = 4;
+		waves[1].shells = 6;
+		waves[1].stimpacks = 6;
+		waves[1].goattid = 202;
+		waves[1].ammotid = 302;
+		waves[1].healthtid = 402;
+		waves[1].useline = 4;
+		waves[1].blockline = 3;
+		waves[1].gate = 3;
+		// 3
+		waves[2].lessergoats = 20;
+		waves[2].goats = 5;
+		waves[2].goatbudget = 5;
+		waves[2].shellboxes = 2;
+		waves[2].shells = 4;
+		waves[2].medikits = 1;
+		waves[2].stimpacks = 6;
+		waves[2].goattid = 203;
+		waves[2].ammotid = 303;
+		waves[2].healthtid = 403;
+		waves[2].useline = 6;
+		waves[2].blockline = 5;
+		waves[2].gate = 4;
+		// 4
+		waves[3].lessergoats = 20;
+		waves[3].goats = 5;
+		waves[3].goatbudget = 5;
+		waves[3].shellboxes = 2;
+		waves[3].shells = 4;
+		waves[3].stimpacks = 8;
+		waves[3].goattid = 204;
+		waves[3].ammotid = 304;
+		waves[3].healthtid = 404;
+		waves[3].useline = 8;
+		waves[3].blockline = 7;
+		waves[3].gate = 5;
+		// 5
+		waves[4].lessergoats = 25;
+		waves[4].goats = 10;
+		waves[4].goatbudget = 8;
+		waves[4].shells = 4;
+		waves[4].stimpacks = 8;
+		waves[4].goattid = 205;
+		waves[4].ammotid = 305;
+		waves[4].healthtid = 405;
+		waves[4].useline = 10;
+		waves[4].blockline = 9;
+		waves[4].gate = 6;
+		// 6
+		waves[5].lessergoats = 30;
+		waves[5].goats = 10;
+		waves[5].goatbudget = 8;
+		waves[5].shellboxes = 2;
+		waves[5].shells = 6;
+		waves[5].medikits = 2;
+		waves[5].stimpacks = 8;
+		waves[5].goattid = 206;
+		waves[5].ammotid = 306;
+		waves[5].healthtid = 406;
+		waves[5].useline = 12;
+		waves[5].blockline = 11;
+		waves[5].gate = 7;
+		// 7
+		waves[6].lessergoats = 20;
+		waves[4].goats = 5;
+		waves[6].goatbudget = 10;
+		waves[6].shellboxes = 2;
+		waves[6].stimpacks = 8;
+		waves[6].goattid = 205;
+		waves[6].ammotid = 305;
+		waves[6].healthtid = 405;
+		waves[6].useline = 11;
+		waves[6].blockline = 12;
+		waves[6].gate = 7;
+		// 8
+		waves[7].lessergoats = 25;
+		waves[7].goats = 10;
+		waves[7].goatbudget = 6;
+		waves[7].shellboxes = 2;
+		waves[7].shells = 4;
+		waves[7].stimpacks = 6;
+		waves[7].goattid = 207;
+		waves[7].ammotid = 307;
+		waves[7].healthtid = 407;
+		waves[7].useline = 14;
+		waves[7].blockline = 13;
+		waves[7].gate = 8;
+		// 9
+		waves[8].lessergoats = 20;
+		waves[8].goats = 20;
+		waves[8].goatbudget = 6;
+		waves[8].shellboxes = 2;
+		waves[8].medikits = 4;
+		waves[8].goattid = 208;
+		waves[8].ammotid = 308;
+		waves[8].healthtid = 408;
+		waves[8].useline = 16;
+		waves[8].blockline = 15;
+		waves[8].gate = 9;
+		// 10
+		waves[9].lessergoats = 30;
+		waves[9].goatbudget = 6;
+		waves[9].shellboxes = 2;
+		waves[9].stimpacks = 10;
+		waves[9].goattid = 209;
+		waves[9].ammotid = 309;
+		waves[9].healthtid = 409;
+		waves[9].useline = 18;
+		waves[9].blockline = 17;
+		waves[9].gate = 10;
+		// 11
+		waves[10].goats = 30;
+		waves[10].goatbudget = 16;
+		waves[10].shellboxes = 4;
+		waves[10].stimpacks = 8;
+		waves[10].goattid = 201;
+		waves[10].ammotid = 301;
+		waves[10].healthtid = 401;
+		waves[10].useline = 2;
+		waves[10].blockline = 1;
+		waves[10].gate = 11;
+		// register for boss health bar
+		let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
+		hnd.bossenemy = self;
+	}
+
+	void StartWave( int wavenum )
+	{
+		curwave = wavenum;
+		// clear current spawn spots
+		goatspawns.Clear();
+		ammospawns.Clear();
+		healthspawns.Clear();
+		// these can be removed now
+		for ( int i=0; i<ammos.Size(); i++ )
+			ammos[i].Destroy();
+		for ( int i=0; i<healths.Size(); i++ )
+			healths[i].Destroy();
+		goats.Clear();
+		ammos.Clear();
+		healths.Clear();
+		// fetch new spots
+		ActorIterator ai;
+		Actor a;
+		ai = ActorIterator.Create(waves[curwave].goattid);
+		while ( a = ai.Next() ) goatspawns.Push(a);
+		ai = ActorIterator.Create(waves[curwave].ammotid);
+		while ( a = ai.Next() ) ammospawns.Push(a);
+		ai = ActorIterator.Create(waves[curwave].healthtid);
+		while ( a = ai.Next() ) healthspawns.Push(a);
+	}
+
+	Actor PickGoatSpot()
+	{
+		Array<Actor> available;
+		for ( int i=0; i<goatspawns.Size(); i++ )
+		{
+			// is it being blocked?
+			bool blocked = false;
+			for ( int j=0; j<goats.Size(); j++ )
+			{
+				if ( goats[j].Distance2D(goatspawns[i]) > 120 )
+					continue;
+				blocked = true;
+				break;
+			}
+			for ( int j=0; j<MAXPLAYERS; j++ )
+			{
+				if ( !playeringame[j] || players[j].mo.Distance2D(goatspawns[i]) > 240 )
+					continue;
+				blocked = true;
+				break;
+			}
+			// can it be seen
+			bool seen = false;
+			for ( int j=0; j<MAXPLAYERS; j++ )
+			{
+				if ( !playeringame[j] || !players[j].mo.IsVisible(goatspawns[i],true) )
+					continue;
+				seen = true;
+				break;
+			}
+			if ( !blocked && seen )
+				available.Push(goatspawns[i]);
+		}
+		if ( available.Size() <= 0 )
+			return null;
+		return available[Random[Seacat](0,available.Size()-1)];
+	}
+
+	Actor PickAmmoSpot()
+	{
+		Array<Actor> available;
+		for ( int i=0; i<ammospawns.Size(); i++ )
+		{
+			// is it being used?
+			bool used = false;
+			for ( int j=0; j<ammos.Size(); j++ )
+			{
+				if ( ammos[j].Distance2D(ammospawns[i]) > 16 )
+					continue;
+				used = true;
+				break;
+			}
+			// can it be seen
+			bool seen = false;
+			for ( int j=0; j<MAXPLAYERS; j++ )
+			{
+				if ( !playeringame[j] || !players[j].mo.IsVisible(ammospawns[i],true) )
+					continue;
+				seen = true;
+				break;
+			}
+			if ( !used && seen )
+				available.Push(ammospawns[i]);
+		}
+		if ( available.Size() <= 0 )
+			return null;
+		return available[Random[Seacat](0,available.Size()-1)];
+	}
+
+	Actor PickHealthSpot()
+	{
+		Array<Actor> available;
+		for ( int i=0; i<healthspawns.Size(); i++ )
+		{
+			// is it being used?
+			bool used = false;
+			for ( int j=0; j<healths.Size(); j++ )
+			{
+				if ( healths[j].Distance2D(healthspawns[i]) > 16 )
+					continue;
+				used = true;
+				break;
+			}
+			// without love, it cannot be seen
+			bool seen = false;
+			for ( int j=0; j<MAXPLAYERS; j++ )
+			{
+				if ( !playeringame[j] || !players[j].mo.IsVisible(healthspawns[i],true) )
+					continue;
+				seen = true;
+				break;
+			}
+			if ( !used && seen )
+				available.Push(healthspawns[i]);
+		}
+		if ( available.Size() <= 0 )
+			return null;
+		return available[Random[Seacat](0,available.Size()-1)];
+	}
+
+	bool SpawnGoats()
+	{
+		if ( waves[curwave].goats+waves[curwave].lessergoats <= 0 )
+		{
+			if ( goats.Size() == 0 )
+				waves[curwave].completed = true;
+			return false;
+		}
+		// check budget
+		int curbudget = 0;
+		for ( int i=0; i<goats.Size(); i++ )
+		{
+			if ( goats[i] is 'mkGoatServant' ) curbudget += 4;
+			else curbudget += 1;
+		}
+		if ( curbudget >= waves[curwave].goatbudget ) return false;
+		bool spawnbig = false;
+		if ( waves[curwave].goats > 0 )
+			spawnbig = (waves[curwave].lessergoats>0)?(!Random[Seacat](0,3)):true;
+		let s = PickGoatSpot();
+		if ( !s ) return false;
+		Actor goat;
+		if ( spawnbig )
+		{
+			goat = Spawn("mkGoatServant",s.pos);
+			waves[curwave].goats--;
+		}
+		else
+		{
+			goat = Spawn("mkLesserGoatServant",s.pos);
+			waves[curwave].lessergoats--;
+		}
+		goat.angle = AngleToRandomPlayer(goat);
+		goat.master = self;
+		goats.Push(goat);
+		return true;
+	}
+
+	bool SpawnAmmo()
+	{
+		if ( waves[curwave].shellboxes+waves[curwave].shells <= 0 )
+			return false;
+		bool spawnbig = false;
+		if ( waves[curwave].shellboxes > 0 )
+			spawnbig = waves[curwave].shells>0?(!Random[Seacat](0,3)):true;
+		let s = PickAmmoSpot();
+		if ( !s ) return false;
+		Actor amo;
+		Spawn("ItemFog",s.pos);
+		if ( spawnbig )
+		{
+			amo = Spawn("ShellBox",s.pos);
+			waves[curwave].shellboxes--;
+		}
+		else
+		{
+			amo = Spawn("Shell",s.pos);
+			waves[curwave].shells--;
+		}
+		amo.angle = s.angle;
+		amo.A_PlaySound("misc/spawn",CHAN_VOICE);
+		ammos.Push(amo);
+		return true;
+	}
+
+	bool SpawnHealing()
+	{
+		if ( waves[curwave].medikits+waves[curwave].stimpacks <= 0 )
+			return false;
+		bool spawnbig = false;
+		if ( waves[curwave].medikits > 0 )
+			spawnbig = waves[curwave].stimpacks>0?(!Random[Seacat](0,3)):true;
+		let s = PickHealthSpot();
+		if ( !s ) return false;
+		Actor heal;
+		Spawn("ItemFog",s.pos);
+		if ( spawnbig )
+		{
+			heal = Spawn("Medikit",s.pos,ALLOW_REPLACE);
+			waves[curwave].medikits--;
+		}
+		else
+		{
+			heal = Spawn("Stimpack",s.pos,ALLOW_REPLACE);
+			waves[curwave].stimpacks--;
+		}
+		heal.angle = s.angle;
+		heal.A_PlaySound("misc/spawn",CHAN_VOICE);
+		healths.Push(heal);
+		return true;
+	}
+
+	void WaveThink()
+	{
+		if ( waves[curwave].completed ) return;
+		// spawn stuff
+		int n = Random[Seacat](1,3);
+		for ( int i=0; i<n; i++ )
+		{
+			if ( !SpawnGoats() )
+				break;
+		}
+		for ( int i=0; i<2; i++ )
+		{
+			if ( !Random[Seacat](0,2) ) SpawnAmmo();
+			else SpawnHealing();
+		}
+		// open the gates once we've run out of goats for this wave
+		// at the last wave, do the exit special instead
+		if ( !waves[curwave].completed ) return;
+		if ( curwave < 10 )
+			ACS_Execute(201,0,waves[curwave+1].useline,waves[curwave+1].gate,waves[curwave+1].blockline);
+		else
+		{
+			ACS_Execute(5,0);
+			A_Die();
+		}
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		Initialize();
+	}
+
+	override void Activate( Actor activator )
+	{
+		// wave advancing
+		SetState(CurState+1);
+	}
+
+	Default
+	{
+		Tag "\cmAll Of The Goats\c-";
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+	}
+	States
+	{
+	Spawn:
+		TNT1 A -1;	// waiting
+		Stop;
+		TNT1 A 150;	// delay for the player(s) to brace themselves
+	Wave1:
+		TNT1 A 0 StartWave(0);
+		TNT1 A 120 WaveThink();
+		Wait;
+	Wave2:
+		TNT1 A 0 StartWave(1);
+		TNT1 A 110 WaveThink();
+		Wait;
+	Wave3:
+		TNT1 A 0 StartWave(2);
+		TNT1 A 100 WaveThink();
+		Wait;
+	Wave4:
+		TNT1 A 0 StartWave(3);
+		TNT1 A 90 WaveThink();
+		Wait;
+	Wave5:
+		TNT1 A 0 StartWave(4);
+		TNT1 A 80 WaveThink();
+		Wait;
+	Wave6:
+		TNT1 A 0 StartWave(5);
+		TNT1 A 70 WaveThink();
+		Wait;
+	Wave7:
+		TNT1 A 0 StartWave(6);
+		TNT1 A 60 WaveThink();
+		Wait;
+	Wave8:
+		TNT1 A 0 StartWave(7);
+		TNT1 A 50 WaveThink();
+		Wait;
+	Wave9:
+		TNT1 A 0 StartWave(8);
+		TNT1 A 40 WaveThink();
+		Wait;
+	Wave10:
+		TNT1 A 0 StartWave(9);
+		TNT1 A 30 WaveThink();
+		Wait;
+	Wave11:
+		TNT1 A 0 StartWave(10);
+		TNT1 A 20 WaveThink();
+		Wait;
+	Death:
+		TNT1 A 200;
+		Stop;
 	}
 }

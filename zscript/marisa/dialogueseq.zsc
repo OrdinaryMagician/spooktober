@@ -387,6 +387,7 @@ Class mkDialogueHandler : EventHandler
 		{
 			speakee.GiveInventory("Fist",1);
 			speakee.GiveInventory("Model1887",1);
+			speakee.A_PlaySound("seacat/rreload",CHAN_WEAPON);
 		}
 		else if ( e.Name ~== "secret05exit" )
 			level.ExecuteSpecial(80,null,null,false,2);

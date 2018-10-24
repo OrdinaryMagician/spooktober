@@ -51,8 +51,7 @@ Class mkBossHealthBar : HUDMessageBase
 		self.target = target;
 		self.tname = tname;
 		alpha = 0.0;
-		thealth = target.health;
-		hmax = target.SpawnHealth();
+		hmax = thealth = target.health;
 		ihealth = DynamicValueInterpolator.Create(thealth,0.25,1,max(8,hmax/100));
 		for ( int i=0; i<10; i++ ) oldhealth[i] = thealth;
 		bbar_r = TexMan.CheckForTexture("bbar_r",TexMan.Type_Any);

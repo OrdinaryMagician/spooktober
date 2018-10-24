@@ -14,7 +14,7 @@ A Halloween 2018 map pack for Doom.
 
 ### Current status
 
-Maps completed: 8 / 19
+Maps completed: 9 / 19
 Slots taken: 19 / 19
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
@@ -35,4 +35,4 @@ Slots taken: 19 / 19
 - **SECRET02**: Abandoned Warehouse - CardBoxNeko
 - **SECRET03**: The Crimson Flow - Rachael [completed]
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz
-- **SECRET05**: Golden Slaughterer - Marisa Kirisame
+- **SECRET05**: Golden Slaughterer - Marisa Kirisame [completed]
