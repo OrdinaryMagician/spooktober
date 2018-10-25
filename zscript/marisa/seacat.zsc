@@ -315,8 +315,8 @@ Class mkLesserGoatServant : Actor
 		Health 60;
 		PainChance 150;
 		Scale 0.8;
-		Radius 20;
-		Height 60;
+		Radius 14;
+		Height 56;
 		Speed 12;
 		Mass 120;
 		MeleeRange 50;
@@ -627,8 +627,8 @@ Class mkGoatServant : Actor
 		Health 250;
 		PainChance 100;
 		Scale 1.2;
-		Radius 30;
-		Height 80;
+		Radius 22;
+		Height 84;
 		Speed 15;
 		Mass 300;
 		MeleeRange 50;
@@ -905,7 +905,7 @@ Class mkGoatServant : Actor
 }
 
 // based on realm667 weapon
-Class ShotShellC : Actor
+Class Casing44 : Actor
 {
 	int deadtimer;
 	double rollvel;
@@ -922,7 +922,7 @@ Class ShotShellC : Actor
 		+MOVEWITHSECTOR;
 		+THRUACTORS;
 		BounceType "Doom";
-		BounceFactor 0.5;
+		BounceFactor 0.75;
 		BounceSound "misc/scase";
 	}
 	override void PostBeginPlay()
@@ -944,29 +944,117 @@ Class ShotShellC : Actor
 	States
 	{
 	Spawn:
-		SHL1 A 1 A_SetRoll(roll+invoker.rollvel);
+		WCAS A 1 A_SetRoll(roll+invoker.rollvel);
 		Wait;
 	Bounce:
-		SHL1 A 0 { invoker.rollvel = FRandom[Junk](10,30)*RandomPick[Junk](-1,1); }
+		WCAS A 0 { invoker.rollvel = FRandom[Junk](10,30)*RandomPick[Junk](-1,1); }
 		Goto Spawn;
 	Death:
-		SHL1 A -1 A_SetRoll(FRandom[Junk](-5,5)+RandomPick[Junk](0,180));
+		WCAS A -1 A_SetRoll(FRandom[Junk](-5,5)+RandomPick[Junk](0,180));
 		Stop;
 	}
 }
 
-Class Model1887 : DoomWeapon
+Class W44Ammo : Ammo
 {
 	Default
 	{
-		Tag "Model 1887 Shotgun";
+		Tag ".44 Winchester";
+		Inventory.Icon "WAMOA0";
+		Inventory.PickupMessage "You got some .44 rounds.";
+		Inventory.Amount 4;
+		Inventory.MaxAmount 50;
+		Ammo.BackpackAmount 20;
+		Ammo.BackpackMaxAmount 100;
+		Ammo.DropAmount 4;
+	}
+	States
+	{
+	Spawn:
+		WAMO A -1;
+		Stop;
+	}
+}
+
+Class W44AmmoBox : W44Ammo
+{
+	Default
+	{
+		Inventory.PickupMessage "You got a box of .44 rounds.";
+		Inventory.Amount 15;
+	}
+	States
+	{
+	Spawn:
+		WAMO B -1;
+		Stop;
+	}
+}
+
+Class W44Tracer : LineTracer
+{
+	Actor ignore;
+	Array<Actor> hitlist;
+	Array<int> headshots;
+	Array<double> hitangles;
+	Array<double> hitpitches;
+	Array<double> hitx;
+	Array<double> hity;
+	Array<double> hitz;
+
+	override ETraceStatus TraceCallback()
+	{
+		if ( Results.HitType == TRACE_HitActor )
+		{
+			if ( Results.HitActor == ignore ) return TRACE_Skip;
+			if ( Results.HitActor.bSHOOTABLE )
+			{
+				hitlist.Push(Results.HitActor);
+				headshots.Push(Results.HitPos.z >= (Results.HitActor.pos.z+Results.HitActor.height*0.81));
+				hitangles.Push(atan2(Results.HitVector.y,Results.HitVector.x));
+				hitpitches.Push(asin(-Results.HitVector.z));
+				hitx.Push(Results.HitPos.x);
+				hity.Push(Results.HitPos.y);
+				hitz.Push(Results.HitPos.z);
+			}
+			return TRACE_Skip;
+		}
+		else if ( (Results.HitType == TRACE_HitWall) && (Results.Tier == TIER_Middle) )
+		{
+			if ( !Results.HitLine.sidedef[1] || (Results.HitLine.Flags&(Line.ML_BlockHitscan|Line.ML_BlockEverything)) )
+			{
+				hitangles.Push(atan2(Results.HitVector.y,Results.HitVector.x));
+				hitpitches.Push(asin(-Results.HitVector.z));
+				hitx.Push(Results.HitPos.x);
+				hity.Push(Results.HitPos.y);
+				hitz.Push(Results.HitPos.z);
+				return TRACE_Stop;
+			}
+			return TRACE_Skip;
+		}
+		hitangles.Push(atan2(Results.HitVector.y,Results.HitVector.x));
+		hitpitches.Push(asin(-Results.HitVector.z));
+		hitx.Push(Results.HitPos.x);
+		hity.Push(Results.HitPos.y);
+		hitz.Push(Results.HitPos.z);
+		return TRACE_Stop;
+	}
+}
+
+Class Model1873 : DoomWeapon
+{
+	transient W44Tracer t;
+
+	Default
+	{
+		Tag "Sawed-Off Model 1873";
 		Weapon.SelectionOrder 1300;
 		Weapon.SlotNumber 3;
 		Weapon.AmmoUse 1;
 		Weapon.AmmoGive 8;
-		Weapon.AmmoType "Shell";
+		Weapon.AmmoType "W44Ammo";
 		Weapon.KickBack 200;
-		Inventory.PickupMessage "You got the model 1887 shotgun!";
+		Inventory.PickupMessage "You got the sawed-off Model 1873!";
 		+WEAPON.CHEATNOTWEAPON;
 	}
 	action void A_FireShot()
@@ -979,13 +1067,61 @@ Class Model1887 : DoomWeapon
 		Vector3 x, y, z, dir;
 		double a, s;
 		[x, y, z] = st_Matrix4Lite.GetAxes(BulletSlope(),angle,roll);
-		for ( int i=0; i<13; i++ )
+		if ( !invoker.t ) invoker.t = new("W44Tracer");
+		invoker.t.ignore = self;
+		invoker.t.hitlist.Clear();
+		invoker.t.headshots.Clear();
+		invoker.t.hitangles.Clear();
+		invoker.t.hitpitches.Clear();
+		invoker.t.hitx.Clear();
+		invoker.t.hity.Clear();
+		invoker.t.hitz.Clear();
+		invoker.t.Trace(Vec2OffsetZ(0,0,player.viewz),CurSector,x,PLAYERMISSILERANGE,0);
+		int totaldamage = Random[GunShot](20,30)*3;
+		for ( int i=0; i<invoker.t.hitlist.Size(); i++ )
 		{
-			a = FRandom[M1887](0,360);
-			s = FRandom[M1887](0,0.06);
-			dir = (x+y*cos(a)*s+z*sin(a)*s).unit();
-			LineAttack(atan2(dir.y,dir.x),PLAYERMISSILERANGE,asin(-dir.z),Random[GunShot](4,7)*3,'Hitscan',"BulletPuff");
+			Vector3 hitdir = (cos(invoker.t.hitangles[i])*cos(invoker.t.hitpitches[i]),sin(invoker.t.hitangles[i])*cos(invoker.t.hitpitches[i]),-sin(invoker.t.hitpitches[i]));
+			Vector3 hitpos = (invoker.t.hitx[i],invoker.t.hity[i],invoker.t.hitz[i]);
+			int dmg = totaldamage;
+			int thrust = 30*dmg;
+			Name dmgtype = 'Shot';
+			if ( invoker.t.headshots[i] )
+			{
+				dmg *= 3;
+				thrust /= 3;
+				dmgtype = 'Headshot';
+			}
+			totaldamage -= invoker.t.hitlist[i].Health;
+			invoker.t.hitlist[i].DamageMobj(w,self,dmg,dmgtype,DMG_THRUSTLESS);
+			if ( !invoker.t.hitlist[i].bDONTTHRUST )
+				invoker.t.hitlist[i].vel += hitdir*(thrust/invoker.t.hitlist[i].mass);
+			if ( invoker.t.hitlist[i].bNOBLOOD )
+			{
+				let p = Spawn("BulletPuff",hitpos-hitdir*4);
+				p.angle = invoker.t.hitangles[i];
+				p.pitch = invoker.t.hitpitches[i];
+				p.A_PlaySound("misc/parp",CHAN_7,attenuation:2.0);
+				p.A_SprayDecal("BulletChip");
+			}
+			else
+			{
+				invoker.t.hitlist[i].TraceBleed(dmg,self);
+				invoker.t.hitlist[i].SpawnBlood(hitpos,invoker.t.hitangles[i]+180,dmg);
+				invoker.t.hitlist[i].A_PlaySound("misc/bullet",CHAN_7,attenuation:2.0);
+			}
+			if ( totaldamage <= 0 )
+				return;
 		}
+		if ( invoker.t.Results.HitType == TRACE_HitNone )
+			return;
+		int i = invoker.t.hitlist.Size();
+		Vector3 hitdir = (cos(invoker.t.hitangles[i])*cos(invoker.t.hitpitches[i]),sin(invoker.t.hitangles[i])*cos(invoker.t.hitpitches[i]),-sin(invoker.t.hitpitches[i]));
+		Vector3 hitpos = (invoker.t.hitx[i],invoker.t.hity[i],invoker.t.hitz[i]);
+		let p = Spawn("BulletPuff",hitpos-hitdir*4);
+		p.angle = invoker.t.hitangles[i];
+		p.pitch = invoker.t.hitpitches[i];
+		p.A_SprayDecal("BulletChip");
+		p.A_PlaySound("misc/ric",CHAN_7,attenuation:2.0);
 	}
 	action void A_Eject()
 	{
@@ -993,7 +1129,7 @@ Class Model1887 : DoomWeapon
 		Vector3 x, y, z;
 		[x, y, z] = st_Matrix4Lite.GetAxes(pitch,angle,roll);
 		ofs += x*20.-y*15-z*12;
-		let c = Spawn("ShotShellC",ofs);
+		let c = Spawn("Casing44",ofs);
 		c.vel = x*FRandom[Junk](0,2)-y*FRandom[Junk](5,8)+z*FRandom[Junk](3,6);
 		c.vel += vel*0.5;
 	}
@@ -1605,12 +1741,12 @@ Class mkSecret05GoatInvasion : Actor
 		Spawn("ItemFog",s.pos);
 		if ( spawnbig )
 		{
-			amo = Spawn("ShellBox",s.pos);
+			amo = Spawn("W44AmmoBox",s.pos);
 			waves[curwave].shellboxes--;
 		}
 		else
 		{
-			amo = Spawn("Shell",s.pos);
+			amo = Spawn("W44Ammo",s.pos);
 			waves[curwave].shells--;
 		}
 		amo.angle = s.angle;

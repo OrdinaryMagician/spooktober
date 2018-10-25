@@ -386,7 +386,7 @@ Class mkDialogueHandler : EventHandler
 		else if ( e.Name ~== "giveshotty" )
 		{
 			speakee.GiveInventory("Fist",1);
-			speakee.GiveInventory("Model1887",1);
+			speakee.GiveInventory("Model1873",1);
 			speakee.A_PlaySound("seacat/rreload",CHAN_WEAPON);
 		}
 		else if ( e.Name ~== "secret05exit" )

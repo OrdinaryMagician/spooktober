@@ -88,5 +88,4 @@ generator mkSplitBoltDecoy	NLordLightning
 generator mkSmolBolt		NLordLightningSmall
 generator mkSmolBoltDecoy	NLordLightningSmall
 
-generator Model1887		BulletChip
 generator mkGoatBall		BaronScorch

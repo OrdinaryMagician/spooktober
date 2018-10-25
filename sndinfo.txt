@@ -44,10 +44,23 @@ misc/adend60 adend60
 misc/wlloop31 wlloop31
 misc/wlend31 wlend31
 // from other sources
-misc/scase1 dsshell1
-misc/scase2 dsshell2
-misc/scase3 dsshell3
-$random misc/scase { misc/scase1 misc/scase2 misc/scase3 }
+misc/scase1 dscasing
+misc/scase2 dscasin2
+misc/scase3 dscasin3
+misc/scase4 dscasin3
+$random misc/scase { misc/scase1 misc/scase2 misc/scase3 misc/scase4 }
+misc/bullet bullet
+misc/parp parp
+misc/ric1 puff1
+misc/ric2 puff2
+misc/ric3 puff3
+misc/ric4 puff4
+misc/ric5 puff5
+misc/ric6 puff6
+misc/ric7 puff7
+misc/ric8 puff8
+misc/ric9 puff9
+$randim misc/ric { misc/ric1 misc/ric2 misc/ric3 misc/ric4 misc/ric5 misc/ric6 misc/ric7 misc/ric8 misc/ric9 }
 satyr/see dssyrsit
 satyr/die dssyrdth
 goat/step step

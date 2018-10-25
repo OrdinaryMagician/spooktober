@@ -27,7 +27,7 @@ Class mkDialogueSequence42 : mkDialogueSequence
 		}
 	}}
 
-Class mkBeerCan : ShotShellC
+Class mkBeerCan : Casing44
 {
 	Default
 	{
