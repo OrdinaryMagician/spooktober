@@ -3,6 +3,7 @@ include "zmapinfo.ednums.txt"
 GameInfo
 {
 	AddEventHandlers = "SpooktoberHandler", "mkDialogueHandler", "MapShader"
+	TitleMusic = "D_MIRROR"
 	FinaleMusic = "D_WALTZ"
 }
 
