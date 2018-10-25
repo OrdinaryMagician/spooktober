@@ -1,0 +1,180 @@
+ACTOR burger1 29407
+{
+  mass 1
+  Radius 4
+  Height 6
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    BRGR A -1
+    loop
+  }
+}
+
+ACTOR burger2 29408
+{
+  mass 1
+  Radius 4
+  Height 6
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    BRGR B -1
+    loop
+  }
+}
+
+ACTOR burger3 29409
+{
+  mass 1
+  Radius 4
+  Height 8
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    BRGR C -1
+    loop
+  }
+}
+
+ACTOR burger4 29410
+{
+  mass 1
+  Radius 4
+  Height 6
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    BRGR D -1
+    loop
+  }
+}
+
+
+ACTOR fries1 29411
+{
+  mass 1
+  Radius 3
+  Height 7
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    FRES A -1
+    loop
+  }
+}
+
+ACTOR fries2 29412
+{
+  mass 1
+  Radius 3
+  Height 6
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    FRES B -1
+    loop
+  }
+}
+
+ACTOR drink 29413
+{
+  mass 1
+  Radius 2
+  Height 7
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    DRNK A -1
+    loop
+  }
+}
+
+ACTOR bottle1 29414
+{
+  mass 1
+  Radius 3
+  Height 16
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    BTTL A -1
+    loop
+  }
+}
+
+ACTOR bottle2 29415
+{
+  mass 1
+  Radius 3
+  Height 16
+  scale 0.5
+  +SOLID
+  States
+  {
+   Spawn:
+    BTTL B -1
+    loop
+  }
+}
+
+ACTOR glass 29416
+{
+  mass 1
+  Radius 3
+  Height 8
+  scale 0.6
+  +SOLID
+  States
+  {
+   Spawn:
+    GLSS A -1
+    loop
+  }
+}
+
+ACTOR donuts 29417
+{
+  mass 1
+  Radius 5
+  Height 5
+  scale 0.3
+  +SOLID
+  States
+  {
+   Spawn:
+    DNTS A -1
+    loop
+  }
+}
+
+ACTOR dbox 29418
+{
+  mass 1
+  Radius 6
+  Height 8
+  +SOLID
+  States
+  {
+   Spawn:
+    DBOX A -1
+    loop
+  }
+}
+

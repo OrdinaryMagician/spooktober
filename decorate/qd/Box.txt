@@ -1,0 +1,13 @@
+ACTOR Box1 29420
+{
+  Game Doom
+  Radius 16
+  Height 56
+  +NOCLIP
+  States
+  {
+  Spawn:
+    BOX1 A -1
+    Stop
+  }
+}

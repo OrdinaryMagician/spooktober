@@ -1,0 +1,86 @@
+//Trees
+
+ACTOR Tree1 29391 {
+	Radius 32
+	Height 162
+	ProjectilePassHeight -16
+	+SOLID
+	States {
+		Spawn:
+			TRE1 A -1
+			STOP
+	}
+}
+
+ACTOR Tree2 29392 {
+	Radius 76
+	Height 199
+	ProjectilePassHeight -16
+	+SOLID
+	States {
+		Spawn:
+			TRE2 A -1
+			STOP
+	}
+}
+
+ACTOR Tree3 29393 {
+	Radius 32
+	Height 183
+	ProjectilePassHeight -16
+	+SOLID
+	States {
+		Spawn:
+			TRE3 A -1
+			STOP
+	}
+}
+
+ACTOR Tree4 29394 {
+	Radius 32
+	Height 162
+	ProjectilePassHeight -16
+	+SOLID
+	States {
+		Spawn:
+			TRE4 A -1
+			STOP
+	}
+}
+
+ACTOR Tree5 29395 {
+	Radius 32
+	Height 197
+	ProjectilePassHeight -16
+	+SOLID
+	States {
+		Spawn:
+			TRE5 A -1
+			STOP
+	}
+}
+
+ACTOR Tree6 29396 {
+	Radius 32
+	Height 162
+	ProjectilePassHeight -16
+	+SOLID
+	States {
+		Spawn:
+			TRE6 A -1
+			STOP
+	}
+}
+
+ACTOR Tree7 29397 {
+	Radius 32
+	Height 159
+	ProjectilePassHeight -16
+	+SOLID
+	States {
+		Spawn:
+			TRE7 A -1
+			STOP
+	}
+}
+

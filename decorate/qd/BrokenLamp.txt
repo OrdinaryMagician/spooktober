@@ -1,0 +1,13 @@
+Actor BrokenLamp 29434
+{
+  +FloorClip
+  +Solid
+  Height 30
+  Radius 10
+  States
+  {
+  Spawn:
+    BLMP A -1
+    Stop
+  }
+}

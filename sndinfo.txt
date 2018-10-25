@@ -219,4 +219,13 @@ nightmarelord/grabtaunt DEESACT1
 nightmarelord/grabthrow THROW9
 nightmarelord/attack DEESATK5
 
-////////
+//////// quakedoomnukem cz
+doorswing1/start		STNMOV
+doorswing1/stop			PSTOP
+
+doorswing2/start		DRCRK
+doorswing2/stop			DRSTP
+
+TOILET1      			TOILET1
+BREAK1       			BREAK1
+DSCHAFIR 				DSCHAFIR

@@ -1,0 +1,104 @@
+ACTOR HelmA 29398
+{
+  Radius 8
+  Height 10
+  +SOLID
+  States
+  {
+  Spawn:
+    AHLM A -1
+    Stop
+  }
+}
+
+ACTOR HelmB 29399
+{
+  Radius 8
+  Height 10
+  +SOLID
+  States
+  {
+  Spawn:
+    BHLM A -1
+    Stop
+  }
+}
+
+ACTOR HelmC 29400
+{
+  Radius 8
+  Height 10
+  +SOLID
+  States
+  {
+  Spawn:
+    CHLM A -1
+    Stop
+  }
+}
+
+ACTOR HelmD 29401
+{
+  Radius 6
+  Height 10
+  +SOLID
+  States
+  {
+  Spawn:
+    dHLM A -1
+    Stop
+  }
+}
+
+ACTOR Boots 29402
+{
+  Radius 8
+  Height 11
+  +SOLID
+  States
+  {
+  Spawn:
+    BOOT A -1
+    Stop
+  }
+}
+
+ACTOR UniformA 29403
+{
+  Radius 12
+  Height 11
+  +SOLID
+  States
+  {
+  Spawn:
+    UNIF A -1
+    Stop
+  }
+}
+
+ACTOR UniformB 29404
+{
+  Radius 12
+  Height 11
+  +SOLID
+  States
+  {
+  Spawn:
+    UNIF B -1
+    Stop
+  }
+}
+
+ACTOR DoomDoll 29405
+{
+  Game Doom
+  Radius 28
+  Height 9
+  +SOLID
+  States
+  {
+  Spawn:
+    DDOL A -1
+    Stop
+  }
+}

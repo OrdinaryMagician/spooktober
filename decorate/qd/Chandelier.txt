@@ -1,0 +1,215 @@
+Actor Chandelier1Switchable : SwitchableDecoration
+{
+  Radius 10
+  Height 21
+  Activation THINGSPEC_Switch
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  +USESPECIAL
+  States
+  {
+  Spawn:
+    CHAN D -1
+    Stop
+  Active:
+    TNT1 A 0 A_PlaySound("DSCHAFIR", CHAN_BODY, 1.0, 1)
+    CHAN ABC 4
+    Goto Active+1
+  Inactive:
+    CHAN D -1 A_StopSound(CHAN_BODY)
+    Stop
+  }
+}
+
+Actor Chandelier1Off 29422
+{
+  Radius 10
+  Height 21
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    CHAN D -1
+    Stop
+  }
+}
+
+Actor Chandelier1On 29423
+{
+  Radius 10
+  Height 21
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("DSCHAFIR", CHAN_BODY, 1.0, 1)
+    CHAN ABC 4
+    Goto Spawn+2
+  }
+}
+
+Actor Chandelier2Switchable : SwitchableDecoration
+{
+  Radius 10
+  Height 21
+  Activation THINGSPEC_Switch
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  +USESPECIAL
+  States
+  {
+  Spawn:
+    CHAN H -1
+    Stop
+  Active:
+    TNT1 A 0 A_PlaySound("DSCHAFIR", CHAN_BODY, 1.0, 1)
+    CHAN EFG 4
+    Goto Active+1
+  Inactive:
+    CHAN H -1 A_StopSound(CHAN_BODY)
+    Stop
+  }
+}
+
+Actor Chandelier2Off 29425
+{
+  Radius 10
+  Height 21
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    CHAN H -1
+    Stop
+  }
+}
+
+Actor Chandelier2On 29426
+{
+  Radius 10
+  Height 21
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("DSCHAFIR", CHAN_BODY, 1.0, 1)
+    CHAN EFG 4
+    Goto Spawn+2
+  }
+}
+
+Actor Chandelier3Switchable : SwitchableDecoration
+{
+  Radius 10
+  Height 21
+  Activation THINGSPEC_Switch
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  +USESPECIAL
+  States
+  {
+  Spawn:
+    CHAN M -1
+    Stop
+  Active:
+    TNT1 A 0 A_PlaySound("DSCHAFIR", CHAN_BODY, 1.0, 1)
+    CHAN IJL 4
+    Goto Active+1
+  Inactive:
+    CHAN M -1 A_StopSound(CHAN_BODY)
+    Stop
+  }
+}
+
+Actor Chandelier3Off 29428
+{
+  Radius 10
+  Height 21
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    CHAN M -1
+    Stop
+  }
+}
+
+Actor Chandelier3On 29429
+{
+  Radius 10
+  Height 21
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("DSCHAFIR", CHAN_BODY, 1.0, 1)
+    CHAN IJL 4
+    Goto Spawn+2
+  }
+}
+
+Actor Chandelier4Switchable : SwitchableDecoration
+{
+  Radius 10
+  Height 21
+  Activation THINGSPEC_Switch
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  +USESPECIAL
+  States
+  {
+  Spawn:
+    CHAN Q -1
+    Stop
+  Active:
+    TNT1 A 0 A_PlaySound("DSCHAFIR", CHAN_BODY, 1.0, 1)
+    CHAN NOP 4
+    Goto Active+1
+  Inactive:
+    CHAN Q -1 A_StopSound(CHAN_BODY)
+    Stop
+  }
+}
+
+Actor Chandelier4Off 29431
+{
+  Radius 10
+  Height 21
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    CHAN Q -1
+    Stop
+  }
+}
+
+Actor Chandelier4On 29432
+{
+  Radius 10
+  Height 21
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("DSCHAFIR", CHAN_BODY, 1.0, 1)
+    CHAN NOP 4
+    Goto Spawn+2
+  }
+}

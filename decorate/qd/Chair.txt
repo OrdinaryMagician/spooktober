@@ -1,0 +1,13 @@
+Actor Chair 29419
+{
+  +FloorClip
+  +Solid
+  Height 30
+  Radius 15
+  States
+  {
+  Spawn:
+    CHAI A -1
+    Stop
+  }
+}

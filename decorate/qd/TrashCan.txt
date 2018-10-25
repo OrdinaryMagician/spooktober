@@ -1,0 +1,18 @@
+//////////////////////////////
+/////TRASH CAN1///////////////SPRITE//DUKE NUKEM
+//////////////////////////////
+
+ACTOR TrashCan1 29433
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    TRAC A -1
+    Stop
+  }
+}
+

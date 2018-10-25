@@ -56,3 +56,12 @@ texture CANDLES1
  pic CANDLES1 tics 8
  pic CANDLES2 tics 8
  pic CANDLES3 tics 8
+
+//// quakedoomnukem cz
+texture PORT_1 range PORT_4 tics 8 oscillate //aging portrait
+
+texture CLOCK_1 range CLOCK_5 tics 6 oscillate //grandfather clock
+
+texture PORTAL_1 range PORTAL_4 tics 2 //black n white portal
+
+texture BWAT_01 range BWAT_10 tics 4 //water

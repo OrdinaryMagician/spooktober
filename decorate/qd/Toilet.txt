@@ -1,0 +1,49 @@
+ACTOR Toilet1 29406
+{
+  SpawnID 125
+  Tag "Toilet"
+  Health 10
+  Radius 10
+  Height 34
+  Mass 10000000
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  +OLDRADIUSDMG
+  DeathSound "BREAK1"
+  States
+  {
+  Spawn:
+    TOIL A 6
+    Loop
+  Death:
+    TOIL A 1 A_Scream
+    TOIL B 4
+	TOIL C 2
+	TOIL D 2
+	TOIL E 2
+	TOIL F 3
+	Goto Water
+  Water:
+    TOIF A 3 A_PlaySound ("TOILET1")
+	TOIF B 3
+	TOIF C 3
+	TOIF D 3
+	TOIF A 3
+	TOIF B 3
+	TOIF C 3
+	TOIF D 3
+    TOIF A 3
+	TOIF B 3
+	TOIF C 3
+	TOIF D 3
+    TOIF A 3
+	TOIF B 3
+	TOIF C 3
+	TOIF D 3
+	Loop
+  }
+}

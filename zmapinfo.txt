@@ -78,7 +78,6 @@ Map SPOOK05 lookup "SP_SPOOK05"
 Map SPOOK06 lookup "SP_SPOOK06"
 {
 	sky1 = "URSK6", 0.00666
-	par = 1
 	music = "OCCULT"
 	levelnum = 7
 }
@@ -149,6 +148,10 @@ Map SECRET03 lookup "SP_SECRET03"
 Map SECRET04 lookup "SP_SECRET04"
 {
 	levelnum = 18
+	sky1 = "SKY", 0
+	music = "Q"
+	noinfighting
+	nojump
 }
 
 Map SECRET05 lookup "SP_SECRET05"

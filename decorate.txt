@@ -3,3 +3,15 @@
 
 // for Giraffe Man's map
 #include "decorate/diabolist.dec"
+
+#include "decorate/qd/trees.txt"
+#include "decorate/qd/CyberMastermind.txt"
+#include "decorate/qd/MarineStuff.txt"
+#include "decorate/qd/Toilet.txt"
+#include "decorate/qd/FoodStuff.txt"
+#include "decorate/qd/Chair.txt"
+#include "decorate/qd/Box.txt"
+#include "decorate/qd/Chandelier.txt"
+#include "decorate/qd/BrokenLamp.txt"
+#include "decorate/qd/PlasmaGlobe.txt"
+#include "decorate/qd/TrashCan.txt"

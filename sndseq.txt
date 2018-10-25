@@ -12,3 +12,10 @@ end
 	playrepeat misc/wlloop31
 	stopsound misc/wlend31
 end
+
+:WoodDoor
+	Door 2
+	playuntildone	doorswing2/start
+	playrepeat		doorswing2/start
+	stopsound		doorswing2/stop
+end

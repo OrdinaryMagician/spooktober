@@ -14,12 +14,12 @@ A Halloween 2018 map pack for Doom.
 
 ### Current status
 
-Maps completed: 9 / 19
-Slots taken: 19 / 19
+Maps completed: 10 / 19
+Slots taken: 18 / 19
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
 - **SPOOK01**: Untitled Map - Jaxxoon R
-- **SPOOK02**: A Baron's Nightmare - Rachael [completed]
+- **SPOOK02**: A Baron's Nightmare - Rachael [completed] [par time set]
 - **SPOOK03**: Pumpkin Head - Pixel Eater
 - **SPOOK04**: Untitled Map - zrrion the insect
 - **SPOOK05**: The Unpowered Spaceship - CanSteam [completed]
@@ -27,12 +27,12 @@ Slots taken: 19 / 19
 - **SPOOK07**: Untitled Map - A.Gamma
 - **SPOOK08**: The Graveyard Shift - Batandy [completed]
 - **SPOOK09**: Untitled Map - Camper125Lv
-- **SPOOK10**: Untitled Map - Rachael
+- **SPOOK10**: Free Slot
 - **SPOOK11**: Large House of Illusions - leodoom85
 - **SPOOK12**: Alone in the Dark - ImpieTwo [completed]
-- **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame [completed]
+- **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame [completed] [par time set]
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man
 - **SECRET02**: Abandoned Warehouse - CardBoxNeko
-- **SECRET03**: The Crimson Flow - Rachael [completed]
-- **SECRET04**: Mansion of Despair - QuakedoomNukem Cz
-- **SECRET05**: Golden Slaughterer - Marisa Kirisame [completed]
+- **SECRET03**: The Crimson Flow - Rachael [completed] [par time set]
+- **SECRET04**: Mansion of Despair - QuakedoomNukem Cz [completed]
+- **SECRET05**: Golden Slaughterer - Marisa Kirisame [completed] [par time set]
