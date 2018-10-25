@@ -80,10 +80,7 @@ Texture "SPPNT02", 256, 256
 
 Texture "SPPNT03", 256, 256
 {
-	Patch "PAGWALL", 0, 0
-	{
-		Translation "0:255=@75[255,255,255]"
-	}
+	Patch "SPPBAS3", 0, 0
 	Patch "SPFRAME", 0, 0
 	{
 		Style Overlay
