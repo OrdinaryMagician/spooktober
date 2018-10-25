@@ -105,4 +105,13 @@ DoomEdNums
 	11010 = Candolier
 	11011 = Scyth
 	11012 = ChainedDown
+	11013 = BigStem
+	11014 = LittleStem
+	11015 = InvertedBlueTorch
+	11016 = InverterabilitySphere
+	11017 = InvertedMegasphere
+	11018 = InvertedPlasmaRifle
+	11019 = InvertedBFG
+	11020 = InvertedRockets
+	11021 = InvertedBlurSphere
 }

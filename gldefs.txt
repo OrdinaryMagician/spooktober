@@ -1498,10 +1498,30 @@ Frame AGTCD { Light AgTorchLight2 }
 }
 
 // pixel eater
-hardwareshader postprocess screen
+hardwareshader postprocess scene
 {
 	name "Screemish"
 	shader "shaders/glsl/Screemish.fp" 330
+}
+
+skybox PHSKY //fliptop
+{
+	PHSKYN
+	PHSKYE
+	PHSKYS
+	PHSKYW
+	PHSKYT
+	PHSKYB
+}
+
+skybox PHSKY2 //fliptop
+{
+	PHSKY2N
+	PHSKY2E
+	PHSKY2S
+	PHSKY2W
+	PHSKY2T
+	PHSKY2B
 }
 
 pointlight SpookerBody
@@ -1531,4 +1551,24 @@ object Spooker
 object SpookerBall
 {
 	frame BAL7 { light SpookerSpit }
+}
+
+object InvertedBlurSphere
+{
+	frame INVS { light BLURSPHERE1 }
+
+	frame INVSA { light BLURSPHERE2 }
+	frame INVSB { light BLURSPHERE3 }
+	frame INVSC { light BLURSPHERE4 }
+	frame INVSD { light BLURSPHERE5 }
+}
+
+object InvertedMegaSphere
+{
+	frame MEGA { light MEGASPHERE }
+}
+
+object InverterabilitySphere
+{
+	frame PINV { light INVULN }
 }

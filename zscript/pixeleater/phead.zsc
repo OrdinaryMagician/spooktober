@@ -8,7 +8,7 @@ class MapShader : EventHandler
 
 		if( p )
 		{
-			if( level.levelnum == 4 )
+			if( level.mapname ~== "SPOOK03" )
 			{
 				Shader.SetEnabled( p, "Screemish", true );
 			}
@@ -29,7 +29,7 @@ class Scyth : Fist
 
 	Default
 	{
-		Obituary "You got harvested by the Reaper's red thumb" ;
+		Obituary "You were harvested by the Reaper's red thumb" ;
 		Tag "Scyth" ;
 		Weapon.SlotNumber 1;
 		+WEAPON.CHEATNOTWEAPON;
@@ -104,6 +104,42 @@ extend class Scyth
 	}
 }*/
 
+class UpBlood : Blood
+{
+	Default
+	{
+		+NOGRAVITY
+	}
+	States
+	{
+	Spawn:
+		BLUD CBA 8 A_ChangeVelocity( vel.x, vel.y, 8 );
+		Stop;
+	}
+}
+
+class BigStem : BigTree
+{
+	//&Category Spooktober
+	States
+	{
+	Spawn:
+		STEM A -1;
+		Stop;
+	}
+}
+
+class LittleStem : Stalagtite
+{
+	States
+	{
+	//&Category Spooktober
+	Spawn:
+		STEM B -1;
+		Stop;
+	}
+}
+
 class Candolier : Candelabra
 {
 	//&Category Spooktober
@@ -121,6 +157,110 @@ class Candolier : Candelabra
 	}
 }
 
+
+class InvertedBlueTorch : ShortBlueTorch
+{
+	//&Category Spooktober
+	Default
+	{
+		//+SPAWNCEILING
+		+NOGRAVITY
+		+FORCEYBILLBOARD
+	}
+	States
+	{
+	Spawn:
+		IVBT ABCD 4 BRIGHT;
+		Loop;
+	}
+}
+
+class InvertedMegaSphere : MegaSphere
+{
+	//&Category Spooktober
+	Default
+	{
+		YScale -1 ;
+		+FORCEXYBILLBOARD ;
+	}
+}
+
+class InvertedBlurSphere : BlurSphere
+{
+	//&Category Spooktober
+	Default
+	{
+		//YScale -1 ;
+		+FORCEXYBILLBOARD ;
+	}
+	States
+	{
+	Spawn:
+		INVS ABCD 6 Bright ;
+		Loop ;
+	}
+}
+
+class InverterabilitySphere : InvulnerabilitySphere
+{
+	//&Category Spooktober
+	Default
+	{
+		YScale -1 ;
+		+FORCEXYBILLBOARD ;
+	}
+}
+
+class InvertedRockets : RocketBox
+{
+	//&Category Spooktober
+	Default
+	{
+		//YScale -1 ;
+	}
+	States
+	{
+	Spawn:
+		IVRK A -1 ;
+		Stop ;
+	}
+}
+
+class InvertedPlasmaRifle : Inventory
+{
+	//&Category Spooktober
+	Default
+	{
+		YScale -1 ;
+		Inventory.PickupMessage "" ;
+		+INVENTORY.QUIET
+	}
+	States
+	{
+	Spawn:
+		PLAS A -1;
+		Stop;
+	}
+}
+
+class InvertedBFG : Inventory
+{
+	//&Category Spooktober
+	Default
+	{
+		YScale -1 ;
+		Inventory.PickupMessage "" ;
+		+INVENTORY.QUIET
+		Height 20 ;
+	}
+	States
+	{
+	Spawn:
+		BFUG A -1;
+		Stop;
+	}
+}
+
 class PeelinDemon : CyberDemon
 {
 	//&Category Spooktober
@@ -128,6 +268,55 @@ class PeelinDemon : CyberDemon
 	{
 		Translation "CyberPeelin" ;
 		Obituary "You're still you, but to a crisp" ;
+		+SPAWNCEILING
+		+NOGRAVITY
+		+DONTTHRUST
+		+DONTFALL
+		+DROPOFF
+		BloodType "UpBlood" ;
+	}
+	States
+	{
+	Spawn:
+		SYBR AB 10 A_Look;
+		Loop;
+	See:
+		SYBR A 3 A_Hoof;
+		SYBR ABBCC 3 A_Chase;
+		SYBR D 3 A_Metal;
+		SYBR D 3 A_Chase;
+		Loop;
+	Missile:
+		TNT1 A 0 A_JumpIf( Random( 1, 4 ) == 1, "ArchAttack" );
+		SYBR E 6 A_FaceTarget;
+		SYBR F 12 A_CyberAttack;
+		SYBR E 12 A_FaceTarget;
+		SYBR F 12 A_CyberAttack;
+		SYBR E 12 A_FaceTarget;
+		SYBR F 12 A_CyberAttack;
+		Goto See;
+	ArchAttack:
+		TNT1 A 0 BRIGHT A_VileStart;
+		SYBR E 10 BRIGHT A_FaceTarget;
+		SYBR E 8 BRIGHT A_VileTarget;
+		SYBR E 48 BRIGHT A_FaceTarget;
+		TNT1 A 0 A_FaceTarget;
+		TNT1 A 0 A_CyberAttack ;
+		SYBR F 8 BRIGHT A_VileAttack;
+		SYBR F 20 BRIGHT;
+		Goto See;
+	Pain:
+		SYBR G 10 A_Pain;
+		Goto See;
+	Death:
+		SYBR H 10;
+		SYBR I 10 A_Scream;
+		SYBR JKL 10;
+		SYBR M 10 A_NoBlocking;
+		SYBR NO 10;
+		SYBR P 30;
+		SYBR P -1 A_BossDeath;
+		Stop;
 	}
 }
 
@@ -154,6 +343,7 @@ class BoneyOne : Revenant
 		Translation "BoneDry" ;
 		Health 600 ;
 		Obituary "The skeleton played Xylophone with your ribcage" ;
+		+NOINFIGHTING
 	}
 	States
 	{
@@ -484,7 +674,7 @@ class Plasmaster : SpiderMastermind
 	Default
 	{
 		Scale 2 ;
-		Health 6000;
+		Health 4500;
 		Radius 128;
 		Height 200;
 		Obituary "%o stood in awe of the Plasmaster." ;
@@ -584,7 +774,7 @@ extend class Plasmaster
 		if (target)
 		{
 			A_FaceTarget();
-			SpawnMissileZ( -8, target, "PlasmasterPlasma");
+			SpawnMissileZ( 0, target, "PlasmasterPlasma");
 		}
 	}
 }

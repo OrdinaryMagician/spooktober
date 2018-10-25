@@ -53,10 +53,10 @@ Map SPOOK02 lookup "SP_SPOOK02"
 Map SPOOK03 lookup "SP_SPOOK03"
 {
 	levelnum = 4
-	sky1 = "SKY1", 0.008
+	sky1 = "PHSKY"
+	sky2 = "PHSKY2"
 	par = 30
-	//music = "MikeMyer"
-	music = "silvreye"
+	music = "SILVREYE"
 }
 
 Map SPOOK04 lookup "SP_SPOOK04"

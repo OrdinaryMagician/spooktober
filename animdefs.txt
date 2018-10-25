@@ -45,6 +45,7 @@ TEXTURE l4in
 
 Texture PUMPHED1 range PUMPHED8 tics 4
 Texture FIRBLUE1 range FIRBLUE2 tics 4
+switch SW1PHEX on pic SW2PHEX tics 0
 
 Warp2 Texture LIVEVINE 0.04
 
