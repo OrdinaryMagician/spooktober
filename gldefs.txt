@@ -198,6 +198,16 @@ skybox ACIDSKY fliptop
 	textures/thief/skyhw/acidb.png
 }
 
+skybox HUBSKY fliptop
+{
+	graphics/SkySetB_back.png
+	graphics/SkySetB_left.png
+	graphics/SkySetB_front.png
+	graphics/SkySetB_right.png
+	graphics/SkySetB_up.png
+	graphics/SkySetB_down.png
+}
+
 flickerlight NLORDBALLBIG
 {
 	color 0.6 0.1 1.0

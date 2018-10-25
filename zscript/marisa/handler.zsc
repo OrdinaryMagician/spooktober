@@ -127,8 +127,8 @@ Class SpooktoberGlobals : Thinker
 			return (v.completion[9]&&v.completion[10]&&v.completion[11]);
 		else if ( n == 4 )	// basement (final boss)
 			return (v.completion[12]);
-		else if ( n == 5 )	// secret maps (SECRET05 is optional)
-			return (v.completion[13]&&v.completion[14]&&v.completion[15]&&v.completion[16]);
+		else if ( n == 5 )	// secret maps
+			return (v.completion[13]&&v.completion[14]&&v.completion[15]&&v.completion[16]&&v.completion[17]);
 		return false;
 	}
 
@@ -411,7 +411,7 @@ Class SpooktoberHandler : EventHandler
 			String aname = StringTable.Localize(String.Format("$SP_AUTHOR%d",tdata.HitLine.args[2]));
 			String atitle = StringTable.Localize(String.Format("$SP_TITLE%d",tdata.HitLine.args[2]));
 			String amessage = StringTable.Localize(String.Format("$SP_MESSAGE%d",tdata.HitLine.args[2]));
-			double ypos = 150;
+			double ypos = 130;
 			int len;
 			len = titlefont.StringWidth(aname);
 			Screen.DrawText(titlefont,Font.CR_WHITE,(320.-len)/2,ypos,aname,DTA_Bottom320x200,true);
@@ -419,8 +419,13 @@ Class SpooktoberHandler : EventHandler
 			len = authorfont.StringWidth(atitle);
 			Screen.DrawText(authorfont,Font.CR_GOLD,(320.-len)/2.,ypos,atitle,DTA_Bottom320x200,true);
 			ypos += authorfont.GetHeight()+6;
-			len = commentfont.StringWidth(amessage);
-			Screen.DrawText(commentfont,Font.CR_GREEN,(320.-len)/2.,ypos,amessage,DTA_Bottom320x200,true);
+			let bl = commentfont.BreakLines(amessage,300);
+			for ( int i=0; i<bl.Count(); i++ )
+			{
+				len = commentfont.StringWidth(bl.StringAt(i));
+				Screen.DrawText(commentfont,Font.CR_GREEN,(320.-len)/2.,ypos,bl.StringAt(i),DTA_Bottom320x200,true);
+				ypos += commentfont.GetHeight()+1;
+			}
 			return;
 		}
 		if ( (tdata.HitLine.args[0] != 10) || !SpooktoberGlobals.HasTalkedToFirstMonk() ) return;

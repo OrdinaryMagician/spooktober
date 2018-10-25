@@ -822,4 +822,10 @@ Sprite "TFGSA0", 7, 7
 	Patch "TFOGH0", 0, 0
 }
 
+Texture "WALL11_T", 128, 256
+{
+	Patch "WALL11", 0, 0
+	Patch "WALL11", 0, 128
+}
+
 // End of texture definitions

@@ -1,25 +1,25 @@
 //Trees
 
-ACTOR Tree1 29391 {
+ACTOR Tree8 29391 {
 	Radius 32
 	Height 162
 	ProjectilePassHeight -16
 	+SOLID
 	States {
 		Spawn:
-			TRE1 A -1
+			TRE8 A -1
 			STOP
 	}
 }
 
-ACTOR Tree2 29392 {
+ACTOR Tree9 29392 {
 	Radius 76
 	Height 199
 	ProjectilePassHeight -16
 	+SOLID
 	States {
 		Spawn:
-			TRE2 A -1
+			TRE9 A -1
 			STOP
 	}
 }
