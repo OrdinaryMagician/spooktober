@@ -233,6 +233,7 @@ SP_AUTHOR14 = "Caligari87";
 SP_AUTHOR15 = "Jaxxoon R";
 SP_AUTHOR16 = "ImpieTwo";
 SP_AUTHOR17 = "SLADE 3";
+SP_AUTHOR18 = "GZDoom Builder";
 
 SP_TITLE0 = "Mapper, Scripter, Magician";
 SP_TITLE1 = "Mapper, Speedrunner";
@@ -252,6 +253,7 @@ SP_TITLE14 = "Tester";
 SP_TITLE15 = "Mapper";
 SP_TITLE16 = "Mapper";
 SP_TITLE17 = "Program that crashes all the time";
+SP_TITLE18 = "Editor with priorities";
 
 SP_MESSAGE0 = "\"I'd say this surpasses my 20 Heretics map.\"";
 SP_MESSAGE1 = "";
@@ -271,3 +273,4 @@ SP_MESSAGE14 = "";
 SP_MESSAGE15 = "";
 SP_MESSAGE16 = "";
 SP_MESSAGE17 = "\"SLADE has crashed unexpectedly.\"";
+SP_MESSAGE18 = "\"Models, Lights? Sure! ZScript? What's that?\"";
