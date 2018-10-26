@@ -626,7 +626,8 @@ Class SpooktoberHandler : EventHandler
 		else if ( e.Name ~== "debug_skipall" )
 		{
 			let g = SpooktoberGlobals.GetInstance();
-			for ( int i=0; i<18; i++ ) g.completion[i] = true;
+			int mx = e.Args[0]?18:13;
+			for ( int i=0; i<mx; i++ ) g.completion[i] = true;
 			for ( int i=0; i<5; i++ ) g.unlocks[i] = true;
 			g.hastalked = true;
 			g.stage = 5;

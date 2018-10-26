@@ -3216,3 +3216,142 @@ Class mkTeleportBeacon : Actor
 		Wait;
 	}
 }
+
+Class mkRevRainNuke : Actor
+{
+	Default
+	{
+		Scale 32.0;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+DONTSPLASH;
+		ReactionTime 30;
+	}
+	void A_BlowUp()
+	{
+		// how loud can it be?
+		A_PlaySound("misc/nuke",CHAN_BODY,attenuation:ATTN_NONE);
+		A_PlaySound("misc/nuke",CHAN_5,attenuation:ATTN_NONE);
+		A_PlaySound("misc/nuke",CHAN_6,attenuation:ATTN_NONE);
+		A_PlaySound("misc/nuke",CHAN_7,attenuation:ATTN_NONE);
+		A_QuakeEx(9,9,9,400,0,65535,"",QF_RELATIVE|QF_SCALEDOWN);
+		for ( int i=0; i<360; i+=15 )
+		{
+			for ( int j=1; j<8; j++ )
+			{
+				let p = Spawn("mkBigPoof",pos);
+				p.vel = (cos(i),sin(i),0)*j*10;
+			}
+		}
+	}
+	void A_CommenceTheBoning()
+	{
+		// rain revs along the ceiling
+		Vector3 spos = pos;
+		spos.z = ceilingz-64;
+		for ( int i=0; i<12; i++ )
+		{
+			let r = Spawn("mkRevRain",spos+(FRandom[OhGodWhy](-1400,1400),FRandom[OhGodWhy](-2800,1300),FRandom[OhGodWhy](-64,0)));
+			r.ChangeTid(tid);
+		}
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay A_BlowUp();
+		NKXP BCDEFGHIJKL 8 BRIGHT;
+		NKXP MNOPQRSTUV 8 BRIGHT A_CommenceTheBoning();
+		TNT1 A 8
+		{
+			A_SetTics(38-ReactionTime);
+			A_CommenceTheBoning();
+			A_Countdown();
+		}
+		Wait;
+	}
+}
+
+Class mkBigPoof : Actor
+{
+	Default
+	{
+		RenderStyle "Translucent";
+		Radius 8;
+		Height 2;
+		Alpha 0.5;
+		Scale 15.0;
+		Gravity 0.5;
+		+THRUACTORS;
+		+DROPOFF;
+		+CANPASS;
+		+DONTSPLASH;
+	}
+	States
+	{
+	Spawn:
+		SDST A 1 BRIGHT
+		{
+			A_SetScale(scale.x*1.01,scale.y*0.99);
+			A_FadeOut(0.003);
+		}
+		Wait;
+	}
+}
+
+Class mkRevRain : Actor
+{
+	double rollvel;
+
+	Default
+	{
+		RenderStyle "Translucent";
+		Gravity 0.35;
+		Speed 10;
+		+ROLLSPRITE;
+		+ROLLCENTER;
+		+INTERPOLATEANGLES;
+		+DROPOFF;
+		+CANPASS;
+		+THRUACTORS;
+	}
+	States
+	{
+	Spawn:
+		SKEL R 0 NoDelay
+		{
+			Scale.x = RandomPick[OhGodWhy](-1,1);
+			Scale *= FRandom[OhGodWhy](0.4,1.4);
+			A_PlaySound("misc/revloop",CHAN_VOICE,0.1,true,3.0);
+			rollvel = FRandom[OhGodWhy](10,30)*RandomPick[OhGodWhy](-1,1);
+		}
+		SKEL R 1
+		{
+			A_FadeIn();
+			roll += rollvel;
+			if ( pos.z <= floorz )
+			{
+				gravity = 1;
+				alpha = 1.0;
+				roll = 0;
+				return ResolveState("Dance")+Random[OhGodWhy](0,5);
+			}
+			return ResolveState(null);
+		}
+		Wait;
+	Dance:
+		SKEL RRRRR 1 A_Wander(CHF_DONTTURN);
+		SKEL R 0
+		{
+			if ( pos.z <= floorz )
+			{
+				A_PlaySound("thief/dirt",CHAN_BODY,0.3,false,2.0);
+				if ( !Random[OhGodWhy](0,10) )
+					vel += (FRandom[OhGodWhy](-5,5),FRandom[OhGodWhy](-5,5),12);
+			}
+			Scale.x *= -1;
+			if ( !Random[OhGodWhy](0,2) )
+				movedir = Random[OhGodWhy](0,7);
+		}
+		Loop;
+	}
+}

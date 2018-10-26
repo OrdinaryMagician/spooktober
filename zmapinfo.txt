@@ -21,6 +21,7 @@ Cluster 666
 {
 	Hub
 	ExitText = Lookup, "SP_EXTXT"
+	Pic = "ENDMAN"
 }
 
 ClearEpisodes
@@ -35,8 +36,8 @@ Map SPOOKHUB lookup "SP_HUB"
 	EvenLighting
 	RememberState
 	Music = "D_SPKHUB"
-	Next = "EndTitle"
-	SecretNext = "EndTitle"
+	Next = "EndGame2"
+	SecretNext = "EndGame2"
 	levelnum = 1
 	Sky1 = "HUBSKY"
 }

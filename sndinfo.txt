@@ -72,6 +72,10 @@ goat/thump dsthump
 tim/grunt timgrunt
 misc/voice dlgvoice
 $limit misc/voice 32
+misc/nuke bigfckx
+misc/revloop dsskestl
+$limit misc/revloop 32
+$pitchshift misc/revloop 5
 // from .blank
 misc/bossvoice bvoice
 $limit misc/bossvoice 32

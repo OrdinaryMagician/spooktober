@@ -7,3 +7,4 @@ C9_DARK : Dark Clouds - C9-La Creme
 CDE-WINT : Winter Frontiers - CDE
 VANDNBRG : Vandenburg Airfield from Deus Ex
 STEPS, DRIPS, MONSTER : Tracks from Alone in the Dark series
+D_SPOOK : Spooky Scary Skeletons by Andrew Gold

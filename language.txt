@@ -212,7 +212,23 @@ SP_SECRET05 = "\cxGolden Slaughterer\c- - by: Marisa Kirisame";
 
 // Exit Text
 // TODO write something here
-SP_EXTXT = "Thanks for playing!";
+SP_EXTXT =
+	"Thank you for playing\n"
+	"the Spooktober Community Map Project!\n"
+	"\n"
+	"I hope you've enjoyed the maps, we worked\n"
+	"very hard to make them.\n"
+	"\n"
+	"Overall, working on this was really fun and\n"
+	"I met some new, promising mappers in the\n"
+	"process. I'd love to do another community\n"
+	"project like this sometime again, though\n"
+	"hopefully not with such a tight deadline. :P\n"
+	"\n"
+	"Well, that's pretty much it from me.\n"
+	"Happy Halloween!\n"
+	"\n"
+	"    - Marisa Kirisame";
 
 // Author credits
 SP_AUTHOR0 = "Marisa Kirisame";
