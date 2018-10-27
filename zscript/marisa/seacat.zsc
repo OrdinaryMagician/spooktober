@@ -312,7 +312,7 @@ Class mkLesserGoatServant : Actor
 		DamageFactor "Magic", 0;
 		DamageFactor "AntiMagic", 999999999;
 		Alpha 0;
-		Health 60;
+		Health 100;
 		PainChance 150;
 		Scale 0.8;
 		Radius 14;
@@ -624,7 +624,7 @@ Class mkGoatServant : Actor
 		DamageFactor "Magic", 0;
 		DamageFactor "AntiMagic", 999999999;
 		Alpha 0;
-		Health 250;
+		Health 200;
 		PainChance 100;
 		Scale 1.2;
 		Radius 22;
@@ -1077,7 +1077,7 @@ Class Model1873 : DoomWeapon
 		invoker.t.hity.Clear();
 		invoker.t.hitz.Clear();
 		invoker.t.Trace(Vec2OffsetZ(0,0,player.viewz),CurSector,x,PLAYERMISSILERANGE,0);
-		int totaldamage = Random[GunShot](20,30)*3;
+		int totaldamage = Random[GunShot](30,40)*3;
 		for ( int i=0; i<invoker.t.hitlist.Size(); i++ )
 		{
 			Vector3 hitdir = (cos(invoker.t.hitangles[i])*cos(invoker.t.hitpitches[i]),sin(invoker.t.hitangles[i])*cos(invoker.t.hitpitches[i]),-sin(invoker.t.hitpitches[i]));
@@ -1431,7 +1431,7 @@ Class mkSecret05GoatInvasion : Actor
 		// 1
 		waves[0].lessergoats = 10;
 		waves[0].goatbudget = 2;
-		waves[0].shells = 6;
+		waves[0].shells = 8;
 		waves[0].stimpacks = 4;
 		waves[0].goattid = 201;
 		waves[0].ammotid = 301;
@@ -1439,7 +1439,7 @@ Class mkSecret05GoatInvasion : Actor
 		// 2
 		waves[1].lessergoats = 15;
 		waves[1].goatbudget = 4;
-		waves[1].shells = 6;
+		waves[1].shells = 8;
 		waves[1].stimpacks = 6;
 		waves[1].goattid = 202;
 		waves[1].ammotid = 302;
@@ -1451,8 +1451,8 @@ Class mkSecret05GoatInvasion : Actor
 		waves[2].lessergoats = 20;
 		waves[2].goats = 5;
 		waves[2].goatbudget = 5;
-		waves[2].shellboxes = 2;
-		waves[2].shells = 4;
+		waves[2].shellboxes = 3;
+		waves[2].shells = 5;
 		waves[2].medikits = 1;
 		waves[2].stimpacks = 6;
 		waves[2].goattid = 203;
@@ -1465,8 +1465,8 @@ Class mkSecret05GoatInvasion : Actor
 		waves[3].lessergoats = 20;
 		waves[3].goats = 5;
 		waves[3].goatbudget = 5;
-		waves[3].shellboxes = 2;
-		waves[3].shells = 4;
+		waves[3].shellboxes = 4;
+		waves[3].shells = 6;
 		waves[3].stimpacks = 8;
 		waves[3].goattid = 204;
 		waves[3].ammotid = 304;
@@ -1478,7 +1478,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[4].lessergoats = 25;
 		waves[4].goats = 10;
 		waves[4].goatbudget = 8;
-		waves[4].shells = 4;
+		waves[4].shells = 6;
 		waves[4].stimpacks = 8;
 		waves[4].goattid = 205;
 		waves[4].ammotid = 305;
@@ -1490,9 +1490,9 @@ Class mkSecret05GoatInvasion : Actor
 		waves[5].lessergoats = 30;
 		waves[5].goats = 10;
 		waves[5].goatbudget = 8;
-		waves[5].shellboxes = 2;
+		waves[5].shellboxes = 4;
 		waves[5].shells = 6;
-		waves[5].medikits = 2;
+		waves[5].medikits = 3;
 		waves[5].stimpacks = 8;
 		waves[5].goattid = 206;
 		waves[5].ammotid = 306;
@@ -1504,8 +1504,8 @@ Class mkSecret05GoatInvasion : Actor
 		waves[6].lessergoats = 20;
 		waves[4].goats = 5;
 		waves[6].goatbudget = 10;
-		waves[6].shellboxes = 2;
-		waves[6].stimpacks = 8;
+		waves[6].shellboxes = 4;
+		waves[6].stimpacks = 10;
 		waves[6].goattid = 205;
 		waves[6].ammotid = 305;
 		waves[6].healthtid = 405;
@@ -1516,9 +1516,9 @@ Class mkSecret05GoatInvasion : Actor
 		waves[7].lessergoats = 25;
 		waves[7].goats = 10;
 		waves[7].goatbudget = 6;
-		waves[7].shellboxes = 2;
-		waves[7].shells = 4;
-		waves[7].stimpacks = 6;
+		waves[7].shellboxes = 3;
+		waves[7].shells = 6;
+		waves[7].stimpacks = 8;
 		waves[7].goattid = 207;
 		waves[7].ammotid = 307;
 		waves[7].healthtid = 407;
@@ -1529,7 +1529,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[8].lessergoats = 20;
 		waves[8].goats = 20;
 		waves[8].goatbudget = 6;
-		waves[8].shellboxes = 2;
+		waves[8].shellboxes = 3;
 		waves[8].medikits = 4;
 		waves[8].goattid = 208;
 		waves[8].ammotid = 308;
@@ -1540,7 +1540,7 @@ Class mkSecret05GoatInvasion : Actor
 		// 10
 		waves[9].lessergoats = 30;
 		waves[9].goatbudget = 6;
-		waves[9].shellboxes = 2;
+		waves[9].shellboxes = 3;
 		waves[9].stimpacks = 10;
 		waves[9].goattid = 209;
 		waves[9].ammotid = 309;
@@ -1551,8 +1551,8 @@ Class mkSecret05GoatInvasion : Actor
 		// 11
 		waves[10].goats = 30;
 		waves[10].goatbudget = 16;
-		waves[10].shellboxes = 4;
-		waves[10].stimpacks = 8;
+		waves[10].shellboxes = 6;
+		waves[10].stimpacks = 10;
 		waves[10].goattid = 201;
 		waves[10].ammotid = 301;
 		waves[10].healthtid = 401;

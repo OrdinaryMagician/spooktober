@@ -547,7 +547,7 @@ Class mkFallingBolt : Actor
 		FXNL MNO 1 BRIGHT
 		{
 			A_FadeIn(0.1);
-			Spawn("mkLilSpeck");
+			Spawn("mkLilSpeck",pos);
 			vel.z -= 0.5;
 		}
 		Loop;
@@ -1308,7 +1308,7 @@ Class mkNightmareLord : Actor
 			A_NoBlocking();
 			scnt = 0;
 		}
-		NLRD Q 0 A_Scream();
+		NLRD Q 0 { A_Scream(); A_Stop(); }
 		NLRD Q 1 A_JumpIf(A_Levitate(),1);
 		Wait;
 		NLRD Q 1 A_JumpIf(A_Spark(),1);
