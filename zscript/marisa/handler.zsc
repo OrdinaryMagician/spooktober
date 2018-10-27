@@ -206,12 +206,6 @@ Class SpooktoberHandler : EventHandler
 	Actor bossenemy;
 	ui mkBossHealthBar bossbar;
 
-	override void OnRegister()
-	{
-		// initialize globals
-		SpooktoberGlobals.MakeInstance();
-	}
-
 	override void CheckReplacement( ReplaceEvent e )
 	{
 		if ( e.Replacee == 'BossBrain' )
@@ -242,6 +236,8 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldLoaded( WorldEvent e )
 	{
+		// initialize globals
+		SpooktoberGlobals.MakeInstance();
 		if ( !e.IsSaveGame )
 			level.ExecuteSpecial(80,null,null,false,-int('MapFadeIn'));
 		else if ( fspeed[consoleplayer] <= 0 )
