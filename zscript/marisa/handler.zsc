@@ -539,6 +539,7 @@ Class SpooktoberHandler : EventHandler
 			break;
 		case 14:
 		case 16:
+		case 18:
 			// fist only
 			mo.GiveInventory("Fist",1);
 			break;
