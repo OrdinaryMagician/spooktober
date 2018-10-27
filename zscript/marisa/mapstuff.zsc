@@ -712,7 +712,6 @@ Class mkMonkBase : Actor abstract
 	override bool Used( Actor user )
 	{
 		if ( !score ) return false;
-		if ( SpooktoberGlobals.HasTalkedToFirstMonk() && (score == 1) ) score = 2;
 		mkDialogueHandler.StartDialogueSequence(self,user,score);
 		return true;
 	}

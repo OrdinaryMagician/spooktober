@@ -372,7 +372,7 @@ Class mkDialogueHandler : EventHandler
 			speaker.score = e.Args[0];
 		}
 		else if ( e.Name ~== "talkedtofirstmonk" )
-			SpooktoberGlobals.TalkedToFirstMonk();
+			Cvar.GetCVar('talkedtofirstmonk').SetBool(true);
 		else if ( e.Name ~== "movetobasement" )
 			level.ExecuteSpecial(80,null,null,false,202);
 		else if ( e.Name ~== "dispelbosspainting" )

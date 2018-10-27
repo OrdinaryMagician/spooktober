@@ -7,22 +7,7 @@ Class SpooktoberGlobals : Thinker
 	int mapkills[2][18];
 	int mapitems[2][18];
 	int mapsecrets[2][18];
-	bool hastalked;
 	int stage;
-
-	static void TalkedToFirstMonk()
-	{
-		let v = GetInstance();
-		if ( !v ) return;
-		v.hastalked = true;
-	}
-
-	static clearscope bool HasTalkedToFirstMonk()
-	{
-		let v = GetInstance();
-		if ( !v ) return false;
-		return v.hastalked;
-	}
 
 	static void MakeInstance()
 	{
@@ -424,7 +409,7 @@ Class SpooktoberHandler : EventHandler
 			}
 			return;
 		}
-		if ( (tdata.HitLine.args[0] != 10) || !SpooktoberGlobals.HasTalkedToFirstMonk() ) return;
+		if ( (tdata.HitLine.args[0] != 10) || !talkedtofirstmonk ) return;
 		// level painting
 		// get map name from levelnum
 		String mname = "???";
@@ -537,7 +522,7 @@ Class SpooktoberHandler : EventHandler
 	{
 		// loadout management
 		let mo = players[e.playernumber].mo;
-		mo.Health = mo.SpawnHealth();
+		mo.A_ResetHealth();
 		mo.ClearInventory();
 		switch ( level.levelnum )
 		{
@@ -585,12 +570,11 @@ Class SpooktoberHandler : EventHandler
 		if ( level.levelnum != 1 ) return;
 		if ( e.Name ~== "debug_skipnext" )
 		{
-			SpooktoberGlobals.TalkedToFirstMonk();
 			int stage = SpooktoberGlobals.GetStage();
 			switch ( stage )
 			{
 			case 0:
-				SpooktoberGlobals.HasTalkedToFirstMonk();
+				Cvar.GetCVar('talkedtofirstmonk').SetBool(true);
 				SpooktoberGlobals.SetCompletion(0,true);
 				SpooktoberGlobals.SetCompletion(1,true);
 				SpooktoberGlobals.SetCompletion(2,true);
@@ -622,11 +606,11 @@ Class SpooktoberHandler : EventHandler
 		}
 		else if ( e.Name ~== "debug_skipall" )
 		{
+			Cvar.GetCVar('talkedtofirstmonk').SetBool(true);
 			let g = SpooktoberGlobals.GetInstance();
 			int mx = e.Args[0]?18:13;
 			for ( int i=0; i<mx; i++ ) g.completion[i] = true;
 			for ( int i=0; i<5; i++ ) g.unlocks[i] = true;
-			g.hastalked = true;
 			g.stage = 5;
 			level.ExecuteSpecial(80,null,null,false,-int('DebugFinish'));
 		}
