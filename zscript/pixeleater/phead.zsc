@@ -352,6 +352,15 @@ class BoneyOne : Revenant
 	}
 }
 
+Class InvertedBoney : BoneyOne
+{
+	//&Category Spooktober
+	Default
+	{
+		BloodType "UpBlood" ;
+	}
+}
+
 class WitchBrewer : PainElemental
 {
 	//&Category Spooktober

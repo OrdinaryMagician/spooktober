@@ -553,7 +553,8 @@ Class SpooktoberHandler : EventHandler
 			// scythe instead of fist
 			mo.GiveInventory("Scyth",1);
 			mo.GiveInventory("Pistol",1);
-			mo.GiveInventory("Clip",50);
+			mo.SetInventory("Clip",1);
+			mo.A_SelectWeapon("Scyth");
 			break;
 		case 14:
 		case 16:

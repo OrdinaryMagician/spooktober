@@ -114,4 +114,5 @@ DoomEdNums
 	11019 = InvertedBFG
 	11020 = InvertedRockets
 	11021 = InvertedBlurSphere
+	11022 = InvertedBoney
 }
