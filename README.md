@@ -11,6 +11,7 @@ A Halloween 2018 map pack for Doom.
   author's choice)
 - Jumpscares are discouraged, though not outright forbidden.
 - The project deadline is on the 30th of October, the day before Halloween.
+  Can be delayed if necessary for some mappers to finish their work.
 
 ### Current status
 
