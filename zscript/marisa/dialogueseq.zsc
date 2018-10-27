@@ -395,6 +395,8 @@ Class mkDialogueHandler : EventHandler
 			speaker.SetStateLabel("DropCan");
 		else if ( e.Name ~== "reggiemorph" )
 			speaker.SetStateLabel("Morph");
+		else if ( e.Name ~== "reggieend" )
+			level.ExecuteSpecial(80,speakee,null,false,-Int('MapFadeOut'));
 	}
 
 	static void StartDialogueSequence( Actor speaker, Actor speakee, int seqnum, bool bOrientSpeaker = true, bool bOrientSpeakee = true )

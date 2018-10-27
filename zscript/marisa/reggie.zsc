@@ -27,6 +27,39 @@ Class mkDialogueSequence42 : mkDialogueSequence
 		}
 	}}
 
+Class mkDialogueSequence43 : mkDialogueSequence
+{
+	override void DialogueSeq( int state )
+	{
+		switch( state )
+		{
+		case 0:
+			SetHeader("$REGGHDR");
+			StartText("$REGGDLG5");
+			break;
+		case 1:
+			StartText("$REGGDLG6");
+			break;
+		case 2:
+			StartText("$REGGDLG7");
+			break;
+		case 3:
+			StartText("$REGGDLG8");
+			break;
+		case 4:
+			StartText("$REGGDLG9");
+			break;
+		case 5:
+			StartText("$REGGDLG10");
+			break;
+		case 6:
+			EventHandler.SendNetworkEvent("reggieend");
+			EndSeq(0);
+			break;
+		}
+	}
+}
+
 Class mkBeerCan : Casing44
 {
 	Default
@@ -70,10 +103,19 @@ Class mkUncleReggie : Actor
 
 	override void Activate( Actor activator )
 	{
-		if ( !InStateSequence(CurState,FindState("Spawn")) ) return;
+		if ( !score ) return;
 		target = activator;
-		mkDialogueHandler.StartDialogueSequence(self,activator,42);
+		mkDialogueHandler.StartDialogueSequence(self,activator,score);
+		score = 0;
+		if ( !InStateSequence(CurState,FindState("Spawn")) ) return;
 		SetStateLabel("Dialogue");
+		S_ChangeMusic("Evil");
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		Score = 42;
 	}
 
 	Default
@@ -98,20 +140,23 @@ Class mkUncleReggie : Actor
 		REGG B -1 A_DropCan();
 		Stop;
 	Morph:
-		REGG C 50 A_QuakeEx(1,1,1,50,0,1200,flags:QF_RELATIVE|QF_SCALEUP,falloff:600);
 		REGG C 0
 		{
+			ACS_Execute(45,0);
+			S_ChangeMusic("ExplodHt");
+			Autosave();
+		}
+		REGG C 150 A_QuakeEx(2,2,2,150,0,1200,flags:QF_RELATIVE|QF_SCALEUP,falloff:600);
+		REGG C 0
+		{
+			bSOLID = false;
 			tracer = Spawn("Diabolist",pos);
+			tracer.Health += 4600;
+			tracer.SetTag("$REGGHDR");
 			tracer.scale = (1.0,0.7);
 			tracer.Deactivate(target);
 			tracer.angle = angle;
 			tracer.bSHOOTABLE = false;
-			tracer.special = special;
-			tracer.args[0] = args[0];
-			tracer.args[1] = args[1];
-			tracer.args[2] = args[2];
-			tracer.args[3] = args[3];
-			tracer.args[4] = args[4];
 			tracer.A_SetRenderStyle(0.0,STYLE_Translucent);
 			A_QuakeEx(1,1,1,50,0,1200,flags:QF_RELATIVE,falloff:600);
 		}
@@ -127,7 +172,7 @@ Class mkUncleReggie : Actor
 			return A_JumpIf(alpha<=0,1);
 		}
 		Wait;
-		TNT1 A 20 A_QuakeEx(1,1,1,30,0,1200,flags:QF_RELATIVE|QF_SCALEDOWN,falloff:600);
+		TNT1 A 20 A_QuakeEx(2,2,2,30,0,1200,flags:QF_RELATIVE|QF_SCALEDOWN,falloff:600);
 		TNT1 A 0
 		{
 			tracer.A_SetRenderStyle(1.0,STYLE_Normal);
@@ -135,7 +180,30 @@ Class mkUncleReggie : Actor
 			tracer.bSHOOTABLE = true;
 			tracer.target = target;
 			tracer.Activate(target);
+			let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
+			hnd.bossenemy = tracer;
 		}
-		Stop;
+		TNT1 A 1 A_JumpIf((tracer.Health<=0)&&(tracer.tics==-1),1);
+		Wait;
+		TNT1 A 0
+		{
+			scale = (1,1);
+			A_SetSize(radius,height*0.8);
+			bSOLID = true;
+			SetOrigin(tracer.pos,false);
+			S_ChangeMusic("");
+			let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
+			hnd.bossenemy = null;
+			let f = Spawn("DFire",pos);
+			f.Scale *= 2;
+			A_QuakeEx(2,2,2,50,0,1200,flags:QF_RELATIVE|QF_SCALEDOWN,falloff:600);
+		}
+		REGG D 1
+		{
+			if ( tracer ) tracer.A_FadeOut(0.04);
+			A_FadeIn(0.04);
+			Score = 43;
+		}
+		Wait;
 	}
 }

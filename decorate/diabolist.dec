@@ -2,7 +2,7 @@ Actor Diabolist : Archvile 30112
 {
 	Obituary "%o was set ablaze by a Diabolist."
 	Scale 1.5
-	Health 4400
+	Health 1400
 	Radius 30
 	Height 90
 	Mass 500

@@ -135,6 +135,7 @@ Map SECRET01 lookup "SP_SECRET01"
 	sky1 = "HELLSKY"
 	par = 300
 	sucktime = 1
+	music = "Bile"
 }
 
 Map SECRET02 lookup "SP_SECRET02"
