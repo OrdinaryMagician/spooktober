@@ -45,6 +45,9 @@ Map SPOOKHUB lookup "SP_HUB"
 Map SPOOK01 lookup "SP_SPOOK01"
 {
 	levelnum = 2
+	SmoothLighting
+	Sky1 = "gradsky"
+	Music = "Imperish"
 }
 
 Map SPOOK02 lookup "SP_SPOOK02"

@@ -834,3 +834,178 @@ Model "mkDimCube"
 	DONTCULLBACKFACES
 	FrameIndex MODL A 0 0
 }
+
+Model BlackCat
+{
+	Path "models/jaxx"
+	Model 0 "blackcat.md3"
+	Path "models/jaxx"
+	Skin 0 "blackcat.png"
+	AngleOffset 0
+	Scale 1.1 1.1 1.3
+	FrameIndex BCAT A 0 0
+	FrameIndex BCAT B 0 1
+	FrameIndex BCAT C 0 2
+	FrameIndex BCAT D 0 3
+	FrameIndex BCAT E 0 4
+	FrameIndex BCAT F 0 5
+	FrameIndex BCAT G 0 6
+	FrameIndex BCAT H 0 7
+	FrameIndex BCAT I 0 8
+	FrameIndex BCAT J 0 9
+	FrameIndex BCAT K 0 10
+	FrameIndex BCAT L 0 11
+	FrameIndex BCAT M 0 12
+	FrameIndex BCAT N 0 13
+	FrameIndex BCAT O 0 14
+	FrameIndex BCAT P 0 15
+	FrameIndex BCAT Q 0 16
+	FrameIndex BCAT R 0 17
+	FrameIndex BCAT S 0 18
+	FrameIndex BCAT T 0 19
+	FrameIndex BCAT U 0 20
+	FrameIndex BCAT V 0 21
+}
+
+Model MetalSpike
+{
+	Path "models/jaxx"
+	Model 0 "metalspike.md3"
+	Path "models/jaxx"
+	Skin 0 "metalspike.png"
+	AngleOffset 0
+	Scale 2.5 2.5 2.7
+	UseActorPitch
+	UseActorRoll
+
+	FrameIndex MSPK A 0 0
+}
+
+Model ShortMetalSpike
+{
+	Path "models/jaxx"
+	Model 0 "metalspike.md3"
+	Path "models/jaxx"
+	Skin 0 "metalspike.png"
+	AngleOffset 0
+	Offset 0 0 -78
+	Scale 2.5 2.5 2.7
+	UseActorPitch
+	UseActorRoll
+
+	FrameIndex MSPK A 0 0
+}
+
+Model Cauldron
+{
+	Path "models/jaxx"
+	Model 0 "Cauldron.md3"
+	Path "models/jaxx"
+	Skin 0 "Cauldron.png"
+	AngleOffset 0
+	Scale 1.5 1.5 1.7
+	UseActorPitch
+	UseActorRoll
+
+	FrameIndex CAUL A 0 0
+}
+
+Model Canada
+{
+	Path "models/jaxx"
+	Model 0 "Canada.md3"
+	Path "models/jaxx"
+	Skin 0 "Canada.png"
+	AngleOffset 0
+	Scale 0.9 0.9 1.1
+	UseActorPitch
+	UseActorRoll
+	DontCullBackfaces
+
+	FrameIndex CANA A 0 0
+}
+
+Model BigHallowTree
+{
+	Path "models/jaxx"
+	Model 0 "BigTree.md3"
+	Path "models/jaxx"
+	SurfaceSkin 0 0 "BLUD0424.png"
+	SurfaceSkin 0 1 "foilag2.png"
+	SurfaceSkin 0 2 "foilag1.png"
+	AngleOffset 0
+	Scale 2.0 2.0 2.1
+	UseActorPitch
+	UseActorRoll
+	DontCullBackfaces
+
+	FrameIndex MODL A 0 0
+}
+
+Model "SATURNDEVOURINGHISSON"
+{
+	Path "models/thief"
+	Model 0 "paintingp_d.3d"
+	Path "models/jaxx"
+	SurfaceSkin 0 0 "SATURN.png"
+	Path "models/thief"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.001 0.001
+	Offset 2 0 0
+	AngleOffset 90
+	UseActorPitch
+	UseActorRoll
+
+	FrameIndex MODL A 0 0
+}
+
+Model "HelloSoup"
+{
+	Path "models/thief"
+	Model 0 "paintingl_d.3d"
+	Path "models/jaxx"
+	SurfaceSkin 0 0 "BANE.png"
+	Path "models/thief"
+	SurfaceSkin 0 1 "FRAME.png"
+	Scale 0.0002 0.001 0.001
+	Offset 2 0 0
+	AngleOffset 90
+	FrameIndex MODL A 0 0
+}
+
+Model "SilWitch"
+{
+	Path "models/jaxx"
+	Model 0 "silwitch.md3"
+	Path "models/jaxx"
+	Skin 0 "noffin.png"
+	Scale 1.0 1.0 1.2
+	//Offset 2 0 0
+	AngleOffset 0
+	UseActorPitch
+	UseActorRoll
+	FrameIndex WITC A 0 0
+}
+
+Model RazCameo
+{
+	Path "models/jaxx"
+	Model 0 "razcameo.md3"
+	Path "models/jaxx"
+	SurfaceSkin 0 0 "razwing.png"
+	Path "models/jaxx"
+	SurfaceSkin 0 1 "razbod.png"
+	AngleOffset 0
+	Scale 1.1 1.1 1.2
+	FrameIndex RAZI A 0 0
+	FrameIndex RAZI B 0 1
+	FrameIndex RAZI C 0 2
+	FrameIndex RAZI D 0 3
+	FrameIndex RAZI E 0 4
+	FrameIndex RAZI F 0 5
+	FrameIndex RAZI G 0 6
+	FrameIndex RAZI H 0 7
+	FrameIndex RAZI I 0 8
+	FrameIndex RAZI J 0 9
+
+}

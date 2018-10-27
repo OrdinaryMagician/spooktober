@@ -191,7 +191,7 @@ BEATDLG27 = "\cgYOUR PET RABBIT WILL NEVER COME BACK\c-";
 // Map Names
 // stored here so the map scripts have easy access to them
 SP_HUB = "Gallery Of Spooks - by: Marisa Kirisame";
-SP_SPOOK01 = "Untitled - by: Jaxxoon R";
+SP_SPOOK01 = "Imperishable Fright - by: Jaxxoon R";
 SP_SPOOK02 = "A Baron's Nightmare - by: Rachael";
 SP_SPOOK03 = "Pumpkin Head - by: Pixel Eater";
 SP_SPOOK04 = "Untitled - by: zrrion the insect";
@@ -286,7 +286,7 @@ SP_MESSAGE11 = "\"Script and Share, until it is done...\"";
 SP_MESSAGE12 = "\"It's canSTEAM, not canSTREAM\"";
 SP_MESSAGE13 = "";
 SP_MESSAGE14 = "";
-SP_MESSAGE15 = "";
+SP_MESSAGE15 = "\"Hello, soup?\"";
 SP_MESSAGE16 = "";
 SP_MESSAGE17 = "\"SLADE has crashed unexpectedly.\"";
 SP_MESSAGE18 = "\"Models, Lights? Sure! ZScript? What's that?\"";

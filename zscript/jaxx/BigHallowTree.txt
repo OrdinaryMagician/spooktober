@@ -1,0 +1,19 @@
+Class BigHallowTree : Actor
+{
+Default
+{
+//$Category "Jaxx"
+	+NOINTERACTION
+	Gravity 0;
+	Height 24;
+	Radius 12;
+	Scale 0.5;
+	}
+	States
+	{
+		Spawn:
+			MODL A -1;
+			Wait;
+	}
+	
+}

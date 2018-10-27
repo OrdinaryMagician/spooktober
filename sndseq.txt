@@ -19,3 +19,27 @@ end
 	playrepeat		doorswing2/start
 	stopsound		doorswing2/stop
 end
+
+:JaxxWoodDoor
+	Door 55
+	playuntildone  thief/doorw1o
+	stopsound   thief/doorw1c
+end
+
+:JaxxSlideDoor
+	Door 56
+	playuntildone  jaxx/witchdoor1
+	stopsound   null/off
+end
+
+:JaxxBigShutter
+	Door 57
+	playrepeat jaxx/metalslide
+	stopsound  jaxx/witchdoor2
+end
+
+:JaxxCrankyDoor
+	Door 58
+	playrepeat jaxx/CrankyDoor
+	stopsound  null/off
+end

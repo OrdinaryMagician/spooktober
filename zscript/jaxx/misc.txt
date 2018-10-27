@@ -1,0 +1,104 @@
+Class SATURNDEVOURINGHISSON : mkThiefPainting
+{
+	Default
+	{
+		//$Title SATURN DEVOURING HIS SON
+		//$Category Jaxx
+		Radius 0.1;
+		Height 0;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class HelloSoup : mkThiefPainting
+{
+	Default
+	{
+		//$Title Hello, Soup?
+		//$Category Jaxx
+		Radius 0.1;
+		Height 0;
+		+NOGRAVITY;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class JaxxRose : Actor
+{
+	Default
+	{
+		//$Title Rose
+		//$Category Jaxx
+		Radius 0.1;
+		Height 0;
+		+NoInteraction;
+	}
+	States
+	{
+	Spawn:
+		JROS A -1;
+		Stop;
+	}
+}
+
+
+Class SilWitch : Actor
+{
+	Default
+	{
+		//$Title Silhouette Witch
+		//$Category Jaxx
+		Radius 0.1;
+		Height 0;
+		monster;
+		-countkill;
+		+SLIDESONWALLS;
+		+NOGRAVITY;
+		+NODROPOFF;
+		-shootable;
+		-NOBLOCKMONST;
+		+friendly;
+		+Bright
+	}
+	States
+	{
+	Spawn:
+		WITC A 1 A_Look;
+		Loop;
+	See:
+		WITC A 1 { A_facetarget(1,1);
+					A_ChangeVelocity(cos(pitch)*2,0,-sin(pitch)*2,CVF_RELATIVE|CVF_REPLACE);  
+					A_Chase(null,null,CHF_NORANDOMTURN|CHF_NOPOSTATTACKTURN|CHF_NODIRECTIONTURN|CHF_DONTMOVE);
+					}
+		Loop;
+	}
+}
+
+Class RazCameo : Actor
+{
+	Default
+	{
+		//$Title Raziel Cameo
+		//$Category Jaxx
+		Radius 0.1;
+		Height 0;
+		+Bright
+	}
+	States
+	{
+	Spawn:
+		RAZI ABCDEFGHIJ 4;
+		Loop;
+	}
+}

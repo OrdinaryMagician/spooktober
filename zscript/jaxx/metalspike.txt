@@ -1,0 +1,30 @@
+Class MetalSpike : Actor
+{
+Default
+{
+//$Category "Jaxx"
+	+INTERPOLATEANGLES;
+	+DONTTHRUST;
+	+SOLID;
+	Gravity 1;
+	Height 128;
+	Radius 8;
+	Scale 1.0;
+	}
+	States
+	{
+		Spawn:
+			MSPK A -1;
+			Wait;
+	}
+	
+}
+
+Class ShortMetalSpike : MetalSpike
+{
+Default
+{
+//$Category "Jaxx"
+	Height 32;
+	}
+}

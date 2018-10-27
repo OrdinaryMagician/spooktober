@@ -1,0 +1,21 @@
+Class BlackCat : Actor
+{
+Default
+{
+//$Category "Jaxx"
+	+INTERPOLATEANGLES;
+	+DONTTHRUST;
+	+BRIGHT;
+	Gravity 0;
+	Height 24;
+	Radius 12;
+	Scale 0.5;
+	}
+	States
+	{
+		Spawn:
+			BCAT ABCDEFGHIJKLMNOPQRSTUV 2;
+			Loop;
+	}
+	
+}

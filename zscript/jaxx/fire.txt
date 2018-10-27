@@ -1,0 +1,912 @@
+
+Class SpookFireSpawner : SwitchableDecoration
+{
+	bool bstarted;
+	
+	bool bactive;
+	
+	bool bhighlodmode;
+	
+	double DMDFireWait;
+	
+	//bool blowlodmode;
+	
+	double bclock;
+	
+	override void PostBeginPlay(void)
+	{
+		Super.PostBeginPlay();	
+		
+		if(Args[1]==0)
+		A_PlaySound("SFX/FireLoop1", CHAN_6, 1.0,1);
+		
+		switch (Args[0]) {
+		
+		case 0:
+			break;
+			
+		case 1:
+			Scale.x+=1.4;
+			Scale.y+=1.3;
+			break;
+			
+		default:
+			Scale.x+=3.9;
+			Scale.y+=3.8;
+			break;
+		
+		}
+		
+		DMDColorSelection();
+		//if(Args[2]==2)
+		//SetStateLabel("Green");
+		//if(Args[2]==3)
+		//SetStateLabel("Purple");
+		
+		bstarted=false;
+		
+	}
+	
+	override void Tick(void)
+	{
+		/*
+		
+		if(!level.frozen)
+		{
+		
+			DMDFireLODCheck();
+		
+			if(bhighlodmode)
+			{	
+			DMDFireFade();
+			DMDFireParticleSpawn();
+			}
+			else
+			DMDFireFadeIn();
+		
+		}
+		*/
+		
+		Super.Tick();
+	}
+	
+	void DMDBeFire(void)
+	{
+		if(!level.frozen)
+		{
+		
+			DMDFireLODCheck();
+		
+			if(bhighlodmode)
+			{	
+			DMDFireFade();
+			DMDFireParticleSpawn();
+			}
+			else
+			DMDFireFadeIn();
+		
+		}
+	}
+	
+	void DMDFireLODCheck(void)
+	{
+	switch (bclock) {
+		case 19:  
+			
+			if(CheckProximity("playerpawn",2048,0,CPXF_ANCESTOR|CPXF_CHECKSIGHT|CPXF_LESSOREQUAL|CPXF_NOZ))
+			{
+				//if(!target||target&&distance2D(target)>1024)
+				bhighlodmode=false;
+					//SetStateLabel("LOD");
+				break;
+			}
+			else
+			{
+			bhighlodmode=true;
+			bstarted=true;
+			//SetStateLabel("Active");
+			}
+			
+			break;
+		case 20:  bclock=0;
+			}
+		
+		bclock+=randompick(0,1);
+	}
+	
+	void DMDFireFade(void)
+	{
+		if(alpha>0)
+		alpha-=0.05;
+	}
+	
+	void DMDColorSelection(void)
+	{
+		switch (Args[2]) {
+		case 1:
+			SetStateLabel("Blue");
+			break;
+		case 2:
+			SetStateLabel("Green");
+			break;
+		case 3:
+			SetStateLabel("Purple");
+			break;
+		default:		break;
+		
+			}
+	}
+	
+	void DMDFireFadeIn(void)
+	{
+		if(alpha<1)
+		alpha+=0.1;
+	}
+	
+	void DMDFireParticleSpawn(void)
+	{
+		switch (Args[0]) {
+		case 0:  
+			DMDSmallFireParticleSpawn();
+			break;
+		case 1:
+			DMDMediumFireParticleSpawn();
+			break;
+		default:
+			DMDLargeFireParticleSpawn();
+			}
+	}
+	
+	void DMDSmallFireParticleSpawn(void)
+	{
+		
+	
+		switch (DMDFireWait) {
+		case 0:
+			if(Args[2]==0)
+			A_SpawnItemEx("SmallFlame", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("SmallFlameBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("SmallFlameGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("SmallFlamePurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 1:
+			if(Args[2]==0)
+				{
+				A_SpawnItemEx("Flame1A", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember1", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==1)
+				{
+				A_SpawnItemEx("Flame1ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember1Blue", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==2)
+				{
+				A_SpawnItemEx("Flame1AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember1Green", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==3)
+				{
+				A_SpawnItemEx("Flame1APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember1Purple", 0, 0, 0, 0, 0, 0, 0, 128);
+				}
+			break;
+		case 2:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame1B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame1BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame1BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame1BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;	
+		case 3:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame2A", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame2ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame2AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame2APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 4:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame2B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame2BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame2BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame2BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 5:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame3A", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame3ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame3AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame3APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 6:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame3B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame3BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame3BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame3BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		default:  DMDFireWait=0;
+			}
+		
+		DMDFireWait++;
+	}
+	
+	void DMDMediumFireParticleSpawn(void)
+	{
+		
+	
+		switch (DMDFireWait) {
+		case 0:
+			if(Args[2]==0)
+			A_SpawnItemEx("MediumFlame", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("MediumFlameBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("MediumFlameGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("MediumFlamePurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 1:
+			if(Args[2]==0)
+				{
+				A_SpawnItemEx("Flame4A", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember2", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==1)
+				{
+				A_SpawnItemEx("Flame4ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember2Blue", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==2)
+				{
+				A_SpawnItemEx("Flame4AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember2Green", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==3)
+				{
+				A_SpawnItemEx("Flame4APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember2Purple", 0, 0, 0, 0, 0, 0, 0, 128);
+				}
+			break;
+		case 2:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame4B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame4BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame4BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame4BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;	
+		case 3:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame5A", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame5ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame5AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame5APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 4:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame5B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame5BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame5BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame5BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 5:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame6A", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame6ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame6AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame6APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 6:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame6B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame6BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame6BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame6BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		default:  DMDFireWait=0;
+			}
+		
+		DMDFireWait++;
+	}
+
+	void DMDLargeFireParticleSpawn(void)
+	{
+		
+		switch (DMDFireWait) {
+		case 0:
+			if(Args[2]==0)
+			A_SpawnItemEx("LargeFlame", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("LargeFlameBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("LargeFlameGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("LargeFlamePurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 1:
+			if(Args[2]==0)
+				{
+				A_SpawnItemEx("Flame7A", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember2", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==1)
+				{
+				A_SpawnItemEx("Flame7ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember2Blue", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==2)
+				{
+				A_SpawnItemEx("Flame7AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember2Green", 0, 0, 0, 0, 0, 0, 0, 128);
+				Break;
+				}
+			if(Args[2]==3)
+				{
+				A_SpawnItemEx("Flame7APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+				A_SpawnItemEx("Ember2Purple", 0, 0, 0, 0, 0, 0, 0, 128);
+				}
+			break;
+		case 2:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame7B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame7BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame7BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame7BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;	
+		case 3:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame8A", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame8ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame8AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame8APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 4:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame8B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame8BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame8BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame8BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 5:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame9A", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame9ABlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame9AGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame9APurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		case 6:
+			if(Args[2]==0)
+			A_SpawnItemEx("Flame9B", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==1)
+			A_SpawnItemEx("Flame9BBlue", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==2)
+			A_SpawnItemEx("Flame9BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
+			if(Args[2]==3)
+			A_SpawnItemEx("Flame9BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
+			break;
+		default:  DMDFireWait=0;
+			}
+		
+		DMDFireWait++;
+	}
+
+	Default
+	{
+//$Category "Jaxx"
+		//$Arg0 Size
+	//$Arg0Default 0
+	//$Arg0Tooltip control the size of the fire. 0 is small, 1 is medium, 2 and above is large.
+	//$Arg1 Sounds
+	//$Arg1Default 0
+	//$Arg1Tooltip prevents it from playing sounds. 0 will play the sounds, 1 will not.
+	//$Arg2 Color
+	//$Arg2Default 0
+	//$Arg2Tooltip color of torch. 0=red, 1=blue, 2=green, 3=purple.
+  Height 50;
+  Radius 30;
+  +ClientSideOnly;
+  +NoClip;
+  +NoBlockMap;
+  +NoGravity;
+  +Bright;
+  xScale 1.8;
+  yScale 1.6;
+  //Alpha 0.0;
+  Renderstyle "Add";
+  //+NoSector;
+  +Randomize;
+  +NoInteraction;
+  }
+  States
+  {
+  Inactive:
+    TNT1 A 0 { A_PlaySound("SFX/FireDie", CHAN_7, 1.0); bStarted=false; }
+    TNT1 A 0 A_StopSound(CHAN_6);
+	TNT1 A -1;
+   Wait;
+   Active:
+    TNT1 A 0;
+    TNT1 A 0;
+    TNT1 A 0 { if(!bStarted&&Args[1]==0)
+				{
+				A_PlaySound("SFX/FireStart", CHAN_7, 1.0);
+				A_PlaySound("SFX/FireLoop1", CHAN_6, 1.0,1);
+				bStarted=true;	
+				}
+			}
+    TNT1 A 0 DMDColorSelection();
+  Spawn:
+    LODR AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ 1 DMDBeFire();
+    Loop;
+  Blue:
+    LODB AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ 1 DMDBeFire();
+    Loop;
+  Green:
+    LODG AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ 1 DMDBeFire();
+    Loop;
+  Purple:
+    LODP AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ 1 DMDBeFire();
+    Loop;
+  }
+}
+
+//Dynamic Light actors
+Class SmallFlame : Actor
+{
+default
+{
+  +ClientSideOnly;
+  +NoClip;
+  +NoBlockMap;
+  +NoGravity;
+  +NoInteraction;
+  }
+  States
+  {
+  Spawn:
+   TNT1 A 1;
+   Stop;
+  }
+}
+
+Class MediumFlame : SmallFlame { }
+Class LargeFlame : SmallFlame { }
+
+//Flames and particles
+
+Class Flame1A : Actor
+{
+
+void A_R667FlameStart1()
+{
+	A_ChangeVelocity(frandom(-1,1),frandom(-1,1),frandom(2,6));
+	A_SetRoll(random(0,90));
+}
+
+void A_OddR667FlameRoll1()
+{
+	A_SetScale(scale.x-0.02,scale.y-0.02); 
+	A_SetRoll(8+roll,SPF_INTERPOLATE);
+	A_SetRenderStyle(alpha-0.05, STYLE_Add); 
+}
+
+void A_EvenR667FlameRoll1()
+{
+	A_SetScale(scale.x-0.02,scale.y-0.02); 
+	A_SetRoll(roll-8,SPF_INTERPOLATE); 
+	A_SetRenderStyle(alpha-0.05, STYLE_Add);
+}
+
+default
+{
+  Height 2;
+  Radius 1;
+  +NoGravity;
+  +NoBlockMap;
+  +Missile;
+  +NoInteraction;
+  +ForceXYBillboard;
+  +RollSprite;
+  RenderStyle "Add";
+  Alpha 0.6;
+  Scale 0.35;
+  }
+  States
+  {
+  Spawn:
+    FLM1 A 0;
+    FLM1 A 0 A_R667FlameStart1();
+    FLM1 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll); }
+    FLM1 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame1B : Flame1A
+{
+  States
+  {
+  Spawn:
+    FLM2 A 0;
+    FLM2 A 0 A_R667FlameStart1();
+    FLM2 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM2 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame2A : Flame1A
+{
+  States
+  {
+  Spawn:
+    FLM3 A 0;
+    FLM3 A 0 A_R667FlameStart1();
+    FLM3 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll); }
+    FLM3 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame2B : Flame1A
+{
+  States
+  {
+  Spawn:
+    FLM4 A 0;
+    FLM4 A 0 A_R667FlameStart1();
+    FLM4 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM4 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame3A : Flame1A
+{
+  States
+  {
+  Spawn:
+    FLM5 A 0;
+    FLM5 A 0 A_R667FlameStart1();
+    FLM5 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll); }
+    FLM5 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame3B : Flame1A
+{
+  States
+  {
+  Spawn:
+    FLM6 A 0;
+    FLM6 A 0 A_R667FlameStart1();
+    FLM6 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM6 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame4A : Actor
+{
+
+void A_R667FlameStart2()
+{
+	A_ChangeVelocity(frandom(-2,2),frandom(-2,2),frandom(4,12));
+	A_SetRoll(random(0,90));
+}
+
+void A_OddR667FlameRoll2()
+{
+	A_SetScale(scale.x-0.05,scale.y-0.05); 
+	A_SetRoll(8+roll,SPF_INTERPOLATE);
+	A_SetRenderStyle(alpha-0.05, STYLE_Add); 
+}
+
+void A_EvenR667FlameRoll2()
+{
+	A_SetScale(scale.x-0.05,scale.y-0.05); 
+	A_SetRoll(roll-8,SPF_INTERPOLATE); 
+	A_SetRenderStyle(alpha-0.05, STYLE_Add);
+}
+
+default
+{
+  Height 2;
+  Radius 1;
+  +NoGravity;
+  +NoBlockMap;
+  +Missile;
+  +NoInteraction;
+  +ForceXYBillboard;
+  +RollSprite;
+  RenderStyle "Add";
+  Alpha 0.6;
+  Scale 0.7;
+  }
+  States
+  {
+  Spawn:
+    FLM1 A 0;
+    FLM1 A 0 A_R667FlameStart2();
+    FLM1 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll); }
+    FLM1 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame4B : Flame4A
+{
+  States
+  {
+  Spawn:
+    FLM2 A 0;
+    FLM2 A 0 A_R667FlameStart2();
+    FLM2 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM2 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame5A : Flame4A
+{
+  States
+  {
+  Spawn:
+    FLM3 A 0;
+    FLM3 A 0 A_R667FlameStart2();
+    FLM3 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    FLM3 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame5B : Flame4A
+{
+  States
+  {
+  Spawn:
+    FLM4 A 0;
+    FLM4 A 0 A_R667FlameStart2();
+    FLM4 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM4 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame6A : Flame4A
+{
+  States
+  {
+  Spawn:
+    FLM5 A 0;
+    FLM5 A 0 A_R667FlameStart2();
+    FLM5 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    FLM5 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame6B : Flame4A
+{
+  States
+  {
+  Spawn:
+    FLM6 A 0;
+    FLM6 A 0 A_R667FlameStart2();
+    FLM6 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM6 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame7A : Actor
+{
+
+void A_R667FlameStart3()
+{
+	A_ChangeVelocity(frandom(-4,4),frandom(-4,4),frandom(8,24));
+	A_SetRoll(random(0,90));
+}
+
+void A_OddR667FlameRoll3()
+{
+	A_SetScale(scale.x-0.1,scale.y-0.1); 
+	A_SetRoll(8+roll,SPF_INTERPOLATE); 
+	A_SetRenderStyle(alpha-0.05, STYLE_Add);
+}
+
+void A_EvenR667FlameRoll3()
+{
+	A_SetScale(scale.x-0.1,scale.y-0.1); 
+	A_SetRoll(roll-8,SPF_INTERPOLATE); 
+	A_SetRenderStyle(alpha-0.05, STYLE_Add);
+}
+
+default
+	{
+  Height 2;
+  Radius 1;
+  +NoGravity;
+  +NoBlockMap;
+  +Missile;
+  +NoInteraction;
+  +RollSprite;
+  +ForceXYBillboard;
+  RenderStyle "Add";
+  Alpha 0.6;
+  Scale 1.4;
+  }
+  States
+  {
+  Spawn:
+    FLM1 A 0;
+    FLM1 A 0 A_R667FlameStart3();
+    FLM1 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    FLM1 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame7B : Flame7A
+{
+  States
+  {
+  Spawn:
+    FLM2 A 0;
+    FLM2 A 0 A_R667FlameStart3();
+    FLM2 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM2 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame8A : Flame7A
+{
+  States
+  {
+  Spawn:
+    FLM3 A 0;
+    FLM3 A 0 A_R667FlameStart3();
+    FLM3 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    FLM3 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame8B : Flame7A
+{
+  States
+  {
+  Spawn:
+    FLM4 A 0;
+    FLM4 A 0 A_R667FlameStart3();
+    FLM4 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM4 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame9A : Flame7A
+{
+  States
+  {
+  Spawn:
+    FLM5 A 0;
+    FLM5 A 0 A_R667FlameStart3();
+    FLM5 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    FLM5 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame9B : Flame7A
+{
+  States
+  {
+  Spawn:
+    FLM6 A 0;
+    FLM6 A 0 A_R667FlameStart3();
+    FLM6 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    FLM6 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Ember1 : Flame1A
+{
+	default
+	{
+	Scale 0.1;
+	}
+	States
+	{
+	Spawn:
+		EMBR A 0;
+		EMBR A 0 {
+	A_ChangeVelocity(frandom(-1,1),frandom(-1,1),frandom(4,16));
+	A_SetRoll(random(0,90));
+	}
+		EMBR A 32 Bright;
+	Death:
+		EMBR A 2 Bright A_FadeOut(0.1);
+		Loop;
+	}
+}
+
+Class Ember2 : Flame1A
+{
+	Default
+	{
+	Scale 0.1;
+	}
+	States
+	{
+	Spawn:
+		EMBR A 0;
+		EMBR A 0 {
+	A_ChangeVelocity(frandom(-1,1),frandom(-1,1),frandom(4,16));
+	A_SetRoll(random(0,90));
+	}
+		EMBR A 64 Bright;
+	Death:
+		EMBR A 2 Bright A_FadeOut(0.1);
+		Loop;
+	}
+}
+
+

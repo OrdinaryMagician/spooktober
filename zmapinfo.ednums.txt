@@ -116,3 +116,20 @@ DoomEdNums
 	11021 = InvertedBlurSphere
 	11022 = InvertedBoney
 }
+
+// Jaxx
+DoomEdNums
+{
+	12015 = BlackCat
+	12016 = MetalSpike
+	12017 = Cauldron
+	12018 = SpookFireSpawner
+	12019 = CanadaSpawner
+	12020 = BigHallowTree
+	12021 = SATURNDEVOURINGHISSON
+	12022 = ShortMetalSpike
+	12023 = HelloSoup
+	12024 = JaxxRose
+	12025 = SilWitch
+	12026 = RazCameo
+}

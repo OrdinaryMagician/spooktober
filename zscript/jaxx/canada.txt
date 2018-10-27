@@ -1,0 +1,82 @@
+Class Canada : Actor
+{
+
+int livetime;
+
+override void PostBeginPlay(void)
+		{
+		livetime=0;
+		roll=random(0,360);
+		pitch=random(0,360);
+		angle=random(0,360);
+		alpha=0.0;
+		Super.PostBeginPlay();	
+		}
+
+void GoAwayLeaf()
+{
+	if(livetime>90)
+	a_fadeout(0.02);
+	else { livetime++;
+	if(livetime<9 && alpha<1.0)
+	a_fadein(0.125);
+	}
+	
+	roll+=frandom(0.1,1.5); pitch+=frandom(0.1,1.5); angle+=frandom(0.1,1.5); 
+}
+
+Default
+{
+//$Category "Jaxx"
+	+INTERPOLATEANGLES;
+	+PUSHABLE;
+	+SOLID;
+	-SHOOTABLE;
+	+NOINTERACTION;
+	Gravity 0.05;
+	Mass 1;
+	Height 16;
+	Radius 8;
+	Scale 0.6;
+	}
+	States
+	{
+		Spawn:
+			CANA A 1 GoAwayLeaf(); 
+			Loop;
+	}
+	
+}
+
+
+Class CanadaSpawner : Actor
+{
+Default
+{
+//$Category "Jaxx"
+//$Arg0 Size
+	//$Arg0Default 256
+	//$Arg0Tooltip control the radius of leaf spawning.
+	//$Arg1 Speed
+	//$Arg1Default 1
+	//$Arg1Tooltip speed of wind.
+	//$Arg2 Gravity
+	//$Arg2Default 1
+	//$Arg2Tooltip how fast the leaves fall.
+	//$Arg3 Variance
+	//$Arg3Default 1
+	//$Arg3Tooltip variance of speed.
+	+NOBLOCKMAP;
+	+NOGRAVITY;
+}
+	States
+	{
+		Spawn:
+			TNT1 A 8 A_SpawnItemEx("Canada",frandom(-Args[0],Args[0]),frandom(-Args[0],Args[0]),random(0,-32),frandom(Args[1],Args[1]+(Args[3]*0.55)),frandom(-Args[3]*0.60,Args[3]*0.60),frandom(-Args[2],-Args[2]-(Args[3]*0.6)));
+			Loop;
+	}
+	
+}
+
+	
+	

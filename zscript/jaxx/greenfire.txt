@@ -1,0 +1,303 @@
+
+
+//Dynamic Light actors
+Class SmallFlamegreen : Actor
+{
+default
+{
+  +ClientSideOnly;
+  +NoClip;
+  +NoBlockMap;
+  +NoGravity;
+  +NoInteraction;
+  }
+  States
+  {
+  Spawn:
+   TNT1 A 1;
+   Stop;
+  }
+}
+
+Class MediumFlamegreen : SmallFlamegreen { }
+Class LargeFlamegreen : SmallFlamegreen { }
+
+//Flames and particles
+
+Class Flame1Agreen : Flame1A
+{
+  States
+  {
+  Spawn:
+    GLM1 A 0;
+    GLM1 A 0 A_R667FlameStart1();
+    GLM1 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll); }
+    GLM1 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame1Bgreen : Flame1Agreen
+{
+  States
+  {
+  Spawn:
+    GLM2 A 0;
+    GLM2 A 0 A_R667FlameStart1();
+    GLM2 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM2 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame2Agreen : Flame1Agreen
+{
+  States
+  {
+  Spawn:
+    GLM3 A 0;
+    GLM3 A 0 A_R667FlameStart1();
+    GLM3 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll); }
+    GLM3 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame2Bgreen : Flame1Agreen
+{
+  States
+  {
+  Spawn:
+    GLM4 A 0;
+    GLM4 A 0 A_R667FlameStart1();
+    GLM4 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM4 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame3Agreen : Flame1Agreen
+{
+  States
+  {
+  Spawn:
+    GLM5 A 0;
+    GLM5 A 0 A_R667FlameStart1();
+    GLM5 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll); }
+    GLM5 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame3Bgreen: Flame1Agreen
+{
+  States
+  {
+  Spawn:
+    GLM6 A 0;
+    GLM6 A 0 A_R667FlameStart1();
+    GLM6 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM6 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll1();
+    Stop;
+  }
+}
+
+Class Flame4Agreen : Flame4A
+{
+  States
+  {
+  Spawn:
+    GLM1 A 0;
+    GLM1 A 0 A_R667FlameStart2();
+    GLM1 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll); }
+    GLM1 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame4Bgreen : Flame4Agreen
+{
+  States
+  {
+  Spawn:
+    GLM2 A 0;
+    GLM2 A 0 A_R667FlameStart2();
+    GLM2 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM2 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame5Agreen : Flame4Agreen
+{
+  States
+  {
+  Spawn:
+    GLM3 A 0;
+    GLM3 A 0 A_R667FlameStart2();
+    GLM3 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    GLM3 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame5Bgreen : Flame4Agreen
+{
+  States
+  {
+  Spawn:
+    GLM4 A 0;
+    GLM4 A 0 A_R667FlameStart2();
+    GLM4 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM4 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame6Agreen : Flame4Agreen
+{
+  States
+  {
+  Spawn:
+    GLM5 A 0;
+    GLM5 A 0 A_R667FlameStart2();
+    GLM5 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    GLM5 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame6Bgreen : Flame4Agreen
+{
+  States
+  {
+  Spawn:
+    GLM6 A 0;
+    GLM6 A 0 A_R667FlameStart2();
+    GLM6 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM6 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll2();
+    Stop;
+  }
+}
+
+Class Flame7Agreen : Flame7A
+{
+  States
+  {
+  Spawn:
+    GLM1 A 0;
+    GLM1 A 0 A_R667FlameStart3();
+    GLM1 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    GLM1 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame7Bgreen : Flame7Agreen
+{
+  States
+  {
+  Spawn:
+    GLM2 A 0;
+    GLM2 A 0 A_R667FlameStart3();
+    GLM2 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM2 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame8Agreen : Flame7Agreen
+{
+  States
+  {
+  Spawn:
+    GLM3 A 0;
+    GLM3 A 0 A_R667FlameStart3();
+    GLM3 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    GLM3 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame8Bgreen : Flame7Agreen
+{
+  States
+  {
+  Spawn:
+    GLM4 A 0;
+    GLM4 A 0 A_R667FlameStart3();
+    GLM4 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM4 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame9Agreen : Flame7Agreen
+{
+  States
+  {
+  Spawn:
+    GLM5 A 0;
+    GLM5 A 0 A_R667FlameStart3();
+    GLM5 AAAAAAAAAA 1 Bright { A_SetRoll(4+roll,SPF_INTERPOLATE); }
+    GLM5 AAAAAAAAAAAAAA 1 Bright A_OddR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Flame9Bgreen : Flame7Agreen
+{
+  States
+  {
+  Spawn:
+    GLM6 A 0;
+    GLM6 A 0 A_R667FlameStart3();
+    GLM6 AAAAAAAAAA 1 Bright { A_SetRoll(roll-4,SPF_INTERPOLATE); }
+    GLM6 AAAAAAAAAAAAAA 1 Bright A_EvenR667FlameRoll3();
+    Stop;
+  }
+}
+
+Class Ember1green : Flame1Agreen
+{
+	default
+	{
+	Scale 0.1;
+	}
+	States
+	{
+	Spawn:
+		GMBR A 0;
+		GMBR A 0 {
+	A_ChangeVelocity(frandom(-1,1),frandom(-1,1),frandom(4,16));
+	A_SetRoll(random(0,90));
+	}
+		GMBR A 32 Bright;
+	Death:
+		GMBR A 2 Bright A_FadeOut(0.1);
+		Loop;
+	}
+}
+
+Class Ember2green : Flame1Agreen
+{
+	Default
+	{
+	Scale 0.1;
+	}
+	States
+	{
+	Spawn:
+		GMBR A 0;
+		GMBR A 0 {
+	A_ChangeVelocity(frandom(-1,1),frandom(-1,1),frandom(4,16));
+	A_SetRoll(random(0,90));
+	}
+		GMBR A 64 Bright;
+	Death:
+		GMBR A 2 Bright A_FadeOut(0.1);
+		Loop;
+	}
+}
+
+
