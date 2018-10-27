@@ -59,10 +59,7 @@ Sprite "FFR1H0", 41, 36
 
 Texture "SPPNT01", 256, 256
 {
-	Patch "PAGWALL", 0, 0
-	{
-		Translation "0:255=@75[255,255,255]"
-	}
+	Patch "SPPBAS1", 0, 0
 	Patch "SPFRAME", 0, 0
 	{
 		Style Overlay
