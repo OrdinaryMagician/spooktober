@@ -62,7 +62,7 @@ Map SPOOK03 lookup "SP_SPOOK03"
 	levelnum = 4
 	sky1 = "PHSKY"
 	sky2 = "PHSKY2"
-	par = 30
+	par = 720
 	music = "SILVREYE"
 }
 
