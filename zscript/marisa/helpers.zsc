@@ -166,6 +166,15 @@ Class SpooktoberUtil abstract play
 			a.DamageMobj(killer,killer,int.max,'Massacre',DMG_FORCED|DMG_THRUSTLESS);
 		}
 	}
+
+	// get one part only of full level name (for ACS)
+	// 0: name, 1: author
+	static clearscope String GetSplitLevelname( int part )
+	{
+		Array<String> splitname;
+		level.levelname.Split(splitname," - by: ");
+		return splitname[part];
+	}
 }
 
 // pretty cutting-edge stuff
