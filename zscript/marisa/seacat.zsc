@@ -1090,8 +1090,9 @@ Class Model1873 : DoomWeapon
 				dmg *= 3;
 				thrust /= 3;
 				dmgtype = 'Headshot';
+				totaldamage -= invoker.t.hitlist[i].Health/3;
 			}
-			totaldamage -= invoker.t.hitlist[i].Health;
+			else totaldamage -= invoker.t.hitlist[i].Health;
 			invoker.t.hitlist[i].DamageMobj(w,self,dmg,dmgtype,DMG_THRUSTLESS);
 			if ( !invoker.t.hitlist[i].bDONTTHRUST )
 				invoker.t.hitlist[i].vel += hitdir*(thrust/invoker.t.hitlist[i].mass);

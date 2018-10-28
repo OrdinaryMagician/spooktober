@@ -2,97 +2,97 @@
 Class SpookFireSpawner : SwitchableDecoration
 {
 	bool bstarted;
-	
+
 	bool bactive;
-	
+
 	bool bhighlodmode;
-	
-	double DMDFireWait;
-	
+
+	int DMDFireWait;
+
 	//bool blowlodmode;
-	
-	double bclock;
-	
+
+	int bclock;
+
 	override void PostBeginPlay(void)
 	{
-		Super.PostBeginPlay();	
-		
+		Super.PostBeginPlay();
+
 		if(Args[1]==0)
 		A_PlaySound("SFX/FireLoop1", CHAN_6, 1.0,1);
-		
+
 		switch (Args[0]) {
-		
+
 		case 0:
 			break;
-			
+
 		case 1:
 			Scale.x+=1.4;
 			Scale.y+=1.3;
 			break;
-			
+
 		default:
 			Scale.x+=3.9;
 			Scale.y+=3.8;
 			break;
-		
+
 		}
-		
+
 		DMDColorSelection();
 		//if(Args[2]==2)
 		//SetStateLabel("Green");
 		//if(Args[2]==3)
 		//SetStateLabel("Purple");
-		
+
 		bstarted=false;
-		
+
 	}
-	
+
 	override void Tick(void)
 	{
 		/*
-		
+
 		if(!level.frozen)
 		{
-		
+
 			DMDFireLODCheck();
-		
+
 			if(bhighlodmode)
-			{	
+			{
 			DMDFireFade();
 			DMDFireParticleSpawn();
 			}
 			else
 			DMDFireFadeIn();
-		
+
 		}
 		*/
-		
+
 		Super.Tick();
 	}
-	
+
 	void DMDBeFire(void)
 	{
 		if(!level.frozen)
 		{
-		
+
 			DMDFireLODCheck();
-		
+
 			if(bhighlodmode)
-			{	
+			{
 			DMDFireFade();
 			DMDFireParticleSpawn();
 			}
 			else
 			DMDFireFadeIn();
-		
+
 		}
 	}
-	
+
 	void DMDFireLODCheck(void)
 	{
 	switch (bclock) {
-		case 19:  
-			
+		case 19:
+
 			if(CheckProximity("playerpawn",2048,0,CPXF_ANCESTOR|CPXF_CHECKSIGHT|CPXF_LESSOREQUAL|CPXF_NOZ))
 			{
 				//if(!target||target&&distance2D(target)>1024)
@@ -106,20 +106,20 @@ Class SpookFireSpawner : SwitchableDecoration
 			bstarted=true;
 			//SetStateLabel("Active");
 			}
-			
+
 			break;
 		case 20:  bclock=0;
 			}
-		
+
 		bclock+=randompick(0,1);
 	}
-	
+
 	void DMDFireFade(void)
 	{
 		if(alpha>0)
 		alpha-=0.05;
 	}
-	
+
 	void DMDColorSelection(void)
 	{
 		switch (Args[2]) {
@@ -133,20 +133,20 @@ Class SpookFireSpawner : SwitchableDecoration
 			SetStateLabel("Purple");
 			break;
 		default:		break;
-		
+
 			}
 	}
-	
+
 	void DMDFireFadeIn(void)
 	{
 		if(alpha<1)
 		alpha+=0.1;
 	}
-	
+
 	void DMDFireParticleSpawn(void)
 	{
 		switch (Args[0]) {
-		case 0:  
+		case 0:
 			DMDSmallFireParticleSpawn();
 			break;
 		case 1:
@@ -156,11 +156,11 @@ Class SpookFireSpawner : SwitchableDecoration
 			DMDLargeFireParticleSpawn();
 			}
 	}
-	
+
 	void DMDSmallFireParticleSpawn(void)
 	{
-		
-	
+
+
 		switch (DMDFireWait) {
 		case 0:
 			if(Args[2]==0)
@@ -206,7 +206,7 @@ Class SpookFireSpawner : SwitchableDecoration
 			A_SpawnItemEx("Flame1BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
 			if(Args[2]==3)
 			A_SpawnItemEx("Flame1BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
-			break;	
+			break;
 		case 3:
 			if(Args[2]==0)
 			A_SpawnItemEx("Flame2A", 0, 0, 0, 0, 0, 0, 0, 128);
@@ -249,14 +249,14 @@ Class SpookFireSpawner : SwitchableDecoration
 			break;
 		default:  DMDFireWait=0;
 			}
-		
+
 		DMDFireWait++;
 	}
-	
+
 	void DMDMediumFireParticleSpawn(void)
 	{
-		
-	
+
+
 		switch (DMDFireWait) {
 		case 0:
 			if(Args[2]==0)
@@ -302,7 +302,7 @@ Class SpookFireSpawner : SwitchableDecoration
 			A_SpawnItemEx("Flame4BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
 			if(Args[2]==3)
 			A_SpawnItemEx("Flame4BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
-			break;	
+			break;
 		case 3:
 			if(Args[2]==0)
 			A_SpawnItemEx("Flame5A", 0, 0, 0, 0, 0, 0, 0, 128);
@@ -345,13 +345,13 @@ Class SpookFireSpawner : SwitchableDecoration
 			break;
 		default:  DMDFireWait=0;
 			}
-		
+
 		DMDFireWait++;
 	}
 
 	void DMDLargeFireParticleSpawn(void)
 	{
-		
+
 		switch (DMDFireWait) {
 		case 0:
 			if(Args[2]==0)
@@ -397,7 +397,7 @@ Class SpookFireSpawner : SwitchableDecoration
 			A_SpawnItemEx("Flame7BGreen", 0, 0, 0, 0, 0, 0, 0, 128);
 			if(Args[2]==3)
 			A_SpawnItemEx("Flame7BPurple", 0, 0, 0, 0, 0, 0, 0, 128);
-			break;	
+			break;
 		case 3:
 			if(Args[2]==0)
 			A_SpawnItemEx("Flame8A", 0, 0, 0, 0, 0, 0, 0, 128);
@@ -440,7 +440,7 @@ Class SpookFireSpawner : SwitchableDecoration
 			break;
 		default:  DMDFireWait=0;
 			}
-		
+
 		DMDFireWait++;
 	}
 
@@ -485,7 +485,7 @@ Class SpookFireSpawner : SwitchableDecoration
 				{
 				A_PlaySound("SFX/FireStart", CHAN_7, 1.0);
 				A_PlaySound("SFX/FireLoop1", CHAN_6, 1.0,1);
-				bStarted=true;	
+				bStarted=true;
 				}
 			}
     TNT1 A 0 DMDColorSelection();
@@ -539,15 +539,15 @@ void A_R667FlameStart1()
 
 void A_OddR667FlameRoll1()
 {
-	A_SetScale(scale.x-0.02,scale.y-0.02); 
+	A_SetScale(scale.x-0.02,scale.y-0.02);
 	A_SetRoll(8+roll,SPF_INTERPOLATE);
-	A_SetRenderStyle(alpha-0.05, STYLE_Add); 
+	A_SetRenderStyle(alpha-0.05, STYLE_Add);
 }
 
 void A_EvenR667FlameRoll1()
 {
-	A_SetScale(scale.x-0.02,scale.y-0.02); 
-	A_SetRoll(roll-8,SPF_INTERPOLATE); 
+	A_SetScale(scale.x-0.02,scale.y-0.02);
+	A_SetRoll(roll-8,SPF_INTERPOLATE);
 	A_SetRenderStyle(alpha-0.05, STYLE_Add);
 }
 
@@ -652,15 +652,15 @@ void A_R667FlameStart2()
 
 void A_OddR667FlameRoll2()
 {
-	A_SetScale(scale.x-0.05,scale.y-0.05); 
+	A_SetScale(scale.x-0.05,scale.y-0.05);
 	A_SetRoll(8+roll,SPF_INTERPOLATE);
-	A_SetRenderStyle(alpha-0.05, STYLE_Add); 
+	A_SetRenderStyle(alpha-0.05, STYLE_Add);
 }
 
 void A_EvenR667FlameRoll2()
 {
-	A_SetScale(scale.x-0.05,scale.y-0.05); 
-	A_SetRoll(roll-8,SPF_INTERPOLATE); 
+	A_SetScale(scale.x-0.05,scale.y-0.05);
+	A_SetRoll(roll-8,SPF_INTERPOLATE);
 	A_SetRenderStyle(alpha-0.05, STYLE_Add);
 }
 
@@ -765,15 +765,15 @@ void A_R667FlameStart3()
 
 void A_OddR667FlameRoll3()
 {
-	A_SetScale(scale.x-0.1,scale.y-0.1); 
-	A_SetRoll(8+roll,SPF_INTERPOLATE); 
+	A_SetScale(scale.x-0.1,scale.y-0.1);
+	A_SetRoll(8+roll,SPF_INTERPOLATE);
 	A_SetRenderStyle(alpha-0.05, STYLE_Add);
 }
 
 void A_EvenR667FlameRoll3()
 {
-	A_SetScale(scale.x-0.1,scale.y-0.1); 
-	A_SetRoll(roll-8,SPF_INTERPOLATE); 
+	A_SetScale(scale.x-0.1,scale.y-0.1);
+	A_SetRoll(roll-8,SPF_INTERPOLATE);
 	A_SetRenderStyle(alpha-0.05, STYLE_Add);
 }
 
