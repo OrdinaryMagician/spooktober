@@ -1,0 +1,130 @@
+//AWCF
+
+class Z_Fog : Actor
+{
+default
+	{
+		+NOINTERACTION	+NOGRAVITY	+NOBLOCKMAP
+		+ROLLSPRITE
+		Renderstyle "Add";
+		Alpha 0.125;
+	}
+Override void PostBeginPlay()//All the cool kids are overriding things in zscript
+	{
+		A_Warp(AAPTR_DEFAULT, random(-32,32), random(-32,32), random(-8,48), 0, WARPF_NOCHECKPOSITION);
+		A_SetScale(frandom(0.9,1.3));
+		bSPRITEFLIP = Random(TRUE,FALSE);
+		A_SetRoll(fRandom(-20,20),0,0);
+	}
+states
+	{
+	Spawn:
+		AWCF AAAAAAAAAAAAA random(1,4) A_FadeOut(0.0001);
+		AWCF A random(70,200);
+		AWCF AAAAAAAAAAAAA random(1,4) A_FadeIn(0.0001);
+		AWCF A random(70,200);
+		Loop;
+	}
+}
+
+class Z_SpookHolder : Actor
+{
+default
+	{
+		+FLOORCLIP
+		+SOLID
+		+BRIGHT
+		Radius 8;
+		height 32;
+	}
+states
+	{
+	Spawn:
+		SPKY ABC 6;
+		Loop;
+	}
+}
+
+class Z_Pumpkin : Actor
+{
+default
+	{
+		+FLOORCLIP
+		Radius 8;
+		height 8;
+	}
+Override void PostBeginPlay()
+	{
+		A_SetScale(frandom(0.9,1.3));
+	}
+states
+	{
+	Spawn:
+		ZPMK AA 0
+		{
+			frame = random(0,1);//this might be a crime idk idc
+		}
+		ZPMK "#" -1;
+		Stop;
+	}
+}
+
+class Z_PumpkinKing : Actor
+{
+default
+	{
+		+BRIGHT
+		-FLOORCLIP
+		+NOGRAVITY
+	}
+Override void tick()
+	{
+		A_SpawnItemEX("Z_PumpkinKing_Fire",random(-16,16), random(-16,16), random(-16,16), 0, 0, random(1,4), 0, 0, 128); 
+		A_SpawnItemEX("Z_PumpkinKing_Fire",random(-16,16), random(-16,16), random(-16,16), 0, 0, random(2,4), 0, 0, 128); 
+		super.tick();
+	}
+states
+	{
+	Spawn:
+		BGOR F 1;
+		Loop;
+	}
+}
+
+class Z_PumpkinKing_Fire : Actor
+{
+default
+	{
+		Renderstyle "Add";
+		Alpha 0.7;
+		+BRIGHT
+		+ROLLSPRITE
+		+NOINTERACTION
+		+NOGRAVITY
+		+NOBLOCKMAP
+	}
+Override void PostBeginPlay()
+	{
+		A_SetScale(frandom(0.8,1.1));
+		A_SetRoll(fRandom(-10,10),0,0);
+	}
+states
+	{
+		Spawn:
+			BFLM AA 0
+			{
+				frame = random(0,13);
+			}
+			BFLM "#" 1
+				{
+					A_Fadein();
+					A_SetScale(scale.X *0.9, scale.Y * 1.05);
+				}
+			BFLM "#" 1
+				{
+					A_SetScale(scale.X *0.9, scale.Y * 1.05);
+					A_Fadeout();
+				}
+			Wait;
+	}
+}

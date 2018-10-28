@@ -261,3 +261,10 @@ jaxx/CrankyDoor	jxcrank
 $volume jaxx/metalslide 0.8
 
 $ambient 6415 jaxx/highwind point 1.0 continuous 0.25
+
+//////// zrrion
+NSTHND00					"sounds/NSTHND00"
+NSTHND01					"sounds/NSTHND01"
+NSTHND02					"sounds/NSTHND02"
+NSTHND03					"sounds/NSTHND03"
+$random zrrion/thunder		{ NSTHND00 NSTHND01 NSTHND02 NSTHND03 }

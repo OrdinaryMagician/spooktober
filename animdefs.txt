@@ -65,3 +65,5 @@ texture CLOCK_1 range CLOCK_5 tics 6 oscillate //grandfather clock
 texture PORTAL_1 range PORTAL_4 tics 2 //black n white portal
 
 texture BWAT_01 range BWAT_10 tics 4 //water
+
+warp2 texture AWCFA0 0.05 // zrrion

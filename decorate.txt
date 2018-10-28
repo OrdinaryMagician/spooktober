@@ -15,3 +15,6 @@
 #include "decorate/qd/BrokenLamp.txt"
 #include "decorate/qd/PlasmaGlobe.txt"
 #include "decorate/qd/TrashCan.txt"
+
+#include "decorate/cacolantern.txt"
+#include "decorate/zrrion/zrrion_crimes.txt"

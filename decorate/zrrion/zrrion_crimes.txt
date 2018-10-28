@@ -1,0 +1,47 @@
+Actor "Z_Fog Spawner" : randomspawner 31000
+{
+	Dropitem "Z_Fog"
+	radius 24
+	height 48
+		states
+		{
+			Spawn:
+				AWCF A 0
+				Stop
+		}
+}
+
+Actor "Z_Spook Holder" : randomspawner 31001
+{
+	scale 0.25
+	renderstyle "add"
+	Dropitem "Z_SpookHolder"
+		states
+		{
+			Spawn:
+				BLUD A 0
+				Stop
+		}
+}
+
+Actor "Z_Pumpkin crime" : randomspawner 31002
+{
+	Dropitem "Z_Pumpkin"
+		states
+		{
+			Spawn:
+				ZPMK A 0
+				Stop
+		}
+}
+
+Actor "Z_PumpkinKing crime" : randomspawner 31003
+{
+	Dropitem "Z_PumpkinKing"
+		states
+		{
+			Spawn:
+				BGOR F 0
+				Stop
+		}
+}

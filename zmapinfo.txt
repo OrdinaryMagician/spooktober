@@ -68,6 +68,16 @@ Map SPOOK03 lookup "SP_SPOOK03"
 
 Map SPOOK04 lookup "SP_SPOOK04"
 {
+	SmoothLighting
+
+	Lightning
+	sky1 = "ZSKYREST"
+	sky2 = "ZSKYLITE"
+	par = 360
+	sucktime = 1
+	//music = "Music/Tenth Street.spc"
+
+	//Fade = "00 00 10" 
 	levelnum = 5
 }
 

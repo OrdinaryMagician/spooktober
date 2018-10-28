@@ -21,3 +21,5 @@ version "3.6"
 #include "zscript/jaxx/bluefire.txt"
 #include "zscript/jaxx/greenfire.txt"
 #include "zscript/jaxx/purplefire.txt"
+
+#include "zscript/zrrion/zrrion_stuff.txt"
