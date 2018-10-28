@@ -75,7 +75,8 @@ Map SPOOK04 lookup "SP_SPOOK04"
 	sky2 = "ZSKYLITE"
 	par = 360
 	sucktime = 1
-	music = "orchest"
+	//music = "orchest"
+	music = "simple"
 
 	//Fade = "00 00 10" 
 	levelnum = 5
