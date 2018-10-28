@@ -893,7 +893,7 @@ Model ShortMetalSpike
 	UseActorPitch
 	UseActorRoll
 
-	FrameIndex MSPK A 0 0
+	FrameIndex SMSP A 0 0
 }
 
 Model Cauldron

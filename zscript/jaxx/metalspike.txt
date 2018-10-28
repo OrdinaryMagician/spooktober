@@ -17,7 +17,7 @@ Default
 			MSPK A -1;
 			Wait;
 	}
-	
+
 }
 
 Class ShortMetalSpike : MetalSpike
@@ -26,5 +26,11 @@ Default
 {
 //$Category "Jaxx"
 	Height 32;
+	}
+	States
+	{
+		Spawn:
+			SMSP A -1;
+			Wait;
 	}
 }
