@@ -16,7 +16,7 @@ A Halloween 2018 map pack for Doom.
 ### Current status
 
 Total maps: 19
-Completed: 13
+Completed: 14
 In Progress: 5
 Free slots: 1
 
@@ -34,7 +34,7 @@ Free slots: 1
 - **SPOOK11**: Large House of Illusions - leodoom85
 - **SPOOK12**: Alone in the Dark - ImpieTwo [completed]
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame [completed] [par time set]
-- **SECRET01**: Uncle Reggie's Basement - Giraffe Man
+- **SECRET01**: Uncle Reggie's Basement - Giraffe Man [completed]
 - **SECRET02**: Abandoned Warehouse - CardBoxNeko
 - **SECRET03**: The Crimson Flow - Rachael [completed] [par time set]
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz [completed]
