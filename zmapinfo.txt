@@ -46,6 +46,7 @@ Map SPOOK01 lookup "SP_SPOOK01"
 {
 	levelnum = 2
 	SmoothLighting
+	Par = 180
 	Sky1 = "gradsky"
 	Music = "Imperish"
 }
@@ -78,7 +79,7 @@ Map SPOOK04 lookup "SP_SPOOK04"
 	//music = "orchest"
 	music = "simple"
 
-	//Fade = "00 00 10" 
+	//Fade = "00 00 10"
 	levelnum = 5
 }
 
@@ -87,6 +88,7 @@ Map SPOOK05 lookup "SP_SPOOK05"
 	//music = "THANTOS"
 	music = "Vandnbrg"
 	sky1 = "spacesky"
+	par = 300
 	lightmode = 3
 	levelnum = 6
 }
@@ -95,6 +97,7 @@ Map SPOOK06 lookup "SP_SPOOK06"
 {
 	sky1 = "URSK6", 0.00666
 	music = "OCCULT"
+	par = 180
 	levelnum = 7
 }
 
@@ -107,6 +110,7 @@ Map SPOOK08 lookup "SP_SPOOK08"
 {
 	sky1 = "AG_BG"
 	music = "D_DEEP"
+	par = 300
 	levelnum = 9
 }
 
@@ -129,6 +133,7 @@ Map SPOOK12 lookup "SP_SPOOK12"
 {
 	levelnum = 13
 	sky1 = "AITDSky"
+	par = 720
 }
 
 Map SPOOK13 lookup "SP_SPOOK13"
@@ -145,7 +150,7 @@ Map SECRET01 lookup "SP_SECRET01"
 	levelnum = 15
 	sky1 = "SKY666"
 	sky2 = "T10AB"
-	par = 300
+	par = 450
 	sucktime = 1
 	music = "Bile"
 }
@@ -166,6 +171,7 @@ Map SECRET03 lookup "SP_SECRET03"
 Map SECRET04 lookup "SP_SECRET04"
 {
 	levelnum = 18
+	par = 420
 	sky1 = "SKY", 0
 	music = "Q"
 	noinfighting
