@@ -417,10 +417,61 @@ Class SpooktoberHandler : EventHandler
 			mname = StringTable.Localize(String.Format("$SP_SPOOK%02d",tdata.HitLine.args[2]-1));
 		else if ( (tdata.HitLine.args[2] >= 15) && (tdata.HitLine.args[2] <= 19) )
 			mname = StringTable.Localize(String.Format("$SP_SECRET%02d",tdata.HitLine.args[2]-14));
-		double ypos;
-		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) ) ypos = 110.;
-		else ypos = 150.;
+		double ypos = 150.;
 		int len;
+		int maxlen = 0;
+		int h1 = 0, m1 = 0, s1, h2 = 0, m2 = 0, s2, ki1, ki2, it1, it2, sc1, sc2;
+		String ctime, ptime, ckills, citems, csecrets;
+		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) )
+		{
+			[s1, s2] = SpooktoberGlobals.GetTimes(tdata.HitLine.args[2]-2);
+			[ki1, ki2] = SpooktoberGlobals.GetKills(tdata.HitLine.args[2]-2);
+			[it1, it2] = SpooktoberGlobals.GetItems(tdata.HitLine.args[2]-2);
+			[sc1, sc2] = SpooktoberGlobals.GetSecrets(tdata.HitLine.args[2]-2);
+			if ( s1 > 0 )
+			{
+				h1 = s1/3600;
+				m1 = (s1%3600)/60;
+				s1 = s1%60;
+				if ( h1 > 0 ) ctime = String.Format("%02d:%02d:%02d",h1,m1,s1);
+				else ctime = String.Format("%02d:%02d",m1,s1);
+				len = statsfont.StringWidth("Time: "..ctime);
+				if ( len > maxlen ) maxlen = len;
+				ypos -= statsfont.GetHeight();
+			}
+			if ( s2 > 0 )
+			{
+				h2 = s2/3600;
+				m2 = (s2%3600)/60;
+				s2 = s2%60;
+				if ( h2 > 0 ) ptime = String.Format("%02d:%02d:%02d",h2,m2,s2);
+				else ptime = String.Format("%02d:%02d",m2,s2);
+				len = statsfont.StringWidth("Par: "..ptime);
+				if ( len > maxlen ) maxlen = len;
+				ypos -= statsfont.GetHeight();
+			}
+			if ( ki2 > 0 )
+			{
+				ckills = String.Format("%d/%d",ki1,ki2);
+				len = statsfont.StringWidth("Kills: "..ckills);
+				if ( len > maxlen ) maxlen = len;
+				ypos -= statsfont.GetHeight();
+			}
+			if ( it2 > 0 )
+			{
+				citems = String.Format("%d/%d",it1,it2);
+				len = statsfont.StringWidth("Items: "..citems);
+				if ( len > maxlen ) maxlen = len;
+				ypos -= statsfont.GetHeight();
+			}
+			if ( sc2 > 0 )
+			{
+				csecrets = String.Format("%d/%d",sc1,sc2);
+				len = statsfont.StringWidth("Secrets: "..csecrets);
+				if ( len > maxlen ) maxlen = len;
+				ypos -= statsfont.GetHeight();
+			}
+		}
 		// format name
 		if ( mname.IndexOf(" - by: ") != -1 )
 		{
@@ -444,54 +495,40 @@ Class SpooktoberHandler : EventHandler
 			len = statsfont.StringWidth("[Cleared]");
 			Screen.DrawText(statsfont,Font.CR_GOLD,(320.-len)/2.,ypos,"[Cleared]",DTA_Bottom320x200,true);
 			ypos += statsfont.GetHeight()+4;
-			int maxlen = 0, h1, m1, s1, h2, m2, s2, ki1, ki2, it1, it2, sc1, sc2;
-			String ctime, ptime, ckills, citems, csecrets;
-			[s1, s2] = SpooktoberGlobals.GetTimes(tdata.HitLine.args[2]-2);
-			[ki1, ki2] = SpooktoberGlobals.GetKills(tdata.HitLine.args[2]-2);
-			[it1, it2] = SpooktoberGlobals.GetItems(tdata.HitLine.args[2]-2);
-			[sc1, sc2] = SpooktoberGlobals.GetSecrets(tdata.HitLine.args[2]-2);
-			h1 = s1/3600;
-			m1 = (s1%3600)/60;
-			s1 = s1%60;
-			h2 = s2/3600;
-			m2 = (s2%3600)/60;
-			s2 = s2%60;
-			if ( h1 > 0 ) ctime = String.Format("%02d:%02d:%02d",h1,m1,s1);
-			else ctime = String.Format("%02d:%02d",m1,s1);
-			if ( h2 > 0 ) ptime = String.Format("%02d:%02d:%02d",h2,m2,s2);
-			else ptime = String.Format("%02d:%02d",m2,s2);
-			len = statsfont.StringWidth("Time: "..ctime);
-			if ( len > maxlen ) maxlen = len;
-			len = statsfont.StringWidth("Par: "..ptime);
-			if ( len > maxlen ) maxlen = len;
-			ckills = String.Format("%d/%d",ki1,ki2);
-			len = statsfont.StringWidth("Kills: "..ckills);
-			if ( len > maxlen ) maxlen = len;
-			citems = String.Format("%d/%d",it1,it2);
-			len = statsfont.StringWidth("Items: "..citems);
-			if ( len > maxlen ) maxlen = len;
-			csecrets = String.Format("%d/%d",sc1,sc2);
-			len = statsfont.StringWidth("Secrets: "..csecrets);
-			if ( len > maxlen ) maxlen = len;
-			Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Time:",DTA_Bottom320x200,true);
-			len = statsfont.StringWidth(ctime);
-			Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ctime,DTA_Bottom320x200,true);
-			ypos += statsfont.GetHeight();
-			Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Par:",DTA_Bottom320x200,true);
-			len = statsfont.StringWidth(ptime);
-			Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ptime,DTA_Bottom320x200,true);
-			ypos += statsfont.GetHeight();
-			Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Kills:",DTA_Bottom320x200,true);
-			len = statsfont.StringWidth(ckills);
-			Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ckills,DTA_Bottom320x200,true);
-			ypos += statsfont.GetHeight();
-			Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Items:",DTA_Bottom320x200,true);
-			len = statsfont.StringWidth(citems);
-			Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,citems,DTA_Bottom320x200,true);
-			ypos += statsfont.GetHeight();
-			Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Secrets:",DTA_Bottom320x200,true);
-			len = statsfont.StringWidth(csecrets);
-			Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,csecrets,DTA_Bottom320x200,true);
+			if ( (s1 > 0) || (m1 > 0) || (h1 > 0) )
+			{
+				Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Time:",DTA_Bottom320x200,true);
+				len = statsfont.StringWidth(ctime);
+				Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ctime,DTA_Bottom320x200,true);
+				ypos += statsfont.GetHeight();
+			}
+			if ( (s2 > 0) || (m2 > 0) || (h2 > 0) )
+			{
+				Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Par:",DTA_Bottom320x200,true);
+				len = statsfont.StringWidth(ptime);
+				Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ptime,DTA_Bottom320x200,true);
+				ypos += statsfont.GetHeight();
+			}
+			if ( ki2 > 0 )
+			{
+				Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Kills:",DTA_Bottom320x200,true);
+				len = statsfont.StringWidth(ckills);
+				Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ckills,DTA_Bottom320x200,true);
+				ypos += statsfont.GetHeight();
+			}
+			if ( it2 > 0 )
+			{
+				Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Items:",DTA_Bottom320x200,true);
+				len = statsfont.StringWidth(citems);
+				Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,citems,DTA_Bottom320x200,true);
+				ypos += statsfont.GetHeight();
+			}
+			if ( sc2 > 0 )
+			{
+				Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Secrets:",DTA_Bottom320x200,true);
+				len = statsfont.StringWidth(csecrets);
+				Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,csecrets,DTA_Bottom320x200,true);
+			}
 		}
 		else
 		{
