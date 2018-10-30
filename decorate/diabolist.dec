@@ -50,7 +50,7 @@ Actor Diabolist : Archvile 30112
 		DIAB G 3 Bright A_FaceTarget
 		DIAB H 3 Bright A_FaceTarget
 		DIAB I 3 Bright A_FaceTarget
-		DIAB G 0 Bright A_Jump(128, "Missile3")
+		DIAB G 0 Bright A_Jump(64, "Missile3")
 		Goto See
 	Missile2:
 		DIAB N 5 Bright A_FaceTarget
@@ -79,8 +79,8 @@ Actor Diabolist : Archvile 30112
 		DIAB N 5 Bright A_CustomMissile("DFlare", 60, 0, Random(-4, 4))
 		DIAB O 0 Bright A_FaceTarget
 		DIAB P 5 Bright
-		DIAB P 0 Bright A_Jump(64, "Missile3")
-		DIAB P 0 Bright A_Jump(128, "Missile4")
+		DIAB P 0 Bright A_Jump(32, "Missile3")
+		DIAB P 0 Bright A_Jump(64, "Missile4")
 		Goto See
 	Missile3:
 		DIAB GHIJKLM 5 Bright A_FaceTarget
@@ -88,7 +88,7 @@ Actor Diabolist : Archvile 30112
 		DIAB O 1 Bright A_Playsound ("weapons/firbfi")
 		DIAB O 4 Bright A_CustomMissile ("DMissile",48,0,0)
 		DIAB P 5 Bright
-		DIAB P 0 Bright A_Jump (128,1)
+		DIAB P 0 Bright A_Jump (64,1)
 		Goto See
 	Missile4:
 		DIA2 A 8 Bright A_FaceTarget
@@ -151,7 +151,7 @@ ACTOR DFlare
 	Radius 5
 	Height 5
 	Speed 25
-	Damage 3
+	Damage 2
 	SpawnID 252
 	RenderStyle Add
 	DamageType Fire
@@ -183,7 +183,7 @@ Actor DTracer
 	Height 5
 	Speed 15
 	ReactionTime 175
-	Damage 5
+	Damage 3
 	DamageType Fire
 	RenderStyle Add
 	Alpha 0.67
@@ -204,7 +204,7 @@ Actor DTracer
 		Loop
 	Death:
 		FTRA K 4 Bright
-		FTRA L 4 Bright A_Explode(16, 64)
+		FTRA L 4 Bright A_Explode(6, 64)
 		FTRA MNO 3 Bright
 		Stop
 	}

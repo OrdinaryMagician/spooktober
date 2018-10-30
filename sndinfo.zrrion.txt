@@ -1,0 +1,5 @@
+NSTHND00					"sounds/NSTHND00"
+NSTHND01					"sounds/NSTHND01"
+NSTHND02					"sounds/NSTHND02"
+NSTHND03					"sounds/NSTHND03"
+$random zrrion/thunder		{ NSTHND00 NSTHND01 NSTHND02 NSTHND03 }

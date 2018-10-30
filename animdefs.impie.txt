@@ -1,0 +1,6 @@
+texture CANDLE_1 range CANDLE_5 rand 3 5
+
+texture CANDLES1
+ pic CANDLES1 tics 8
+ pic CANDLES2 tics 8
+ pic CANDLES3 tics 8

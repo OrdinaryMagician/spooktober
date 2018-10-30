@@ -1,3 +1,5 @@
+#include "decorate/smoothfluids.dec"
+
 #include "decorate/batandy.dec"
 #include "decorate/ryker.dec"
 
@@ -18,3 +20,18 @@
 
 #include "decorate/cacolantern.txt"
 #include "decorate/zrrion/zrrion_crimes.txt"
+
+// junkcity lamp
+Actor JunkLamp 22220
+{
+	Radius 16
+	Height 64
+	+SOLID
+	States
+	{
+	Spawn:
+		POL7 A 6
+		POL7 B 8
+		Loop
+	}
+}

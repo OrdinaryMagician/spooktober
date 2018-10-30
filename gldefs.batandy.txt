@@ -1,0 +1,30 @@
+Pointlight AgPumpkinLight
+{
+Color 1.0 0.8 0.5
+Size 32
+}
+
+Object AGPumpkin
+{
+Frame AGPKA { Light AgPumpkinLight }
+}
+
+Pointlight AgTorchLight
+{
+Color 0.9 0.5 0.4
+Size 64
+}
+
+Pointlight AgTorchLight2
+{
+Color 0.9 0.5 0.4
+Size 72
+}
+
+Object AGTorch
+{
+Frame AGTCA { Light AgTorchLight }
+Frame AGTCB { Light AgTorchLight2 }
+Frame AGTCC { Light AgTorchLight }
+Frame AGTCD { Light AgTorchLight2 }
+}

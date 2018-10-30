@@ -151,7 +151,7 @@ Class mkUncleReggie : Actor
 		{
 			bSOLID = false;
 			tracer = Spawn("Diabolist",pos);
-			tracer.Health += 4600;
+			tracer.Health += 2600;
 			tracer.SetTag("$REGGHDR");
 			tracer.scale = (1.0,0.7);
 			tracer.Deactivate(target);

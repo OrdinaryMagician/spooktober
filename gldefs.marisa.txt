@@ -1,0 +1,450 @@
+hardwareshader postprocess scene
+{
+	Name "blurfade"
+	Uniform float strength
+	Shader "shaders/glsl/blurfade.fp" 330
+}
+
+hardwareshader postprocess scene
+{
+	Name "marifx_grading"
+	Uniform vec3 grademul
+	Uniform vec3 gradepow
+	Uniform vec3 gradecol
+	Uniform float gradecolfact
+	Uniform float gradesatmul
+	Uniform float gradesatpow
+	Uniform float gradevalmul
+	Uniform float gradevalpow
+	Shader "shaders/glsl/marifx_grading.fp" 330
+}
+
+hardwareshader texture "RBARRIER"
+{
+	Shader "shaders/glsl/bwarp.fp"
+}
+hardwareshader texture "RBARRIE2"
+{
+	Shader "shaders/glsl/bwarp.fp"
+}
+
+hardwareshader texture "DSPACE"
+{
+	Shader "shaders/glsl/differentspace.fp"
+	Texture "layer1" "DSP1"
+	Texture "layer2" "DSP2"
+}
+
+hardwareshader texture "blin"
+{
+	Shader "shaders/glsl/dlwarp.fp"
+}
+
+hardwareshader texture "grin"
+{
+	Shader "shaders/glsl/dlwarp.fp"
+	Speed 0.6
+}
+
+hardwareshader texture "l4in"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+hardwareshader texture "l4in_1"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+hardwareshader texture "l4in_2"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+hardwareshader texture "l4in_3"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+hardwareshader texture "l4in_4"
+{
+	Shader "shaders/glsl/slwarp.fp"
+	Speed 0.15
+}
+
+hardwareshader texture "vmin"
+{
+	Shader "shaders/glsl/dlwarp.fp"
+	Speed 0.4
+}
+
+flickerlight2 MKBRAZIER
+{
+	color 1.0 0.8 0.0
+	size 204
+	secondarySize 212
+	interval 0.1
+	offset 0 48 0
+	attenuate 1
+}
+object mkFireBrazier
+{
+	frame KFR1A { light MKBRAZIER }
+	frame KFR1B { light MKBRAZIER }
+	frame KFR1C { light MKBRAZIER }
+	frame KFR1D { light MKBRAZIER }
+	frame KFR1E { light MKBRAZIER }
+	frame KFR1F { light MKBRAZIER }
+	frame KFR1G { light MKBRAZIER }
+	frame KFR1H { light MKBRAZIER }
+}
+
+flickerlight2 MKBRAZIER2
+{
+	color 1.0 0.8 0.0
+	size 204
+	secondarySize 212
+	interval 0.1
+	offset 0 8 0
+	attenuate 1
+}
+object mkFireBrazier2
+{
+	frame FFR1 { light MKBRAZIER2 }
+}
+
+flickerlight2 MKTORCH
+{
+	color 0.85 0.7 0.0
+	size 64
+	secondarySize 72
+	interval 0.1
+	offset 0 70 0
+}
+object mkWallTorch
+{
+	frame WTRHA { light MKTORCH }
+	frame WTRHB { light MKTORCH }
+	frame WTRHC { light MKTORCH }
+}
+
+flickerlight2 MKCHANDELIER
+{
+	color 0.5 0.4 0.0
+	size 160
+	secondarySize 168
+	interval 0.1
+	attenuate 1
+}
+object mkChandelier
+{
+	frame CHDLA { light MKCHANDELIER }
+	frame CHDLB { light MKCHANDELIER }
+	frame CHDLC { light MKCHANDELIER }
+}
+
+pointlight GOATBALL
+{
+    color 0.5 0.0 1.0
+    size 96
+	attenuate 1
+}
+
+flickerlight GOATBALL_X1
+{
+    color 0.6 0.45 0.9
+    size 120
+    secondarySize 132
+    chance 0.25
+	attenuate 1
+}
+
+flickerlight GOATBALL_X2
+{
+    color 0.4 0.3 0.6
+    size 144
+    secondarySize 156
+    chance 0.25
+	attenuate 1
+}
+
+flickerlight GOATBALL_X3
+{
+    color 0.2 0.15 0.45
+    size 168
+    secondarySize 180
+    chance 0.25
+	attenuate 1
+}
+
+object mkGoatBall
+{
+    frame BALGA { light GOATBALL    }
+    frame BALGB { light GOATBALL    }
+
+    frame BALGC { light GOATBALL_X1 }
+    frame BALGD { light GOATBALL_X2 }
+    frame BALGE { light GOATBALL_X3 }
+}
+
+skybox ACIDSKY fliptop
+{
+	textures/thief/skyhw/acide.png
+	textures/thief/skyhw/acids.png
+	textures/thief/skyhw/acidw.png
+	textures/thief/skyhw/acidn.png
+	textures/thief/skyhw/acidt.png
+	textures/thief/skyhw/acidb.png
+}
+
+skybox HUBSKY fliptop
+{
+	graphics/SkySetB_back.png
+	graphics/SkySetB_left.png
+	graphics/SkySetB_front.png
+	graphics/SkySetB_right.png
+	graphics/SkySetB_up.png
+	graphics/SkySetB_down.png
+}
+
+flickerlight NLORDBALLBIG
+{
+	color 0.6 0.1 1.0
+	size 88
+	secondarySize 96
+	chance 0.5
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X1
+{
+	color 0.6 0.1 1.0
+	size 96
+	secondarySize 108
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X2
+{
+	color 0.48 0.08 0.8
+	size 120
+	secondarySize 132
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X3
+{
+	color 0.35 0.06 0.6
+	size 132
+	secondarySize 138
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X4
+{
+	color 0.24 0.04 0.4
+	size 123
+	secondarySize 138
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLBIG_X5
+{
+	color 0.12 0.02 0.2
+	size 123
+	secondarySize 138
+	chance 0.3
+	attenuate 1
+}
+
+flickerlight NLORDBALLSM
+{
+	color 0.6 0.1 1.0
+	size 44
+	secondarySize 48
+	chance 0.5
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X1
+{
+	color 0.6 0.1 1.0
+	size 48
+	secondarySize 54
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X2
+{
+	color 0.48 0.08 0.8
+	size 60
+	secondarySize 66
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X3
+{
+	color 0.35 0.06 0.6
+	size 66
+	secondarySize 69
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X4
+{
+	color 0.24 0.04 0.4
+	size 62
+	secondarySize 69
+	chance 0.3
+	attenuate 1
+}
+flickerlight NLORDBALLSM_X5
+{
+	color 0.12 0.02 0.2
+	size 62
+	secondarySize 69
+	chance 0.3
+	attenuate 1
+}
+
+object mkBigBolt
+{
+	frame FXNLA { light NLORDBALLBIG }
+	frame FXNLB { light NLORDBALLBIG }
+	frame FXNLC { light NLORDBALLBIG }
+
+	frame FXNLG { light NLORDBALLBIG_X1 }
+	frame FXNLH { light NLORDBALLBIG_X2 }
+	frame FXNLI { light NLORDBALLBIG_X3 }
+	frame FXNLJ { light NLORDBALLBIG_X4 }
+	frame FXNLK { light NLORDBALLBIG_X5 }
+	frame FXNLL { light NLORDBALLBIG_X5 }
+}
+object mkBigBoltDecoy
+{
+	frame FXNLA { light NLORDBALLBIG }
+	frame FXNLB { light NLORDBALLBIG }
+	frame FXNLC { light NLORDBALLBIG }
+
+	frame FXNLG { light NLORDBALLBIG_X1 }
+	frame FXNLH { light NLORDBALLBIG_X2 }
+	frame FXNLI { light NLORDBALLBIG_X3 }
+	frame FXNLJ { light NLORDBALLBIG_X4 }
+	frame FXNLK { light NLORDBALLBIG_X5 }
+	frame FXNLL { light NLORDBALLBIG_X5 }
+}
+object mkSplitBolt
+{
+	frame FXNLA { light NLORDBALLBIG }
+	frame FXNLB { light NLORDBALLBIG }
+	frame FXNLC { light NLORDBALLBIG }
+
+	frame FXNLG { light NLORDBALLBIG_X1 }
+	frame FXNLH { light NLORDBALLBIG_X2 }
+	frame FXNLI { light NLORDBALLBIG_X3 }
+	frame FXNLJ { light NLORDBALLBIG_X4 }
+	frame FXNLK { light NLORDBALLBIG_X5 }
+	frame FXNLL { light NLORDBALLBIG_X5 }
+}
+object mkSplitBoltDecoy
+{
+	frame FXNLA { light NLORDBALLBIG }
+	frame FXNLB { light NLORDBALLBIG }
+	frame FXNLC { light NLORDBALLBIG }
+
+	frame FXNLG { light NLORDBALLBIG_X1 }
+	frame FXNLH { light NLORDBALLBIG_X2 }
+	frame FXNLI { light NLORDBALLBIG_X3 }
+	frame FXNLJ { light NLORDBALLBIG_X4 }
+	frame FXNLK { light NLORDBALLBIG_X5 }
+	frame FXNLL { light NLORDBALLBIG_X5 }
+}
+
+object mkSmolBolt
+{
+	frame FXNLA { light NLORDBALLSM }
+	frame FXNLB { light NLORDBALLSM }
+	frame FXNLC { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+object mkSmolBoltDecoy
+{
+	frame FXNLA { light NLORDBALLSM }
+	frame FXNLB { light NLORDBALLSM }
+	frame FXNLC { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+object mkBigSpeck
+{
+	frame FXNLD { light NLORDBALLSM }
+	frame FXNLE { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+object mkFallingBolt
+{
+	frame FXNLM { light NLORDBALLSM }
+	frame FXNLN { light NLORDBALLSM }
+	frame FXNLO { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+object mkFallingBoltDecoy
+{
+	frame FXNLM { light NLORDBALLSM }
+	frame FXNLN { light NLORDBALLSM }
+	frame FXNLO { light NLORDBALLSM }
+
+	frame FXNLG { light NLORDBALLSM_X1 }
+	frame FXNLH { light NLORDBALLSM_X2 }
+	frame FXNLI { light NLORDBALLSM_X3 }
+	frame FXNLJ { light NLORDBALLSM_X4 }
+	frame FXNLK { light NLORDBALLSM_X5 }
+	frame FXNLL { light NLORDBALLSM_X5 }
+}
+
+flickerlight NLORDATK
+{
+	color 0.6 0.2 1.0
+	size 96
+	secondarySize 108
+	chance 0.5
+	attenuate 1
+}
+
+object mkNightmareLord
+{
+	frame NLRDR { light NLORDATK }
+	frame NLRDS { light NLORDATK }
+	frame NLRDT { light NLORDATK }
+	frame NLRDV { light NLORDATK }
+	frame NLRDW { light NLORDATK }
+}
+object mkNightmareLordDecoy
+{
+	frame NLRDR { light NLORDATK }
+	frame NLRDS { light NLORDATK }
+	frame NLRDT { light NLORDATK }
+	frame NLRDV { light NLORDATK }
+	frame NLRDW { light NLORDATK }
+}

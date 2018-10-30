@@ -1,10 +1,3 @@
-//////// UndeadRyker
-sjas/act_distant SJAS01
-
-
-//////// Marisa
-$pitchshiftrange 0
-
 // diabolist
 monster/diasit dsdiasit
 monster/diapai dsdiapai
@@ -20,6 +13,22 @@ ClericFlameFire         dshellfi
 ClericFlameExplode      dshellex
 ClericFlameCircle       dsfirex5
 
+$pitchshiftrange 0
+// ambiences
+$ambient 6400 rain/rain point 1.5 continuous 0.5
+$ambient 6401 rain/rain2 world continuous 0.5
+$ambient 6402 misc/wind1 point 1.0 continuous 0.25
+$ambient 6403 misc/wind2 point 1.0 continuous 0.25
+$ambient 6404 misc/wind3 point 1.0 continuous 0.25
+$ambient 6405 misc/wind4 point 1.0 continuous 0.25
+$ambient 6406 misc/growl point 2.0 continuous 0.5
+$ambient 6407 misc/wah point 3.0 continuous 0.25
+$ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
+$ambient 6409 thief/eees1 point 0.8 continuous 0.6
+$ambient 6410 thief/eees2 point 0.8 continuous 0.6
+$ambient 6411 thief/eees3 point 0.6 continuous 0.8
+$ambient 6412 misc/ulava point 1.0 continuous 1.0
+$ambient 6413 misc/wind5 point 0.3 continuous 0.2
 // from unreal
 rain/rain rainM1
 rain/rain2 rainM2
@@ -38,6 +47,7 @@ misc/growl growl
 misc/wah stower51
 misc/ulava lava31
 misc/wind5 wind21
+$pitchshiftrange 4
 misc/uquake quake31
 misc/stnloop4 stnloop4
 misc/adend60 adend60
@@ -72,7 +82,9 @@ goat/thump dsthump
 tim/grunt timgrunt
 misc/voice dlgvoice
 $limit misc/voice 32
+$pitchshiftrange 0
 misc/nuke bigfckx
+$pitchshiftrange 4
 misc/revloop dsskestl
 $limit misc/revloop 32
 $pitchshift misc/revloop 5
@@ -82,13 +94,16 @@ $limit misc/bossvoice 32
 // from .flow
 misc/lka lka
 $musicvolume D_MIRROR 0.35
+$pitchshiftrange 0
 // from umineko
 seacat/ahahawav ahaha
 seacat/flangefemale flangefm
 seacat/flangestorm flangest
 seacat/loudthunder lthunder
+$pitchshiftrange 4
 seacat/rfire r_fire
 seacat/rreload r_reload
+$pitchshiftrange 0
 seacat/rainloop rain4l
 seacat/z1 z1
 $limit seacat/z1 32
@@ -99,13 +114,17 @@ thief/firelp1	FIRELP1
 thief/firelp8	FIRELP8
 thief/firelp9	FIRELP9
 $random thief/firelp { thief/firelp1 thief/firelp8 thief/firelp9 }
+thief/eees1	EEES1
+thief/eees2	EEES2
+thief/eees3	EEES3
+thief/egloop	EGPEDLP2
+thief/egzap	EGZAP
+$pitchshiftrange 4
 thief/locked	LOCKED
 thief/unlocked	UNLOCKED
 thief/pinset2	PINSET2
 thief/wboxopen	BOXW_OP
 thief/button	B_PUSH
-thief/egloop	EGPEDLP2
-thief/egzap	EGZAP
 thief/doorm1o	DOORM1O
 thief/doorm1c	DOORM1C
 thief/doors1o	DOORS1O
@@ -117,9 +136,6 @@ thief/swthrow1	LVTHROW1
 thief/swthrow2	LVTHROW2
 thief/swsmall	LVSCOPE
 thief/switch	LVWALL
-thief/eees1	EEES1
-thief/eees2	EEES2
-thief/eees3	EEES3
 // thief footsteps
 thief/lcarpet FTCAR_J
 thief/carpet1 FTCAR_P1
@@ -171,21 +187,7 @@ thief/water4 FTWAT_4
 $random thief/water { thief/water1 thief/water2 thief/water3 thief/water4 }
 // from hexen
 hexen/ignite	TORCH2
-// ambiences
-$ambient 6400 rain/rain point 1.5 continuous 0.5
-$ambient 6401 rain/rain2 world continuous 0.5
-$ambient 6402 misc/wind1 point 1.0 continuous 0.25
-$ambient 6403 misc/wind2 point 1.0 continuous 0.25
-$ambient 6404 misc/wind3 point 1.0 continuous 0.25
-$ambient 6405 misc/wind4 point 1.0 continuous 0.25
-$ambient 6406 misc/growl point 2.0 continuous 0.5
-$ambient 6407 misc/wah point 3.0 continuous 0.25
-$ambient 6408 seacat/flangefemale point 2.0 continuous 0.25
-$ambient 6409 thief/eees1 point 0.8 continuous 0.6
-$ambient 6410 thief/eees2 point 0.8 continuous 0.6
-$ambient 6411 thief/eees3 point 0.6 continuous 0.8
-$ambient 6412 misc/ulava point 1.0 continuous 1.0
-$ambient 6413 misc/wind5 point 0.3 continuous 0.2
+$pitchshiftrange 0
 // various sources
 nightmarelord/see DEESACT3
 nightmarelord/death DEESDIE5
@@ -193,9 +195,13 @@ nightmarelord/pain1 DEESPAI1
 nightmarelord/pain2 DEESPAI2
 nightmarelord/pain3 DEESPAI3
 $random nightmarelord/pain { nightmarelord/pain1 nightmarelord/pain2 nightmarelord/pain3 }
+nightmarelord/attack DEESATK5
+nightmarelord/grabtaunt DEESACT1
+nightmarelord/pop CORK
+nightmarelord/explode bfg8fire
+$pitchshiftrange 4
 nightmarelord/zap SORZAP
 nightmarelord/cast SORATK
-nightmarelord/pop CORK
 nightmarelord/appear SORRISE
 nightmarelord/disappear BISHAPP
 nightmarelord/strafe BLUR6
@@ -212,59 +218,10 @@ nightmarelord/sparkhit1 hspafle1
 nightmarelord/sparkhit2 hspafle2
 nightmarelord/sparkhit3 hspafle3
 $random nightmarelord/sparkhit { nightmarelord/sparkhit1 nightmarelord/sparkhit2 nightmarelord/sparkhit3 }
-nightmarelord/explode bfg8fire
 nightmarelord/step1 NLSTEP1
 nightmarelord/step2 NLSTEP2
 nightmarelord/step3 NLSTEP3
 nightmarelord/step4 NLSTEP4
 $random nightmarelord/step { nightmarelord/step1 nightmarelord/step2 nightmarelord/step3 nightmarelord/step4 }
 nightmarelord/stomp STHMP1
-nightmarelord/grabtaunt DEESACT1
 nightmarelord/grabthrow THROW9
-nightmarelord/attack DEESATK5
-
-//////// quakedoomnukem cz
-doorswing1/start		STNMOV
-doorswing1/stop			PSTOP
-
-doorswing2/start		DRCRK
-doorswing2/stop			DRSTP
-
-TOILET1      			TOILET1
-BREAK1       			BREAK1
-DSCHAFIR 				DSCHAFIR
-
-//////// jaxxoon r
-SFX/FireStart	FIRESTRT
-SFX/FireLoop1	FIRELOP1
-SFX/FireLoop2	FIRELOP2
-SFX/FireLoop3	FIRELOP3
-SFX/FireDie	FIREDIE
-
-$volume SFX/FireLoop1 0.5
-$volume SFX/FireLoop2 0.5
-$volume SFX/FireLoop3 0.5
-$volume SFX/FireStart 0.8
-
-$Limit SFX/FireStart 0
-$Limit SFX/FireLoop	0
-$Limit SFX/FireDie	0
-
-CAT/CATCAT		neko
-
-jaxx/highwind	HIWINAMB
-jaxx/witchdoor1	witchdr1
-jaxx/witchdoor2	witchcls
-jaxx/metalslide	MTLMV3
-jaxx/CrankyDoor	jxcrank
-
-$volume jaxx/metalslide 0.8
-
-$ambient 6415 jaxx/highwind point 1.0 continuous 0.25
-
-//////// zrrion
-NSTHND00					"sounds/NSTHND00"
-NSTHND01					"sounds/NSTHND01"
-NSTHND02					"sounds/NSTHND02"
-NSTHND03					"sounds/NSTHND03"
-$random zrrion/thunder		{ NSTHND00 NSTHND01 NSTHND02 NSTHND03 }

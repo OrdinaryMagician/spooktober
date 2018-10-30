@@ -1,0 +1,1 @@
+warp2 texture AWCFA0 0.05

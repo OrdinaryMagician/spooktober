@@ -1,0 +1,26 @@
+SFX/FireStart	FIRESTRT
+SFX/FireLoop1	FIRELOP1
+SFX/FireLoop2	FIRELOP2
+SFX/FireLoop3	FIRELOP3
+SFX/FireDie	FIREDIE
+
+$volume SFX/FireLoop1 0.5
+$volume SFX/FireLoop2 0.5
+$volume SFX/FireLoop3 0.5
+$volume SFX/FireStart 0.8
+
+$Limit SFX/FireStart 0
+$Limit SFX/FireLoop	0
+$Limit SFX/FireDie	0
+
+CAT/CATCAT		neko
+
+jaxx/highwind	HIWINAMB
+jaxx/witchdoor1	witchdr1
+jaxx/witchdoor2	witchcls
+jaxx/metalslide	MTLMV3
+jaxx/CrankyDoor	jxcrank
+
+$volume jaxx/metalslide 0.8
+
+$ambient 6415 jaxx/highwind point 1.0 continuous 0.25

@@ -1,5 +1,3 @@
-//// marisa
-
 TEXTURE nlttele1
 	RANGE nlttele4 TICS 4
 
@@ -40,30 +38,3 @@ TEXTURE bwal1
 // thief/waterhw
 TEXTURE l4in
 	RANGE l4in_4 TICS 5
-
-//// pixel eater
-
-Texture PUMPHED1 range PUMPHED8 tics 4
-Texture FIRBLUE1 range FIRBLUE2 tics 4
-switch SW1PHEX on pic SW2PHEX tics 0
-
-Warp2 Texture LIVEVINE 0.04
-
-//// impietwo
-texture CANDLE_1 range CANDLE_5 rand 3 5
-
-texture CANDLES1
- pic CANDLES1 tics 8
- pic CANDLES2 tics 8
- pic CANDLES3 tics 8
-
-//// quakedoomnukem cz
-texture PORT_1 range PORT_4 tics 8 oscillate //aging portrait
-
-texture CLOCK_1 range CLOCK_5 tics 6 oscillate //grandfather clock
-
-texture PORTAL_1 range PORTAL_4 tics 2 //black n white portal
-
-texture BWAT_01 range BWAT_10 tics 4 //water
-
-warp2 texture AWCFA0 0.05 // zrrion
