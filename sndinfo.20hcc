@@ -1,0 +1,107 @@
+/***************************************************************************/
+/*									   */
+/* HEXEN SOUNDS								   */
+/*									   */
+/***************************************************************************/
+
+//===========================================================================
+//
+// PLAYER SOUNDS
+//
+//===========================================================================
+
+// Pig
+
+PigActive1              pigrunt1
+PigActive2              squeal1
+PigPain                 pigpain2
+PigAttack               bite4
+PigDeath                pigdth2
+
+;===========================================================================
+;
+; MONSTER SOUNDS
+;
+;===========================================================================
+
+// Fire Demon
+FireDemonDeath          fired3
+
+//===========================================================================
+//
+// MISCELLANEOUS SOUNDS
+//
+//===========================================================================
+
+BatScream               bats
+
+FlyBuzz                 fly3
+Earthquake              quake2
+
+BellRing                bellrng
+TreeBreak               treebrk
+TreeExplode             treeburn
+SuitofArmorBreak        armorexp
+PoisonShroomPain        stretch3
+PoisonShroomDeath       puff1
+
+Ignite                  torch2
+
+GlassShatter            glass5
+
+ThunderCrash            thndr1
+PotteryExplode          potbrk1
+Drip                    blddrp1
+Wind                    wind3
+
+// Ambient sounds
+
+Ambient1                insects1
+Ambient2                crkets
+Ambient3                crkets1
+Ambient4                katydid
+Ambient5                frogs
+Ambient6                owl
+Ambient7                bird
+Ambient8                shlurp
+Ambient9                bubble
+Ambient10               drop2
+Ambient11               rocks
+Ambient12               chains
+Ambient13               gong
+Ambient14               steel1
+Ambient15               steel2
+
+//MOR'LADIM'S HERETIC PACK
+
+//Unholy Beacon
+UNHBECLT UNHBECLT
+$Limit UNHBECLT 0
+
+//Wizard's Step
+WIZSTEPR WIZSTEPR
+$Limit WIZSTEPR 0
+
+//Item Chests
+TCHSTOPN TCHSTOPN
+$Limit TCHSTOPN 0
+
+//MOR'LADIM'S CROWS
+
+CRWFLP CRWFLP
+
+CRWCAW1 CRWCAW1
+$Limit CRWCAW1	0
+
+CRWCAW2 CRWCAW2
+$Limit CRWCAW2	0
+
+CRWCAW3 CRWCAW3
+$Limit CRWCAW3 0
+
+//MY OWN SHIT
+GeyserErupt				GEYSER1
+PeasantPain				PSNTWNCE
+PeasantDeath			PSNTKILL
+MarsFishPain			FISHHURT
+MarsFishDeath			FISHDTH

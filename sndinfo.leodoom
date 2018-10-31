@@ -1,0 +1,17 @@
+spooky/baby BABY
+spooky/doorknock DOORKNOK
+spooky/feet FEET2
+spooky/laugh LAUGH
+spooky/whisper WHISPER
+spooky/clock CLOCK
+spooky/fire FIRE3
+spooky/ghost GHOST
+spooky/dooropen DOOR_OPN
+spooky/doorclose DOOR_CLO
+spooky/doorlock DOOR_KNO
+spooky/doorstop DOORSTP
+spooky/doorcreak DOORCRK
+
+$ambient 41 spooky/fire point continuous 0.4
+$ambient 42 spooky/ghost point continuous 0.3
+$ambient 43 spooky/clock point continuous 0.5

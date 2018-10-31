@@ -1,0 +1,6936 @@
+// MOR'LADIM'S HERETIC PROP PACK
+
+ACTOR BrownStonePillar 6250
+{
+  Mass 99999
+  Radius 10
+  Height 80
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _BSP A -1
+	 Stop
+  }
+}
+
+ACTOR BrownStonePillarTall 6251
+{
+  Mass 99999
+  Radius 10
+  Height 115
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _BSP B -1
+	 Stop
+  }
+}
+
+ACTOR BrownStonePillarSign 6266
+{
+  Mass 99999
+  Radius 10
+  Height 115
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _BSP C -1
+	 Stop
+  }
+}
+
+//----
+
+ACTOR SmallPedestal 6252
+{
+  Mass 99999
+  Radius 15
+  Height 40
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn: 
+     _SMP A 1	
+	 _SMP A 0 A_SpawnItem("PedestalOrb1",0,40,0) 
+	 _SMP A -1
+	 Stop
+  }
+}
+
+ACTOR SmallPedestalShort 6253
+{
+  Mass 99999
+  Radius 15
+  Height 40
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _SMP B 1	
+ 	 _SMP A 0 A_SpawnItem("PedestalOrb2",0,30,0) 
+	 _SMP B -1	
+	 Stop
+  }
+}
+
+ACTOR SmallPedestalOrnate 6254
+{
+  Mass 99999
+  Radius 15
+  Height 4
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _SMP C 1
+	 _SMP A 0 A_SpawnItem("PedestalOrb3",0,40,0)  
+	 _SMP C -1
+	 Stop
+  }
+}
+
+ACTOR PedestalOrb1 //Orange
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.8
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  +FLOATBOB
+  States
+  {
+  Spawn:
+     _POB A 2
+	 _POB A 0 A_SpawnItem("PedestalOrb1AI",0,0,0)
+	 Loop
+  }
+}
+
+ACTOR PedestalOrb2 //Green
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.8
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  +FLOATBOB
+  States
+  {
+  Spawn:
+     _POB B 2
+	 _POB A 0 A_SpawnItem("PedestalOrb2AI",0,0,0)
+	 Loop
+  }
+}
+
+ACTOR PedestalOrb3 //Blue
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.8
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  +FLOATBOB
+  States
+  {
+  Spawn:
+     _POB C 2
+	 _POB A 0 A_SpawnItem("PedestalOrb3AI",0,0,0)
+	 Loop
+  }
+}
+
+ACTOR PedestalOrb1AI //Orange Afterimage
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.15
+  +NOCLIP
+  States
+  {
+  Spawn:
+     _PBF A 1
+	 _PBF A 0 A_SetScale(1.2)
+     _PBF A 1
+	 _PBF A 0 A_SetScale(1.4)	 
+     _PBF A 1
+	 _PBF A 0 A_SetScale(1.6)	 
+     _PBF A 1
+	 _PBF A 0 A_SetScale(1.8)	 
+     _PBF A 1	 
+	 Stop
+  }
+}
+
+ACTOR PedestalOrb2AI //Green Afterimage
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.15
+  +NOCLIP
+  States
+  {
+  Spawn:
+     _PBF B 1
+	 _PBF A 0 A_SetScale(1.2)
+     _PBF B 1
+	 _PBF A 0 A_SetScale(1.4)	 
+     _PBF B 1
+	 _PBF A 0 A_SetScale(1.6)	 
+     _PBF B 1
+	 _PBF A 0 A_SetScale(1.8)	 
+     _PBF B 1	 
+	 Stop
+  }
+}
+
+ACTOR PedestalOrb3AI //Blue Afterimage
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.2
+  +NOCLIP
+  States
+  {
+  Spawn:
+     _PBF C 1
+	 _PBF A 0 A_SetScale(1.2)
+     _PBF C 1
+	 _PBF A 0 A_SetScale(1.4)	 
+     _PBF C 1
+	 _PBF A 0 A_SetScale(1.6)	 
+     _PBF C 1
+	 _PBF A 0 A_SetScale(1.8)	 
+     _PBF C 1	 
+	 Stop
+  }
+}
+
+//----
+
+ACTOR UnholyBeacon 6255
+{
+  Mass 99999
+  Radius 8
+  Height 55
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _EVP A -1
+	 Stop
+  }
+}
+
+ACTOR UnholyBeaconProx 6256
+{
+  Mass 99999
+  Health 999
+  Radius 8
+  Height 55
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  +DONTBLAST 
+  +INVULNERABLE
+  MeleeDamage 0
+  MeleeRange 90
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn: 
+	 _EVP A 0 A_Look
+	 _EVP A 0 A_JumpIfTargetInsideMeleeRange("Activated")
+     _EVP A 1
+	 Loop
+  See:
+	 _EVP A 0 A_FaceTarget
+	 _EVP A 0 A_JumpIfTargetInsideMeleeRange("Activated")
+     _EVP A 1
+	 Goto Spawn	 
+  Melee:	
+  Activated:
+    _EVP A 0 A_SpawnItem("UnholyBeaconShockwave",0,40,0)
+	_EVP A 0 A_PlaySound("UNHBECLT",5,2.5,0)
+    _EVP A 8
+    _EVP A 0 A_SpawnItem("UnholyBeaconGlow",0,40,0)
+  Glowing:
+    _EVP A 1
+	Loop	 
+  }
+}
+
+ACTOR UnholyBeaconShockwave
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.12
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  +DONTBLAST 
+  States
+  {
+  Spawn:
+     _EPG A 1
+	 _EPG A 0 A_SetScale(0.5)
+     _EPG A 1
+	 _EPG A 0 A_SetScale(0.7)	 
+     _EPG A 1
+	 _EPG A 0 A_SetScale(0.9)	 
+     _EPG A 1
+	 _EPG A 0 A_SetScale(1.1)	 
+     _EPG A 1	 
+	 Stop
+  }
+}
+
+ACTOR UnholyBeaconGlow
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.5
+  Scale 0.35
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  +DONTBLAST  
+  States
+  {
+  Spawn:
+     _EPG B 1
+	 TNT1 A 1
+	 Loop
+  }
+}
+
+//----
+
+ACTOR CeilingBanner 6257
+{
+  Mass 99999
+  Radius 1
+  Height 1
+  Scale 0.7
+  +NOCLIP  
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CEB A -1
+	 Stop
+  }
+}
+
+//----
+
+ACTOR DemonChain 6258 //A metal demon head decoration.
+{
+  Mass 99999
+  Radius 1
+  Height 1
+  +NOCLIP
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _DMC A -1
+	 Stop
+  }
+}
+
+ACTOR DemonChainTorch 6259 //A metal demon head decoration with a light source.
+{
+  Mass 99999
+  Radius 1
+  Height 1
+  +NOCLIP  
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _DMC BCDE 3
+	 Loop
+  }
+}
+
+//----
+
+ACTOR SkullCage 6260
+{
+  Mass 99999
+  Radius 25
+  Height 65
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _SKC A -1
+	 Stop
+  }
+}
+
+ACTOR SkullPileA 6261
+{
+  Mass 99999
+  Radius 8
+  Height 15
+  Scale 1.2
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _SKP A -1
+	 Stop
+  }
+}
+
+ACTOR SkullPileB 6262
+{
+  Mass 99999
+  Radius 8
+  Height 15
+  Scale 1.3
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _SKP B -1
+	 Stop
+  }
+}
+
+//----
+
+ACTOR UnholyLamp 6263
+{
+  Mass 99999
+  Radius 1
+  Height 1
+  +NOCLIP
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CRL ABCD 3
+	 _CRL A 0 A_Jump(128,2)
+	 _CRL A 0 A_SpawnItemEx("UnholyLampEmberFX",random(-2,2),random(-2,2),random(4,6),0,0)
+	 _CRL A 0
+	 Loop
+  }
+}
+
+ACTOR UnholyLampEmberFX
+{
+	+NOINTERACTION
+	+NOCLIP
+    +BRIGHT
+	Radius 1
+	Height 1
+	Renderstyle Add
+	Alpha 1
+	Scale 0.3
+	ReactionTime 5
+	States
+	{
+	Spawn:		
+		FEMB A 0 A_Jump(128,"Medium","Large")
+	    FEMB A 1
+		FEMB A 0 ThrustThingZ(0,1,0,1)
+		TNT1 A 1
+		FEMB A 0 A_Countdown
+		Goto Spawn+1
+	Medium:
+	    FEMB A 0 A_SetScale(0.5)
+ 	    FEMB A 1
+		FEMB A 0 ThrustThingZ(0,1,0,1)
+		TNT1 A 1
+		Goto Spawn+1	
+	Large:
+	    FEMB A 0 A_SetScale(0.6)
+	    FEMB A 1
+		FEMB A 0 ThrustThingZ(0,1,0,1)
+		TNT1 A 1
+		Goto Spawn+1	
+    Death:
+	    FEMB A 1
+		FEMB A 0 ThrustThingZ(0,1,0,1)
+		FEMB A 0 A_FadeOut(0.3)
+		Loop
+	}
+}
+
+//----
+
+ACTOR MedievalCandle 6264
+{
+  Mass 99999
+  Radius 1
+  Height 1
+  +NOCLIP
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _MDC A 1
+	 _MDC A 0 A_SpawnItem("MCandlelight",0,11,0)
+  Glowing:
+     _MDC ABC 3
+	 Loop
+  }
+}
+
+ACTOR MCandlelight
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.35
+  Scale 0.65
+  +NOCLIP
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CDL A 1
+	 TNT1 A 1
+	 _CDL B 1
+	 TNT1 A 1
+	 Loop
+  }
+}
+
+//----
+
+ACTOR PrisonCage 6265
+{
+  Mass 99999
+  Radius 25
+  Height 85
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CAG A -1
+	 Stop
+  }
+}
+
+ACTOR PrisonCageSkeleton 6267
+{
+  Mass 99999
+  Radius 25
+  Height 85
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CAG B -1
+	 Stop
+  }
+}
+
+ACTOR PrisonCageRuined 6268
+{
+  Mass 99999
+  Radius 25
+  Height 85
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CAG C -1
+	 Stop
+  }
+}
+
+//---
+
+ACTOR SpiritBrazier 6269
+{
+  Mass 99999
+  Radius 15
+  Height 55
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _SPB ABCD 2	 
+	 Loop
+  }
+}
+
+ACTOR SpiritBrazierFX 6270
+{
+  Mass 99999
+  Radius 15
+  Height 55
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _SPB ABCD 2	
+	 _SPB A 0 A_Jump(128,2)
+	 _SPB A 0 A_SpawnItemEx("BrazierSpirit",random(-6,6),random(-6,6),random(20,25),0,0)
+	 _SPB A 0
+	 Loop
+  }
+}
+
+ACTOR BrazierSpirit
+{
+	+NOINTERACTION
+	+NOCLIP
+    +BRIGHT
+	Radius 1
+	Height 1
+	Renderstyle Add
+	Alpha 0.25
+	Scale 0.3
+	ReactionTime 12
+	States
+	{
+	Spawn:		
+	    DSRB A 1
+		DSRB A 0 ThrustThingZ(0,1,0,1)
+		DSRB B 1
+		DSRB AA 0 A_SpawnItem("BrazierSpiritTrail",random(-3,6),random(-2,2),0)
+		DSRB A 0 A_Countdown
+		Loop
+    Death:
+	    DSRB A 1
+		DSRB A 0 ThrustThingZ(0,1,0,1)
+		DSRB A 0 A_SetScale(0.25)
+		DSRB A 0 A_FadeOut(0.05)
+		Loop
+	}
+}
+
+ACTOR BrazierSpiritTrail
+{
+	+NOINTERACTION
+	+NOCLIP
+    +BRIGHT
+	Radius 1
+	Height 1
+	Renderstyle Add
+	Alpha 0.25
+	Scale 0.4
+	ReactionTime 2
+	States
+	{
+	Spawn:		
+	    _SBT A 1
+		_SBT A 0 A_Countdown
+		Loop
+    Death:
+	    _SBT A 1
+		_SBT A 0 A_SetScale(0.2)
+		_SBT A 0 A_FadeOut(0.05)
+		Loop
+	}
+}
+
+//---
+
+ACTOR EngravedLectern 6271
+{
+  Mass 99999
+  Radius 15
+  Height 55
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _BKP A -1	 
+	 Stop
+  }
+}
+
+//---
+
+ACTOR GoreBag 6272
+{
+  Mass 99999
+  Radius 15
+  Height 35
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _GRB A -1	 
+	 Stop
+  }
+}
+
+//---
+
+ACTOR WizardsStep 6273 //Create more Wizard's Steps by increasing the argument number by 1 for each step in your favored level editor.
+{
+  Mass 99999
+  Health 999
+  Radius 8
+  Height 3
+  MONSTER
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  +INVULNERABLE
+  -CANUSEWALLS
+  +NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  +DONTBLAST 
+  +NOCLIP
+  +NOVERTICALMELEERANGE
+  //$Category "Mor'ladim"
+  MeleeDamage 0
+  MeleeRange 90
+  States
+  {
+  Spawn: 
+	 _WZS A 0 A_UnsetSolid
+	 _WZS A 0 A_Look
+	 _WZS A 0 A_JumpIfTargetInsideMeleeRange("Activated")
+     _WZS A 1
+	 Loop
+  See:
+	 _WZS A 0 A_FaceTarget
+	 _WZS A 0 A_JumpIfTargetInsideMeleeRange("Activated")
+     _WZS A 1
+	 Goto Spawn	 
+  Melee:	
+  Activated:
+     _WZS A 0 ThrustThingZ(0,5+20*args[0], 0, 0)
+     _WZS A 1 A_PlaySound("WIZSTEPR",5,2.5,0)
+     _WZS A 0 A_ChangeFlag("NOCLIP",0)
+     _WZS A 1 A_SetSolid
+     _WZS A 0 ThrustThingZ(0,5*args[0], 0, 0)
+     _WZS A 0 A_Stop
+  Raised:
+    _WZS A -1
+	Stop	 
+  }
+}
+
+//---
+
+ACTOR YellowKeyPost 6274
+{
+  Mass 99999
+  Radius 8
+  Height 60
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _YKP A 1
+	 _YKP A 0 A_SpawnItem("YellowKeyPostGem",0,48,0)
+  IdleSt:
+     _YKP A -1
+	 Stop
+  }
+}
+
+ACTOR YellowKeyPostGem
+{
+  Mass 99999
+  Radius 12
+  Height 12
+  Scale 0.8
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  States
+  {
+  Spawn:
+     _YKG A 50
+	 _YKG A 0 A_Jump(55,"Shine")
+	 Loop
+  Shine:
+     _YKG BCDEF 3
+	 Goto Spawn
+  }
+}
+
+//---
+
+ACTOR GreenKeyPost : YellowKeyPost 6275
+{
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _YKP A 1
+	 _YKP A 0 A_SpawnItem("GreenKeyPostGem",0,48,0)
+  IdleSt:
+     _YKP A -1
+	 Stop
+  }
+}
+
+ACTOR GreenKeyPostGem
+{
+  Mass 99999
+  Radius 12
+  Height 12
+  Scale 0.8
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  States
+  {
+  Spawn:
+     _GKG A 50
+	 _GKG A 0 A_Jump(55,"Shine")
+	 Loop
+  Shine:
+     _GKG BCDEF 3
+	 Goto Spawn
+  }
+}
+
+//---
+
+ACTOR BlueKeyPost : YellowKeyPost 6276
+{
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _YKP A 1
+	 _YKP A 0 A_SpawnItem("BlueKeyPostGem",0,48,0)
+  IdleSt:
+     _YKP A -1
+	 Stop
+  }
+}
+
+ACTOR BlueKeyPostGem
+{
+  Mass 99999
+  Radius 12
+  Height 12
+  Scale 0.8
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  States
+  {
+  Spawn:
+     _BKG A 50
+	 _BKG A 0 A_Jump(55,"Shine")
+	 Loop
+  Shine:
+     _BKG BCDEF 3
+	 Goto Spawn
+  }
+}
+
+ACTOR HangingPlantOrnament 6277
+{
+  Mass 99999
+  Radius 1
+  Height 1
+  Scale 0.7
+  +NOCLIP  
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _HPO A -1
+	 Stop
+  }
+}
+
+//---
+
+ACTOR VasePillar 6278
+{
+  Mass 99999
+  Radius 10
+  Height 60
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _VSP A -1	 
+	 Stop
+  }
+}
+
+//---
+
+ACTOR DemonStatue 6279
+{
+  Mass 99999
+  Radius 10
+  Height 55
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _DMS A -1	 
+	 Stop
+  }
+}
+
+//---
+
+ACTOR Crate 6280
+{
+  Mass 99999
+  Radius 20
+  Height 65
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CRT A -1	 
+	 Stop
+  }
+}
+
+ACTOR CrateAngled 6281
+{
+  Mass 99999
+  Radius 20
+  Height 65
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CRT B -1	 
+	 Stop
+  }
+}
+
+ACTOR CrateCombo 6282
+{
+  Mass 99999
+  Radius 20
+  Height 65
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _CRT C -1	 
+	 Stop
+  }
+}
+
+//---Artifact Pedestal - Can be used to place items with the +NOGRAVITY flag set. (So they will not fall through) 
+//An example item is used in conjunction with the prop. (Listed at the bottom of the page as the EtherealLiquid actor.)
+
+ACTOR ArtifactPedestal 6283
+{
+  Mass 99999
+  Radius 12
+  Height 60
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _ATP A -1	 
+	 Stop
+  }
+}
+
+ACTOR ArtifactPedestalB 6284
+{
+  Mass 99999
+  Radius 12
+  Height 60
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _ATP B -1	 
+	 Stop
+  }
+}
+
+//---
+
+ACTOR CrystalStand 6285
+{
+  Mass 99999
+  Radius 8
+  Height 60
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+  	 _CST A 1
+	 _CST A 0 A_SpawnItem("CrystalStandFX",0,48,0)
+  IdleSt:
+     _CST A -1
+	 Stop
+  }
+}
+
+ACTOR CrystalStandFX
+{
+  Mass 99999
+  Radius 12
+  Height 12
+  RenderStyle Add
+  Alpha 0.55
+  +NOCLIP
+  +NOGRAVITY
+  +NODAMAGETHRUST
+  States
+  {
+  Spawn:
+     _CST B -1
+	 Stop
+  }
+}
+
+ACTOR UnholySkullTorch 6286
+{
+  Mass 99999
+  Radius 8
+  Height 60
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _SKT ABCD 3
+	 Loop
+  }
+}
+
+ACTOR SmallShrub 6287
+{
+  Mass 99999
+  Radius 10
+  Height 45
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _SHR A -1
+	 Stop
+  }
+}
+
+ACTOR TinyShrub 6288
+{
+  Mass 99999
+  Radius 8
+  Height 25
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _TSR A -1
+	 Stop
+  }
+}
+
+ACTOR TallTree 6289
+{
+  Mass 99999
+  Radius 15
+  Height 85
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _TTR A -1
+	 Stop
+  }
+}
+
+ACTOR OrnateTorch 6290
+{
+  Mass 99999
+  Radius 1
+  Height 1
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +FIXMAPTHINGPOS
+  +NOGRAVITY
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _OTR ABCD 3
+	 Loop
+  }
+}
+
+ACTOR TreasureChestWood 6291 //Sprites from 'Castlevania: Order of Ecclesia'
+{
+  Health 1
+  Mass 90000000
+  Radius 20
+  Height 38
+  Scale 0.8
+  +SHOOTABLE
+  +NOBLOOD
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _TBX A 1
+     Loop
+  Death:
+	 _TBX A 0 A_PlaySound("TCHSTOPN",0,3.5,0)	
+	 _TBX BCDE 4
+     _TBX A 0 A_Jump(255,"DistGeneral","DistInv")
+	 Loop
+  DistGeneral:
+     _TBX AA 0 A_SpawnItemEx("WoodChestLootA",0,0,6,random(-2,2),random(-2,2),random(3,7),random(0,359),32)
+	 _TBX A 0 A_Jump(50,"DistInv")
+	 Goto Opened
+  DistInv:
+     _TBX A 0 A_SpawnItemEx("WoodChestLootB",0,0,0) //If using unedited vanilla health and artifacts, the jump effect cannot be used as in the	 
+  Opened:                                           //DistGeneral state, or else the items will float away and be suspended in the air.
+	 _TBX F 125 A_UnSetSolid
+  Fade:
+	 _TBX F 1
+     _TBX A 0 A_FadeOut(0.02)
+	 Loop
+  }
+}
+
+ACTOR WoodChestLootA : RandomSpawner //Random loot spawner for the wood chest. Set your own custom loot!
+{
+	DropItem GoldWandAmmo 255 10
+	DropItem CrossbowAmmo 255 6
+}
+
+ACTOR WoodChestLootB : RandomSpawner //Random artifact spawner for wood chest.
+{
+	DropItem ArtiTorch 255 7
+	DropItem ArtiHealth 255 4
+	DropItem CrystalVial 255 10
+}
+
+//---
+
+ACTOR TreasureChestRed 6292 //Sprites from 'Castlevania: Order of Ecclesia'
+{
+  Health 1
+  Mass 90000000
+  Radius 20
+  Height 38
+  Scale 0.85
+  +SHOOTABLE
+  +NOBLOOD
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _TB2 A 1
+     Loop
+  Death:
+	 _TB2 A 0 A_PlaySound("TCHSTOPN",0,3.5,0)	
+	 _TB2 BCDE 4
+     _TB2 A 0 A_Jump(255,"DistGeneral","DistInv")
+	 Loop
+  DistGeneral:
+     _TB2 AAA 0 A_SpawnItemEx("RedChestLootA",0,0,6,random(-2,2),random(-2,2),random(3,7),random(0,359),32)
+	 _TB2 A 0 A_Jump(55,"DistInv")
+	 Goto Opened
+  DistInv:
+     _TB2 A 0 A_SpawnItemEx("RedChestLootB",0,0,0)
+	 _TB2 A 0 A_Jump(180,2)
+	 _TB2 A 0 A_SpawnItemEx("RedChestLootB",0,0,0)	
+  Opened:
+	 _TB2 E 125 A_UnSetSolid
+  Fade:
+	 _TB2 E 1
+     _TB2 A 0 A_FadeOut(0.02)
+	 Loop
+  }
+}
+
+ACTOR RedChestLootA : RandomSpawner //Random loot spawner for the red chest. Set your own custom loot!
+{
+	DropItem GoldWandAmmo 255 10
+	DropItem CrossbowAmmo 255 8
+	DropItem BlasterAmmo 255 5
+}
+
+ACTOR RedChestLootB : RandomSpawner //Random artifact spawner for red chest.
+{
+	DropItem ArtiTorch 255 7
+	DropItem ArtiHealth 255 5
+	DropItem CrystalVial 255 10
+	DropItem ArtiTimeBomb 255 4
+	DropItem ArtiTeleport 255 3
+	DropItem ArtiTomeOfPower 255 2
+}
+
+ACTOR TreasureChestGreen 6293 //Sprites from 'Castlevania: Order of Ecclesia'
+{
+  Health 1
+  Mass 90000000
+  Radius 20
+  Height 38
+  Scale 0.90
+  +SHOOTABLE
+  +NOBLOOD
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _TB3 A 1
+     Loop
+  Death:
+	 _TB3 A 0 A_PlaySound("TCHSTOPN",0,3.5,0)	
+	 _TB3 BCDE 4
+     _TB3 A 0 A_Jump(255,"DistGeneral","DistInv")
+	 Loop
+  DistGeneral:
+     _TB3 AAAA 0 A_SpawnItemEx("GreenChestLootA",0,0,6,random(-2,2),random(-2,2),random(3,7),random(0,359),32)
+	 _TB3 A 0 A_Jump(55,"DistInv")
+	 Goto Opened
+  DistInv:
+     _TB3 AA 0 A_SpawnItemEx("GreenChestLootB",0,0,0)
+	 _TB3 A 0 A_Jump(180,2)
+	 _TB3 A 0 A_SpawnItemEx("GreenChestLootB",0,0,0)	
+  Opened:
+	 _TB3 E 125 A_UnSetSolid
+  Fade:
+	 _TB3 E 1
+     _TB3 A 0 A_FadeOut(0.02)
+	 Loop
+  }
+}
+
+ACTOR GreenChestLootA : RandomSpawner //Random loot spawner for the red chest. Set your own custom loot!
+{
+	DropItem CrossbowAmmo 255 10
+	DropItem BlasterAmmo 255 8
+	DropItem SkullRodAmmo 255 6
+	DropItem PhoenixRodAmmo 255 2
+}
+
+ACTOR GreenChestLootB : RandomSpawner //Random artifact spawner for red chest.
+{
+	DropItem ArtiHealth 255 7
+	DropItem CrystalVial 255 10
+	DropItem ArtiTimeBomb 255 6
+    DropItem ArtiTomeOfPower 255 3
+	DropItem ArtiTeleport 255 3
+	DropItem ArtiInvisibility 255 3
+	DropItem ArtiEgg 255 2
+	DropItem ArtiInvulnerability 255 1
+}
+
+ACTOR TreasureChestBlue 6294 //Sprites from 'Castlevania: Order of Ecclesia'
+{
+  Health 1
+  Mass 90000000
+  Radius 20
+  Height 38
+  Scale 0.95
+  +SHOOTABLE
+  +NOBLOOD
+  +SOLID
+  +NODAMAGETHRUST
+  +DONTBLAST
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+	 _TB4 A 1
+     Loop
+  Death:
+	 _TB4 A 0 A_PlaySound("TCHSTOPN",0,3.5,0)	
+	 _TB4 BCDE 4
+     _TB4 A 0 A_Jump(255,"DistGeneral","DistInv")
+	 Loop
+  DistGeneral:
+     _TB4 AAAAA 0 A_SpawnItemEx("BlueChestLootA",0,0,6,random(-2,2),random(-2,2),random(3,7),random(0,359),32)
+	 _TB4 A 0 A_Jump(55,"DistInv")
+	 Goto Opened
+  DistInv:
+     _TB4 AAA 0 A_SpawnItemEx("BlueChestLootB",0,0,0)
+	 _TB4 A 0 A_Jump(180,2)
+	 _TB4 AA 0 A_SpawnItemEx("BlueChestLootB",0,0,0)	
+  Opened:
+	 _TB4 E 125 A_UnSetSolid
+  Fade:
+	 _TB4 E 1
+     _TB4 A 0 A_FadeOut(0.02)
+	 Loop
+  }
+}
+
+ACTOR BlueChestLootA : RandomSpawner //Random loot spawner for the red chest. Set your own custom loot!
+{
+	DropItem CrossbowAmmo 255 10
+	DropItem BlasterAmmo 255 10
+	DropItem SkullRodAmmo 255 8
+	DropItem PhoenixRodAmmo 255 4
+}
+
+ACTOR BlueChestLootB : RandomSpawner //Random artifact spawner for red chest.
+{
+	DropItem ArtiHealth 255 10
+	DropItem ArtiTimeBomb 255 8
+	DropItem ArtiTeleport 255 6
+    DropItem ArtiTomeOfPower 255 6
+	DropItem ArtiInvisibility 255 5
+	DropItem ArtiEgg 255 4
+	DropItem ArtiSuperHealth 255 2
+	DropItem ArtiInvulnerability 255 1
+}
+
+//--
+
+ACTOR TornCeilingBanner 6295
+{
+  Mass 99999
+  Radius 1
+  Height 1
+  Scale 0.7
+  +NOCLIP  
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  +RANDOMIZE
+  //$Category "Mor'ladim"
+  States
+  {
+  Spawn:
+     _TBN A 0 A_Jump(128,2)
+     _TBN AAAABBBBCCCDDEEDCCBBB 1
+	 Loop
+  }
+}
+
+// ZXD'S ORIGINALS
+
+// BLOOD
+
+ACTOR BloodTree1 7135
+{
+	Height 128
+	Radius 16
+	+SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		BTR1 A -1
+		Stop
+	}
+}
+
+ACTOR BloodTree2 7136
+{
+	Height 199
+	Radius 16
+	+SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		BTR2 A -1
+		Stop
+	}
+}
+
+ACTOR BloodTree3 7137
+{
+	Height 197
+	Radius 16
+	+SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		BTR3 A -1
+		Stop
+	}
+}
+
+ACTOR BloodTree4 7138
+{
+	Height 162
+	Radius 13
+	+SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		BTR4 A -1
+		Stop
+	}
+}
+
+ACTOR BloodTree5 7139
+{
+	Height 162
+	Radius 11
+	+SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		BTR5 A -1
+		Stop
+	}
+}
+
+ACTOR BloodTree6 7140
+{
+	Height 183
+	Radius 9
+	+SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		BTR6 A -1
+		Stop
+	}
+}
+
+ACTOR BloodTree7 7141
+{
+	Height 162
+	Radius 13
+	+SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		BTR7 A -1
+		Stop
+	}
+}
+
+ACTOR FlatLeaves 7287
+{
+	+FLATSPRITE
+	-SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		FLLV A -1
+		Stop
+	}
+}
+
+ACTOR IceRock 7288
+{
+	-SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		ICER A -1
+		Stop
+	}
+}
+
+ACTOR IceTree 7289
+{
+	Radius 32
+	Height 127
+	+SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		ICET A -1
+		Stop
+	}
+}
+
+ACTOR WallIcicles1 7290
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		ICL1 A -1
+		Stop
+	}
+}
+
+ACTOR WallIcicles2 7291
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		ICL2 A -1
+		Stop
+	}
+}
+
+ACTOR Seaweed1 7292
+{
+	-SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		SWD1 ABCD 4
+		Loop
+	}
+}
+
+ACTOR Seaweed2 7293
+{
+	-SOLID
+	//$Category "Blood"
+	States
+	{
+	  Spawn:
+		SWD2 ABCD 4
+		Loop
+	}
+}
+
+// NECRODOME SHIT
+
+ACTOR NecrodomeBrazier 7142
+{
+	Radius 17
+	Height 41
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	Spawn:
+		NBRZ ABCDEFGHI 4 Bright
+		Loop
+	}
+}
+
+ACTOR NecrodomeColumn1 7143
+{
+	Height 190
+	Radius 20
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NCL1 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeColumn2 7144
+{
+	Height 111
+	Radius 19
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NCL2 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeColumn3 7145
+{
+	Height 65
+	Radius 21
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NCL3 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeColumn4 7146
+{
+	Height 64
+	Radius 19
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NCL4 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeColumn5 7147
+{
+	Height 47
+	Radius 19
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NCL5 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeColumn6 7148
+{
+	Height 23
+	Radius 29
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NCL6 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeColumn7 7149
+{
+	Height 23
+	Radius 22
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NCL7 A -1
+		Stop
+	}
+}
+
+ACTOR LionStatue 7150
+{
+	Height 85
+	Radius 26
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		LION A -1
+		Stop
+	}
+}
+
+ACTOR PalmTree1 7151
+{
+	Height 131
+	Radius 5
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		PALM A -1
+		Stop
+	}
+}
+
+ACTOR PalmTree2 7152
+{
+	Height 131
+	Radius 5
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		PALM B -1
+		Stop
+	}
+}
+
+ACTOR AngelStatue 7153
+{
+	Height 78
+	Radius 28
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		ANGL A -1
+		Stop
+	}
+}
+
+ACTOR MoaiHead1 7154
+{
+	Height 95
+	Radius 31
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		MOA1 A -1
+		Stop
+	}
+}
+
+ACTOR MoaiHead2 7155
+{
+	Height 88
+	Radius 28
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		MOA2 A -1
+		Stop
+	}
+}
+
+ACTOR MoaiHead3 7156
+{
+	Height 86
+	Radius 28
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		MOA3 A -1
+		Stop
+	}
+}
+
+ACTOR MoaiHead4 7157
+{
+	Height 78
+	Radius 32
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		MOA4 A -1
+		Stop
+	}
+}
+
+ACTOR MoaiHead5 7158
+{
+	Height 77
+	Radius 28
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		MOA5 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeTombstone1 7159
+{
+	Height 73
+	Radius 26
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NTS1 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeTombstone2 7160
+{
+	Height 77
+	Radius 20
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NTS2 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeTombstone3 7161
+{
+	Height 82
+	Radius 23
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NTS3 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeTombstone4 7162
+{
+	Height 50
+	Radius 21
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NTS4 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeTombstone5 7163
+{
+	Height 58
+	Radius 15
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NTS5 A -1
+		Stop
+	}
+}
+
+ACTOR NecrodomeSpike 7164
+{
+	Height 128
+	Radius 12
+	+SOLID
+	//$Category "Necrodome"
+	States
+	{
+	  Spawn:
+		NSPK A -1
+		Stop
+	}
+}
+
+// SHADOWCASTER SHIT
+
+ACTOR Manacle 7165
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		MNCL A -1
+		Stop
+	}
+}
+
+// YOU SKIPPED BIG BUBBLE (WILL DO BUBBLES LAST)
+
+ACTOR BigRedMushroom 7166
+{
+	Height 49
+	Radius 24
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BRED A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterBrazier 7167
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SBRZ ABCD 4 Bright
+		Loop
+	}
+}
+
+ACTOR BrokenAxe1 7168
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BRKN A -1
+		Stop
+	}
+}
+
+ACTOR BrokenAxe2 7169
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BRKN B -1
+		Stop
+	}
+}
+
+ACTOR BrokenBall 7170
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BRKN C -1
+		Stop
+	}
+}
+
+ACTOR BrokenBottle 7171
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BRKN D -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterBrokenPillar 7172
+{
+	Radius 17
+	Height 59
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SBPL A -1
+		Stop
+	}
+}
+
+ACTOR BrokenSword 7173
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BRKN E -1
+		Stop
+	}
+}
+
+ACTOR BrokenWand 7174
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BRKN F -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterBrownMushroom 7175
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SMR1 A -1
+		Stop
+	}
+}
+
+ACTOR MetalBucket 7176
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		MTBK A -1
+		Stop
+	}
+}
+
+ACTOR HangingCage 7177
+{
+	Radius 14
+	Height 56
+	+SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		CAG1 A -1
+		Stop
+	}
+}
+
+ACTOR HangingCageWithSkeleton 7178
+{
+	Radius 14
+	Height 64
+	+SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		CAG2 A -1
+		Stop
+	}
+}
+
+ACTOR HangingCageWithSkeleton2 7179
+{
+	Radius 14
+	Height 115
+	+SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		CAG3 A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterCauldron 7180
+{
+	Radius 24
+	Height 36
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SCLD A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterCandle 7181
+{
+	Radius 4
+	Height 40
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SCND A -1
+		Stop
+	}
+}
+
+ACTOR CeilingBall 7182
+{
+	-SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		CBAL A -1
+		Stop
+	}
+}
+
+ACTOR CeilingHook 7183
+{
+	-SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		CHOK A -1
+		Stop
+	}
+}
+
+ACTOR ChainOfWoe 7184
+{
+	-SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		SCOW A -1
+		Stop
+	}
+}
+
+ACTOR WoodenChair1 7185
+{
+	Radius 13
+	Height 37
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		CHR1 A -1
+		Stop
+	}
+}
+
+ACTOR WoodenChair2 7186
+{
+	Radius 11
+	Height 30
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		CHR2 A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterChandelier1 7187
+{
+	-SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		SCD1 A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterChandelier2 7188
+{
+	-SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		SCD2 A -1
+		Stop
+	}
+}
+
+ACTOR Cocoon 7189
+{
+	Radius 26
+	Height 49
+	+SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		COCN A -1
+		Stop
+	}
+}
+
+ACTOR CocoonWithHead 7190
+{
+	Radius 26
+	Height 49
+	+SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		COCH A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterCauldron2 7191
+{
+	Radius 37
+	Height 37
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SCOL ABC 4 Bright
+		Loop
+	}
+}
+
+ACTOR DrainChain 7192
+{
+	-SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		DCHN A -1
+		Stop
+	}
+}
+
+ACTOR ElectricPillar 7193
+{
+	Radius 20
+	Height 63
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		ELEC ABC 4 Bright
+		Loop
+	}
+}
+
+ACTOR EmptyThrone 7194
+{
+	Radius 20
+	Height 59
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		ETHR A -1
+		Stop
+	}
+}
+
+ACTOR EyeChest 7195
+{
+	Radius 22
+	Height 22
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		ECHS A -1
+		Stop
+	}
+}
+
+ACTOR Fern 7196
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		FERN A -1
+		Stop
+	}
+}
+
+ACTOR Fish 7197
+{
+	Health 5
+	Speed 8
+	Radius 13
+	Height 29
+	Monster
+	FloatBobStrength 0.3
+	-COUNTKILL
+	+NOGRAVITY
+	+FLOATBOB
+	+DONTFALL
+	DeathSound "snake/death"
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		FISH AABBAABB 5 A_Wander
+		Loop
+	  Death:
+		FISH C	1 A_Scream
+		FISH CD 4
+		TNT1 A -1
+		Stop
+	}
+}
+
+ACTOR FloorSafe 7198
+{
+	Radius 15
+	Height 42
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SAFE A -1
+		Stop
+	}
+}
+
+ACTOR Geyser 7199
+{
+	+RANDOMIZE
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		TNT1 A 15
+		TNT1 a 1 A_PlaySound("GeyserErupt")
+		GYSR ABCDEFG 3
+		TNT1 A 225
+		Loop
+	}
+}
+
+ACTOR Globe 7200
+{
+	Radius 26
+	Height 42
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GLOB A -1
+		Stop
+	}
+}
+
+ACTOR Glove 7201
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GLOV A -1
+		Stop
+	}
+}
+
+ACTOR GreenBottle1 7202
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GBT1 A -1
+		Stop
+	}
+}
+
+ACTOR GreenBottle2 7203
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GBT2 A -1
+		Stop
+	}
+}
+
+ACTOR GreenBottle3 7204
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GBT3 A -1
+		Stop
+	}
+}
+
+ACTOR Hourglass 7205
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		HOUR A -1
+		Stop
+	}
+}
+
+ACTOR JumpingFish 7206
+{
+	+RANDOMIZE
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		TNT1 A 15
+		TNT1 A 1 A_PlaySound("world/watersplash")
+		JFSH ABC 4
+		TNT1 A 1 A_PlaySound("world/watersplash")
+		TNT1 A 225
+		Loop
+	}
+}
+
+ACTOR LargeBarrel 7207
+{
+	Radius 17
+	Height 37
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		LBRL A -1
+		Stop
+	}
+}
+
+ACTOR LargeBoulder 7208
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		LBLD A -1
+		Stop
+	}
+}
+
+
+ACTOR LargeMoss 7209
+{
+	-SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	//$Category "Shadowcaster"
+	States
+	{
+	Spawn:
+		LMOS A -1
+		Stop
+	}
+}
+
+ACTOR LargePebble 7210
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		LPBL A -1
+		Stop
+	}
+}
+
+ACTOR LargeSpike 7211
+{
+	Radius 4
+	Height 19
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		LSPK A -1
+		Stop
+	}
+}
+
+ACTOR LargeRedMushroom 7212
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		LRED A -1
+		Stop
+	}
+}
+
+ACTOR MineCart 7213
+{
+	Radius 15
+	Height 27
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		CRT1 A -1
+		Stop
+	}
+}
+
+ACTOR MossyTree 7214
+{
+	Radius 30
+	Height 83
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		MTRE A -1
+		Stop
+	}
+}
+
+ACTOR NoTipObelisk 7215
+{
+	Radius 15
+	Height 50
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		NOBL A -1
+		Stop
+	}
+}
+
+ACTOR FloatingEyeObelisk 7216
+{
+	Radius 20
+	Height 52
+	+FLOATBOB
+	+NOGRAVITY
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		EYOB A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterPalmTree 7217
+{
+	Radius 10
+	Height 71
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SPLM A -1
+		Stop
+	}
+}
+
+ACTOR PatheticHuman 7218
+{
+	Health 40
+	Speed 8
+	Radius 10
+	Height 47
+	PainChance 192
+	Monster
+	-COUNTKILL
+	PainSound "PeasantPain"
+	DeathSound "PeasantDeath"
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		PTHU AABBCCDD 5 A_Wander
+		Loop
+	  Pain:
+		PTHU E	5
+		PTHU E	5 A_Pain
+		Goto Spawn
+	  Death:
+		PTHU E	5
+		PTHU E	5 A_Scream
+		PTHU FGH 5
+		PTHU H	-1
+		Stop
+	}
+}
+
+ACTOR Pebble 7219
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		PEBL A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterPedestal 7220
+{
+	Radius 16
+	Height 27
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SPED A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterPileOfBones 7221
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SPOB A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterStonePillar 7222
+{
+	Radius 10
+	Height 90
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SPIL A -1
+		Stop
+	}
+}
+
+ACTOR PlainChest 7223
+{
+	Radius 21
+	Height 21
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		PCHS A -1
+		Stop
+	}
+}
+
+ACTOR RedPillar 7224
+{
+	Radius 15
+	Height 72
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RDPL A -1
+		Stop
+	}
+}
+
+ACTOR RedMushroom 7225
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RMSH A -1
+		Stop
+	}
+}
+
+ACTOR RedBottle1 7226
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RBT1 A -1
+		Stop
+	}
+}
+
+ACTOR BrownBottle1 7227
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BBT1 A -1
+		Stop
+	}
+}
+
+ACTOR RedBottle2 7228
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RBT2 A -1
+		Stop
+	}
+}
+
+ACTOR BrownBottle2 7229
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BBT2 A -1
+		Stop
+	}
+}
+
+ACTOR RedBottle3 7230
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RBT3 A -1
+		Stop
+	}
+}
+
+ACTOR Remains 7231
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		REMN A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterRock 7232
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SROK A -1
+		Stop
+	}
+}
+
+ACTOR Rope 7233
+{
+	-SOLID
+	+NOGRAVITY
+	+SPAWNCEILING
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		ROPE A -1
+		Stop
+	}
+}
+
+ACTOR SRubble4 7234
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RBL4 A -1
+		Stop
+	}
+}
+
+ACTOR SRubble5 7235
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RBL5 A -1
+		Stop
+	}
+}
+
+ACTOR SRubble6 7236
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RBL6 A -1
+		Stop
+	}
+}
+
+ACTOR SkeletonSpit 7237
+{
+	Radius 32
+	Height 42
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SKSP ABCD 4
+		Loop
+	}
+}
+
+ACTOR SkeletonStatue 7238
+{
+	Radius 30
+	Height 81
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SKST A -1
+		Stop
+	}
+}
+
+ACTOR SkeletonThrone 7239
+{
+	Radius 20
+	Height 60
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SKTH A -1
+		Stop
+	}
+}
+
+ACTOR SmallBarrel 7240
+{
+	Radius 12
+	Height 26
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SBRL A -1
+		Stop
+	}
+}
+
+ACTOR SmallBoulder 7241
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SBLD A -1
+		Stop
+	}
+}
+
+// ALSO GOTTA DO SMALL BUBBLES
+
+ACTOR SmallSpike 7242
+{
+	Radius 2
+	Height 10
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SSPK A -1
+		Stop
+	}
+}
+
+ACTOR WarriorStatueNoSword 7243
+{
+	Radius 23
+	Height 63
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		WST1 A -1
+		Stop
+	}
+}
+
+ACTOR WarriorStatue 7244
+{
+	Radius 23
+	Height 63
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		WST2 A -1
+		Stop
+	}
+}
+
+ACTOR Stocks 7245
+{
+	Radius 21
+	Height 42
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		STOK A -1
+		Stop
+	}
+}
+
+ACTOR ShadowcasterStonePillar2 7246
+{
+	Radius 15
+	Height 63
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		STPL A -1
+		Stop
+	}
+}
+
+ACTOR StrawBed 7247
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		STWB A -1
+		Stop
+	}
+}
+
+ACTOR SuitOfArmor2 7248
+{
+	Radius 15
+	Height 56
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SUT2 A -1
+		Stop
+	}
+}
+
+ACTOR TallBluePillar 7249
+{
+	Radius 17
+	Height 94
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		TBLP A -1
+		Stop
+	}
+}
+
+ACTOR TallColumn 7250
+{
+	Radius 15
+	Height 195
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		TCLM A -1
+		Stop
+	}
+}
+
+ACTOR TallStone 7251
+{
+	Radius 16
+	Height 58
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		TSTN A -1
+		Stop
+	}
+}
+
+ACTOR ThinWoodenSpike 7252
+{
+	Radius 4
+	Height 53
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		TWDS A -1
+		Stop
+	}
+}
+
+ACTOR Throne 7253
+{
+	Radius 15
+	Height 35
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		THRN A -1
+		Stop
+	}
+}
+
+ACTOR ObeliskWithTip 7254
+{
+	Radius 17
+	Height 59
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		TOBL A -1
+		Stop
+	}
+}
+
+ACTOR Tripod 7255
+{
+	Radius 18
+	Height 42
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		TRPD A -1
+		Stop
+	}
+}
+
+ACTOR Wardrobe 7256
+{
+	Radius 18
+	Height 47
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		WRDB A -1
+		Stop
+	}
+}
+
+ACTOR WeirdBottle 7257
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		WBTL A -1
+		Stop
+	}
+}
+
+ACTOR WeirdPillar 7258
+{
+	Radius 12
+	Height 63
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		WPLR A -1
+		Stop
+	}
+}
+
+ACTOR WoodenChest 7259
+{
+	Radius 21
+	Height 21
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		WCHS A -1
+		Stop
+	}
+}
+
+ACTOR WoodenPillar 7260
+{
+	Radius 23
+	Height 63
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		WDPL A -1
+		Stop
+	}
+}
+
+ACTOR WoodenSpike 7261
+{
+	Radius 8
+	Height 55
+	+SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		WSPK A -1
+		Stop
+	}
+}
+
+ACTOR GoldenChalice1 7262
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GCHL A -1
+		Stop
+	}
+}
+
+ACTOR GoldenBug 7263
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GBUG A -1
+		Stop
+	}
+}
+
+ACTOR GoldenAmulet 7264
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GAML A -1
+		Stop
+	}
+}
+
+ACTOR GoldenWingyThing 7265
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GWNG A -1
+		Stop
+	}
+}
+
+ACTOR EmptyBottle1 7266
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		EBT1 A -1
+		Stop
+	}
+}
+
+ACTOR EmptyBottle2 7267
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		EBT2 A -1
+		Stop
+	}
+}
+
+ACTOR Geode1 7268
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GEO1 A -1
+		Stop
+	}
+}
+
+ACTOR Geode2 7269
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GEO2 A -1
+		Stop
+	}
+}
+
+ACTOR Geode3 7270
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GEO3 A -1
+		Stop
+	}
+}
+
+ACTOR HuntingHorn1 7271
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		HRN1 A -1
+		Stop
+	}
+}
+
+ACTOR HuntingHorn2 7272
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		HRN2 A -1
+		Stop
+	}
+}
+
+ACTOR DecorativeSkull 7273
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		SSKL A -1
+		Stop
+	}
+}
+
+ACTOR BigGoldChalice 7274
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		GCH2 A -1
+		Stop
+	}
+}
+
+ACTOR PurpleBottle 7275
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		PBTL A -1
+		Stop
+	}
+}
+
+ACTOR RedVial 7276
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		RVIL A -1
+		Stop
+	}
+}
+
+ACTOR RedPyramid 7277
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		PYRM A -1
+		Stop
+	}
+}
+
+ACTOR BlueBottle 7278
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		BLBT A -1
+		Stop
+	}
+}
+
+ACTOR EmptyBottle3 7279
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		EBT3 A -1
+		Stop
+	}
+}
+
+ACTOR EmptyBottle4 7280
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		EBT4 A -1
+		Stop
+	}
+}
+
+ACTOR EmptyBottle5 7281
+{
+	-SOLID
+	//$Category "Shadowcaster"
+	States
+	{
+	  Spawn:
+		EBT5 A -1
+		Stop
+	}
+}
+
+// MARS 3D FOR SOME REASON???
+
+ACTOR Mars3DFish 7282
+{
+	Health 20
+	Speed 8
+	Radius 13
+	Height 29
+	Monster
+	PainChance 128
+	FloatBobStrength 0.3
+	-COUNTKILL
+	+NOGRAVITY
+	+FLOATBOB
+	+DONTFALL
+	PainSound "MarsFishPain"
+	DeathSound "MarsFishDeath"
+	//$Category "MARS 3D"
+	States
+	{
+	  Spawn:
+		FSH2 AABBCCDD 5 A_Wander
+		Loop
+	  Pain:
+		FSH2 F 3
+		FSH2 F 3 A_Pain
+		Goto Spawn
+	  Death:
+		FSH2 G	1 A_Scream
+		FSH2 GHIJK 4
+		FSH2 K -1
+		Stop
+	}
+}
+
+// CAPTAIN TOENAIL'S BUBBLE SPAWNER
+// MODIFIED BY ZERO X. DIAMOND
+
+actor BigBubble
+{
+  Radius 2
+  Height 2
+  Speed 1
+  RenderStyle Add
+  projectile
+  +CLIENTSIDEONLY
+  +FORCEXYBILLBOARD
+  +NOCLIP
+  States
+  {
+  Spawn:
+    BBUB G 1
+    //fall through
+  Rise:
+    BBUB G 0 A_JumpIf(waterlevel == 0, "Death")
+    BBUB GH 4 A_Jump (32, "Jiggle")
+    loop
+  Jiggle:
+    BBUB G 0 A_JumpIf(waterlevel == 0, "Death")
+    BBUB GH 4 A_SetAngle (random (0, 360)) 
+    BBUB G 0 A_Recoil (0.1)
+    goto Rise
+  Death:
+    TNT1 A 1
+    stop
+  }
+}
+
+actor BigBubbleSpawner 7283
+{
+  Radius 2
+  Height 2
+  +NOINTERACTION
+  //$Category "Shadowcaster"
+  States
+  {
+  Spawn:
+    BBUB A 0
+    BBUB A 0 A_SpawnItemEx ("BigBubble", random (-16, 16), 0, 0, 0, 0, 2, random (0, 360), 0, 128)
+	BBUB ABCDEF 2
+    loop
+  }
+}
+
+actor SmallBubble
+{
+  Radius 2
+  Height 2
+  Speed 1
+  RenderStyle Add
+  projectile
+  +CLIENTSIDEONLY
+  +FORCEXYBILLBOARD
+  +NOCLIP
+  States
+  {
+  Spawn:
+    BBUB G 1
+    //fall through
+  Rise:
+    SBUB G 0 A_JumpIf(waterlevel == 0, "Death")
+    SBUB GH 4 A_Jump (32, "Jiggle")
+    loop
+  Jiggle:
+    SBUB G 0 A_JumpIf(waterlevel == 0, "Death")
+    SBUB GH 4 A_SetAngle (random (0, 360)) 
+    SBUB G 0 A_Recoil (0.1)
+    goto Rise
+  Death:
+    TNT1 A 1
+    stop
+  }
+}
+
+actor SmallBubbleSpawner 7284
+{
+  Radius 2
+  Height 2
+  +NOINTERACTION
+  //$Category "Shadowcaster"
+  States
+  {
+  Spawn:
+    SBUB A 0
+    SBUB A 0 A_SpawnItemEx ("SmallBubble", random (-16, 16), 0, 0, 0, 0, 2, random (0, 360), 0, 128)
+	SBUB ABCDEF 2
+    loop
+  }
+}
+
+// DECORATIVE ANIMALS
+
+ACTOR WanderingNPCChicken 7285
+{
+	Health 10
+	Radius 9
+	Height 22
+	Mass 40
+	Speed 4
+	Painchance 200
+	Monster
+	-COUNTKILL
+	+WINDTHRUST
+	+DONTMORPH
+	+FLOORCLIP
+	//$Category "Decorative Animals"
+	SeeSound "chicken/pain"
+	AttackSound "chicken/attack"
+	PainSound "chicken/pain"
+	DeathSound "chicken/death"
+	ActiveSound "chicken/active"
+	States
+	{
+	Spawn:
+		CHKN AB 10 A_Wander
+		Loop
+	Pain:
+		CHKN D 5 A_Feathers
+		CHKN C 5 A_Pain
+		Goto Spawn
+	Death:
+		CHKN E 6 A_Scream
+		CHKN F 6 A_Feathers
+		CHKN G 6
+		CHKN H 6 A_NoBlocking
+		CHKN IJK 6
+		CHKN L -1
+		Stop
+	}
+}
+
+ACTOR WanderingNPCPig 7286
+{
+	Health 25
+	Painchance 128
+	Speed 10
+	Radius 12
+	Height 22
+	Mass 60
+	Monster
+	-COUNTKILL
+	+WINDTHRUST
+	+DONTMORPH
+	//$Category "Decorative Animals"
+	SeeSound "PigActive1"
+	PainSound "PigPain"
+	DeathSound "PigDeath"
+	ActiveSound "PigActive1"
+	States
+	{
+	Spawn:
+		PIGY B 10 A_Wander
+		Loop
+	Pain:
+		PIGY D 4 A_PigPain
+		Goto Spawn
+	Death:
+		PIGY E 4 A_Scream
+		PIGY F 3 A_NoBlocking
+		PIGY G 4 A_QueueCorpse
+		PIGY H 3
+		PIGY IJK 4
+		PIGY L -1
+		Stop
+	Ice:
+		PIGY M 5 A_FreezeDeath
+		PIGY M 1 A_FreezeDeathChunks
+		Wait
+	}
+}
+
+/*
+Quick Reference:
+CrowWander1L 8881 - Wanders, proximity flee. Reacts to weapon fire. Left.
+CrowWander1R 8882 - Wanders, proximity flee. Reacts to weapon fire. Right.
+CrowWander2L 8883 - Wanders, proximity flee. No reaction to weapon fire. Left.
+CrowWander2R 8884 - Wanders, proximity flee. No reaction to weapon fire. Right.
+CrowWander3L 8885 - Wanders, no proximity flee. Reacts to weapon fire. Left.
+CrowWander3R 8886 - Wanders, no proximity flee. Reacts to weapon fire. Right.
+CrowWander4L 8887 - Wanders, no proximity flee. No reaction to weapon fire. Left.
+CrowWander4R 8888 - Wanders, no proximity flee. No reaction to weapon fire. Right.
+CrowStill1L  8889 - Stationary, proximity flee. Reacts to weapon fire. Left.
+CrowStill1R  8890 - Stationary, proximity flee. Reacts to weapon fire. Right.
+CrowStill2L  8891 - Stationary, proximity flee. No reaction to weapon fire. Left.
+CrowStill2R  8892 - Stationary, proximity flee. No reaction to weapon fire. Right.
+CrowStill3L  8893 - Stationary, no proximity flee. Reacts to weapon fire. Left.
+CrowStill3R  8894 - Stationary, no proximity flee. Reacts to weapon fire. Right.
+CrowStill4L  8895 - Stationary, no proximity flee. No reaction to weapon fire. Left.
+CrowStill4R  8896 - Stationary, no proximity flee. No reaction to weapon fire. Right.
+
+
+Proximity Flee - Flees when player is close to the actor
+Reacts to weapon fire - An actor will fly away if a weapon is shot within 800 map units of it.
+
+Note: All actors flee when shot directly. Some flee upon reacting to weapon sound, or when the player approaches. In any case 
+they will fly towards the sky and permanently disappear.
+
+A fleeing crow will cause any other crows in a nearby group to flee as well when the above conditions are met.
+*/
+
+
+
+ACTOR CrowWander1L 8881 //Wandering version. Flees when player gets close and reacts to weapon fire. Faces left.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  +BOUNCEONWALLS
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_Stop
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+	 TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Goto Spawn
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 C 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 C 5
+	 CRW1 EC 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 A 12
+	 CRW1 M 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 A 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 G 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	 
+  WanderFly:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(4,8), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(4,8),0,1)
+	 TNT1 A 0 A_Jump(20,"Flight")
+	 Goto WanderFly+4
+  Flight:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 A_Jump(35,"FlyDown")
+	 Goto Flight+2
+  FlyDown:	 
+	 TNT1 A 0 A_Stop
+	 CRW1 IK 2
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 TNT1 A 0 ThrustThingZ(0,-2,0,1)
+	 TNT1 A 0 A_CheckFloor("Spawn")
+	 Goto FlyDown+1
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6
+  }
+}
+
+ACTOR CrowWander1R 8882 //Wandering version. Flees when player gets close and reacts to weapon fire. Faces right.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  +BOUNCEONWALLS
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_Stop
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+	 TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Goto Spawn
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 D 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 D 5
+	 CRW1 FD 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 B 12
+	 CRW1 N 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 B 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 H 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	 
+  WanderFly:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(4,8), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(4,8),0,1)
+	 TNT1 A 0 A_Jump(20,"Flight")
+	 Goto WanderFly+4
+  Flight:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 A_Jump(35,"FlyDown")
+	 Goto Flight+2
+  FlyDown:	 
+	 TNT1 A 0 A_Stop
+	 CRW1 JL 2
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 TNT1 A 0 ThrustThingZ(0,-2,0,1)
+	 TNT1 A 0 A_CheckFloor("Spawn")
+	 Goto FlyDown+1
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6
+  }
+}
+
+ACTOR CrowWander2L 8883 //Wandering version. Flees when player gets close. No reaction to weapon fire. Faces left.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  +BOUNCEONWALLS
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Goto Spawn
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 C 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 C 5
+	 CRW1 EC 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 A 12
+	 CRW1 M 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 A 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 G 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	 
+  WanderFly:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(4,8), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(4,8),0,1)
+	 TNT1 A 0 A_Jump(20,"Flight")
+	 Goto WanderFly+4
+  Flight:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 A_Jump(35,"FlyDown")
+	 Goto Flight+2
+  FlyDown:	 
+	 TNT1 A 0 A_Stop
+	 CRW1 IK 2
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 TNT1 A 0 ThrustThingZ(0,-2,0,1)
+	 TNT1 A 0 A_CheckFloor("Spawn")
+	 Goto FlyDown+1
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6
+  }
+}
+
+ACTOR CrowWander2R 8884 //Wandering version. Flees when player gets close. No reaction to weapon fire. Faces right.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  +BOUNCEONWALLS
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_Stop
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Goto Spawn
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 D 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 D 5
+	 CRW1 FD 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 B 12
+	 CRW1 N 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 B 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 H 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	 
+  WanderFly:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(4,8), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(4,8),0,1)
+	 TNT1 A 0 A_Jump(20,"Flight")
+	 Goto WanderFly+4
+  Flight:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 A_Jump(35,"FlyDown")
+	 Goto Flight+2
+  FlyDown:	 
+	 TNT1 A 0 A_Stop
+	 CRW1 JL 2
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 TNT1 A 0 ThrustThingZ(0,-2,0,1)
+	 TNT1 A 0 A_CheckFloor("Spawn")
+	 Goto FlyDown+1
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6
+  }
+}
+
+ACTOR CrowWander3L 8885 //Wandering version. Does not flee when player approches but reacts to weapon fire. Faces left.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +BOUNCEONWALLS
+  //$Category "Decorative Animals"
+  PainChance 255
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Stop
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Goto Spawn	 
+  LookDown:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 C 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 C 5
+	 CRW1 EC 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 A 12
+	 CRW1 M 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 A 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 G 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	 
+  WanderFly:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(4,8), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(4,8),0,1)
+	 TNT1 A 0 A_Jump(20,"Flight")
+	 Goto WanderFly+4
+  Flight:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 A_Jump(35,"FlyDown")
+	 Goto Flight+2
+  FlyDown:	 
+	 TNT1 A 0 A_Stop
+	 CRW1 IK 2
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 TNT1 A 0 ThrustThingZ(0,-2,0,1)
+	 TNT1 A 0 A_CheckFloor("Spawn")
+	 Goto FlyDown+1
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6
+  }
+}
+
+ACTOR CrowWander3R 8886 //Wandering version. Does not flee when player approches but reacts to weapon fire. Faces right.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +BOUNCEONWALLS
+  //$Category "Decorative Animals"
+  PainChance 255
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Stop
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Goto Spawn		 
+  LookDown:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 F 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 D 5
+	 CRW1 FD 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 B 12
+	 CRW1 N 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 B 12
+	 TNT1 A 0
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 H 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	 
+  WanderFly:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(4,8), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(4,8),0,1)
+	 TNT1 A 0 A_Jump(20,"Flight")
+	 Goto WanderFly+4
+  Flight:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 A_Jump(35,"FlyDown")
+	 Goto Flight+2
+  FlyDown:	 
+	 TNT1 A 0 A_Stop
+	 CRW1 JL 2
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 TNT1 A 0 ThrustThingZ(0,-2,0,1)
+	 TNT1 A 0 A_CheckFloor("Spawn")
+	 Goto FlyDown+1
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6
+  }
+}
+
+ACTOR CrowWander4L 8887 //Wandering version. Does not flee when player approches. No sounds reaction. Faces left.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +BOUNCEONWALLS
+  //$Category "Decorative Animals"
+  PainChance 255
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Stop
+	 TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Goto Spawn	 
+  LookDown:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 C 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 C 5
+	 CRW1 EC 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 A 12
+	 CRW1 M 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 A 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 G 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	 
+  WanderFly:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(4,8), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(4,8),0,1)
+	 TNT1 A 0 A_Jump(20,"Flight")
+	 Goto WanderFly+4
+  Flight:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 A_Jump(35,"FlyDown")
+	 Goto Flight+2
+  FlyDown:	 
+	 TNT1 A 0 A_Stop
+	 CRW1 IK 2
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 TNT1 A 0 ThrustThingZ(0,-2,0,1)
+	 TNT1 A 0 A_CheckFloor("Spawn")
+	 Goto FlyDown+1
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6
+  }
+}
+
+ACTOR CrowWander4R 8888 //Wandering version. Does not flee when player approches. No sound reaction. Faces right.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +BOUNCEONWALLS
+  //$Category "Decorative Animals"
+  PainChance 255
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Stop
+	 TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 TNT1 A 0 A_Jump(10,"WanderFly")
+	 Goto Spawn		 
+  LookDown:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 F 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 D 5
+	 CRW1 FD 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 B 12
+	 CRW1 N 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 B 12
+	 TNT1 A 0
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 H 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	 
+  WanderFly:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(4,8), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(4,8),0,1)
+	 TNT1 A 0 A_Jump(20,"Flight")
+	 Goto WanderFly+4
+  Flight:
+     TNT1 A 0
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 A_Jump(35,"FlyDown")
+	 Goto Flight+2
+  FlyDown:	 
+	 TNT1 A 0 A_Stop
+	 CRW1 JL 2
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 ThrustThing(random(0,360), random(3,6), 0, 0)
+	 TNT1 A 0 ThrustThingZ(0,-2,0,1)
+	 TNT1 A 0 A_CheckFloor("Spawn")
+	 Goto FlyDown+1
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6
+  }
+}
+
+/*
+================================================
+STATIONARY VERSIONS
+================================================
+*/
+
+ACTOR CrowStill1L 8889 //Stationary version. Flees when player is close. Reacts to sound. Faces left.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Goto Spawn	 
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 C 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 C 5
+	 CRW1 EC 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 A 12
+	 CRW1 M 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 A 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 G 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6	 
+  }
+}
+
+ACTOR CrowStill1R 8890 //Stationary version. Flees when player is close. Reacts to sound. Faces right.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Goto Spawn	
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 D 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 D 5
+	 CRW1 FD 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 B 12
+	 CRW1 N 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 B 12
+	 TNT1 A 0
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(0,0,310,800,0,"Pain")
+     CRW1 H 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6	 
+  }
+}
+
+
+ACTOR CrowStill2L 8891 //Stationary version. Flees when player is close. No sound reaction. Faces left.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Goto Spawn	 
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 C 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 C 5
+	 CRW1 EC 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 A 12
+	 CRW1 M 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 A 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 G 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6	 
+  }
+}
+
+ACTOR CrowStill2R 8892 //Stationary version. Flees when player is close. No sound reaction. Faces right.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Goto Spawn	
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 D 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 D 5
+	 CRW1 FD 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 B 12
+	 CRW1 N 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 B 12
+	 TNT1 A 0
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK ,0,310,800,0,"Pain")
+     CRW1 H 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6	 
+  }
+}
+
+ACTOR CrowStill3L 8893 //Stationary version. Does not flee when player is close. Reacts to sound. Faces left.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Goto Spawn	 
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 C 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 C 5
+	 CRW1 EC 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 A 12
+	 CRW1 M 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 A 12
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 G 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6	 
+  }
+}
+
+ACTOR CrowStill3R 8894 //Stationary version. Flees when player is close. No sound reaction. Faces right.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  +LOOKALLAROUND
+  //$Category "Decorative Animals"
+  PainChance 255
+  MeleeDamage 0
+  MeleeRange 310
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Loop
+  See:
+     TNT1 A 0 A_StopSound(5)
+	 TNT1 A 0 A_FaceTarget
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Goto Spawn	
+  Melee:	
+     TNT1 A 0
+	 Goto Pain
+  LookDown:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 D 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 D 5
+	 CRW1 FD 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 B 12
+	 CRW1 N 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 B 12
+	 TNT1 A 0
+	 Goto Spawn
+  ForwardLook:
+     TNT1 A 0 A_JumpIfTargetInsideMeleeRange("Pain")
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_LookEx(LOF_NOSIGHTCHECK ,0,310,800,0,"Pain")
+     CRW1 H 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6	 
+  }
+}
+
+ACTOR CrowStill4L 8895 //Stationary version. Does not flee when player is close. No sound reaction. Faces left.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  //$Category "Decorative Animals"
+  PainChance 255
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 A 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Loop
+  LookDown:
+  	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 C 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+  	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 C 5
+	 CRW1 EC 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 A 12
+	 CRW1 M 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 A 12
+	 Goto Spawn
+  ForwardLook:
+  	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 G 16
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 IK 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6	 
+  }
+}
+
+ACTOR CrowStill4R 8896 //Stationary version. Does not flee when player is close. No sound reaction. Faces right.
+{
+  Mass 99999
+  Health 999
+  Radius 3
+  Height 3
+  Scale 0.7
+  Monster
+  Alpha 1
+  -ISMONSTER
+  -COUNTKILL
+  +THRUACTORS
+  +NOTARGET
+  +NODAMAGETHRUST
+  +FLOORHUGGER
+  +FLOORCLIP
+  -CANUSEWALLS
+  -NOGRAVITY
+  +NOBLOOD
+  +NODAMAGE
+  +NOTAUTOAIMED
+  //$Category "Decorative Animals"
+  PainChance 255
+  States
+  {
+  Spawn: 
+     TNT1 A 0
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+     CRW1 B 25
+	 TNT1 A 0 A_Jump(60,"LookDown","Peck","ForwardLook")
+	 TNT1 A 0 A_Jump(15,"Caw")
+	 Loop
+  LookDown:
+  	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 F 5
+	 TNT1 A 0 A_Jump(60,"Spawn","Peck")
+	 Loop	
+  Peck:
+  	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+     CRW1 D 5
+	 CRW1 FD 2
+	 TNT1 A 0 A_Jump(60,"Spawn","LookDown")
+	 Loop
+  Caw:
+	 TNT1 A 0 A_Jump(60,4) //To play one caw on occasion.
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_PlaySound("CRWCAW1",6,0.3,0)
+     CRW1 B 12
+	 CRW1 N 6
+	 Goto Spawn
+	 TNT1 A 0 A_PlaySound("CRWCAW3",6,0.3,0)
+	 CRW1 B 12
+	 TNT1 A 0
+	 Goto Spawn
+  ForwardLook:
+     CRW1 H 16
+	 TNT1 A 0 A_JumpIfInventory("CrowGroupFlee",1,"Pain")
+	 TNT1 A 0 A_Jump(120,"Spawn")
+	 Loop	
+  Pain:
+     TNT1 A 0
+	 TNT1 A 0 A_RadiusGive("CrowGroupFlee",160,RGF_OBJECTS,1)
+	 TNT1 A 0 A_Jump(25,2)
+	 TNT1 A 0 A_PlaySound("CRWCAW2",6,0.4,0)
+	 TNT1 A 0 A_PlaySound("CRWFLP",5,0.3,1)
+	 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+	 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+	 TNT1 A 0 ThrustThing(random(0,360), random(6,12), 0, 0)
+	 CRW1 JL 2
+	 TNT1 A 0 ThrustThingZ(0,random(12,20),0,1)
+	 TNT1 A 0 A_FadeOut(0.1)
+	 Goto Pain+6	 
+  }
+}
+
+Actor CrowGroupFlee : Inventory 
+{ 
+Inventory.MaxAmount 1 
+}
+
+// QUARANTINE 2???  OKAY NOW YOU HAVE TO BE FUCKING WITH ME
+
+ACTOR Q2GoldStatue1 7294
+{
+	Radius 12
+	Height 81
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QGL1 A -1
+		Stop
+	}
+}
+
+ACTOR Q2GoldStatue2 7295
+{
+	Radius 12
+	Height 88
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QGL2 A -1
+		Stop
+	}
+}
+
+ACTOR Q2GoldStatue3 7296
+{
+	Radius 12
+	Height 74
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QGL3 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Gargoyle1 7297
+{
+	Radius 55
+	Height 79
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QGR1 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Gargoyle2 7298
+{
+	Radius 36
+	Height 89
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QGR2 A -1
+		Stop
+	}
+}
+
+ACTOR Q2SmallStatue1 7299
+{
+	-SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QSS1 A -1
+		Stop
+	}
+}
+
+ACTOR Q2SmallStatue2 7300
+{
+	-SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QSS2 A -1
+		Stop
+	}
+}
+
+ACTOR Q2SmallStatue3 7301
+{
+	-SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QSS3 A -1
+		Stop
+	}
+}
+
+ACTOR Q2SmallStatue4 7302
+{
+	-SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QSS4 A -1
+		Stop
+	}
+}
+
+ACTOR Q2SmallStatue5 7303
+{
+	-SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QSS5 A -1
+		Stop
+	}
+}
+
+ACTOR Q2SmallStatue6 7304
+{
+	-SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QSS6 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Statue1 7305
+{
+	Radius 35
+	Height 106
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QST1 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Statue2 7306
+{
+	Radius 29
+	Height 104
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QST2 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Statue3 7307
+{
+	Radius 23
+	Height 125
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QST3 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Statue4 7308
+{
+	Radius 21
+	Height 134
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QST4 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Statue5 7309
+{
+	Radius 22
+	Height 139
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QST5 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Statue6 7310
+{
+	Radius 24
+	Height 92
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QST6 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Statue7 7311
+{
+	Radius 12
+	Height 54
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QST7 A -1
+		Stop
+	}
+}
+
+ACTOR Q2Statue8 7312
+{
+	Radius 19
+	Height 56
+	+SOLID
+	//$Category "Quarantine 2"
+	States
+	{
+	  Spawn:
+		QST8 A -1
+		Stop
+	}
+}
+
+// DUKE NUKEM: ZERO HOUR
+
+ACTOR DNZHSwordsAndShield 7313
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHWS A -1
+		Stop
+	}
+}
+
+ACTOR DNZHAxeAndMace 7314
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHAM A -1
+		Stop
+	}
+}
+
+ACTOR DNZHSwordAndShieldBanner 7315
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHBS A -1
+		Stop
+	}
+}
+
+ACTOR DNZHBanner 7316
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHBN A -1
+		Stop
+	}
+}
+
+ACTOR DNZHTapestry 7317
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHTP A -1
+		Stop
+	}
+}
+
+ACTOR DNZHSpearsWithFlags 7318
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHSF A -1
+		Stop
+	}
+}
+
+ACTOR DNZHTapestriesWithSwords 7319
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHTS A -1
+		Stop
+	}
+}
+
+ACTOR DNZHMiningToolRack 7320
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHTR A -1
+		Stop
+	}
+}
+
+ACTOR DNZHMiningTools 7321
+{
+	+WALLSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHMT A -1
+		Stop
+	}
+}
+
+ACTOR DNZHBearskinRug 7322
+{
+	+FLATSPRITE
+	-SOLID
+	//$Category "Duke Nukem: Zero Hour"
+	States
+	{
+	  Spawn:
+		ZHBR A -1
+		Stop
+	}
+}
+
+// HEXX
+
+ACTOR HexxObelisk1 7323
+{
+	Radius 12
+	Height 64
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXO1 A -1
+		Stop
+	}
+}
+
+ACTOR HexxPillar1 7324
+{
+	Radius 16
+	Height 64
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXP1 A -1
+		Stop
+	}
+}
+
+ACTOR HexxOrbPillar 7325
+{
+	Radius 16
+	Height 64
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXOP A -1
+		Stop
+	}
+}
+
+ACTOR HexxObelisk2 7326
+{
+	Radius 12
+	Height 64
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXO2 A -1
+		Stop
+	}
+}
+
+ACTOR HexxSpikes 7327
+{
+	Radius 16
+	Height 64
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXSP A -1
+		Stop
+	}
+}
+
+ACTOR HexxRitualPedestal 7328
+{
+	Radius 12
+	Height 46
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXB1 A -1
+		Stop
+	}
+}
+
+ACTOR HexxObelisk3 7329
+{
+	Radius 12
+	Height 64
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXO3 A -1
+		Stop
+	}
+}
+
+ACTOR HexxStoneSpike 7330
+{
+	Radius 12
+	Height 64
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXSS A -1
+		Stop
+	}
+}
+
+ACTOR HexxObelisk4 7331
+{
+	Radius 16
+	Height 64
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXO4 A -1
+		Stop
+	}
+}
+
+ACTOR HexxReceptacle 7332
+{
+	Radius 16
+	Height 46
+	+SOLID
+	//$Category "Hexx"
+	States
+	{
+	  Spawn:
+		HXB2 A -1
+		Stop
+	}
+}
+
+// SHADOW WARRIOR BETA
+
+ACTOR Crab 7333
+{
+	-SOLID
+	//$Category "Shadow Warrior Beta"
+	States
+	{
+	  Spawn:
+		CRAB ABC 4
+		Loop
+	}
+}
+
+ACTOR SWBurntBody 7334
+{
+	Radius 12
+	Height 94
+	+SOLID
+	//$Category "Shadow Warrior Beta"
+	States
+	{
+	  Spawn:
+		SWBR A -1
+		Stop
+	}
+}
+
+ACTOR CrystalBall 7335
+{
+	-SOLID
+	//$Category "Shadow Warrior Beta"
+	States
+	{
+	  Spawn:
+		CRBL A -1
+		Stop
+	}
+}
+
+ACTOR SWCrystal1 7336
+{
+	Radius 6
+	Height 12
+	+SOLID
+	//$Category "Shadow Warrior Beta"
+	States
+	{
+	  Spawn:
+		CRY1 A -1
+		Stop
+	}
+}
+
+ACTOR SWCrystal2 7337
+{
+	Radius 24
+	Height 39
+	+SOLID
+	//$Category "Shadow Warrior Beta"
+	States
+	{
+	  Spawn:
+		CRY2 A -1
+		Stop
+	}
+}
+
+ACTOR SWCrystal3 7338
+{
+	Radius 20
+	Height 30
+	+SOLID
+	//$Category "Shadow Warrior Beta"
+	States
+	{
+	  Spawn:
+		CRY3 A -1
+		Stop
+	}
+}
+
+// ZXD EDITS
+
+ACTOR DyingMan 7339
+{
+	Radius 20
+	Height 40
+	+SOLID
+	//$Category "ZXD's Edits"
+	States
+	{
+	  Spawn:
+		DYNG ABCD 4
+		Loop
+	}
+}
+
+// CAPTAIN TOENAIL
+
+ACTOR DSparilStatue 7340
+{
+  Radius 16
+  Height 96
+  +SOLID
+  //$Category "Captain Toenail"
+  States
+  {
+  Spawn:
+    STAD ABCDE 3 Bright
+    Loop
+  }
+}
+
+ACTOR GoldStandGizmoYellow 7341
+{
+  Radius 16
+  Height 50
+  +SOLID
+  //$Category "Captain Toenail"
+  States
+  {
+  Spawn:
+    GSTD A 0
+    GSTD A 1 A_SpawnItem("YellowStandGizmoOrb", 0, 34)
+    GSTD A -1
+    Stop
+  }
+}
+
+ACTOR GoldStandGizmoBlue 7342
+{
+  Radius 16
+  Height 50
+  +SOLID
+  //$Category "Captain Toenail"
+  States
+  {
+  Spawn:
+    GSTD A 0
+    GSTD A 1 A_SpawnItem("BlueStandGizmoOrb", 0, 34)
+    GSTD A -1
+    Stop
+  }
+}
+
+ACTOR GoldStandGizmoGreen 7343
+{
+  Radius 16
+  Height 50
+  +SOLID
+  //$Category "Captain Toenail"
+  States
+  {
+  Spawn:
+    GSTD A 0
+    GSTD A 1 A_SpawnItem("GreenStandGizmoOrb", 0, 34)
+    GSTD A -1
+    Stop
+  }
+}
+
+ACTOR GoldStandGizmoRed 7344
+{
+  Radius 16
+  Height 50
+  +SOLID
+  //$Category "Captain Toenail"
+  States
+  {
+  Spawn:
+    GSTD A 0
+    GSTD A 1 A_SpawnItem("RedStandGizmoOrb", 0, 34)
+    GSTD A -1
+    Stop
+  }
+}
+
+ACTOR YellowStandGizmoOrb
+{
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    YORB A -1 bright
+	stop
+  }
+}
+
+ACTOR BlueStandGizmoOrb
+{
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    BORB A -1 bright
+	stop
+  }
+}
+
+ACTOR GreenStandGizmoOrb
+{
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    GORB A -1 bright
+	stop
+  }
+}
+
+ACTOR RedStandGizmoOrb
+{
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    RORB A -1 bright
+	stop
+  }
+}
+
+ACTOR SerpentBrazierBronze 7345
+{
+  Radius 16
+  Height 56
+  +SOLID
+  //$Category "Captain Toenail"
+  States
+  {
+  Spawn:
+    BNAK ABCDEFG 3 Bright
+    Loop
+  }
+}
+
+ACTOR SerpentBrazierGreen 7346
+{
+  Radius 16
+  Height 56
+  +SOLID
+  //$Category "Captain Toenail"
+  States
+  {
+  Spawn:
+    GNAK ABCDEFG 3 Bright
+    Loop
+  }
+}
+
+ACTOR SerpentBrazierGold 7347
+{
+  Radius 16
+  Height 56
+  +SOLID
+  //$Category "Captain Toenail"
+  States
+  {
+  Spawn:
+    YNAK ABCDEFG 3 Bright
+    Loop
+  }
+}
+
+// GOTHIC
+
+ACTOR GoldenEagle1 7348
+{
+Radius 16
+Height 50
++SOLID
+//$Category "Gothic"
+States
+{
+Spawn:
+	EAGL A -1
+	Stop
+}
+}
+
+ACTOR GoldenEagle2 7349
+{
+Radius 16
+Height 60
++SOLID
+//$Category "Gothic"
+States
+{
+Spawn:
+	EAG2 A -1
+	Stop
+}
+}
+
+ACTOR GoldenEagle3 7350
+{
+Radius 16
+Height 50
++SOLID
+//$Category "Gothic"
+States
+{
+Spawn:
+	EAG3 A -1
+	Stop
+}
+}
+
+// ETTINGRINDER
+
+Actor ZCorpseBurning 7351
+{
+	+SOLID
+	Radius 8
+	Height 100
+	//$Category "ETTiNGRiNDER"
+
+	States
+	{
+	Spawn:
+		WBRN ABCDEFG 4 Bright
+		Loop
+	}
+}
+
+ACTOR ZCorpseCrucified : ZBannerTattered 7352
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		CRUX A -1
+		Stop
+	}
+}
+
+ACTOR ZCorpseCrucifiedBloody : ZBannerTattered 7353
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		CRUX B -1
+		Stop
+	}
+}
+
+ACTOR ZCorpseCrucifiedSword : ZBannerTattered 7354
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		CRUX C -1
+		Stop
+	}
+}
+
+Actor Bust1 7355
+{
+	+SOLID
+	//$Category "ETTiNGRiNDER"
+	Radius 8
+	Height 32
+
+	States
+	{
+	Spawn:
+		BUST A -1
+		Stop
+	}
+}
+
+Actor Bust2 : Bust1 7356
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		BUST B -1
+		Stop
+	}
+}
+
+Actor Bust3 : Bust1 7357
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		BUST C -1
+		Stop
+	}
+}
+
+Actor Bust4 : Bust1 7358
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		BUST D -1
+		Stop
+	}
+}
+
+Actor Bust5 : Bust1 7359
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		BUST E -1
+		Stop
+	}
+}
+
+Actor Bust1Pillar1 : ZVasePillar 7360
+{
+	Height 64
+	//$Category "ETTiNGRiNDER"
+
+	States
+	{
+	Spawn:
+		PBUS A -1
+		Stop
+	}
+}
+
+Actor Bust2Pillar1 : Bust1Pillar1 7361
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS B -1
+		Stop
+	}
+}
+
+Actor Bust3Pillar1 : Bust1Pillar1 7362
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS C -1
+		Stop
+	}
+}
+
+Actor Bust4Pillar1 : Bust1Pillar1 7363
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS D -1
+		Stop
+	}
+}
+
+Actor Bust5Pillar1 : Bust1Pillar1 7364
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS E -1
+		Stop
+	}
+}
+
+Actor Bust1Pillar2 : Bust1Pillar1 7365
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS F -1
+		Stop
+	}
+}
+
+Actor Bust2Pillar2 : Bust1Pillar1 7366
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS G -1
+		Stop
+	}
+}
+
+Actor Bust3Pillar2 : Bust1Pillar1 7367
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS H -1
+		Stop
+	}
+}
+
+Actor Bust4Pillar2 : Bust1Pillar1 7368
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS I -1
+		Stop
+	}
+}
+
+Actor Bust5Pillar2 : Bust1Pillar1 7369
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		PBUS J -1
+		Stop
+	}
+}
+
+actor CleanLog : ZLog 7370
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			LOG2 A -1
+			Stop
+	}
+}
+
+actor CharredLog : ZLog 7371
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			LOG2 B -1
+			Stop
+	}
+}
+
+actor BurningLog : ZLog 7372
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			LOG2 CDE 4 Bright
+			Loop
+	}
+}
+
+actor EmberLog : ZLog 7373
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			LOG2 FGH 4 Bright
+			Loop
+	}
+}
+
+actor CutLog : ZLog 7374
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			LOG2 I -1
+			Stop
+	}
+}
+
+Actor ZCorpseImpaled1 7375
+{
+	+SOLID
+	Radius 8
+	Height 100
+	//$Category "ETTiNGRiNDER"
+
+	States
+	{
+	Spawn:
+		CPSI A -1
+		Stop
+	}
+}
+
+Actor ZCorpseImpaled2 7376
+{
+	+SOLID
+	Radius 8
+	Height 100
+	//$Category "ETTiNGRiNDER"
+
+	States
+	{
+	Spawn:
+		CPSI B -1
+		Stop
+	}
+}
+
+Actor ZCorpseImpaled3 7377
+{
+	+SOLID
+	Radius 8
+	Height 100
+	//$Category "ETTiNGRiNDER"
+
+	States
+	{
+	Spawn:
+		CPSI C -1
+		Stop
+	}
+}
+
+Actor ZCorpseImpaled4 7378
+{
+	+SOLID
+	Radius 8
+	Height 100
+	//$Category "ETTiNGRiNDER"
+
+	States
+	{
+	Spawn:
+		CPSI D -1
+		Stop
+	}
+}
+
+Actor ZCorpseImpaled5 7379
+{
+	+SOLID
+	Radius 8
+	Height 100
+	//$Category "ETTiNGRiNDER"
+
+	States
+	{
+	Spawn:
+		CPSI E -1
+		Stop
+	}
+}
+
+Actor ZCorpseUpsideDown1 : ZCorpseLynched 7380
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		UPSC A -1
+		Stop
+	}
+}
+
+Actor ZCorpseUpsideDown2 : ZCorpseLynchedNoHeart 7381
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		UPSC B 140 A_SpawnItemEx("CorpseBloodDrip", 0, 0, 24, 0, 0, 0, 0, SXF_CLIENTSIDE, 192)
+		Loop
+	}
+}
+
+Actor ZCorpseUpsideDown3 : ZCorpseLynchedNoHeart 7382
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		UPSC C 140 A_SpawnItemEx("CorpseBloodDrip", 0, 0, 24, 0, 0, 0, 0, SXF_CLIENTSIDE, 192)
+		Loop
+	}
+}
+
+Actor ZCorpseUpsideDown4 : ZCorpseLynched 7383
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		UPSC D -1
+		Stop
+	}
+}
+
+Actor ZCorpseUpsideDown5 : ZCorpseLynchedNoHeart 7384
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		UPSC E 140 A_SpawnItemEx("CorpseBloodDrip", 0, 0, 20, 0, 0, 0, 0, SXF_CLIENTSIDE, 192)
+		Loop
+	}
+}
+
+actor WarriorStatueGold 7385
+{
+	+SOLID
+	Radius 8
+	Height 64
+	//$Category "ETTiNGRiNDER"
+	
+	States
+	{
+		Spawn:
+			WSTA A -1
+			Stop
+	}
+}
+
+actor WarriorStatueGold2 : WarriorStatueGold 7386
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			WSTA B -1
+			Stop
+	}
+}
+
+actor WarriorStatueStone : WarriorStatueGold 7387
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			WSTA C -1
+			Stop
+	}
+}
+
+actor WarriorStatueStone2 : WarriorStatueGold 7388
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			WSTA D -1
+			Stop
+	}
+}
+
+actor WarriorStatueIron : WarriorStatueGold 7389
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			WSTA E -1
+			Stop
+	}
+}
+
+actor WarriorStatueIron2 : WarriorStatueGold 7390
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+		Spawn:
+			WSTA F -1
+			Stop
+	}
+}
+
+ACTOR EGCandleabra : SwitchableDecoration 7391
+{
+	Radius 11
+	Height 65
+	+SOLID
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Active:
+		HSCN A 4 A_PlaySound("Ignite")
+		HSCN BCD 4 Bright
+	Spawn:
+		HSCN BCD 4 Bright
+		Loop
+	Inactive:
+		HSCN A -1
+		Stop
+	}
+}
+
+ACTOR EGCandleabraUnlit : EGCandleabra 7392
+{
+	//$Category "ETTiNGRiNDER"
+	States
+	{
+	Spawn:
+		Goto Super::Inactive
+	}
+}

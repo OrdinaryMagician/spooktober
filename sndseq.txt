@@ -43,3 +43,15 @@ end
 	playrepeat jaxx/CrankyDoor
 	stopsound  null/off
 end
+
+:LeoWoodDoor
+	Door 31
+	playuntildone	spooky/dooropen
+	stopsound		spooky/doorclose
+end
+
+:LeoBigWoodDoor
+	Door 32
+	playuntildone	spooky/doorcreak
+	stopsound		spooky/doorstop
+end

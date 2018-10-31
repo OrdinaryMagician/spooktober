@@ -21,6 +21,8 @@
 #include "decorate/cacolantern.txt"
 #include "decorate/zrrion/zrrion_crimes.txt"
 
+#include "decorate/20hcc_props.dec"
+
 // junkcity lamp
 Actor JunkLamp 22220
 {

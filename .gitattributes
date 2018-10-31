@@ -1,0 +1,9 @@
+*		text=auto
+*.txt		text
+
+*.png		binary
+*.imgz		binary
+*.lmp		binary
+*.flac		binary
+*.dat		binary
+*.wad		binary

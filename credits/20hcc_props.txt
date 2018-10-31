@@ -1,0 +1,143 @@
+EXTRA PROPS:
+Monolith (Blood)
+Raven Software (Hexen, Necrodome, Shadowcaster)
+Engine Technology (MARS 3D)
+GameTek (Quarantine 2: Road Warrior)
+Eurocom (Duke Nukem: Zero Hour)
+Psygnosis (Hexx: Heresy of the Wizard)
+3D Realms (Shadow Warrior betas)
+
+New DECORATE by Zero X. Diamond
+Shadowcaster Brazier Animation by Zero X. Diamond
+
+//MOR'LADIM'S HERETIC PROP PACK
+
+--Credits--
+Submitted: Mor'ladim
+Decorate: Mor'ladim
+Sounds: Mor'ladim
+Sprites: Mor'ladim, Eclipse Productions, Capcom, Raven Software, Konami
+Idea Base: None
+
+/*
+- Extended Credits -
+Pedestal Orbs - Eclipse Productions (Tyrian)
+Unholy Beacon Shockwave & Glow - Capcom (Strider 2) 
+Medieval Candle Glow - Konami (Castlevania: Symphony of the Night)
+Spirit Brazier Orb (DSRB) - Capcom (Demon's Crest)
+Key Post Gems - Capcom (Marvel Super Heroes: War of the Gems)
+
+Flames for Medieval Candle/Unholy Lamp/Spirit Brazier/Ornate Torch - Raven Software (Heretic)
+Treasure Chests (Wood,Green,Blue,etc.) - Konami (Castlevania: Order of Ecclesia)
+
+-Sounds-
+Unholy Beacon (UNHBECLT) - Terranigma (Quintet)
+Wizard's Step (WIZSTEPR) - Ratchet & Clank: Up Your Arsenal (Insomniac Games)
+Treasure Chests (TCHSTOPN) - Fate (Unknown - Mobile Game)
+*/
+
+// MOR'LADIM'S CROW
+
+Submitted: Mor'ladim
+Decorate: Mor'ladim
+Sounds: Mor'ladim, Jojikiba (Caw sound)
+Sprites: Konami (Contra: Hard Corps)
+Sprite Edit: Mor'ladim
+Idea Base: Saw the crow in a sprite sheet and wanted to make a 'prop' out of it.
+
+// ETTINGRINDER'S BURNING CORPSE
+
+Submitted: ETTiNGRiNDER
+Decorate: ETTiNGRiNDER
+GLDefs: ETTiNGRiNDER
+Sounds: N/A
+Sprites: Heretic & Hexen (Raven Software)
+Sprite Edit: ETTiNGRiNDER
+Idea Base: Burning at stake corpse in Wrath of Magic
+
+// ETTINGRINDER'S CRUCIFIED CORPSES
+
+Submitted: ETTiNGRiNDER
+Decorate: ETTiNGRiNDER
+Sounds: N/A
+Sprites: Hexen (Raven Software)
+Sprite Edit: ETTiNGRiNDER
+Idea Base: Similar decor in Gothic DM and Wrath of Magic
+
+// ETTINGRINDER'S DEVILISH BUSTS
+
+Submitted: ETTiNGRiNDER
+Decorate: ETTiNGRiNDER
+Sounds: N/A
+Sprites: Konami, Raven Software
+Sprite Edit: ETTiNGRiNDER
+Idea Base: Modified Castlevania graphic
+
+// CAPTAIN TOENAIL'S D'SPARIL STATUE
+
+Submitted: Captain Toenail
+Decorate: Captain Toenail
+Gldefs: None
+Sprites: Raven
+Sprite Edit: Captain Toenail
+
+// ETTINGRINDER'S FIREWOOD
+
+Submitted: ETTiNGRiNDER
+Decorate: ETTiNGRiNDER
+GLDefs: ETTiNGRiNDER
+Sounds: N/A
+Sprites: Raven Software
+Sprite Edit: ETTiNGRiNDER
+Idea Base: Hexen wads putting slimy swamp logs in fireplaces
+
+// GOTHIC'S GOLDEN EAGLE STATUES
+
+Credits:
+Submitted: Gothic
+Decorate: Gothic
+Sprites: Konami
+Sprite Edit: Gothic
+
+// ETTINGRINDER'S IMPALED CORPSES
+
+Submitted: ETTiNGRiNDER
+Decorate: ETTiNGRiNDER
+Sounds: N/A
+Sprites: Magnet Interactive Studios / Mat Weathers
+Sprite Edit: ETTiNGRiNDER
+Idea Base: Sprite left over from an unreleased Hellraiser game, heavily reworked
+
+// ETTINGRINDER'S UPSIDE DOWN CORPSES
+
+Submitted: ETTiNGRiNDER
+Decorate: ETTiNGRiNDER
+Sounds: N/A
+Sprites: Hexen (Raven Software)
+Sprite Edit: ETTiNGRiNDER
+Idea Base: N/A
+
+// ETTINGRINDER'S WARRIOR STATUE
+
+Submitted: ETTiNGRiNDER
+Decorate: ETTiNGRiNDER
+Sounds: N/A
+Sprites: Konami (statue), Raven Software (stand)
+Sprite Edit: ETTiNGRiNDER
+Idea Base: Another Castlevania-Hexen crossbreed
+
+// CAPTAIN TOENAIL'S GOLD STAND GIZMOS
+
+Submitted: Captain Toenail
+Decorate: Captain Toenail
+Gldefs: Captain Toenail
+Sprites: Hexx
+Sprite Edit: Captain Toenail
+
+// CAPTAIN TOENAIL'S SERPENT BRAZIERS
+
+Submitted: Captain Toenail
+Decorate: Captain Toenail
+Gldefs: Captain Toenail
+Sprites: Hexx
+Sprite Edit: Captain Toenail
