@@ -128,8 +128,9 @@ Map SPOOK10 lookup "SP_SPOOK10"
 Map SPOOK11 lookup "SP_SPOOK11"
 {
 	levelnum = 12
-	sky1 = "RSKY1" 
+	sky1 = "RSKY1"
 	music = "DARK"
+	par = "900"
 }
 
 Map SPOOK12 lookup "SP_SPOOK12"

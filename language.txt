@@ -279,7 +279,7 @@ SP_TITLE17 = "Program that crashes all the time";
 SP_TITLE18 = "Editor with priorities";
 
 SP_MESSAGE0 = "\"I'd say this surpasses my 20 Heretics map.\"";
-SP_MESSAGE1 = "";
+SP_MESSAGE1 = "\"I'm so bad speedrunner\"";
 SP_MESSAGE2 = "\"I may have raised the bars to high for my second map, but at least I improve as I go and I enjoy it, no matter how long it takes.\"";
 SP_MESSAGE3 = "";
 SP_MESSAGE4 = "";
