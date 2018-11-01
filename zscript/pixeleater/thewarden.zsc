@@ -1,0 +1,160 @@
+
+class FireImp : DoomImp
+{
+//$Category "Spooktober"
+	Default
+	{
+		-SHOOTABLE
+		-COUNTKILL
+		PainChance 0 ;
+		PushFactor 1.0 ;
+		//+SLIDESONWALLS
+	}
+	States
+	{
+	See:
+		#### AABBCCDD 3 A_Chase;
+		Loop;
+	Melee:
+	Missile:
+		#### A 0 A_JumpIfInventory( "ShrinkWrap", 1, "See" );
+		TROO EF 8 A_FaceTarget;
+		TROO G 6 A_TroopAttack ;
+		Goto See;
+	Include:
+		TRAP A 0 ;
+		Goto See ;
+	}
+	
+	TextureID ThePit ;
+	override void BeginPlay()
+	{
+		super.BeginPlay() ;
+		A_SetInventory( "FearFactor", Random( 0, 1 ));
+		ThePit = TexMan.CheckForTexture( "BLAKWAL1", TexMan.Type_Any );
+	}
+	override void Tick()
+	{
+		super.tick() ;
+		if( floorpic != ThePit )	bSolid = true ;
+		else						bSolid = false ;
+		
+	}
+	override bool Used( actor user )
+	{
+		if( user )
+		{
+			int UserAmt = user.CountInv( "ShrinkWrap" );
+			
+			if( self.FindInventory( "ShrinkWrap" ))
+			{
+				if( UserAmt < 2 ) //Remove jacket
+				{
+					user.GiveInventory( "ShrinkWrap", 1 );
+					self.TakeInventory( "ShrinkWrap", 1 );
+					SetStateLabel( "See" );
+					A_PlaySound( SeeSound );
+					Console.Printf( String.Format( "Straightjackets: %d", UserAmt + 1 ));
+					return true ;
+				}
+				else if( CheckMeleeRange() )
+				{
+					Console.Printf( "You have the maximum Straightjackets" );
+					return false ;
+				}
+				else return false ;
+			}
+			else if( UserAmt > 0 && CheckMeleeRange() )
+			{
+				user.TakeInventory( "ShrinkWrap", 1 );
+				self.GiveInventory( "ShrinkWrap", 1 );
+				SetStateLabel( "See" );
+				A_PlaySound( PainSound );
+				Console.Printf( String.Format( "Straightjackets: %d", UserAmt - 1 ));
+				return true ;
+			}
+			else return false ;
+		}
+		else return false ;
+	}
+}
+
+class ScratchImp : FireImp
+{
+	States
+	{
+	Melee:
+		#### A 0 A_JumpIfInventory( "ShrinkWrap", 1, "See" );
+		TROO EF 8 A_FaceTarget;
+		TROO G 6 A_CatAttack ;
+		Goto See;
+	Missile:
+		Goto See ;
+	}
+}
+
+class TrappedImp : ScratchImp
+{
+//$Category "Spooktober"
+	override void BeginPlay()
+	{
+		super.BeginPlay() ;
+		A_GiveInventory( "ShrinkWrap", 1 );
+	}
+}
+
+extend class ScratchImp
+{
+	void A_CatAttack()
+	{
+		let targ = target;
+		if( targ && CheckMeleeRange() )
+		{
+			int damage = random[pr_troopattack](1, 8) * 3;
+			A_PlaySound ("imp/melee", CHAN_WEAPON);
+			int newdam = targ.DamageMobj (self, self, damage, "Melee");
+			targ.TraceBleed (newdam > 0 ? newdam : damage, self);
+		}
+	}
+}
+
+class FearFactor : Inventory
+{}
+
+class ShrinkWrap : Inventory
+{
+	default
+	{
+		Inventory.MaxAmount 2 ;
+		//Inventory.InvBar ;
+		
+	}
+	override void AttachToOwner( actor owner )
+	{
+		if( owner )
+		{
+			super.AttachToOwner( owner ) ;
+			if( owner.checkclass( "DoomImp", AAPTR_DEFAULT, true ))
+			{
+				owner.sprite = GetSpriteIndex( "TRAP" );
+				owner.bPushable = true ;
+				owner.bDropoff = true ;
+				if( owner.CountInv( "FearFactor" ) == 1 ) owner.bFrightened = true ;
+			}
+		}
+	}
+	override void DetachFromOwner()
+	{
+		if( owner )
+		{
+			super.DetachFromOwner() ;
+			if( owner.checkclass( "DoomImp", AAPTR_DEFAULT, true ))
+			{
+				owner.sprite = GetSpriteIndex( "TROO" );
+				owner.bPushable = false ;
+				owner.bDropoff = false ;
+				owner.bFrightened = false ;
+			}
+		}
+	}
+}

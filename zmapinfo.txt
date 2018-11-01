@@ -122,6 +122,11 @@ Map SPOOK09 lookup "SP_SPOOK09"
 
 Map SPOOK10 lookup "SP_SPOOK10"
 {
+	Sky1 = "DRKSKY1", 0.08
+	Sky2 = "SKY1", 0.08
+	Lightning
+	lightmode = 3
+	nolightfade
 	levelnum = 11
 }
 

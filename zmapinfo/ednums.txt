@@ -115,6 +115,9 @@ DoomEdNums
 	11020 = InvertedRockets
 	11021 = InvertedBlurSphere
 	11022 = InvertedBoney
+	11023 = ScratchImp
+	11024 = TrappedImp
+	11025 = FireImp
 }
 
 // Jaxx

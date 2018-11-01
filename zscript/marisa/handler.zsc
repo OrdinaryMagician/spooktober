@@ -564,6 +564,7 @@ Class SpooktoberHandler : EventHandler
 		switch ( level.levelnum )
 		{
 		case 1:
+		case 11:
 		case 19:
 			// you get nothing
 			break;

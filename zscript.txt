@@ -10,6 +10,7 @@ version "3.6"
 #include "zscript/marisa/reggie.zsc"
 
 #include "zscript/pixeleater/phead.zsc"
+#include "zscript/pixeleater/thewarden.zsc"
 
 #include "zscript/jaxx/blackcat.txt"
 #include "zscript/jaxx/metalspike.txt"
