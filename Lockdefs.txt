@@ -2,6 +2,6 @@
 Lock 7
 {
    PumpkinKey
-   Message "Present here with the vile minds of the Pumpkin Head"
+   Message "Return to me the vile minds of the Pumpkin Head"
    Mapcolor 255 128 0
 }

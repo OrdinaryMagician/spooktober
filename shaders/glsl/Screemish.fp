@@ -1,7 +1,7 @@
 
 void main()
 {
-	vec3 colour		= texture( InputTexture, TexCoord ).rgb ;
+	vec3 colour		= clamp( texture( InputTexture, TexCoord ).rgb, 0.0, 1.0 );
 	
 	float value		= max( max( colour.r, colour.g ), colour.b );
 	value			= sqrt( value );
