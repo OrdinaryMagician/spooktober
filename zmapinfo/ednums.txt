@@ -118,6 +118,7 @@ DoomEdNums
 	11023 = ScratchImp
 	11024 = TrappedImp
 	11025 = FireImp
+	12027 = GravLight
 }
 
 // Jaxx
