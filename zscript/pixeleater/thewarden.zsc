@@ -1,4 +1,18 @@
 
+class GravLight : PointLight
+{
+//$Category "Spooktober"
+	Default
+	{
+		-NoGravity
+	}
+	override void Tick()
+	{
+		super.tick() ;
+		self.setorigin(( pos.x, pos.y, floorz ), true );
+	}
+}
+
 class FireImp : DoomImp
 {
 //$Category "Spooktober"
