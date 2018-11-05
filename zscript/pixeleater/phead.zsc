@@ -89,21 +89,6 @@ extend class Scyth
 	}
 }
 
-/*class Reaper : Doomplayer
-{
-	Default
-	{
-		+NOMENU
-		Player.DisplayName "Grim Marine";
-		Player.StartItem "Scyth" ;
-		Player.StartItem "Pistol" ;
-		Player.StartItem "Clip", 50 ;
-		Player.WeaponSlot 1, "Scyth", "Chainsaw" ;
-		Player.ColorRange 0, 0 ;
-		Translation "Cloak" ;
-	}
-}*/
-
 class UpBlood : Blood
 {
 	Default
@@ -172,6 +157,83 @@ class InvertedBlueTorch : ShortBlueTorch
 	Spawn:
 		IVBT ABCD 4 BRIGHT;
 		Loop;
+	}
+}
+
+class UpSdDnMedikit : Medikit
+{
+	//&Category Spooktober
+	Default
+	{
+		//YScale -1 ;
+	}
+	States
+	{
+	Spawn:
+		IVMK A -1;
+		Stop;
+	}
+}
+
+class UpSdDnBluArmor : BlueArmor
+{
+	//&Category Spooktober
+	Default
+	{
+		//YScale -1 ;
+	}
+	States
+	{
+	Spawn:
+		IVBA A 6;
+		IVBA B 6 bright;
+		loop;
+	}
+}
+
+
+class UpSdDnBulls : ClipBox
+{
+	//&Category Spooktober
+	Default
+	{
+		//YScale -1 ;
+	}
+	States
+	{
+	Spawn:
+		IVMO A -1;
+		Stop;
+	}
+}
+
+class UpSdDnShells : ShellBox
+{
+	//&Category Spooktober
+	Default
+	{
+		//YScale -1 ;
+	}
+	States
+	{
+	Spawn:
+		IVSB A -1;
+		Stop;
+	}
+}
+
+class UpSdDnBPack : BackPack
+{
+	//&Category Spooktober
+	Default
+	{
+		//YScale -1 ;
+	}
+	States
+	{
+	Spawn:
+		IVBP A -1;
+		Stop;
 	}
 }
 
