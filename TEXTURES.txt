@@ -774,9 +774,9 @@ Texture "APCAMP", 256, 256
 	}
 }
 
-Texture "APCALI", 256, 256
+Texture "APDRAGON", 256, 256
 {
-	Patch "P_CALI", 0, 0
+	Patch "P_DRAGON", 0, 0
 	Patch "SPFRAME", 0, 0
 	{
 		Style Overlay

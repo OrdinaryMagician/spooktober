@@ -128,6 +128,7 @@ Map SPOOK10 lookup "SP_SPOOK10"
 	lightmode = 3
 	nolightfade
 	levelnum = 11
+	music = "D_WARDEN"
 }
 
 Map SPOOK11 lookup "SP_SPOOK11"
