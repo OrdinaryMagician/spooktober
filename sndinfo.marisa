@@ -13,6 +13,17 @@ ClericFlameFire         dshellfi
 ClericFlameExplode      dshellex
 ClericFlameCircle       dsfirex5
 
+$playersound	sabitsuki	male	*death		dsempty
+$playersound	sabitsuki	male	*xdeath		dsempty
+$playersound	sabitsuki	male	*pain100	dsempty
+$playersounddup	sabitsuki	male	*pain75		*pain100
+$playersounddup	sabitsuki	male	*pain50		*pain100
+$playersounddup	sabitsuki	male	*pain25		*pain100
+$playersound	sabitsuki	male	*grunt		dsempty
+$playersound	sabitsuki	male	*land		dsempty
+$playersound	sabitsuki	male	*usefail	dsempty
+$playersound	sabitsuki	male	*jump		dsempty
+
 $pitchshiftrange 0
 // ambiences
 $ambient 6400 rain/rain point 1.5 continuous 0.5
@@ -55,6 +66,12 @@ misc/adend60 adend60
 misc/wlloop31 wlloop31
 misc/wlend31 wlend31
 // from other sources
+misc/flesh1 ftfle1
+misc/flesh2 ftfle2
+misc/flesh3 ftfle3
+misc/flesh4 ftfle4
+$random misc/flesh { misc/flesh1 misc/flesh2 misc/flesh3 misc/flesh4 }
+misc/lflesh ftflej
 misc/scase1 dscasing
 misc/scase2 dscasin2
 misc/scase3 dscasin3
@@ -95,9 +112,14 @@ $limit misc/bossvoice 32
 // from .flow
 misc/lka lka
 kaibutsu/giggle lka_2
+red/noise noizu4
 $musicvolume D_MIRROR 0.65
 $pitchshiftrange 0
+misc/nz nz
+misc/nz_end nz_end
+smile/laugh smile
 misc/bgm34 bgm34
+misc/wwww2 wwww2
 // from umineko
 seacat/ahahawav ahaha
 seacat/flangefemale flangefm

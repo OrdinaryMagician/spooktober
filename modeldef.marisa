@@ -841,7 +841,7 @@ Model "SchoolTable"
 	Model 1 "table2.obj"
 	Skin 0 "FLOWTEX9"
 	Skin 1 "FLOWTEXA"
-	Scale 1 1 1.2
+	Scale 0.5 0.5 0.6
 	FrameIndex MODL A 0 0
 	FrameIndex MODL A 0 1
 }
@@ -856,7 +856,7 @@ Model "SchoolTableChair"
 	Skin 1 "FLOWTEXA"
 	Skin 2 "FLOWTEX9"
 	Skin 3 "FLOWTEXA"
-	Scale 1 1 1.2
+	Scale 0.5 0.5 0.6
 	FrameIndex MODL A 0 0
 	FrameIndex MODL A 0 1
 	FrameIndex MODL A 0 2

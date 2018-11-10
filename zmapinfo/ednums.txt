@@ -87,6 +87,44 @@ DoomEdNums
 	6483 = mkSecret05OutsideWind
 	6484 = mkSecret05ProximityTrigger
 	6485 = mkUncleReggie
+	6486 = SkyEye
+	6487 = SkyCross
+	6488 = CommonKaibutsu
+	6489 = CrowbarKaibutsu
+	6490 = SmilingSabitsuki
+	6491 = KneelingSabitsuki
+	6492 = SchoolKid
+	6493 = Smile
+	6494 = Smile2
+	6495 = FleshPost1
+	6496 = FleshPost2
+	6497 = FleshBeast1
+	6498 = FleshBeast2
+	6499 = FleshBeast3
+	6500 = FleshBeast4
+	6501 = SchoolTable
+	6502 = SchoolTableChair
+	6503 = FloorBlood1
+	6504 = FloorBlood2
+	6505 = FloorEye
+	6506 = FleshBanner1
+	6507 = FleshBanner2
+	6508 = Pylon1
+	6509 = Pylon2
+	6510 = RooftopSmile
+	6511 = FleshTree1
+	6512 = FleshTree2
+	6513 = FleshTree3
+	6514 = WallEye
+	6515 = WallMouth
+	6516 = MouthBanner1
+	6517 = MouthBanner2
+	6518 = MouthBanner3
+	6519 = MouthBanner4
+	6520 = MouthBanner5
+	6521 = MouthBanner6
+	6522 = EyeBanner1
+	6523 = EyeBanner2
 }
 
 // Pixel Eater

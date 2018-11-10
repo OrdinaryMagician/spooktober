@@ -181,8 +181,6 @@ Map SECRET03 lookup "SP_SECRET03"
 	NoJump
 	NoCrouch
 	LightMode = 3
-	PixelRatio = 1.0
-	NoLightFade
 	levelnum = 17
 }
 

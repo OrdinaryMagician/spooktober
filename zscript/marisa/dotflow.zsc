@@ -1,8 +1,56 @@
+// sneaky
+Class DummyFlash : Actor
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1;
+		Stop;
+	}
+}
+
+// replacement player class for this map
+Class Sabitsuki : PlayerPawn
+{
+	Default
+	{
+		Speed 1;
+		Scale 2;
+		Health 100;
+		Radius 16;
+		Height 56;
+		Mass 100;
+		Player.SoundClass "sabitsuki";
+		Player.DisplayName "Sabitsuki";
+		Player.ViewHeight 32;
+		Player.ViewBob 0.5;
+		+NOSKIN;
+	}
+	States
+	{
+	Spawn:
+		SABI B -1;
+		Stop;
+	See:
+		SABI BABC 4;
+		Loop;
+	Death:
+		SABI DEFGHIJK 4;
+		SABI L 12;
+		SABI M 6 A_NoBlocking();
+		SABI N 4;
+		SABI O -1;
+		Stop;
+	}
+}
+
 Class CommonKaibutsu : Actor
 {
 	int sc;
 	Default
 	{
+		//$Title Kaibutsu
+		//$Category Marisa Kirisame/dotFlow
 		Radius 16;
 		Height 56;
 		Scale 2;
@@ -12,14 +60,145 @@ Class CommonKaibutsu : Actor
 		-ISMONSTER;
 		+NODAMAGE;
 		+STANDSTILL;
+		+SPRITEANGLE;
 	}
-	override void BeginPlay()
+	void A_SetSkin()
 	{
-		Super.BeginPlay();
 		int dec = Random[Kaibutsu](0,2);
 		if ( dec == 1 ) sprite = GetSpriteIndex('KAI2');
 		else if ( dec == 2 ) sprite = GetSpriteIndex('KAI3');
 		else sprite = GetSpriteIndex('KAI1');
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		double angdiff = deltaangle(AngleTo(players[consoleplayer].camera),angle);
+		if ( abs(angdiff) <= 45 ) spriteangle = 180;
+		else if ( abs(angdiff) >= 135 ) spriteangle = 0;
+		else if ( angdiff > 45 ) spriteangle = 90;
+		else if ( angdiff < -45 ) spriteangle = 270;
+	}
+	bool CheckDirectMove()
+	{
+		// check if we can move towards target without bumping into anything
+		Vector3 oldpos = pos;
+		double angdest = AngleTo(target);
+		Vector2 dir = (cos(angdest),sin(angdest))*speed;
+		for ( int i=0; i<4; i++ )
+		{
+			if ( TryMove(Vec2Offset(dir.x,dir.y),32) )
+				continue;
+			if ( BlockingMobj == target )
+				break;
+			SetOrigin(oldpos,false);
+			return false;
+		}
+		SetOrigin(oldpos,false);
+		return true;
+	}
+	void A_KaibutsuChase()
+	{
+		if ( !target || (target.health <= 0) )
+		{
+			SetStateLabel("Idle");
+			return;
+		}
+		// if we can't move towards them in a straight line
+		// fall back to standard chase
+		if ( Random[KaibutsuLaugh]() < 3 )
+			A_PlaySound("kaibutsu/giggle",CHAN_VOICE);
+		if ( CheckMeleeRange() )
+		{
+			A_FaceTarget();
+			if ( !Random[Kaibutsu](0,3) )
+			{
+				A_PlaySound("imp/melee",CHAN_WEAPON);
+				int dmg = Random[Kaibutsu](3,6);
+				int ndmg = target.DamageMobj(self,self,dmg,'Melee',DMG_THRUSTLESS);
+				target.TraceBleed((ndmg>0)?ndmg:dmg,self);
+			}
+			return;
+		}
+		sc++;
+		if ( sc >= 8 ) sc = 0;
+		if ( sc < 2 ) frame = 1;
+		else if ( sc < 4 ) frame = 0;
+		else if ( sc < 6 ) frame = 1;
+		else if ( sc < 8 ) frame = 2;
+		if ( sc == 2 || sc == 6 )
+			mkFootstepMaker.PlayStep(self,1.0);
+		if ( IsVisible(target,false) && CheckDirectMove() )
+		{
+			A_FaceTarget(10);
+			Vector2 dir = (cos(angle),sin(angle))*speed;
+			TryMove(Vec2Offset(dir.x,dir.y),32);
+		}
+		else A_Chase(null,null);
+	}
+	States
+	{
+	Spawn:
+		KAI1 B 0 NoDelay A_SetSkin();
+		Goto Idle;
+	Idle:
+		#### B 4
+		{
+			if ( Random[KaibutsuLaugh]() < 2 )
+				A_PlaySound("kaibutsu/giggle",CHAN_VOICE);
+			A_Look();
+		}
+		Wait;
+	See:
+		#### B 0 { sc = 0; }
+		#### # 2 A_KaibutsuChase();
+		Wait;
+	Skins:
+		KAI1 A 0;
+		KAI2 A 0;
+		KAI3 A 0;
+		Stop;
+	}
+}
+
+Class CrowbarKaibutsuMarker : Actor
+{
+	Default
+	{
+		Radius 16;
+		Height 56;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+DONTSPLASH;
+	}
+}
+
+Class CrowbarKaibutsu : Actor
+{
+	int sc;
+	Actor lastseen;
+	Default
+	{
+		//$Title Kaibutsu (Crowbar)
+		//$Category Marisa Kirisame/dotFlow
+		Radius 16;
+		Height 56;
+		Scale 2;
+		Speed 10;
+		MONSTER;
+		-COUNTKILL;
+		-ISMONSTER;
+		+NODAMAGE;
+		+STANDSTILL;
+		+SPRITEANGLE;
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		double angdiff = deltaangle(AngleTo(players[consoleplayer].camera),angle);
+		if ( abs(angdiff) <= 45 ) spriteangle = 180;
+		else if ( abs(angdiff) >= 135 ) spriteangle = 0;
+		else if ( angdiff > 45 ) spriteangle = 90;
+		else if ( angdiff < -45 ) spriteangle = 270;
 	}
 	bool CheckDirectMove()
 	{
@@ -48,13 +227,11 @@ Class CommonKaibutsu : Actor
 		}
 		// if we can't move towards them in a straight line
 		// fall back to standard chase
-		if ( Random[KaibutsuLaugh]() < 3 )
+		if ( Random[KaibutsuLaugh]() < 6 )
 			A_PlaySound("kaibutsu/giggle",CHAN_VOICE);
 		if ( CheckMeleeRange() )
 		{
-			A_FaceTarget();
-			if ( !Random[Kaibutsu](0,3) )
-				target.DamageMobj(self,self,5,'Melee',DMG_THRUSTLESS);
+			SetStateLabel("Melee");
 			return;
 		}
 		sc++;
@@ -63,82 +240,487 @@ Class CommonKaibutsu : Actor
 		else if ( sc < 4 ) frame = 0;
 		else if ( sc < 6 ) frame = 1;
 		else if ( sc < 8 ) frame = 2;
+		if ( sc == 2 || sc == 6 )
+			mkFootstepMaker.PlayStep(self,1.0);
 		if ( IsVisible(target,false) && CheckDirectMove() )
 		{
-			A_FaceTarget();
+			A_FaceTarget(10);
 			Vector2 dir = (cos(angle),sin(angle))*speed;
 			TryMove(Vec2Offset(dir.x,dir.y),32);
 		}
 		else A_Chase(null,null);
 	}
+	void A_KaibutsuSearch()
+	{
+		// TODO
+	}
+	void A_KaibutsuSwing()
+	{
+		A_FaceTarget(10);
+		A_PlaySound("skeleton/swing",CHAN_WEAPON);
+	}
+	void A_KaibutsuMelee()
+	{
+		A_FaceTarget(10);
+		if ( !target )
+			return;
+		double ang = AngleTo(target);
+		meleerange += 50;
+		if ( !CheckMeleeRange() || abs(deltaangle(angle,ang)) > 45 )
+		{
+			meleerange -= 50;
+			return;
+		}
+		meleerange -= 50;
+		A_PlaySound("skeleton/melee",CHAN_WEAPON);
+		int dmg = Random[Kaibutsu](8,11)*3;
+		int ndmg = target.DamageMobj(self,self,dmg,'Melee');
+		target.TraceBleed((ndmg>0)?ndmg:dmg,self);
+	}
 	States
 	{
 	Spawn:
-		#### B 4
+		KAI4 B 4
 		{
-			if ( Random[KaibutsuLaugh]() < 2 )
+			if ( Random[KaibutsuLaugh]() < 4 )
 				A_PlaySound("kaibutsu/giggle",CHAN_VOICE);
 			A_Look();
 		}
 		Wait;
 	See:
-		#### B 0 { sc = 0; }
-		#### # 2 A_KaibutsuChase();
+		KAI4 B 0 { sc = 0; }
+		KAI4 # 2 A_KaibutsuChase();
 		Wait;
-	Skins:
-		KAI1 A 0;
-		KAI2 A 0;
-		KAI3 A 0;
+	Search:
+		KAI4 # 2 A_KaibutsuSearch();
+		Wait;
+	SearchWait:
+		KAI4 B 0 { sc = 10; }
+		KAI4 B 10
+		{
+			A_Look();
+			sc--;
+			return A_JumpIf(sc<=0,"Search");
+		}
+		Wait;
+	Melee:
+		KAI4 B 0 { sc = 0; }
+		KAI4 D 5 A_FaceTarget();
+		KAI4 E 4 A_KaibutsuSwing();
+		KAI4 F 4 A_FaceTarget(10);
+		KAI4 G 6 A_KaibutsuMelee();
+		KAI4 D 5 A_FaceTarget(10);
+		Goto See;
+	}
+}
+
+Class SmilingSabitsuki : Actor
+{
+	Default
+	{
+		//$Title Smiling Sabitsuki
+		//$Category Marisa Kirisame/dotFlow
+		Radius 16;
+		Height 56;
+		Scale 2;
+		+SOLID;
+	}
+	States
+	{
+	Spawn:
+		KAI5 A -1;
 		Stop;
 	}
 }
 
-Class CrowbarKaibutsu : Actor
+Class KneelingSabitsuki : Actor
 {
-}
-
-Class SmilingKaibutsu : Actor
-{
+	Default
+	{
+		//$Title Kneeling Sabitsuki
+		//$Category Marisa Kirisame/dotFlow
+		Radius 16;
+		Height 56;
+		Scale 2;
+		+SOLID;
+	}
+	States
+	{
+	Spawn:
+		KAI6 A -1;
+		Stop;
+	}
 }
 
 Class SchoolKid : Actor
 {
+	int sc, wc;
+	Default
+	{
+		//$Title School Kid
+		//$Category Marisa Kirisame/dotFlow
+		Radius 8;
+		Height 36;
+		Scale 2;
+		Speed 4;
+		MONSTER;
+		-COUNTKILL;
+		-ISMONSTER;
+		+NODAMAGE;
+	}
+	void A_SchoolKidWander()
+	{
+		if ( bSTANDSTILL ) return;
+		sc++;
+		if ( sc >= 8 ) sc = 0;
+		if ( sc < 2 ) frame = 1;
+		else if ( sc < 4 ) frame = 0;
+		else if ( sc < 6 ) frame = 1;
+		else if ( sc < 8 ) frame = 2;
+		if ( sc == 2 || sc == 6 )
+			mkFootstepMaker.PlayStep(self,0.2);
+		A_Wander();
+		wc--;
+		if ( wc <= 0 )
+			SetStateLabel("Idle");
+	}
+	void A_SetSkin()
+	{
+		if ( Random[Kid](1,100) <= 50 ) sprite = GetSpriteIndex('KID2');
+		else sprite = GetSpriteIndex('KID1');
+	}
+	States
+	{
+	Spawn:
+		KID1 B 0 NoDelay A_SetSkin();
+		Goto Idle;
+	Idle:
+		#### B 100 { sc = 0; wc = Random[Kid](1,3)*8; }
+		#### # 2 A_SchoolKidWander();
+		Wait;
+	Skins:
+		KID1 B 0;
+		KID2 B 0;
+		Stop;
+	}
 }
 
 Class Smile : Actor
 {
+	int sc;
+	override void Tick()
+	{
+		Super.Tick();
+		double angdiff = deltaangle(AngleTo(players[consoleplayer].camera),angle);
+		if ( abs(angdiff) <= 45 ) spriteangle = 180;
+		else if ( abs(angdiff) >= 135 ) spriteangle = 0;
+		else if ( angdiff > 45 ) spriteangle = 90;
+		else if ( angdiff < -45 ) spriteangle = 270;
+	}
+	Default
+	{
+		//$Title Smile
+		//$Category Marisa Kirisame/dotFlow
+		Radius 16;
+		Height 56;
+		Scale 2;
+		Speed 15;
+		MONSTER;
+		-COUNTKILL;
+		-ISMONSTER;
+		+NODAMAGE;
+		+STANDSTILL;
+		+SPRITEANGLE;
+	}
+	bool CheckDirectMove()
+	{
+		// check if we can move towards target without bumping into anything
+		Vector3 oldpos = pos;
+		double angdest = AngleTo(target);
+		Vector2 dir = (cos(angdest),sin(angdest))*speed;
+		for ( int i=0; i<4; i++ )
+		{
+			if ( TryMove(Vec2Offset(dir.x,dir.y),32) )
+				continue;
+			if ( BlockingMobj == target )
+				break;
+			SetOrigin(oldpos,false);
+			return false;
+		}
+		SetOrigin(oldpos,false);
+		return true;
+	}
+	void A_KaibutsuChase()
+	{
+		if ( !target || (target.health <= 0) )
+		{
+			SetStateLabel("Spawn");
+			return;
+		}
+		// if we can't move towards them in a straight line
+		// fall back to standard chase
+		if ( CheckMeleeRange() )
+		{
+			SpooktoberUtil.FullFreeze(target);
+			mkSmoothLookTo.LookTowards(target,target.AngleTo(self),0,4.0);
+			SetStateLabel("Melee");
+			return;
+		}
+		sc++;
+		if ( sc >= 8 ) sc = 0;
+		if ( sc < 2 ) frame = 1;
+		else if ( sc < 4 ) frame = 0;
+		else if ( sc < 6 ) frame = 1;
+		else if ( sc < 8 ) frame = 2;
+		if ( sc == 2 || sc == 6 )
+			mkFootstepMaker.PlayStep(self,1.0);
+		if ( IsVisible(target,false) && CheckDirectMove() )
+		{
+			A_FaceTarget(10);
+			Vector2 dir = (cos(angle),sin(angle))*speed;
+			TryMove(Vec2Offset(dir.x,dir.y),32);
+		}
+		else A_Chase(null,null);
+	}
+	void A_KaibutsuSwing()
+	{
+		A_FaceTarget();
+		A_PlaySound("skeleton/swing",CHAN_WEAPON);
+	}
+	void A_KaibutsuMelee()
+	{
+		A_FaceTarget();
+		A_PlaySound("skeleton/melee",CHAN_WEAPON);
+		SpooktoberHandler.DoKnockOut();
+	}
+	States
+	{
+	Spawn:
+		SMIL B 4 A_Look();
+		Wait;
+	See:
+		SMIL B 0 { sc = 0; }
+		SMIL # 2 A_KaibutsuChase();
+		Wait;
+	Melee:
+		SMIL B 5 A_JumpIf(abs(deltaangle(target.AngleTo(self),target.angle))<10,1);
+		Wait;
+		SMIL F 5 A_FaceTarget();
+		SMIL G 4 A_KaibutsuSwing();
+		SMIL H 4 A_FaceTarget();
+		SMIL I 6 A_KaibutsuMelee();
+		SMIL F 5 A_FaceTarget();
+		SMIL B 70;
+		SMIL B 100 A_PlaySound("misc/wwww2",CHAN_VOICE,1.0,false,ATTN_NONE);
+		SMIL B -1 ACS_NamedExecute('MapFadeOut');
+		Stop;
+	}
+}
+
+Class Smile2 : Smile
+{
+	bool wasused;
+
+	Default
+	{
+		//$Title Smile (Cutscene)
+		//$Category Marisa Kirisame/dotFlow
+	}
+	override void Activate( Actor activator )
+	{
+		if ( !InStateSequence(CurState,FindState("Spawn")) )
+			return;
+		target = activator;
+		SetStateLabel("Turn");
+		return;
+	}
+	override bool Used( Actor user )
+	{
+		if ( !InStateSequence(CurState,FindState("Spawn")) )
+			return true;
+		target = user;
+		wasused = true;
+		SpooktoberUtil.FullFreeze(target);
+		mkSmoothLookTo.LookTowards(target,target.AngleTo(self),0,4.0);
+		SetStateLabel("Turn");
+		return true;
+	}
+	void A_Smile()
+	{
+		A_PlaySound("smile/laugh",CHAN_BODY,1.0,false,ATTN_NONE);
+		A_PlaySound("smile/laugh",CHAN_VOICE,1.0,false,ATTN_NONE);
+		A_PlaySound("misc/wwww2",CHAN_ITEM,0.3,false,ATTN_NONE);
+		A_QuakeEx(5,5,5,40,0,65535,"",QF_SCALEDOWN|QF_RELATIVE);
+		SpooktoberHandler.DoSmile();
+	}
+	States
+	{
+	Spawn:
+		SMIL B -1;
+		Stop;
+	Turn:
+		SMIL B 4
+		{
+			A_FaceTarget(30);
+			if ( abs(deltaangle(angle,AngleTo(target))) <= 15 )
+			{
+				if ( wasused )
+					return ResolveState("Melee");
+				return ResolveState("Laugh");
+			}
+			return ResolveState(null);
+		}
+		Wait;
+	Laugh:
+		SMIL BB 5 A_FaceTarget();
+		SMIL D 15;
+		SMIL E 40 A_Smile();
+		SMIL B -1;
+		Stop;
+	}
 }
 
 Class FleshPost1 : Actor
 {
+	Default
+	{
+		//$Title Flesh Post 1
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 16;
+		Height 64;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FPIL B -1;
+		Stop;
+	}
 }
 
 Class FleshPost2 : Actor
 {
+	Default
+	{
+		//$Title Flesh Post 2
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 16;
+		Height 64;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FPIL B -1;
+		Stop;
+	}
 }
 
-Class FleshEye1 : Actor
+Class FleshBeast1 : Actor
 {
+	Default
+	{
+		//$Title Flesh Beast 1
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 24;
+		Height 64;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FMON A -1;
+		Stop;
+	}
 }
 
-Class FleshEye2 : Actor
+Class FleshBeast2 : Actor
 {
+	Default
+	{
+		//$Title Flesh Beast 2
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 24;
+		Height 64;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FMON B -1;
+		Stop;
+	}
 }
 
-Class FleshMouth : Actor
+Class FleshBeast3 : Actor
 {
+	Default
+	{
+		//$Title Flesh Beast 3
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 32;
+		Height 64;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FMON C -1;
+		Stop;
+	}
 }
 
-Class FleshMouthBig : Actor
+Class FleshBeast4 : Actor
 {
+	Default
+	{
+		//$Title Flesh Beast 4
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 40;
+		Height 64;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FMON D -1;
+		Stop;
+	}
 }
 
 Class SchoolTable : Actor
 {
 	Default
 	{
+		//$Title School Table
+		//$Category Marisa Kirisame/dotFlow
 		Radius 20;
 		Height 26;
+		Scale 2;
 		Mass int.max;
 		+SOLID;
 		+SHOOTABLE;
@@ -158,8 +740,11 @@ Class SchoolTableChair : Actor
 {
 	Default
 	{
+		//$Title School Table (Chair)
+		//$Category Marisa Kirisame/dotFlow
 		Radius 20;
 		Height 26;
+		Scale 2;
 		Mass int.max;
 		+SOLID;
 		+SHOOTABLE;
@@ -177,84 +762,513 @@ Class SchoolTableChair : Actor
 
 Class FloorBlood1 : Actor
 {
+	Default
+	{
+		//$Title Floor Blood 1
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+FLATSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FBLD A -1;
+		Stop;
+	}
 }
 
 Class FloorBlood2 : Actor
 {
+	Default
+	{
+		//$Title Floor Blood 2
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+FLATSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FBLD B -1;
+		Stop;
+	}
 }
 
-Class FloorBlood3 : Actor
+Class FloorEye : Actor
 {
+	Default
+	{
+		//$Title Floor Eye
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+FLATSPRITE;
+		+MOVEWITHSECTOR;
+	}
+	States
+	{
+	Spawn:
+		FEYE A -1;
+		Stop;
+	}
 }
 
 Class FleshBanner1 : Actor
 {
+	Default
+	{
+		//$Title Flesh Banner 1
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FBAN A -1;
+		Stop;
+	}
 }
 
 Class FleshBanner2 : Actor
 {
+	Default
+	{
+		//$Title Flesh Banner 2
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		FBAN B -1;
+		Stop;
+	}
 }
 
 Class Pylon1 : Actor
 {
+	Default
+	{
+		//$Title Pylon
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 8;
+		Height 24;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+	}
+	States
+	{
+	Spawn:
+		TCON A -1;
+		Stop;
+	}
 }
 
 Class Pylon2 : Actor
 {
+	Default
+	{
+		//$Title Pylon (Tape)
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 32;
+		Height 24;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+	}
+	States
+	{
+	Spawn:
+		TCON B -1;
+		Stop;
+	}
 }
 
 Class RooftopSmile : Actor
 {
+	Default
+	{
+		//$Title Rooftop Smile
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+	}
+	States
+	{
+	Spawn:
+		BSMI BABC 4;
+		Loop;
+	}
 }
 
 Class FleshTree1 : Actor
 {
+	Default
+	{
+		//$Title Flesh Tree 1
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 32;
+		Height 96;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+	}
+	States
+	{
+	Spawn:
+		FTRE A -1;
+		Stop;
+	}
 }
 
 Class FleshTree2 : Actor
 {
+	Default
+	{
+		//$Title Flesh Tree 2
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 24;
+		Height 96;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+	}
+	States
+	{
+	Spawn:
+		FTRE B -1;
+		Stop;
+	}
 }
 
 Class FleshTree3 : Actor
 {
+	Default
+	{
+		//$Title Flesh Tree 3
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 16;
+		Height 96;
+		Mass int.max;
+		+SOLID;
+		+DONTTHRUST;
+	}
+	States
+	{
+	Spawn:
+		FTRE C -1;
+		Stop;
+	}
 }
 
 Class WallEye : Actor
 {
+	Default
+	{
+		//$Title Wall Eye
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		WEYE A -1;
+		Stop;
+	Blink:
+		WEYE BCD 4;
+		WEYE E 8;
+		WEYE DCB 4;
+		Goto Spawn;
+	Pain:
+		WEYE G 4;
+		Goto Spawn;
+	Death:
+		WEYE F -1;
+		Stop;
+	}
 }
 
 Class WallMouth : Actor
 {
+	Default
+	{
+		//$Title Wall Mouth
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		WMOU A -1;
+		Stop;
+	}
 }
 
 Class MouthBanner1 : Actor
 {
+	Default
+	{
+		//$Title Mouth Banner 1
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		SBAN A -1;
+		Stop;
+	}
 }
 
 Class MouthBanner2 : Actor
 {
+	Default
+	{
+		//$Title Mouth Banner 2
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		SBAN B -1;
+		Stop;
+	}
 }
 
 Class MouthBanner3 : Actor
 {
+	Default
+	{
+		//$Title Mouth Banner 3
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		SBAN C -1;
+		Stop;
+	}
 }
 
 Class MouthBanner4 : Actor
 {
+	Default
+	{
+		//$Title Mouth Banner 4
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		SBAN D -1;
+		Stop;
+	}
 }
 
 Class MouthBanner5 : Actor
 {
+	Default
+	{
+		//$Title Mouth Banner 5
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		SBAN E -1;
+		Stop;
+	}
 }
 
 Class MouthBanner6 : Actor
 {
+	Default
+	{
+		//$Title Mouth Banner 6
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		SBAN F -1;
+		Stop;
+	}
 }
 
 Class EyeBanner1 : Actor
 {
+	Default
+	{
+		//$Title Eye Banner 1
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		SBAN G -1;
+		Stop;
+	}
 }
 
 Class EyeBanner2 : Actor
 {
+	Default
+	{
+		//$Title Eye Banner 2
+		//$Category Marisa Kirisame/dotFlow
+		Scale 2.0;
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	States
+	{
+	Spawn:
+		SBAN H -1;
+		Stop;
+	}
+}
+
+Class SkyEye : Actor
+{
+	double cn;
+	Default
+	{
+		//$Title Sky Eye
+		//$Category Marisa Kirisame/dotFlow
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+INTERPOLATEANGLES;
+		+WALLSPRITE;
+	}
+	void A_Orbit()
+	{
+		Vector3 dir = (cos(cn),sin(cn),0)*150;
+		SetOrigin(level.Vec3Offset(SpawnPoint,dir),true);
+		angle = cn;
+		cn += 0.02;
+	}
+	States
+	{
+	Spawn:
+		EYED A 1 Bright A_Orbit();
+		Wait;
+	}
+}
+
+Class SkyCross : Actor
+{
+	double cn;
+	Default
+	{
+		//$Title Sky Cross
+		//$Category Marisa Kirisame/dotFlow
+		Radius 1;
+		Height 0.1;
+		+NOGRAVITY;
+		+NOBLOCKMAP;
+		+FORCEYBILLBOARD;
+		+WALLSPRITE;
+	}
+	void A_Orbit()
+	{
+		Vector3 dir = (cos(cn),sin(cn),0)*200;
+		SetOrigin(level.Vec3Offset(SpawnPoint,dir),true);
+		angle = cn;
+		cn += 0.03;
+	}
+	States
+	{
+	Spawn:
+		CROS A 1 Bright A_Orbit();
+		Wait;
+	}
 }

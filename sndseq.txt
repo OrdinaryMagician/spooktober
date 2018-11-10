@@ -13,6 +13,11 @@ end
 	stopsound misc/wlend31
 end
 
+:FlowMove
+	playrepeat misc/nz
+	stopsound misc/nz_end
+end
+
 :WoodDoor
 	Door 2
 	playuntildone	doorswing2/start
