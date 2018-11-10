@@ -2521,14 +2521,14 @@ Class mkThiefButton : Actor
 		MODL A -1;
 		Stop;
 	Activated:
-		MODL A 5;
+		MODL A 3;
 		MODL B 3
 		{
 			A_PlaySound("thief/button");
 			level.ExecuteSpecial(special,target,null,false,args[0],args[1],args[2],args[3],args[4]);
 			if ( !bAMBUSH ) A_SetTics(-1);
 		}
-		MODL B 10;
+		MODL B 3;
 		MODL A 0;
 		Goto Spawn;
 	}

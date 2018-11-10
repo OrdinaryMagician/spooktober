@@ -8,6 +8,7 @@ version "3.6"
 #include "zscript/marisa/seacat.zsc"
 #include "zscript/marisa/nightmarelord.zsc"
 #include "zscript/marisa/reggie.zsc"
+#include "zscript/marisa/dotflow.zsc"
 
 #include "zscript/pixeleater/phead.zsc"
 #include "zscript/pixeleater/thewarden.zsc"

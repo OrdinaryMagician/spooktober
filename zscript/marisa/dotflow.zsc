@@ -1,0 +1,260 @@
+Class CommonKaibutsu : Actor
+{
+	int sc;
+	Default
+	{
+		Radius 16;
+		Height 56;
+		Scale 2;
+		Speed 10;
+		MONSTER;
+		-COUNTKILL;
+		-ISMONSTER;
+		+NODAMAGE;
+		+STANDSTILL;
+	}
+	override void BeginPlay()
+	{
+		Super.BeginPlay();
+		int dec = Random[Kaibutsu](0,2);
+		if ( dec == 1 ) sprite = GetSpriteIndex('KAI2');
+		else if ( dec == 2 ) sprite = GetSpriteIndex('KAI3');
+		else sprite = GetSpriteIndex('KAI1');
+	}
+	bool CheckDirectMove()
+	{
+		// check if we can move towards target without bumping into anything
+		Vector3 oldpos = pos;
+		double angdest = AngleTo(target);
+		Vector2 dir = (cos(angdest),sin(angdest))*speed;
+		for ( int i=0; i<4; i++ )
+		{
+			if ( TryMove(Vec2Offset(dir.x,dir.y),32) )
+				continue;
+			if ( BlockingMobj == target )
+				break;
+			SetOrigin(oldpos,false);
+			return false;
+		}
+		SetOrigin(oldpos,false);
+		return true;
+	}
+	void A_KaibutsuChase()
+	{
+		if ( !target || (target.health <= 0) )
+		{
+			SetStateLabel("Spawn");
+			return;
+		}
+		// if we can't move towards them in a straight line
+		// fall back to standard chase
+		if ( Random[KaibutsuLaugh]() < 3 )
+			A_PlaySound("kaibutsu/giggle",CHAN_VOICE);
+		if ( CheckMeleeRange() )
+		{
+			A_FaceTarget();
+			if ( !Random[Kaibutsu](0,3) )
+				target.DamageMobj(self,self,5,'Melee',DMG_THRUSTLESS);
+			return;
+		}
+		sc++;
+		if ( sc >= 8 ) sc = 0;
+		if ( sc < 2 ) frame = 1;
+		else if ( sc < 4 ) frame = 0;
+		else if ( sc < 6 ) frame = 1;
+		else if ( sc < 8 ) frame = 2;
+		if ( IsVisible(target,false) && CheckDirectMove() )
+		{
+			A_FaceTarget();
+			Vector2 dir = (cos(angle),sin(angle))*speed;
+			TryMove(Vec2Offset(dir.x,dir.y),32);
+		}
+		else A_Chase(null,null);
+	}
+	States
+	{
+	Spawn:
+		#### B 4
+		{
+			if ( Random[KaibutsuLaugh]() < 2 )
+				A_PlaySound("kaibutsu/giggle",CHAN_VOICE);
+			A_Look();
+		}
+		Wait;
+	See:
+		#### B 0 { sc = 0; }
+		#### # 2 A_KaibutsuChase();
+		Wait;
+	Skins:
+		KAI1 A 0;
+		KAI2 A 0;
+		KAI3 A 0;
+		Stop;
+	}
+}
+
+Class CrowbarKaibutsu : Actor
+{
+}
+
+Class SmilingKaibutsu : Actor
+{
+}
+
+Class SchoolKid : Actor
+{
+}
+
+Class Smile : Actor
+{
+}
+
+Class FleshPost1 : Actor
+{
+}
+
+Class FleshPost2 : Actor
+{
+}
+
+Class FleshEye1 : Actor
+{
+}
+
+Class FleshEye2 : Actor
+{
+}
+
+Class FleshMouth : Actor
+{
+}
+
+Class FleshMouthBig : Actor
+{
+}
+
+Class SchoolTable : Actor
+{
+	Default
+	{
+		Radius 20;
+		Height 26;
+		Mass int.max;
+		+SOLID;
+		+SHOOTABLE;
+		+NODAMAGE;
+		+NOBLOOD;
+		+DONTTHRUST;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class SchoolTableChair : Actor
+{
+	Default
+	{
+		Radius 20;
+		Height 26;
+		Mass int.max;
+		+SOLID;
+		+SHOOTABLE;
+		+NODAMAGE;
+		+NOBLOOD;
+		+DONTTHRUST;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}
+
+Class FloorBlood1 : Actor
+{
+}
+
+Class FloorBlood2 : Actor
+{
+}
+
+Class FloorBlood3 : Actor
+{
+}
+
+Class FleshBanner1 : Actor
+{
+}
+
+Class FleshBanner2 : Actor
+{
+}
+
+Class Pylon1 : Actor
+{
+}
+
+Class Pylon2 : Actor
+{
+}
+
+Class RooftopSmile : Actor
+{
+}
+
+Class FleshTree1 : Actor
+{
+}
+
+Class FleshTree2 : Actor
+{
+}
+
+Class FleshTree3 : Actor
+{
+}
+
+Class WallEye : Actor
+{
+}
+
+Class WallMouth : Actor
+{
+}
+
+Class MouthBanner1 : Actor
+{
+}
+
+Class MouthBanner2 : Actor
+{
+}
+
+Class MouthBanner3 : Actor
+{
+}
+
+Class MouthBanner4 : Actor
+{
+}
+
+Class MouthBanner5 : Actor
+{
+}
+
+Class MouthBanner6 : Actor
+{
+}
+
+Class EyeBanner1 : Actor
+{
+}
+
+Class EyeBanner2 : Actor
+{
+}

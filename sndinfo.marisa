@@ -29,6 +29,7 @@ $ambient 6410 thief/eees2 point 0.8 continuous 0.6
 $ambient 6411 thief/eees3 point 0.6 continuous 0.8
 $ambient 6412 misc/ulava point 1.0 continuous 1.0
 $ambient 6413 misc/wind5 point 0.3 continuous 0.2
+$ambient 6414 misc/bgm34 point 2.0 continuous 0.5
 // from unreal
 rain/rain rainM1
 rain/rain2 rainM2
@@ -93,8 +94,10 @@ misc/bossvoice bvoice
 $limit misc/bossvoice 32
 // from .flow
 misc/lka lka
-$musicvolume D_MIRROR 0.35
+kaibutsu/giggle lka_2
+$musicvolume D_MIRROR 0.65
 $pitchshiftrange 0
+misc/bgm34 bgm34
 // from umineko
 seacat/ahahawav ahaha
 seacat/flangefemale flangefm

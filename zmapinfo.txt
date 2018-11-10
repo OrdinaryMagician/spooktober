@@ -104,6 +104,9 @@ Map SPOOK06 lookup "SP_SPOOK06"
 
 Map SPOOK07 lookup "SP_SPOOK07"
 {
+	EvenLighting
+	music = "crunatus"
+	Par = 45
 	levelnum = 8
 }
 
@@ -172,10 +175,15 @@ Map SECRET02 lookup "SP_SECRET02"
 
 Map SECRET03 lookup "SP_SECRET03"
 {
-	EvenLighting
+	SmoothLighting
+	Music = "D_NO2"
+	Sky1 = "Blk"
+	NoJump
+	NoCrouch
+	LightMode = 3
+	PixelRatio = 1.0
+	NoLightFade
 	levelnum = 17
-	music = "crunatus"
-	Par = 45
 }
 
 Map SECRET04 lookup "SP_SECRET04"

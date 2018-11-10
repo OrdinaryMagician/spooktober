@@ -834,3 +834,31 @@ Model "mkDimCube"
 	DONTCULLBACKFACES
 	FrameIndex MODL A 0 0
 }
+Model "SchoolTable"
+{
+	Path "models/flow"
+	Model 0 "table1.obj"
+	Model 1 "table2.obj"
+	Skin 0 "FLOWTEX9"
+	Skin 1 "FLOWTEXA"
+	Scale 1 1 1.2
+	FrameIndex MODL A 0 0
+	FrameIndex MODL A 0 1
+}
+Model "SchoolTableChair"
+{
+	Path "models/flow"
+	Model 0 "table1.obj"
+	Model 1 "table2.obj"
+	Model 2 "table3.obj"
+	Model 3 "table4.obj"
+	Skin 0 "FLOWTEX9"
+	Skin 1 "FLOWTEXA"
+	Skin 2 "FLOWTEX9"
+	Skin 3 "FLOWTEXA"
+	Scale 1 1 1.2
+	FrameIndex MODL A 0 0
+	FrameIndex MODL A 0 1
+	FrameIndex MODL A 0 2
+	FrameIndex MODL A 0 3
+}

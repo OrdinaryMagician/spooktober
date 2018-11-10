@@ -27,7 +27,7 @@ Free slots: 0
 - **SPOOK04**: For Whom It Is Reserved - zrrion the insect
 - **SPOOK05**: The Unpowered Spaceship - CanSteam [completed] [par time set]
 - **SPOOK06**: Avarice - UndeadRyker [completed] [par time set]
-- **SPOOK07**: Untitled Map - A.Gamma
+- **SPOOK07**: The Crimson Flow - Rachael [completed] [par time set]
 - **SPOOK08**: The Graveyard Shift - Batandy [completed] [par time set]
 - **SPOOK09**: Untitled Map - Camper125Lv
 - **SPOOK10**: The War-den - Pixel Eater [completed]
@@ -36,6 +36,6 @@ Free slots: 0
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame [completed] [par time set]
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man [completed] [par time set]
 - **SECRET02**: Abandoned Warehouse - CardBoxNeko
-- **SECRET03**: The Crimson Flow - Rachael [completed] [par time set]
+- **SECRET03**: Point Motion - Marisa Kirisame
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz [completed] [par time set]
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame [completed] [par time set]
