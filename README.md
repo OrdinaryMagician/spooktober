@@ -16,15 +16,15 @@ A Halloween 2018 map pack for Doom.
 ### Current status
 
 Total maps: 19
-Completed: 15
-In Progress: 4
+Completed: 16
+In Progress: 3
 Free slots: 0
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
 - **SPOOK01**: Imperishable Fright - Jaxxoon R [completed] [par time set]
 - **SPOOK02**: A Baron's Nightmare - Rachael [completed] [par time set]
 - **SPOOK03**: Pumpkin Head - Pixel Eater [completed] [par time set]
-- **SPOOK04**: For Whom It Is Reserved - zrrion the insect
+- **SPOOK04**: For Whom It Is Reserved - zrrion the insect [completed] [par time set]
 - **SPOOK05**: The Unpowered Spaceship - CanSteam [completed] [par time set]
 - **SPOOK06**: Avarice - UndeadRyker [completed] [par time set]
 - **SPOOK07**: The Crimson Flow - Rachael [completed] [par time set]
