@@ -125,6 +125,7 @@ DoomEdNums
 	6521 = MouthBanner6
 	6522 = EyeBanner1
 	6523 = EyeBanner2
+	6524 = KaibutsuNode
 }
 
 // Pixel Eater
