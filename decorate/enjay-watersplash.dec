@@ -3,7 +3,7 @@
 ///////////////////////////////////////////
 //Core Splash definition for others to inherit from
 
-ACTOR NJCoreSplashChunk
+ACTOR NJSCoreSplashChunk
 {
 	Radius 2
 	Height 4
@@ -20,7 +20,7 @@ ACTOR NJCoreSplashChunk
 }
 
 
-ACTOR NJCoreSplashBase
+ACTOR NJSCoreSplashBase
 {
 	Radius 2
 	Height 4
@@ -33,7 +33,7 @@ ACTOR NJCoreSplashBase
 	+DONTBLAST
 }
 
-ACTOR NJCoreSplashSmoke
+ACTOR NJSCoreSplashSmoke
 {
 	Radius 2
 	Height 4
@@ -49,7 +49,7 @@ ACTOR NJCoreSplashSmoke
 ///////////////////////////////////////////
 //Blood
 ///////////////////////////////////////////
-Actor NJBloodChunk : NJCoreSplashChunk
+ACTOR NJSBloodChunk : NJSCoreSplashChunk
 {
 	TRANSLATION "112:127=176:191"
 	States
@@ -67,7 +67,7 @@ Actor NJBloodChunk : NJCoreSplashChunk
 	}
 }
 
-Actor NJBloodBase : NJCoreSplashBase
+ACTOR NJSBloodBase : NJSCoreSplashBase
 {
 	TRANSLATION "112:127=176:191"
 	States
@@ -86,7 +86,7 @@ Actor NJBloodBase : NJCoreSplashBase
 ///////////////////////////////////////////
 //Lava
 ///////////////////////////////////////////
-ACTOR NJLavaSmoke : NJCoreSplashSmoke
+ACTOR NJSLavaSmoke : NJSCoreSplashSmoke
 {
 	States
 	{
@@ -100,7 +100,7 @@ ACTOR NJLavaSmoke : NJCoreSplashSmoke
 	}
 }
 
-Actor NJLavaBase : NJCoreSplashBase
+ACTOR NJSLavaBase : NJSCoreSplashBase
 {
 	Renderstyle Add
 	Alpha 0.8
@@ -116,7 +116,7 @@ Actor NJLavaBase : NJCoreSplashBase
 ///////////////////////////////////////////
 //Lava Smoke Only
 ///////////////////////////////////////////
-ACTOR NJLavaSmokeOnly : NJCoreSplashSmoke
+ACTOR NJSLavaSmokeOnly : NJSCoreSplashSmoke
 {
 	States
 	{
@@ -133,7 +133,7 @@ ACTOR NJLavaSmokeOnly : NJCoreSplashSmoke
 ///////////////////////////////////////////
 //Nukage
 ///////////////////////////////////////////
-Actor NJNukageSmoke : NJCoreSplashSmoke
+ACTOR NJSNukageSmoke : NJSCoreSplashSmoke
 {
 	States
 	{
@@ -148,7 +148,7 @@ Actor NJNukageSmoke : NJCoreSplashSmoke
 	}
 }
 
-Actor NJNukageBase : NJCoreSplashBase
+ACTOR NJSNukageBase : NJSCoreSplashBase
 {
 	Translation "112:123=116:127", "124:127=9:12"
 	Renderstyle Add
@@ -168,7 +168,7 @@ Actor NJNukageBase : NJCoreSplashBase
 ///////////////////////////////////////////
 //Slime - Brown
 ///////////////////////////////////////////
-Actor NJSlimeBrownChunk : NJCoreSplashChunk
+ACTOR NJSSlimeBrownChunk : NJSCoreSplashChunk
 {
 	TRANSLATION "112:127=[107,71,39]:[23,15,7]"
 	States
@@ -186,7 +186,7 @@ Actor NJSlimeBrownChunk : NJCoreSplashChunk
 	}
 }
 
-Actor NJSlimeBrownBase : NJCoreSplashBase
+ACTOR NJSSlimeBrownBase : NJSCoreSplashBase
 {
 	TRANSLATION "112:127=[107,71,39]:[23,15,7]"
 	States
@@ -204,7 +204,7 @@ Actor NJSlimeBrownBase : NJCoreSplashBase
 ///////////////////////////////////////////
 //Sludge - GreenyBrown
 ///////////////////////////////////////////
-Actor NJSludgeChunk : NJCoreSplashChunk
+ACTOR NJSSludgeChunk : NJSCoreSplashChunk
 {
 	Renderstyle Translucent
 	Alpha 0.8
@@ -224,7 +224,7 @@ Actor NJSludgeChunk : NJCoreSplashChunk
 	}
 }
 
-Actor NJSludgeBase : NJCoreSplashBase
+ACTOR NJSSludgeBase : NJSCoreSplashBase
 {
 	Renderstyle Translucent
 	Alpha 0.9
@@ -246,7 +246,7 @@ Actor NJSludgeBase : NJCoreSplashBase
 ///////////////////////////////////////////
 //Water Normal
 ///////////////////////////////////////////
-Actor NJWaterSplashChunk : NJCoreSplashChunk
+ACTOR NJSWaterSplashChunk : NJSCoreSplashChunk
 {
 	Alpha 0.6
 	TRANSLATION "112:127=192:207"
@@ -264,7 +264,7 @@ Actor NJWaterSplashChunk : NJCoreSplashChunk
 	}
 }
 
-Actor NJWaterSplashBase : NJCoreSplashBase
+ACTOR NJSWaterSplashBase : NJSCoreSplashBase
 {
 	Alpha 0.6
 	TRANSLATION "112:119=200:207", "120:127=240:247"

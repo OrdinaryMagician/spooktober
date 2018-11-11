@@ -1,4 +1,4 @@
-#include "decorate/smoothfluids.dec"
+#include "decorate/enjay-watersplash.dec"
 
 #include "decorate/batandy.dec"
 #include "decorate/ryker.dec"
