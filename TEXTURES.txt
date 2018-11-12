@@ -735,15 +735,6 @@ Texture "APPIXE", 256, 256
 	}
 }
 
-Texture "APCARD", 256, 256
-{
-	Patch "P_CARD", 0, 0
-	Patch "SPFRAME", 0, 0
-	{
-		Style Overlay
-	}
-}
-
 Texture "APZRR", 256, 256
 {
 	Patch "P_ZRR", 0, 0
