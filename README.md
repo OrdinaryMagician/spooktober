@@ -16,8 +16,8 @@ A Halloween 2018 map pack for Doom.
 ### Current status
 
 Total maps: 19
-Completed: 16
-In Progress: 3
+Completed: 17
+In Progress: 2
 Free slots: 0
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
@@ -36,6 +36,6 @@ Free slots: 0
 - **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame [completed] [par time set]
 - **SECRET01**: Uncle Reggie's Basement - Giraffe Man [completed] [par time set]
 - **SECRET02**: Untitled Map - ImpieTwo
-- **SECRET03**: Point Motion - Marisa Kirisame
+- **SECRET03**: Point Motion - Marisa Kirisame [completed] [par time set]
 - **SECRET04**: Mansion of Despair - QuakedoomNukem Cz [completed] [par time set]
 - **SECRET05**: Golden Slaughterer - Marisa Kirisame [completed] [par time set]

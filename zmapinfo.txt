@@ -177,6 +177,7 @@ Map SECRET03 lookup "SP_SECRET03"
 	NoJump
 	NoCrouch
 	LightMode = 3
+	Par = 540
 	levelnum = 17
 }
 

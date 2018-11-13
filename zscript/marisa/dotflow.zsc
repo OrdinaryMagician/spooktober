@@ -13,10 +13,27 @@ Class Sabitsuki : PlayerPawn
 		Player.DisplayName "Sabitsuki";
 		Player.ViewHeight 36;
 		Player.ViewBob 0.25;
-		Player.ForwardMove 0.5, 0.5;
-		Player.SideMove 0.5, 0.5;
+		Player.ForwardMove 0.8, 0.4;
+		Player.SideMove 0.8, 0.4;
 		+NOSKIN;
 		+NOMENU;
+	}
+	override void MovePlayer()
+	{
+		Super.MovePlayer();
+		if ( bNoGravity || !player.onground || (waterlevel >= 3) )
+			return;
+		// decelerate quickly when not moving
+		int fm = player.cmd.forwardmove;
+		int sm = player.cmd.sidemove;
+		if ( !fm && !sm )
+		{
+			vel.xy *= 0.8;
+			player.vel *= 0.8;
+			// stop running animation
+			if ( InStateSequence(CurState,FindState("See")) )
+				PlayIdle();
+		}
 	}
 	States
 	{
@@ -38,7 +55,7 @@ Class Sabitsuki : PlayerPawn
 
 Class CommonKaibutsu : Actor
 {
-	int sc;
+	int sc, st;
 	Default
 	{
 		//$Title Kaibutsu
@@ -51,7 +68,6 @@ Class CommonKaibutsu : Actor
 		Species "Kaibutsu";
 		MONSTER;
 		-COUNTKILL;
-		-ISMONSTER;
 		+NODAMAGE;
 		+STANDSTILL;
 		+SPRITEANGLE;
@@ -92,6 +108,16 @@ Class CommonKaibutsu : Actor
 		SetOrigin(oldpos,false);
 		return true;
 	}
+	void A_KaibutsuBite()
+	{
+		if ( !CheckMeleeRange() )
+			return;
+		A_FaceTarget();
+		A_PlaySound("imp/melee",CHAN_WEAPON);
+		int dmg = Random[Kaibutsu](3,5);
+		int ndmg = target.DamageMobj(self,self,dmg,'Melee',DMG_THRUSTLESS);
+		target.TraceBleed((ndmg>0)?ndmg:dmg,self);
+	}
 	void A_KaibutsuChase()
 	{
 		if ( args[0] )
@@ -113,14 +139,7 @@ Class CommonKaibutsu : Actor
 			A_PlaySound("kaibutsu/giggle",CHAN_VOICE);
 		if ( CheckMeleeRange() )
 		{
-			A_FaceTarget();
-			if ( !Random[Kaibutsu](0,3) )
-			{
-				A_PlaySound("imp/melee",CHAN_WEAPON);
-				int dmg = Random[Kaibutsu](3,6);
-				int ndmg = target.DamageMobj(self,self,dmg,'Melee',DMG_THRUSTLESS);
-				target.TraceBleed((ndmg>0)?ndmg:dmg,self);
-			}
+			SetStateLabel("Melee");
 			return;
 		}
 		sc++;
@@ -133,13 +152,23 @@ Class CommonKaibutsu : Actor
 			mkFootstepMaker.PlayStep(self,1.0);
 		// if we can't move towards them in a straight line
 		// fall back to standard chase
-		if ( IsVisible(target,false) && CheckDirectMove() )
+		if ( CheckDirectMove() )
 		{
+			st = 0;
 			A_FaceTarget(10);
 			Vector2 dir = (cos(angle),sin(angle))*speed;
 			TryMove(Vec2Offset(dir.x,dir.y),32);
 		}
-		else A_Chase(null,null);
+		else
+		{
+			A_Chase(null,null);
+			if ( !IsVisible(target,true) && (++st > 30) )
+			{
+				A_FaceTarget();
+				A_ClearTarget();
+				SetStateLabel("Idle");
+			}
+		}
 	}
 	States
 	{
@@ -159,6 +188,11 @@ Class CommonKaibutsu : Actor
 		#### B 0 { sc = 0; }
 		#### # 2 A_KaibutsuChase();
 		Wait;
+	Melee:
+		#### B 4 A_FaceTarget();
+		#### B 4 A_KaibutsuBite();
+		#### B 4 A_FaceTarget();
+		Goto See;
 	Skins:
 		KAI1 A 0;
 		KAI2 A 0;
@@ -325,7 +359,6 @@ Class CrowbarKaibutsu : Actor
 		Species "Kaibutsu";
 		MONSTER;
 		-COUNTKILL;
-		-ISMONSTER;
 		+NODAMAGE;
 		+STANDSTILL;
 		+SPRITEANGLE;
@@ -595,8 +628,8 @@ Class CrowbarKaibutsu : Actor
 		{
 			if ( lt++ < 30 )
 				return;
-			if ( !CheckDirectMove(lastseen) )
-				FindPath(lastseen);
+			if ( !CheckDirectMove(target) )
+				FindPath(target);
 			SetStateLabel("Search");
 		}
 		lt = 0;
@@ -694,7 +727,7 @@ Class CrowbarKaibutsu : Actor
 		}
 		meleerange -= 50;
 		A_PlaySound("skeleton/melee",CHAN_WEAPON);
-		int dmg = Random[Kaibutsu](8,11)*3;
+		int dmg = Random[Kaibutsu](7,9)*3;
 		int ndmg = target.DamageMobj(self,self,dmg,'Melee');
 		target.TraceBleed((ndmg>0)?ndmg:dmg,self);
 	}
@@ -1375,12 +1408,11 @@ Class RedDemon : Actor
 		Scale 2.0;
 		Radius 16;
 		Height 56;
-		Speed 10;
+		Speed 5;
+		DamageFunction Random[Red](3,9);
 		MONSTER;
-		-ISMONSTER;
 		-COUNTKILL;
 		+NODAMAGE;
-		+STANDSTILL;
 		+SLIDESONWALLS;
 		+LOOKALLAROUND;
 	}
@@ -1393,7 +1425,7 @@ Class RedDemon : Actor
 		}
 		if ( CheckMeleeRange() )
 		{
-			target.DamageMobj(self,self,20,'Melee',DMG_THRUSTLESS);
+			target.DamageMobj(self,self,GetMissileDamage(0,0),'Melee',DMG_THRUSTLESS);
 			target.A_Stop();
 			target.A_SetBlend("Red",1.0,5);
 			target.A_PlaySound("red/noise",CHAN_ITEM);
@@ -1428,7 +1460,7 @@ Class RedDemon : Actor
 			dashcnt--;
 		}
 		else if ( !Random[Red](0,10) )
-			dashcnt = Random[Red](8,16);
+			dashcnt = Random[Red](3,6);
 	}
 	States
 	{
@@ -1445,7 +1477,8 @@ Class RedDemonBig : RedDemon
 		//$Title Red Demon (Big)
 		//$Category Marisa Kirisame/dotFlow
 		//$Sprite RED2B0
-		Speed 6;
+		Speed 3;
+		DamageFunction (Random[Red](3,9)*3);
 		-SOLID;
 	}
 	States
@@ -1594,24 +1627,30 @@ Class WallMouth : Actor
 	{
 		let mo = players[p].mo;
 		Vector3 sc = level.SphericalCoords(mo.pos,pos,(mo.angle,mo.pitch));
-		return ((abs(sc.x)<90)||(abs(sc.y)>60))&&CheckSight(mo);
+		return (abs(sc.x)<90)||(abs(sc.y)>60);
 	}
 	States
 	{
 	Spawn:
 		WMOU A 20
 		{
-			bool seen = false;
+			bool seeplayers = true;
+			bool seenbyplayers = false;
 			for ( int i=0; i<MAXPLAYERS; i++ )
 			{
 				if ( !playeringame[i] )
 					continue;
+				if ( !CheckSight(players[i].mo) )
+				{
+					seeplayers = false;
+					break;
+				}
 				if ( !InPlayerLOS(i) )
 					continue;
-				seen = true;
+				seenbyplayers = true;
 				break;
 			}
-			if ( !seen && (Random[Kaibutsu]() < 6) )
+			if ( seeplayers && !seenbyplayers && (Random[Kaibutsu]() < 6) )
 				A_PlaySound("kaibutsu/giggle",CHAN_BODY,0.5);
 		}
 		Wait;
@@ -1875,7 +1914,7 @@ Class SkyCross : Actor
 	}
 }
 
-Class BlackKey : DoomKey
+Class BlackCard : DoomKey
 {
 	Default
 	{
@@ -1888,5 +1927,49 @@ Class BlackKey : DoomKey
 		DKEY A 10;
 		DKEY B 10 Bright;
 		Loop;
+	}
+}
+
+Class Cleaner : Actor
+{
+	Default
+	{
+		//$Title Cleaner
+		//$Category Marisa Kirisame/dotFlow
+		Radius 16;
+		Height 56;
+		Scale 2;
+		+SOLID;
+		+SPRITEANGLE;
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		double angdiff = deltaangle(AngleTo(players[consoleplayer].camera),angle);
+		if ( abs(angdiff) <= 45 ) spriteangle = 180;
+		else if ( abs(angdiff) >= 135 ) spriteangle = 0;
+		else if ( angdiff > 45 ) spriteangle = 90;
+		else if ( angdiff < -45 ) spriteangle = 270;
+	}
+	override bool Used( Actor user )
+	{
+		if ( !InStateSequence(CurState,FindState("Spawn")) )
+			return true;
+		target = user;
+		SetStateLabel("Bow");
+		return true;
+	}
+	States
+	{
+	Spawn:
+		CLEN A -1;
+		Stop;
+	Bow:
+		CLEN A 0 A_FaceTarget();
+		CLEN ABCD 4;
+		CLEN E 12;
+		CLEN DCBA 4;
+		CLEN A 0 A_SetAngle(SpawnAngle);
+		Goto Spawn;
 	}
 }
