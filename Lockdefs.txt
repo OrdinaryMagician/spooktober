@@ -5,3 +5,11 @@ Lock 7
    Message "Return to me the vile minds of the Pumpkin Head"
    Mapcolor 255 128 0
 }
+
+Lock 8
+{
+	BlackCard
+	Message "You need a black card to open this door"
+	RemoteMessage "You need a black card to activate this object"
+	Mapcolor 64 64 64
+}

@@ -172,7 +172,6 @@ Map SECRET02 lookup "SP_SECRET02"
 
 Map SECRET03 lookup "SP_SECRET03"
 {
-	SmoothLighting
 	Music = "D_NO2"
 	Sky1 = "Blk"
 	NoJump

@@ -11,9 +11,12 @@ Class Sabitsuki : PlayerPawn
 		Mass 100;
 		Player.SoundClass "sabitsuki";
 		Player.DisplayName "Sabitsuki";
-		Player.ViewHeight 32;
-		Player.ViewBob 0.5;
+		Player.ViewHeight 36;
+		Player.ViewBob 0.25;
+		Player.ForwardMove 0.5, 0.5;
+		Player.SideMove 0.5, 0.5;
 		+NOSKIN;
+		+NOMENU;
 	}
 	States
 	{
@@ -57,6 +60,7 @@ Class CommonKaibutsu : Actor
 	void A_SetSkin()
 	{
 		int dec = Random[Kaibutsu](0,2);
+		if ( score ) dec = score-1;
 		if ( dec == 1 ) sprite = GetSpriteIndex('KAI2');
 		else if ( dec == 2 ) sprite = GetSpriteIndex('KAI3');
 		else sprite = GetSpriteIndex('KAI1');
@@ -90,6 +94,16 @@ Class CommonKaibutsu : Actor
 	}
 	void A_KaibutsuChase()
 	{
+		if ( args[0] )
+		{
+			sc++;
+			if ( sc >= 16 ) sc = 0;
+			if ( sc < 4 ) frame = 1;
+			else if ( sc < 8 ) frame = 0;
+			else if ( sc < 12 ) frame = 1;
+			else if ( sc < 16 ) frame = 2;
+			return;
+		}
 		if ( !target || (target.health <= 0) )
 		{
 			SetStateLabel("Idle");
@@ -115,7 +129,7 @@ Class CommonKaibutsu : Actor
 		else if ( sc < 4 ) frame = 0;
 		else if ( sc < 6 ) frame = 1;
 		else if ( sc < 8 ) frame = 2;
-		if ( sc == 2 || sc == 6 )
+		if ( (sc == 2) || (sc == 6) )
 			mkFootstepMaker.PlayStep(self,1.0);
 		// if we can't move towards them in a straight line
 		// fall back to standard chase
@@ -131,11 +145,12 @@ Class CommonKaibutsu : Actor
 	{
 	Spawn:
 		KAI1 B 0 NoDelay A_SetSkin();
+		#### B 0 A_JumpIf(args[0],"See");
 		Goto Idle;
 	Idle:
 		#### B 4
 		{
-			if ( Random[KaibutsuLaugh]() < 2 )
+			if ( !args[0] && (Random[KaibutsuLaugh]() < 2) )
 				A_PlaySound("kaibutsu/giggle",CHAN_VOICE);
 			A_Look();
 		}
@@ -276,6 +291,7 @@ Class KaibutsuPathPlan
 Class CrowbarKaibutsu : Actor
 {
 	int sc;
+	int lt;
 	// spot auto-created when target goes out of sight
 	// its angle is equal to the movement direction the target
 	// had at that moment
@@ -459,7 +475,7 @@ Class CrowbarKaibutsu : Actor
 				fringe[i].path.Copy(cur.path);
 				fringe[i].path.Push(lastnode.near[j]);
 				fringe[i].g = cur.g+lastnode.weight[j];
-				fringe[i].h = lastnode.near[j].Distance2D(goalnode);
+				fringe[i].h = lastnode.near[j].Distance2D(goal);
 				// something about bubbles rising up in cost?
 				while ( i > 0 )
 				{
@@ -557,7 +573,7 @@ Class CrowbarKaibutsu : Actor
 		if ( sc == 2 || sc == 6 )
 			mkFootstepMaker.PlayStep(self,1.0);
 		// if we can't move towards them in a straight line
-		// fall back to standard chase
+		// use normal chase
 		if ( !lastseen )
 			lastseen = Spawn("KaibutsuSightSpot");
 		lastseen.SetOrigin(target.pos,false);
@@ -575,12 +591,15 @@ Class CrowbarKaibutsu : Actor
 		}
 		else A_Chase(null,null);
 		// if we can no longer see the target anymore, search the last spot they were at
-		if ( !IsVisible(target,false) && lastseen )
+		if ( !IsVisible(target,true) && lastseen )
 		{
+			if ( lt++ < 30 )
+				return;
 			if ( !CheckDirectMove(lastseen) )
 				FindPath(lastseen);
 			SetStateLabel("Search");
 		}
+		lt = 0;
 	}
 	void A_KaibutsuSearch()
 	{
@@ -781,7 +800,7 @@ Class SchoolKid : Actor
 		//$Sprite KID1B0
 		Radius 8;
 		Height 36;
-		Scale 2;
+		Scale 1.5;
 		Speed 4;
 		MONSTER;
 		-COUNTKILL;
@@ -807,7 +826,9 @@ Class SchoolKid : Actor
 	}
 	void A_SetSkin()
 	{
-		if ( Random[Kid](1,100) <= 50 ) sprite = GetSpriteIndex('KID2');
+		int dec = Random[Kid](0,1);
+		if ( score ) dec = score-1;
+		if ( dec == 1 ) sprite = GetSpriteIndex('KID2');
 		else sprite = GetSpriteIndex('KID1');
 	}
 	States
@@ -942,11 +963,53 @@ Class Smile : Actor
 Class Smile2 : Smile
 {
 	bool wasused;
+	int seetime;
 
 	Default
 	{
 		//$Title Smile (Cutscene)
 		//$Category Marisa Kirisame/dotFlow
+	}
+	private bool InPlayerLOS( int p )
+	{
+		let mo = players[p].mo;
+		Vector3 sc = level.SphericalCoords(mo.pos,pos,(mo.angle,mo.pitch));
+		return ((abs(sc.x)<90)||(abs(sc.y)>60))&&CheckSight(mo);
+	}
+	private bool CanSeePlayers()
+	{
+		for ( int i=0; i<MAXPLAYERS; i++ )
+		{
+			if ( !playeringame[i] )
+				continue;
+			if ( CheckSight(players[i].mo) )
+				return true;
+		}
+		return false;
+	}
+	override void Tick()
+	{
+		Super.Tick();
+		if ( !bAMBUSH || !InStateSequence(CurState,FindState("Spawn")) )
+			return;
+		bool seen = false;
+		Actor seeplayer = null;
+		// check if any players are looking at us
+		for ( int i=0; i<MAXPLAYERS; i++ )
+		{
+			if ( !playeringame[i] )
+				continue;
+			if ( InPlayerLOS(i) )
+			{
+				seen = true;
+				seeplayer = players[i].mo;
+				break;
+			}
+		}
+		if ( seen ) seetime++;
+		else seetime = 0;
+		if ( seetime > 200 )
+			Activate(seeplayer);
 	}
 	override void Activate( Actor activator )
 	{
@@ -962,8 +1025,15 @@ Class Smile2 : Smile
 			return true;
 		target = user;
 		wasused = true;
-		SpooktoberUtil.FullFreeze(target);
+		SpooktoberUtil.FullFreeze(null);
 		mkSmoothLookTo.LookTowards(target,target.AngleTo(self),0,4.0);
+		S_ChangeMusic("");
+		for ( int i=0; i<MAXPLAYERS; i++ )
+		{
+			if ( !playeringame[i] )
+				continue;
+			players[i].camera = target;
+		}
 		SetStateLabel("Turn");
 		return true;
 	}
@@ -997,8 +1067,19 @@ Class Smile2 : Smile
 		SMIL BB 5 A_FaceTarget();
 		SMIL D 15;
 		SMIL E 40 A_Smile();
-		SMIL B -1;
-		Stop;
+		SMIL B 5
+		{
+			A_FaceTarget();
+			seetime--;
+			return A_JumpIf((seetime<=0)&&!CanSeePlayers(),1);
+		}
+		Wait;
+		SMIL B 0
+		{
+			bAMBUSH = true;
+			angle = spawnangle;
+		}
+		Goto Spawn;
 	}
 }
 
@@ -1153,7 +1234,7 @@ Class SchoolTable : Actor
 	States
 	{
 	Spawn:
-		MODL A -1;
+		TABL A -1;
 		Stop;
 	}
 }
@@ -1177,7 +1258,7 @@ Class SchoolTableChair : Actor
 	States
 	{
 	Spawn:
-		MODL A -1;
+		TABL B -1;
 		Stop;
 	}
 }
@@ -1284,45 +1365,101 @@ Class FleshBanner2 : Actor
 	}
 }
 
-Class Pylon1 : Actor
+Class RedDemon : Actor
 {
+	int dashcnt;
 	Default
 	{
-		//$Title Pylon
+		//$Title Red Demon
 		//$Category Marisa Kirisame/dotFlow
 		Scale 2.0;
-		Radius 8;
-		Height 24;
-		Mass int.max;
-		+SOLID;
-		+DONTTHRUST;
+		Radius 16;
+		Height 56;
+		Speed 10;
+		MONSTER;
+		-ISMONSTER;
+		-COUNTKILL;
+		+NODAMAGE;
+		+STANDSTILL;
+		+SLIDESONWALLS;
+		+LOOKALLAROUND;
+	}
+	bool A_RedChase()
+	{
+		if ( !target || !CheckSight(target) )
+		{
+			A_Wander();
+			return true;
+		}
+		if ( CheckMeleeRange() )
+		{
+			target.DamageMobj(self,self,20,'Melee',DMG_THRUSTLESS);
+			target.A_Stop();
+			target.A_SetBlend("Red",1.0,5);
+			target.A_PlaySound("red/noise",CHAN_ITEM);
+			Destroy();
+			return false;
+		}
+		A_Chase(null,null);
+		return true;
+	}
+	void A_RedDemonThink()
+	{
+		double mindist = double.infinity;
+		for ( int i=0; i<MAXPLAYERS; i++ )
+		{
+			if ( !playeringame[i] || (players[i].mo.Health <= 0) )
+				continue;
+			double dist = Distance2D(players[i].mo);
+			if ( dist > mindist )
+				continue;
+			mindist = dist;
+			target = players[i].mo;
+		}
+		if ( !A_RedChase() )
+			return;
+		if ( !target || !CheckSight(target) )
+			return;
+		if ( dashcnt > 0 )
+		{
+			for ( int i=0; i<3; i++ )
+				if ( !A_RedChase() )
+					return;
+			dashcnt--;
+		}
+		else if ( !Random[Red](0,10) )
+			dashcnt = Random[Red](8,16);
 	}
 	States
 	{
 	Spawn:
-		TCON A -1;
-		Stop;
+		RED1 BBAABBCC 2 A_RedDemonThink();
+		Loop;
 	}
 }
 
-Class Pylon2 : Actor
+Class RedDemonBig : RedDemon
 {
 	Default
 	{
-		//$Title Pylon (Tape)
+		//$Title Red Demon (Big)
 		//$Category Marisa Kirisame/dotFlow
-		Scale 2.0;
-		Radius 32;
-		Height 24;
-		Mass int.max;
-		+SOLID;
-		+DONTTHRUST;
+		//$Sprite RED2B0
+		Speed 6;
+		-SOLID;
 	}
 	States
 	{
 	Spawn:
-		TCON B -1;
-		Stop;
+		TNT1 A 4 A_LookEx(0,0,300,300,0,"Rise");
+		Wait;
+	Rise:
+		RED2 D 0 { bSOLID = true; }
+		RED2 DEFG 3;
+		Goto See;
+	See:
+		RED2 BBAABBCC 2 A_RedDemonThink();
+		Loop;
 	}
 }
 
@@ -1422,8 +1559,9 @@ Class WallEye : Actor
 	States
 	{
 	Spawn:
-		WEYE A -1;
-		Stop;
+		WEYE A 10;
+		WEYE A 10 A_Jump(16,"Blink");
+		Loop;
 	Blink:
 		WEYE BCD 4;
 		WEYE E 8;
@@ -1452,11 +1590,31 @@ Class WallMouth : Actor
 		+FORCEYBILLBOARD;
 		+WALLSPRITE;
 	}
+	private bool InPlayerLOS( int p )
+	{
+		let mo = players[p].mo;
+		Vector3 sc = level.SphericalCoords(mo.pos,pos,(mo.angle,mo.pitch));
+		return ((abs(sc.x)<90)||(abs(sc.y)>60))&&CheckSight(mo);
+	}
 	States
 	{
 	Spawn:
-		WMOU A -1;
-		Stop;
+		WMOU A 20
+		{
+			bool seen = false;
+			for ( int i=0; i<MAXPLAYERS; i++ )
+			{
+				if ( !playeringame[i] )
+					continue;
+				if ( !InPlayerLOS(i) )
+					continue;
+				seen = true;
+				break;
+			}
+			if ( !seen && (Random[Kaibutsu]() < 6) )
+				A_PlaySound("kaibutsu/giggle",CHAN_BODY,0.5);
+		}
+		Wait;
 	}
 }
 
@@ -1651,11 +1809,22 @@ Class SkyEye : Actor
 		+INTERPOLATEANGLES;
 		+WALLSPRITE;
 	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if ( args[0] )
+			return;
+		for ( int i=1; i<3; i++ )
+		{
+			let s = Spawn("SkyEye",SpawnPoint);
+			s.args[0] = 120*i;
+		}
+	}
 	void A_Orbit()
 	{
-		Vector3 dir = (cos(cn),sin(cn),0)*150;
+		Vector3 dir = (cos(cn+args[0]),sin(cn+args[0]),0)*150;
 		SetOrigin(level.Vec3Offset(SpawnPoint,dir),true);
-		angle = cn;
+		angle = cn+args[0];
 		cn += 0.02;
 	}
 	States
@@ -1680,11 +1849,22 @@ Class SkyCross : Actor
 		+FORCEYBILLBOARD;
 		+WALLSPRITE;
 	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if ( args[0] )
+			return;
+		for ( int i=1; i<4; i++ )
+		{
+			let s = Spawn("SkyCross",SpawnPoint);
+			s.args[0] = 90*i;
+		}
+	}
 	void A_Orbit()
 	{
-		Vector3 dir = (cos(cn),sin(cn),0)*200;
+		Vector3 dir = (cos(cn+args[0]),sin(cn+args[0]),0)*200;
 		SetOrigin(level.Vec3Offset(SpawnPoint,dir),true);
-		angle = cn;
+		angle = cn+args[0];
 		cn += 0.03;
 	}
 	States
@@ -1692,5 +1872,21 @@ Class SkyCross : Actor
 	Spawn:
 		CROS A 1 Bright A_Orbit();
 		Wait;
+	}
+}
+
+Class BlackKey : DoomKey
+{
+	Default
+	{
+		Inventory.PickupMessage "Picked up a black keycard.";
+		Inventory.Icon "STKEYBLK";
+	}
+	States
+	{
+	Spawn:
+		DKEY A 10;
+		DKEY B 10 Bright;
+		Loop;
 	}
 }

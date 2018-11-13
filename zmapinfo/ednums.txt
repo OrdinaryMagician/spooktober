@@ -109,8 +109,8 @@ DoomEdNums
 	6505 = FloorEye
 	6506 = FleshBanner1
 	6507 = FleshBanner2
-	6508 = Pylon1
-	6509 = Pylon2
+	6508 = RedDemon
+	6509 = RedDemonBig
 	6510 = RooftopSmile
 	6511 = FleshTree1
 	6512 = FleshTree2

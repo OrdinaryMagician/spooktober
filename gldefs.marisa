@@ -448,3 +448,18 @@ object mkNightmareLordDecoy
 	frame NLRDV { light NLORDATK }
 	frame NLRDW { light NLORDATK }
 }
+
+pulselight BLACKKEY
+{
+    color 0.2 0.2 0.2
+    size 24
+    secondarySize 27
+    interval 2.0
+	attenuate 1
+    offset 0 10 0
+}
+
+object BlackCard
+{
+    frame DKEY { light BLACKKEY }
+}

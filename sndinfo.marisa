@@ -120,6 +120,7 @@ misc/nz_end nz_end
 smile/laugh smile
 misc/bgm34 bgm34
 misc/wwww2 wwww2
+$musicvolume D_PON1 0.5
 // from umineko
 seacat/ahahawav ahaha
 seacat/flangefemale flangefm
