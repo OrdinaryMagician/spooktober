@@ -129,6 +129,7 @@ Map SPOOK10 lookup "SP_SPOOK10"
 	nolightfade
 	levelnum = 11
 	music = "D_WARDEN"
+	par = "570"
 }
 
 Map SPOOK11 lookup "SP_SPOOK11"
@@ -170,6 +171,7 @@ Map SECRET02 lookup "SP_SECRET02"
 	levelnum = 16
 	sky1 = "CTSKY1"
 	music = "CFOREBOD"
+	Par = 90
 }
 
 Map SECRET03 lookup "SP_SECRET03"
