@@ -168,6 +168,8 @@ Map SECRET01 lookup "SP_SECRET01"
 Map SECRET02 lookup "SP_SECRET02"
 {
 	levelnum = 16
+	sky1 = "CTSKY1"
+	music = "CFOREBOD"
 }
 
 Map SECRET03 lookup "SP_SECRET03"

@@ -23,6 +23,8 @@
 
 #include "decorate/20hcc_props.dec"
 
+#include "decorate/bobby.dec"
+
 // junkcity lamp
 Actor JunkLamp 22220
 {
