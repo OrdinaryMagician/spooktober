@@ -1076,6 +1076,7 @@ Class mkNightmareLord : Actor
 		+THRUSPECIES;
 		+DONTHARMSPECIES;
 		+INTERPOLATEANGLES;
+		+NEVERRESPAWN;
 		BloodColor "Purple";
 		SeeSound "nightmarelord/see";
 		PainSound "nightmarelord/pain";

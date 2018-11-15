@@ -307,6 +307,7 @@ Class mkLesserGoatServant : Actor
 		MONSTER;
 		-SHOOTABLE;
 		+LOOKALLAROUND;
+		+NEVERRESPAWN;
 		Species "LesserGoat";
 		RenderStyle "Translucent";
 		DamageFactor "Magic", 0;
@@ -615,6 +616,7 @@ Class mkGoatServant : Actor
 		-SHOOTABLE;
 		+NOINFIGHTSPECIES;
 		+LOOKALLAROUND;
+		+NEVERRESPAWN;
 		Species "Goat";
 		RenderStyle "Translucent";
 		DamageFactor "Magic", 0;
@@ -1583,6 +1585,13 @@ Class mkSecret05GoatInvasion : Actor
 		waves[10].useline = 2;
 		waves[10].blockline = 1;
 		waves[10].gate = 11;
+		// difficulty adjustments
+		double sf = 1.2-0.2*(4-G_SkillPropertyInt(SKILLP_ACSReturn));
+		for ( int i=0; i<11; i++ )
+		{
+			waves[i].goats = int(ceil(waves[i].goats*sf));
+			waves[i].lessergoats = int(ceil(waves[i].lessergoats*sf));
+		}
 		// register for boss health bar
 		let hnd = SpooktoberHandler(EventHandler.Find("SpooktoberHandler"));
 		hnd.bossenemy = self;

@@ -64,7 +64,7 @@ Map SPOOK03 lookup "SP_SPOOK03"
 	levelnum = 4
 	sky1 = "PHSKY"
 	sky2 = "PHSKY2"
-	par = 720
+	par = 600
 	music = "SILVREYE"
 }
 
@@ -74,7 +74,7 @@ Map SPOOK04 lookup "SP_SPOOK04"
 	Lightning
 	sky1 = "ZSKYREST"
 	sky2 = "ZSKYLITE"
-	par = 360
+	par = 300
 	sucktime = 1
 	music = "SIMPLE"
 	Fade = "00 00 10"
@@ -137,7 +137,7 @@ Map SPOOK11 lookup "SP_SPOOK11"
 	levelnum = 12
 	sky1 = "RSKY1"
 	music = "DARK"
-	par = "900"
+	par = "330"
 }
 
 Map SPOOK12 lookup "SP_SPOOK12"
@@ -181,7 +181,7 @@ Map SECRET03 lookup "SP_SECRET03"
 	NoJump
 	NoCrouch
 	LightMode = 3
-	Par = 540
+	Par = 480
 	levelnum = 17
 }
 
