@@ -515,10 +515,10 @@ Class mkFallingBolt : Actor
 	{
 		RenderStyle "Add";
 		Alpha 0.0;
-		Scale 0.6;
+		Scale 1.2;
 		Speed 30;
-		Radius 4;
-		Height 2;
+		Radius 8;
+		Height 4;
 		DamageFunction (Random[NLord](4,6)*2);
 		Species "NightmareLord";
 		DamageType "Zapped";
@@ -541,13 +541,24 @@ Class mkFallingBolt : Actor
 		vel.xy = (cos(ang),sin(ang))*FRandom[NLord](0,8);
 		vel.z = -15;
 	}
+	action void A_RainSeek()
+	{
+		if ( !target || !target.target ) return;
+		let t = target.target;
+		Vector2 tdir = Vec2To(t);
+		if ( tdir.length() <= double.epsilon ) return;
+		Vector2 ndir = (0,0);
+		if ( vel.xy.length() > double.epsilon ) ndir += vel.xy.unit()*0.6;
+		ndir += tdir.unit()*0.4;
+		vel.xy = ndir*min(tdir.length(),8);
+	}
 	States
 	{
 	Spawn:
 		FXNL MNO 1 BRIGHT
 		{
 			A_FadeIn(0.1);
-			Spawn("mkLilSpeck",pos);
+			A_RainSeek();
 			vel.z -= 0.5;
 		}
 		Loop;
@@ -586,17 +597,44 @@ Class WallHitter : Thinker
 		let w = new("WallHitter");
 		w.ChangeStatNum(STAT_USER);
 		w.victim = victim;
+		w.instigator = instigator;
+	}
+
+	bool BlockingLineIsBlocking()
+	{
+		if ( !victim.BlockingLine ) return false;
+		// one-sided
+		if ( !victim.BlockingLine.sidedef[1] ) return true;
+		// blocks us
+		int bt = Line.ML_BLOCKING|LINE.ML_BLOCKEVERYTHING;
+		if ( victim.player || victim.bBLOCKASPLAYER ) bt |= Line.ML_BLOCK_PLAYERS;
+		if ( victim.bISMONSTER ) bt |= Line.ML_BLOCKMONSTERS;
+		if ( victim.BlockingLine.flags&bt ) return true;
+		return false;
 	}
 
 	override void Tick()
 	{
 		Super.Tick();
-		if ( !victim ) Destroy();
-		if ( victim.BlockingLine || victim.BlockingMobj || (victim.pos.z <= victim.floorz) )
+		if ( !victim || (victim.Health <= 0) )
+			Destroy();
+		victim.CheckPosition(victim.pos.xy+victim.vel.xy*2);
+		bool dummy;
+		Actor onmobj;
+		[dummy, onmobj] = victim.TestMobjZ(true);
+		Actor hitactor = victim.BlockingMobj?victim.BlockingMobj:onmobj;
+		if ( BlockingLineIsBlocking() || (hitactor && hitactor.bSOLID) || (victim.pos.z <= victim.floorz) || (victim.pos.z+victim.height >= victim.ceilingz) )
 		{
+			if ( victim.vel.length() < 8 )
+			{
+				Destroy();
+				return;
+			}
 			int dmg = Random[NLord](4,6)*5;
 			if ( instigator is 'mkNightmareLordDecoy' ) dmg /= 3;
 			victim.DamageMobj(instigator,instigator,dmg,'Crash',DMG_THRUSTLESS);
+			victim.A_Stop();
+			victim.A_PlaySound("nightmarelord/stomp",CHAN_BODY);
 			Destroy();
 		}
 	}
@@ -721,6 +759,16 @@ Class mkNightmareLord : Actor
 		}
 	}
 
+	void SwapActors( Actor a, Actor b )
+	{
+		Vector3 tmpv = a.pos;
+		double tmpa = a.angle;
+		a.SetOrigin(b.pos,false);
+		a.angle = b.angle;
+		b.SetOrigin(tmpv,false);
+		b.angle = tmpa;
+	}
+
 	// Spawns decoys on 2 other tele spots
 	void A_SpawnDecoys()
 	{
@@ -749,11 +797,17 @@ Class mkNightmareLord : Actor
 		s.master = self;
 		s.bSHOOTABLE = false;
 		s.SetStateLabel("TeleIn");
+		// swap places with the decoy
+		if ( !Random[NLord](0,2) )
+			SwapActors(self,s);
 		s = Spawn("mkNightmareLordDecoy",bspot.pos);
 		s.target = target;
 		s.master = self;
 		s.bSHOOTABLE = false;
 		s.SetStateLabel("TeleIn");
+		// swap places with the decoy
+		if ( !Random[NLord](0,2) )
+			SwapActors(self,s);
 	}
 
 	void A_DashTowards()
