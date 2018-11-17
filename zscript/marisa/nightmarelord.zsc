@@ -1111,7 +1111,7 @@ Class mkNightmareLord : Actor
 	{
 		//$Title Nightmare Lord
 		//$Category Marisa Kirisame
-		Health 20000;
+		Health 16000;
 		Scale 2.0;
 		Radius 32;
 		Height 140;
@@ -1528,7 +1528,8 @@ Class mkNightmareLordEasy : mkNightmareLord	// ITYTD/HNTR
 {
 	Default
 	{
-		Health 10000;
+		Health 12000;
+		Species "NightmareLord";
 		-MISSILEMORE;
 	}
 }
@@ -1537,7 +1538,8 @@ Class mkNightmareLordHard : mkNightmareLord	// UV/NM
 {
 	Default
 	{
-		Health 30000;
+		Health 24000;
+		Species "NightmareLord";
 		+MISSILEEVENMORE;
 	}
 }
