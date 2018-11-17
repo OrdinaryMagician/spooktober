@@ -24,6 +24,8 @@ Class SpooktoberUtil abstract play
 		Actor a;
 		while ( a = ai.Next() )
 		{
+			if ( (a.args[0] == 255) && (a.args[1] == 160) && (a.args[2] == 32) )
+				continue;
 			a.args[0] = 255;
 			a.args[1] = 160;
 			a.args[2] = 32;
