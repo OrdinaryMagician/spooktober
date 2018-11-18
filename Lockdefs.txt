@@ -13,3 +13,11 @@ Lock 8
 	RemoteMessage "You need a black card to activate this object"
 	Mapcolor 64 64 64
 }
+
+Lock 9
+{
+	WhiteCard
+	Message "You need a white card to open this door"
+	RemoteMessage "You need a white card to activate this object"
+	Mapcolor 192 192 192
+}

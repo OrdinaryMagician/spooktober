@@ -127,6 +127,8 @@ DoomEdNums
 	6523 = EyeBanner2
 	6524 = KaibutsuNode
 	6525 = Cleaner
+	6526 = BlackCard
+	6527 = WhiteCard
 }
 
 // Pixel Eater

@@ -2008,6 +2008,22 @@ Class BlackCard : DoomKey
 	}
 }
 
+Class WhiteCard : DoomKey
+{
+	Default
+	{
+		Inventory.PickupMessage "Picked up a white keycard.";
+		Inventory.Icon "STKEYWHT";
+	}
+	States
+	{
+	Spawn:
+		WKEY A 10;
+		WKEY B 10 Bright;
+		Loop;
+	}
+}
+
 Class Cleaner : Actor
 {
 	Default
