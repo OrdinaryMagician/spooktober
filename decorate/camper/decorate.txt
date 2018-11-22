@@ -1,0 +1,1361 @@
+#include "decorate/camper/DECORATE-MONSTERS.TXT"
+#include "decorate/camper/DECORATE-LIGHTS.TXT"
+#include "decorate/camper/DECORATE-WEAPONS.TXT"
+#include "decorate/camper/DECORATE-ITEMS.TXT"
+
+
+//////////////////////////////////////////////////////////////////////MARINE_STUFF
+
+ACTOR HelmA 12130
+{
+	//$Category SpookyProps
+	Radius 8
+	Height 10
+	+SOLID
+	States
+	{
+		Spawn:
+			AHLM A -1
+			Stop
+	}
+}
+
+ACTOR HelmB 12131
+{
+	//$Category SpookyProps
+	Radius 8
+	Height 10
+	+SOLID
+	States
+	{
+		Spawn:
+			BHLM A -1
+			Stop
+	}
+}
+
+ACTOR HelmC 12132
+{
+	//$Category SpookyProps
+	Radius 8
+	Height 10
+	+SOLID
+	States
+	{
+		Spawn:
+			CHLM A -1
+			Stop
+	}
+}
+
+ACTOR HelmD 12133
+{
+	//$Category SpookyProps
+	Radius 6
+	Height 10
+	+SOLID
+	States
+	{
+		Spawn:
+			dHLM A -1
+			Stop
+	}
+}
+
+ACTOR Boots 12134
+{
+	//$Category SpookyProps
+	Radius 8
+	Height 11
+	+SOLID
+	States
+	{
+		Spawn:
+			BOOT A -1
+			Stop
+	}
+}
+
+ACTOR UniformA 12135
+{
+	//$Category SpookyProps
+	Radius 12
+	Height 11
+	+SOLID
+	States
+	{
+		Spawn:
+			UNIF A -1
+			Stop
+	}
+}
+
+ACTOR UniformB 12136
+{
+	//$Category SpookyProps
+	Radius 12
+	Height 11
+	+SOLID
+	States
+	{
+		Spawn:
+			UNIF B -1
+			Stop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////HOLOGRAMS
+
+Actor UACHolo1 12142
+{
+	//$Category SpookyProps
+	Scale 1
+	Renderstyle add
+	+NOGRAVITY
+	States
+	{
+		Spawn:
+			UAC1 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner", random(-16,16), random(-16,16), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION)
+			Loop
+	}
+}
+
+Actor UACHolo2 : UACHolo1 12137
+{
+	//$Category SpookyProps
+	States
+	{
+		Spawn:
+			UAC1 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION)
+			Loop
+	}
+}
+
+Actor UACHolo3 : UACHolo1 12138
+{
+	//$Category SpookyProps
+	States
+	{
+		Spawn:
+			UAC2 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner2", random(-16,16), random(-16,16), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION)
+			Loop
+	}
+}
+
+Actor UACHolo4 : UACHolo1 12139
+{
+	//$Category SpookyProps
+	States
+	{
+		Spawn:
+			UAC2 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner2", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION)
+			Loop
+	}
+}
+
+Actor UACHolo5 : UACHolo1 12140
+{
+	//$Category SpookyProps
+	States
+	{
+		Spawn:
+			UAC3 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner3", random(-16,16), random(-16,16), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION)
+			Loop
+	}
+}
+
+Actor UACHolo6 : UACHolo1 12141
+{
+	//$Category SpookyProps
+	States
+	{
+		Spawn:
+			UAC3 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner3", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION)
+			Loop
+	}
+}
+
+Actor PlasmaSpawner
+{
+	Alpha 0.75
+	RenderStyle Add
+	+NOGRAVITY
+	+DONTSPLASH
+	+NOCLIP
+	-SOLID
+	Projectile
+	States
+	{
+		Spawn:
+			PLEM AAAAAAAAAAAAAAAA 1 BRIGHT A_FadeOut(0.09)
+			stop
+		Death:
+			TNT1 A 1
+			stop
+	}
+}
+
+Actor PlasmaSpawner2 : plasmaspawner////Cyan
+{
+	States
+	{
+		Spawn:
+			PLEM BBBBBBBBBBBBBBBB 1 BRIGHT A_FadeOut(0.09)
+			stop
+		Death:
+			TNT1 A 1
+			stop
+	}
+}
+
+Actor PlasmaSpawner3 : plasmaspawner////Orange
+{
+	States
+	{
+		Spawn:
+			PLEM CCCCCCCCCCCCCCCC 1 BRIGHT A_FadeOut(0.09)
+			stop
+		Death:
+			TNT1 A 1
+			stop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////FOOD
+
+ACTOR burger1 12144
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 4
+	Height 6
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			BRGR A -1
+			loop
+	}
+}
+
+ACTOR burger2 12145
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 4
+	Height 6
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			BRGR B -1
+			loop
+	}
+}
+
+ACTOR burger3 12146
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 4
+	Height 8
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			BRGR C -1
+			loop
+	}
+}
+
+ACTOR burger4 12147
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 4
+	Height 6
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			BRGR D -1
+			loop
+	}
+}
+
+
+ACTOR fries1 12148
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 3
+	Height 7
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			FRES A -1
+			loop
+	}
+}
+
+ACTOR fries2 12149
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 3
+	Height 6
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			FRES B -1
+			loop
+	}
+}
+
+ACTOR drink 12150
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 2
+	Height 7
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			DRNK A -1
+			loop
+	}
+}
+
+ACTOR bottle1 12151
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 3
+	Height 16
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			BTTL A -1
+			loop
+	}
+}
+
+ACTOR bottle2 12152
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 3
+	Height 16
+	scale 0.5
+	+SOLID
+	States
+	{
+		Spawn:
+			BTTL B -1
+			loop
+	}
+}
+
+ACTOR glass 12153
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 3
+	Height 8
+	scale 0.6
+	+SOLID
+	States
+	{
+		Spawn:
+			GLSS A -1
+			loop
+	}
+}
+
+ACTOR donuts 12154
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 5
+	Height 5
+	scale 0.3
+	+SOLID
+	States
+	{
+		Spawn:
+			DNTS A -1
+			loop
+	}
+}
+
+ACTOR dbox 12155
+{
+	//$Category SpookyProps
+	mass 1
+	Radius 6
+	Height 8
+	+SOLID
+	States
+	{
+		Spawn:
+			DBOX A -1
+			loop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////PIPES
+
+ACTOR HPipe1 325
+{
+	//$Category SpookyProps
+	Radius 16
+	Height 128
+	Tag "Pipe 1"
+	+SOLID
+	States
+	{
+		Spawn:
+			PIP1 A -1
+			Stop
+	}
+}
+
+ACTOR HPipe2 326
+{
+	//$Category SpookyProps
+	Radius 16
+	Height 128
+	Tag "Pipe 2"
+	+SOLID
+	States
+	{
+		Spawn:
+			PIP2 A -1
+			Stop
+	}
+}
+
+ACTOR HPipe3 327
+{
+	//$Category SpookyProps
+	Radius 16
+	Height 128
+	Tag "Pipe 3"
+	+SOLID
+	States
+	{
+		Spawn:
+			PIP3 A -1
+			Stop
+	}
+}
+
+ACTOR HPipe4 328
+{
+	//$Category SpookyProps
+	Radius 16
+	Height 128
+	Tag "Pipe 4"
+	+SOLID
+	States
+	{
+		Spawn:
+			PIP4 A -1
+			Stop
+	}
+}
+
+ACTOR HPipe5 329
+{
+	//$Category SpookyProps
+	Radius 16
+	Height 128
+	Tag "Pipe 5"
+	+SOLID
+	States
+	{
+		Spawn:
+			PIP5 A -1
+			Stop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////TOILET
+
+ACTOR Toilet1 290
+{
+	//$Category SpookyProps
+	SpawnID 125
+	Tag "Toilet"
+	Health 10
+	Radius 10
+	Height 34
+	Mass 10000000
+	+SOLID
+	+SHOOTABLE
+	+NOBLOOD
+	+ACTIVATEMCROSS
+	+DONTGIB
+	+NOICEDEATH
+	+OLDRADIUSDMG
+	DeathSound "BREAK1"
+	States
+	{
+		Spawn:
+			TOIL A 6
+			Loop
+		Death:
+			TOIL A 1 A_Scream
+			TOIL B 4
+			TOIL C 2
+			TOIL D 2
+			TOIL E 2
+			TOIL F 3
+			Goto Water
+		Water:
+			TOIF A 3 A_PlaySound ("TOILET1")
+			TOIF B 3
+			TOIF C 3
+			TOIF D 3
+			TOIF A 3
+			TOIF B 3
+			TOIF C 3
+			TOIF D 3
+			TOIF A 3
+			TOIF B 3
+			TOIF C 3
+			TOIF D 3
+			TOIF A 3
+			TOIF B 3
+			TOIF C 3
+			TOIF D 3
+			Loop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////SPECIMEN_TANK
+
+ACTOR TankCreature 12143
+{
+	//$Category SpookyProps
+	Radius 16
+	Height 70
+	+SOLID
+	States
+	{
+	Spawn:
+		CIAT ABCDEDCB 7
+		Loop
+	}
+}
+
+ACTOR TankNotCreature : TankCreature 12156
+{
+	//$Category SpookyProps
+	States
+	{
+	Spawn:
+		CIAT F -1
+		Loop
+	}
+}
+
+ACTOR TankBroken : TankCreature 12157
+{
+	//$Category SpookyProps
+	States
+	{
+	Spawn:
+		CIAT G -1
+		Loop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////BARELLS!!!!
+
+Actor BrownMetalBarrel 12158
+{
+	//$Category SpookyProps
+	+FloorClip
+	+Solid
+	Radius 12
+	Height 32
+	States
+	{
+		Spawn:
+			BBAR A -1
+			Stop
+	}
+}
+
+Actor EmptyNukageBarrel 12159
+{
+	//$Category SpookyProps
+	+FloorClip
+	+Solid
+	Radius 12
+	Height 32
+	States
+	{
+		Spawn:
+			EBAR A -1
+			Stop
+	}
+}
+
+actor soundbarrel 168
+{
+	//$Category SpookyProps
+	radius 8
+	height 29
+	+solid
+	states
+	{
+		spawn:
+			BARR ABCD 4
+			TNT1 A 0 a_playsound("radioactivebarrel/detected",0,0.2,true,attn_static)
+			loop
+	}
+}
+
+actor emptybarrel 169
+{
+	//$Category SpookyProps
+	radius 8
+	height 29
+	+solid
+	states
+	{
+		spawn:
+			BARR E -1
+			stop
+	}
+}
+
+actor radioactivebarrel 170
+{
+	//$Category SpookyProps
+	radius 8
+	height 29
+	+solid
+	states
+	{
+		spawn:
+			BARR ABCD 4
+			loop
+	}
+}
+
+ACTOR OilDrum 12160
+{
+	//$Category SpookyProps
+	Health 20
+	Radius 10
+	Height 34
+	+SOLID
+	+SHOOTABLE
+	+NOBLOOD
+	+ACTIVATEMCROSS
+	+DONTGIB
+	+NOICEDEATH
+	+OLDRADIUSDMG
+	DeathSound "world/barrelx"
+	Obituary "$OB_BARREL"
+	States
+	{
+		Spawn:
+			OILD A 6
+			Loop
+		Death:
+			OILD A 5 BRIGHT
+			OILD A 5 BRIGHT A_Scream
+			OILD B 5 BRIGHT
+			OILD C 5 BRIGHT A_Explode
+			OILC CCCCC 0 BRIGHT A_SpawnItemEx ("BarrelFlames", random (0, 40), random (0, 40), 0, 0, 0, 0, random (0, 360))
+			OILD D 10 BRIGHT
+			OILD D 1050 BRIGHT A_BarrelDestroy
+			OILD D 5 A_Respawn
+			Wait
+	}
+}
+
+ACTOR BarrelFlames 12161
+{
+	//$Category SpookyProps
+	Radius 16
+	Height 24
+	ReactionTime 75
+	damagetype "fire"
+	renderstyle Add
+	Projectile
+	+NODAMAGETHRUST
+	+BLOODLESSIMPACT
+	-NOGRAVITY
+	-DROPOFF
+	-MISSILE
+	-ACTIVATEIMPACT
+	-ACTIVATEPCROSS
+	States
+	{
+		Spawn:
+			OILS A 0 bright
+			OILS A 4 bright A_PlaySoundEx ("BarrelFire/Loop", "SoundSlot5", 1)
+			OILS A 0 bright A_PlaySoundEx ("BarrelFire/Start", "SoundSlot6")
+			OILS BC 4 bright
+		FireLoop:
+			OILF AB 4 bright
+			OILF C 4 bright A_Explode (5, 40)
+			OILF C 0 bright A_CountDown
+			Loop
+		Death:
+			OILS CB 4 bright
+			OILS A 4 bright A_StopSoundEx ("SoundSlot5")
+			Stop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////NATURE
+
+ACTOR SeaWeed 12450
+{
+	//$Category SpookyNature
+	States
+	{
+		Spawn:
+			CWED AB 12
+			Loop
+	}
+}
+
+ACTOR NRock1 16100
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK A -1
+			Stop
+	}
+}
+
+ACTOR NRock2 16101
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK B -1
+			Stop
+	}
+}
+
+ACTOR NRock3 16102
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK C -1
+			Stop
+	}
+}
+
+ACTOR NRock4 16103
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK D -1
+			Stop
+	}
+}
+
+ACTOR NRock5 16104
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK E -1
+			Stop
+	}
+}
+
+ACTOR NRock6 16105
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK F -1
+			Stop
+	}
+}
+
+ACTOR NRock7 16106
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK G -1
+			Stop
+	}
+}
+
+ACTOR NRock8 16107
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK H -1
+			Stop
+	}
+}
+
+ACTOR NRock9 16108
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK I -1
+			Stop
+	}
+}
+
+ACTOR NRock10 16109
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	States
+	{
+		Spawn:
+			NROK J -1
+			Stop
+	}
+}
+
+ACTOR NRock1small 16110
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK A -1
+			Stop
+	}
+}
+
+ACTOR NRock2small 16111
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK B -1
+			Stop
+	}
+}
+
+ACTOR NRock3small 16112
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK C -1
+			Stop
+	}
+}
+
+ACTOR NRock4small 16113
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK D -1
+			Stop
+	}
+}
+
+ACTOR NRock5small 16114
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK E -1
+			Stop
+	}
+}
+
+ACTOR NRock6small 16115
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK F -1
+			Stop
+	}
+}
+
+ACTOR NRock7small 16116
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK G -1
+			Stop
+	}
+}
+
+ACTOR NRock8small 16117
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK H -1
+			Stop
+	}
+}
+
+ACTOR NRock9small 16118
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK I -1
+			Stop
+	}
+}
+
+ACTOR NRock10small 16119
+{
+	//$Category SpookyNature
+	Radius 16
+	Height 16
+	Scale 0.6
+	States
+	{
+		Spawn:
+			NROK J -1
+			Stop
+	}
+}
+
+actor CaveStalagmiteFloor 30357
+{
+	//$Category SpookyNature
+	Radius 24
+	Height 52
+	+SOLID
+	States
+	{
+		Spawn:
+			CAV3 A -1
+			Loop
+	}
+}
+
+actor CaveStalagmiteCeiling1 12162
+{
+	//$Category SpookyNature
+	Radius 24
+	Height 52
+	+SOLID
+	+NOGRAVITY
+	+SPAWNCEILING
+	States
+	{
+		Spawn:
+			CAV1 A -1
+			Loop
+	}
+}
+
+actor CaveStalagmiteCeiling2 12163
+{
+	//$Category SpookyNature
+	Radius 24
+	Height 52
+	+SOLID
+	+SPAWNCEILING
+	+NOGRAVITY
+	States
+	{
+		Spawn:
+			CAV2 A -1
+			Loop
+	}
+}
+
+actor Bubble
+{
+	Radius 2
+	Height 2
+	Speed 1
+	Scale 0.05
+	Alpha 0.25
+	RenderStyle Add
+	projectile
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	+NOCLIP
+	var int user_time;
+	States
+	{
+		Spawn:
+			SBUB A 1
+		//fall through
+		Rise:
+			SBUB A 0 A_JumpIf(waterlevel == 0, "Death")
+			SBUB A 0 Bright A_JumpIf(user_time>350,"Death")
+			FLAR A 0 Bright A_SetUserVar("user_time",user_time+1)
+			SBUB A 1 A_Jump (32, "Jiggle")
+			loop
+		Jiggle:
+			SBUB A 0 A_JumpIf(waterlevel == 0, "Death")
+			SBUB A 1 A_SetAngle (random (0, 360))
+			SBUB A 0 A_Recoil (0.1)
+			goto Rise
+		Death:
+			TNT1 A 1
+			stop
+	}
+}
+
+actor BubbleSpawner 12345
+{
+	//$Category SpookyNature
+	Radius 2
+	Height 2
+	+NOINTERACTION
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			TNT1 A 10 A_SpawnItemEx ("Bubble", random (-16, 16), 0, 0, 0, 0, 2, random (0, 360), 0, 128)
+			loop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////CHAIR
+
+Actor Chair 12165
+{
+	//$Category SpookyProps
+	+FloorClip
+	+Solid
+	Height 30
+	Radius 15
+	States
+	{
+		Spawn:
+			CHAI A -1
+			Stop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////GORE
+
+Actor DeadMaleScientist 12166
+{
+	//$Category SpookyGore
+	Radius 32
+	Height 16
+	States
+	{
+		Spawn:
+			MSCI N -1
+			Loop
+	}
+}
+
+Actor DeadFemaleScientist 12167
+{
+	//$Category SpookyGore
+	Radius 32
+	Height 16
+	States
+	{
+		Spawn:
+			FSCI N -1
+			Loop
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////LabStuff
+
+Actor Jar0 12173
+{
+	//$Category SpookyLabStuff
+	+Solid
+	Radius 8
+	Height 16
+	States
+	{
+		Spawn:
+			JAR0 A -1
+			Stop
+	}
+}
+
+Actor Jar1 12174
+{
+	//$Category SpookyLabStuff
+	+Solid
+	Radius 12
+	Height 32
+	States
+	{
+		Spawn:
+			JAR1 A -1
+			Stop
+	}
+}
+
+Actor BeakRed 12175
+{
+	//$Category SpookyLabStuff
+	+Solid
+	Radius 4
+	Height 2
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			BEAK C -1
+			Stop
+	}
+}
+
+Actor BeakGreeb 12176
+{
+	//$Category SpookyLabStuff
+	+Solid
+	Radius 4
+	Height 2
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			BEAK D -1
+			Stop
+	}
+}
+
+Actor BeakYellow 12177
+{
+	//$Category SpookyLabStuff
+	+Solid
+	Radius 4
+	Height 2
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			BEAK E -1
+			Stop
+	}
+}
+
+Actor BeakBigGreen 12178
+{
+	//$Category SpookyLabStuff
+	+Solid
+	Radius 16
+	Height 8
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			DJB4 B -1
+			Stop
+	}
+}
+
+Actor BeakBigRed 12179
+{
+	//$Category SpookyLabStuff
+	+Solid
+	Radius 16
+	Height 8
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			DJB5 A -1
+			Stop
+	}
+}
+
+Actor MagnifyingGlass 12180
+{
+	//$Category SpookyLabStuff
+	Radius 16
+	Height 8
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			DJLN A -1
+			Stop
+	}
+}
+
+Actor InspectingThingy 12181
+{
+	//$Category SpookyLabStuff
+	Radius 16
+	Height 8
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			DJPD B -1
+			Stop
+	}
+}
+
+Actor FlaskYellow 12182
+{
+	//$Category SpookyLabStuff
+	Radius 16
+	Height 8
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			FLKS K -1
+			Stop
+	}
+}
+
+Actor FlaskBlack 12183
+{
+	//$Category SpookyLabStuff
+	Radius 16
+	Height 8
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			FLKS L -1
+			Stop
+	}
+}
+
+Actor SurgicMachine 12184
+{
+	//$Category SpookyLabStuff
+	+NOGRAVITY
+	+SPAWNCEILING
+	Radius 16
+	Height 8
+	States
+	{
+		Spawn:
+			SURG A -1
+			Stop
+	}
+}
+
+Actor SpookyDooty 12185
+{
+	//$Category SpookyLabStuff
+	xscale 0.5
+	yscale 0.5
+	Radius 16
+	Height 8
+	States
+	{
+		Spawn:
+			DJDS A -1
+			Stop
+	}
+}

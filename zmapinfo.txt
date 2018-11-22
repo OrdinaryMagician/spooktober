@@ -3,7 +3,7 @@ include "zmapinfo/20hcc.txt"
 
 GameInfo
 {
-	AddEventHandlers = "SpooktoberHandler", "mkDialogueHandler", "MapShader"
+	AddEventHandlers = "SpooktoberHandler", "mkDialogueHandler", "MapShader", "WaterHandler"
 	TitleMusic = "spkmenu"
 	FinaleMusic = "D_WALTZ"
 }
@@ -117,6 +117,7 @@ Map SPOOK08 lookup "SP_SPOOK08"
 
 Map SPOOK09 lookup "SP_SPOOK09"
 {
+	music = "D_SPOOK9"
 	levelnum = 10
 }
 

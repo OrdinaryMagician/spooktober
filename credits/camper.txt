@@ -1,0 +1,25 @@
+textures\cage
+	Author: Cage
+	Submitted by: Ceeb/Grymmoire
+
+textures\gray
+	Author: Nick Baker, aka NiGHTMARE
+
+textures\psytex
+	Author: J.S.Graham (aka psyren)
+
+textures\litextra
+	Author: FuzzballFox
+
+textures\nb_flats
+	Author: Nick Baker
+
+textures\udet
+	Author: Enjay, Nightmare, Malinku, Earthquake
+	Submitted: Malinku
+
+textures\nb_silver
+	Author: Nick Baker
+
+textures\sstex
+	Author: J.C. Bengtson (SailorScout)

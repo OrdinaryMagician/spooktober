@@ -671,6 +671,7 @@ Class SpooktoberHandler : EventHandler
 			mo.A_SelectWeapon("Scyth");
 			break;
 		case 5:
+		case 10:
 		case 14:
 		case 16:
 		case 18:

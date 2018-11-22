@@ -29,7 +29,7 @@ Free slots: 0
 - **SPOOK06**: Avarice - UndeadRyker [completed] [par time set]
 - **SPOOK07**: The Crimson Flow - Rachael [completed] [par time set]
 - **SPOOK08**: The Graveyard Shift - Batandy [completed] [par time set]
-- **SPOOK09**: Untitled Map - Camper125Lv
+- **SPOOK09**: Deep Sea - Camper125Lv [completed]
 - **SPOOK10**: The War-den - Pixel Eater [completed] [par time set]
 - **SPOOK11**: Large House of Illusions - leodoom85 [completed] [par time set]
 - **SPOOK12**: Alone in the Dark - ImpieTwo [completed] [par time set]

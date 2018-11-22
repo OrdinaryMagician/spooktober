@@ -1,0 +1,32 @@
+TOILET1      TOILET1
+BREAK1       BREAK1
+
+radioactivebarrel/detected dsdetect
+
+
+Flare/Light	FLARLITE
+Flare/Loop	FLARLOOP
+
+$Volume Flare/Light 0.5
+$Volume Flare/Loop 0.5
+$Limit Flare/Loop 5
+
+world/drip gloop
+world/watersplash gloop
+
+aracnorb/sight		dsaracst
+aracnorb/death		dsaracdt
+aracnorb/attack		dsaracfr
+aracnorb/melee		dsaracml
+
+monster/wiksit                  dswiksit
+$random monster/wikact		{ monster/wikac1    monster/wikac2 }
+monster/wikac1                  dswikac1
+monster/wikac2                  dswikac2
+monster/wikatk                  dswikatk
+monster/wikpai                  dswikpai
+monster/wikdth                  dswikdth
+weapons/firmfi                  dsfirmfi
+weapons/firex5                  dsfirex5
+monster/tenpn1                  dstenpn1
+monster/tenpn2                  dstenpn2

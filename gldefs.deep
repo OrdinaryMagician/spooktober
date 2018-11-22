@@ -1,0 +1,53 @@
+object DeepOneBall
+{
+    frame OLDPA { light OLDP_X1 }
+    frame OLDPB { light OLDP_X2 }
+    frame OLDPC { light OLDP_X3 }
+    frame OLDPD { light OLDP_X4 }
+    frame OLDPE { light OLDP_X5 }
+    frame OLDPF { light OLDP_X6 }
+ }
+
+ flickerlight OLDP_X1
+{
+    color 0 2 0
+    size 40
+    secondarySize 35
+    chance 0.4
+}
+
+ flickerlight OLDP_X2
+{
+    color 0 2 0
+    size 30
+    secondarySize 25
+    chance 0.4
+}
+
+pointlight OLDP_X3
+{
+    color 0.0 2.0 0.0
+    size 48
+    offset 0 0 0
+} 
+
+pointlight OLDP_X4
+{
+    color 0.0 2.0 0.0
+    size 64
+    offset 0 0 0
+} 
+
+pointlight OLDP_X5
+{
+    color 0.0 2.0 0.0
+    size 128
+    offset 0 0 0
+} 
+
+pointlight OLDP_X6
+{
+    color 0.0 2.0 0.0
+    size 64
+    offset 0 0 0
+} 

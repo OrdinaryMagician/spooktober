@@ -12,3 +12,4 @@ CFOREBOD, CSCISSOR : Tracks from Clock Tower
 D_SPOOK : Spooky Scary Skeletons by Andrew Gold
 Bile, Evil, ExplodHt : "Bile", "Evil Draws Near" and "Exploding Hearts" (edited for seamless loop) from LISA: The Painful RPG
 D_WARDEN : Original composition by KynikossDragonn
+D_SPOOK9 : Drakk Hive from Unreal 2

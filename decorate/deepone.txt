@@ -1,0 +1,121 @@
+actor DeepOne 11300
+{
+  obituary "%o was driven mad by a Deep One."
+  hitobituary "%o got whiplashed by a Deep One."
+  health 2000
+  radius 24
+  height 64
+  mass 1000
+  speed 8
+  BloodColor "purple"
+  painchance 50
+  meleedamage 20
+  meleerange 64
+  seesound "deepone/sight"
+  painsound "deepone/pain"
+  deathsound "deepone/death"
+  activesound "deepone/active"
+  meleesound "deepone/melee"
+  MONSTER
+  +FLOORCLIP
+  +BOSSDEATH
+  +MISSILEEVENMORE
+  states
+  {
+Spawn:
+    CUTH DD 6 A_Look
+    loop
+See:
+    CUTH ABCD 6 A_Chase
+    loop
+Melee:
+	CUTH E 0 A_FaceTarget 
+	CUTH E 6 A_PlaySound ("deepone/meleegrowl") 
+        CUTH F 6 A_FaceTarget
+	CUTH G 2 A_MeleeAttack
+	CUTH HI 2
+	goto See
+Missile:
+    CUTH J 0 A_JumpIfCloser (32,"Melee") 
+    CUTH J 0 A_Jump (20, "Hide") 
+    CUTH J 8 A_FaceTarget
+    CUTH K 0 A_CustomMissile("DeepOneBall",42,15)
+    CUTH K 8  bright A_CPosRefire
+	Goto Missile+1
+Pain:
+    CUTH L 0 A_TakeInventory("squidinviso", 255)
+    CUTH L 2 A_ChangeFlag("STEALTH", 0)
+    CUTH L 2 A_Pain
+    goto See
+Hide:
+    CUTH I 1 A_JumpIfInventory("squidinviso",1,"Unhide")
+    CUTH I 0 A_GiveInventory("squidinviso", 1)
+    CUTH I 2 A_PlaySound ("deepone/stealth")
+    CUTH I 10 A_ChangeFlag("STEALTH", 1)
+    goto See
+Unhide:
+        CUTH D 0 A_TakeInventory("squidinviso", 255)
+	CUTH D 2 A_ChangeFlag("STEALTH", 0)
+	CUTH D 2 A_PlaySound ("deepone/stealth")
+    goto See	
+Death:
+	CUTH M 0 A_Jump(128,"AltDeath")
+    CUTH M 10
+    CUTH N 10 A_Scream
+    CUTH O 10
+    CUTH P 10 A_NoBlocking
+    CUTH Q -1
+    stop
+AltDeath:
+    CUTH R 5
+    CUTH S 5 A_Scream
+    CUTH T 5
+    CUTH U 5 A_NoBlocking
+    CUTH V 5
+	CUTH W -1
+    stop	
+Raise:
+    CUTH PONM 8
+    goto See
+  }
+}
+
+actor DeepOneBall
+{
+  Radius 13
+  Height 8
+  Speed 25
+  Damage 5
+  Projectile
+  +RANDOMIZE
+  +ROCKETTRAIL
+  +SEEKERMISSILE
+  RenderStyle Add
+  Alpha 0.75
+  SeeSound "deepone/fire"
+  DeathSound "deepone/firehit"
+  States
+  {
+  Spawn:
+    OLDP A 0 A_Tracer
+    OLDP A 0 bright A_BishopMissileWeave
+    OLDP A 2 bright A_BishopMissileWeave
+	OLDP B 0 A_Tracer
+	OLDP B 0 bright A_BishopMissileWeave
+    OLDP B 2 bright A_BishopMissileWeave
+    loop
+	//OLDP A 2 bright A_Weave(-2, 2, 2.0, 1.0)
+    //OLDP B 2 bright A_Weave(-2, 2, 2.0, 1.0)
+    //goto spawn+3
+  Death:
+    OLDP C 0 A_Scream
+    OLDP CDEF 4 bright 
+    stop
+  }
+}
+
+ACTOR squidinviso : Inventory
+{
+  Inventory.amount 0
+  Inventory.maxamount 1
+}

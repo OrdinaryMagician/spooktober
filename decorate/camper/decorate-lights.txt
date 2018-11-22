@@ -1,0 +1,135 @@
+ACTOR StrobeLightRedOff 12172
+{
+	//$Category SpookyProps
+	Radius 16
+	Height 16
+	+NOGRAVITY
+	+SPAWNCEILING
+	States
+	{
+		Spawn:
+			STRR C -1
+			Stop
+	}
+}
+
+ACTOR StrobeLightRed 12402
+{
+	//$Category SpookyLights
+	Radius 16
+	Height 16
+	+NOGRAVITY
+	+SPAWNCEILING
+	+DONTSPLASH
+	States
+	{
+		Spawn:
+			STRR A 0 BRIGHT
+			STRR A 0 BRIGHT A_SpawnItem ("StrobeEmitterRed")
+		Spin:
+			STRR DCBA 4 BRIGHT
+			Loop
+	}
+}
+
+ACTOR StrobeEmitterRed
+{
+	Radius 16
+	Height 16
+	+NOGRAVITY
+	+SPAWNCEILING
+	+DONTSPLASH
+	States
+	{
+		Spawn:
+			TNT1 A 0
+		Spin:
+			TNT1 A 1
+			TNT1 A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+			TNT1 A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+			TNT1 A 0 A_SetAngle(10 + angle)
+			Loop
+	}
+}
+
+ACTOR StrobeRayRed
+{
+	Radius 2
+	Height 2
+	Speed 100
+	Damage 0
+	Renderstyle None
+	projectile
+	-ACTIVATEIMPACT
+	-ACTIVATEPCROSS
+	+RIPPER
+	+BLOODLESSIMPACT
+	+PAINLESS
+	+THRUACTORS
+	+DONTSPLASH
+	States
+	{
+		Spawn:
+			BAL1 A 8
+			Loop
+		Death:
+			BAL1 C 2
+			Stop
+	}
+}
+
+Actor GreyLamp 12164
+{
+	//$Category SpookyLights
+	+Solid
+	Radius 8
+	Height 52
+	States
+	{
+		Spawn:
+			GLMP A -1 Bright
+			Loop
+	}
+}
+
+ACTOR TLamp1 12850
+{
+	//$Category SpookyLights
+	Radius 16
+	Height 80
+	+SOLID
+	States
+	{
+		Spawn:
+			LAMT A -1 Bright
+			Stop
+	}
+}
+
+ACTOR TLamp2 12851
+{
+	//$Category SpookyLights
+	Radius 16
+	Height 60
+	+SOLID
+	States
+	{
+		Spawn:
+			LAMT B -1 Bright
+			Stop
+	}
+}
+
+ACTOR TLamp3 12852
+{
+	//$Category SpookyLights
+	Radius 16
+	Height 70
+	+SOLID
+	States
+	{
+		Spawn:
+			LAMT C -1 Bright
+			Stop
+	}
+}

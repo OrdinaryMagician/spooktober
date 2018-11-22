@@ -1,0 +1,35 @@
+texture CGCANI00
+    allowdecals
+    pic CGCANI00 tics 1.5
+    pic CGCANI01 tics 1.5
+    pic CGCANI02 tics 1.5
+    pic CGCANI03 tics 1.5
+    pic CGCANI04 tics 1.5
+    pic CGCANI05 tics 1.5
+    pic CGCANI06 tics 1.5
+    pic CGCANI07 tics 1.5
+    
+switch CGSWC00A on sound Switch1 pic CGSWC00B tics 0
+switch CGSWC00B off sound Switch2 pic CGSWC00A tics 0
+
+switch CGSWC01A on sound Switch1 pic CGSWC01B tics 0
+switch CGSWC01B off sound Switch2 pic CGSWC01A tics 0
+
+switch CGSWC02A on sound Switch1 pic CGSWC02B tics 0
+switch CGSWC02B off sound Switch2 pic CGSWC02A tics 0
+
+switch CGSWC03A on sound Switch1 pic CGSWC03B tics 0
+switch CGSWC03B off sound Switch2 pic CGSWC03A tics 0
+
+switch CBINA on sound Switch1 pic CBINB tics 0
+switch CBINB off sound Switch2 pic CBINA tics 0
+
+switch CGMETB6A on sound Switch1 pic CGMETB6B tics 0
+switch CGMETB6B off sound Switch2 pic CGMETB6A tics 0
+
+switch CDOORA on sound Switch1 pic CDOORB tics 0
+switch CDOORB off sound Switch2 pic CDOORA tics 0
+
+warp2 texture sbuba0
+
+cameratexture CAMTEX0 72 51 fit 24 17

@@ -1,0 +1,27 @@
+$random deepone/pain { deepone/hurt1 deepone/hurt2 deepone/hurt3 deepone/hurt4 }
+
+deepone/hurt1 	DEEPPN1
+deepone/hurt2 	DEEPPN2
+deepone/hurt3  	DEEPPN3
+deepone/hurt4 	DEEPPN4
+
+$random deepone/active { deepone/groan1 deepone/groan2 }
+
+deepone/groan1 	DEEPGN1
+deepone/groan2 	DEEPGN2
+
+$random deepone/meleegrowl { deepone/attack1 deepone/attack2 }
+
+deepone/melee		DSCLAW
+
+deepone/attack1 	DEEPAK1
+deepone/attack2 	DEEPAK2
+
+deepone/sight 		DEEPSEE
+deepone/stealth		DEEPSTTH
+
+deepone/death 	DEEPDTH
+
+deepone/fire 	DEEPFIRE
+
+deepone/firehit 	DEEPFHIT

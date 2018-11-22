@@ -25,6 +25,9 @@
 
 #include "decorate/bobby.dec"
 
+#include "decorate/camper/decorate.txt"
+#include "decorate/deepone.txt"
+
 // junkcity lamp
 Actor JunkLamp 22220
 {

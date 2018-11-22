@@ -60,3 +60,8 @@ end
 	playuntildone	spooky/doorcreak
 	stopsound		spooky/doorstop
 end
+
+:Door12121
+   door 51
+   playrepeat   doors/dr1_open
+end

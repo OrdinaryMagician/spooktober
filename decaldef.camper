@@ -1,0 +1,13 @@
+decal Plug 120
+{
+	x-scale 0.5
+	y-scale 0.5
+	pic DNXPLUG
+}
+
+decal Switch 121
+{
+	x-scale 0.5
+	y-scale 0.5
+	pic DNSW13OF
+}

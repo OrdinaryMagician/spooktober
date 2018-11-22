@@ -1,0 +1,427 @@
+////Green
+PointLight UAC1
+{
+	color 0.0 1.0 0.0
+    size 26
+}
+
+Object UACHolo1
+{
+	FRAME UAC1 { light UAC1 }
+}
+Object UACHolo2
+{
+	FRAME UAC1 { light UAC1 }
+}
+////Cyan
+PointLight UAC2
+{
+	color 0.0 0.3 0.5
+    size 26
+}
+
+Object UACHolo3
+{
+	FRAME UAC2 { light UAC2 }
+}
+Object UACHolo4
+{
+	FRAME UAC2 { light UAC2 }
+}
+////Orange
+PointLight UAC3
+{
+	color 0.5 0.3 0.0
+    size 26
+}
+
+Object UACHolo5
+{
+	FRAME UAC3 { light UAC3 }
+}
+Object UACHolo6
+{
+	FRAME UAC3 { light UAC3 }
+}
+
+pointlight REDSTROBE
+{
+    color 0.4 0.0 0.0
+    size 48
+}
+
+object StrobeRayRed
+{
+    frame BAL1C { light REDSTROBE }
+}
+
+PointLight GreyLamp
+{
+	Color 0.6 0.6 0.6
+	Size 56
+	Offset 0 48 0
+}
+
+Object GreyLamp
+{
+	Frame GLMP { Light GreyLamp }
+}
+
+pointlight TLIGHT1
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 72 0
+}
+
+pointlight TLIGHT2
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 44 0
+}
+
+pointlight TLIGHT3
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 50 0
+}
+
+object TLamp1
+{
+    frame LAMTA { light TLIGHT1 }
+}
+
+object TLamp2
+{
+    frame LAMTB { light TLIGHT2 }
+}
+
+object TLamp3
+{
+    frame LAMTC { light TLIGHT3 }
+}
+
+FlickerLight FLARE
+{
+    color 1.0 0.3 0.3
+    size 128
+    secondarySize 112
+    Chance 0.05
+    offset 0 16 0
+}
+
+object ActiveFlare
+{
+    frame FLARA { light FLARE }
+	frame FLARB { light FLARE }
+	frame FLARC { light FLARE }
+}
+
+
+//////////////////////////////////////////////////////////////////////SHADERS
+
+HardwareShader PostProcess scene
+{
+	Name "watershader"
+	Shader "SHADERS/Water.frag" 330
+	Uniform float waterFactor
+	Uniform float timer // placeholder?
+}
+
+HardwareShader PostProcess scene
+{
+	Name "waterzoomshader"
+	Shader "SHADERS/WaterZoom.frag" 330
+	Uniform float zoomFactor
+}
+
+
+//////////////////////////////////////////////////////////////////////BRIGHTMAPS
+
+
+//---------------------------------------------------------------------------------------------------------- lights
+
+brightmap sprite 0_LITEL1
+{
+	map "BRIGHTMAPS/0_LITEW1.png"
+}
+
+brightmap sprite 0_LITEB1
+{
+	map "BRIGHTMAPS/0_LITEW1.png"
+}
+
+brightmap sprite 0_LITEY1
+{
+	map "BRIGHTMAPS/0_LITEW1.png"
+}
+
+brightmap sprite 0_LITEL2
+{
+	map "BRIGHTMAPS/0_LITEW2.png"
+}
+
+brightmap sprite 0_LITEL3
+{
+	map "BRIGHTMAPS/0_LITEW3.png"
+}
+
+brightmap sprite 0_LITEY4
+{
+	map "BRIGHTMAPS/0_LITEW4.png"
+}
+
+brightmap sprite 0_LITEL6
+{
+	map "BRIGHTMAPS/0_LITEW6.png"
+}
+
+brightmap sprite 0_LITEO6
+{
+	map "BRIGHTMAPS/0_LITEW6.png"
+}
+
+brightmap sprite 0_LITEL7
+{
+	map "BRIGHTMAPS/0_LITEW7.png"
+}
+
+brightmap sprite 0_LITEY7
+{
+	map "BRIGHTMAPS/0_LITEW7.png"
+}
+
+brightmap sprite 0_LITELD
+{
+	map "BRIGHTMAPS/0_LITEWD.png"
+}
+
+brightmap sprite 0_LITEBD
+{
+	map "BRIGHTMAPS/0_LITEWD.png"
+}
+
+brightmap sprite CGTECH06
+{
+	map "BRIGHTMAPS/CGTECH06BM.png"
+}
+
+brightmap sprite DNALN33
+{
+	map "BRIGHTMAPS/DNALN33BM.png"
+}
+
+//---------------------------------------------------------------------------------------------------------- Computer animation
+
+brightmap sprite CGSWC01B
+{
+	map "BRIGHTMAPS/CGSWC01BM.png"
+}
+
+brightmap sprite CGSWC01A
+{
+	map "BRIGHTMAPS/CGSWC01AM.png"
+}
+
+brightmap sprite CGSWC03A
+{
+	map "BRIGHTMAPS/CGSWC03BM.png"
+}
+
+brightmap sprite CGSWC03B
+{
+	map "BRIGHTMAPS/CGSWC03AM.png"
+}
+
+//---------------------------------------------------------------------------------------------------------- Armor Shard
+
+brightmap sprite ARSDB0
+{
+	map "BRIGHTMAPS/ARSDBM.png"
+}
+
+brightmap sprite ARSDC0
+{
+	map "BRIGHTMAPS/ARSDBM.png"
+}
+
+brightmap sprite ARSDD0
+{
+	map "BRIGHTMAPS/ARSDBM.png"
+}
+
+
+//---------------------------------------------------------------------------------------------------------- Buttons
+
+brightmap sprite CBINA
+{
+	map "BRIGHTMAPS/CBINBM.png"
+}
+
+brightmap sprite CBINB
+{
+	map "BRIGHTMAPS/CBINBM.png"
+}
+
+brightmap sprite TVSCR
+{
+	map "BRIGHTMAPS/TVSCRBM.png"
+}
+
+brightmap sprite CGCANI00
+{
+	map "BRIGHTMAPS/CGCANIBM.png"
+}
+
+brightmap sprite CGCANI01
+{
+	map "BRIGHTMAPS/CGCANIBM.png"
+}
+
+brightmap sprite CGCANI02
+{
+	map "BRIGHTMAPS/CGCANIBM.png"
+}
+
+brightmap sprite CGCANI03
+{
+	map "BRIGHTMAPS/CGCANIBM.png"
+}
+
+brightmap sprite CGCANI04
+{
+	map "BRIGHTMAPS/CGCANIBM.png"
+}
+
+brightmap sprite CGCANI05
+{
+	map "BRIGHTMAPS/CGCANIBM.png"
+}
+
+brightmap sprite CGCANI06
+{
+	map "BRIGHTMAPS/CGCANIBM.png"
+}
+
+brightmap sprite CGCANI07
+{
+	map "BRIGHTMAPS/CGCANIBM.png"
+}
+
+brightmap sprite CGMETB6A
+{
+	map "BRIGHTMAPS/CGMETB6ABM.png"
+}
+
+brightmap sprite CGMETB6B
+{
+	map "BRIGHTMAPS/CGMETB6BBM.png"
+}
+
+//---------------------------------------------------------------------------------------------------------- Custom Door
+
+brightmap sprite CDOORA
+{
+	map "BRIGHTMAPS/CDOORAM.png"
+}
+
+brightmap sprite CDOORB
+{
+	map "BRIGHTMAPS/CDOORBM.png"
+}
+
+brightmap sprite CGDOOR03
+{
+	map "BRIGHTMAPS/CGDOOR03BM.png"
+}
+
+brightmap sprite CGDOOR01
+{
+	map "BRIGHTMAPS/CGDOOR01BM.png"
+}
+
+brightmap sprite CAMTEX0
+{
+	map "BRIGHTMAPS/WPIXEL.png"
+}
+
+//---------------------------------------------------------------------------------------------------------- SMG
+
+brightmap sprite SSMGA0
+{
+	map "BRIGHTMAPS/SSMGABCBR.png"
+}
+
+brightmap sprite SSMGC0
+{
+	map "BRIGHTMAPS/SSMGABCBR.png"
+}
+
+brightmap sprite SSMGD0
+{
+	map "BRIGHTMAPS/SSMGDBR.png"
+}
+
+//Brightmaps
+
+BrightMap Sprite WICKJ1
+{
+	Map BRIGHTMAPS/BMWICKJ1
+	DisableFullBright
+}
+
+BrightMap Sprite WICKJ2J8
+{
+	Map BRIGHTMAPS/BMWICKJ2
+	DisableFullBright
+}
+
+BrightMap Sprite WICKJ3J7
+{
+	Map BRIGHTMAPS/BMWICKJ3
+	DisableFullBright
+}
+
+BrightMap Sprite WICKJ4J6
+{
+	Map BRIGHTMAPS/BMWICKJ4
+	DisableFullBright
+}
+
+BrightMap Sprite WICKJ5
+{
+	Map BRIGHTMAPS/BMWICKJ5
+	DisableFullBright
+}
+
+BrightMap Sprite WICKK1
+{
+	Map BRIGHTMAPS/BMWICKK1
+	DisableFullBright
+}
+
+BrightMap Sprite WICKK2K8
+{
+	Map BRIGHTMAPS/BMWICKK2
+	DisableFullBright
+}
+
+BrightMap Sprite WICKK3K7
+{
+	Map BRIGHTMAPS/BMWICKK3
+	DisableFullBright
+}
+
+BrightMap Sprite WICKK4K6
+{
+	Map BRIGHTMAPS/BMWICKK4
+	DisableFullBright
+}
+
+BrightMap Sprite WICKK5
+{
+	Map BRIGHTMAPS/BMWICKK5
+	DisableFullBright
+}
