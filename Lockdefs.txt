@@ -21,3 +21,11 @@ Lock 9
 	RemoteMessage "You need a white card to activate this object"
 	Mapcolor 192 192 192
 }
+
+Lock 10
+{
+	GreenCard
+	Message "You need a green card to open this door"
+	RemoteMessage "You need a green card to activate this object"
+	Mapcolor 0 255 0
+}

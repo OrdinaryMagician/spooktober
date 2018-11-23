@@ -95,6 +95,7 @@ ACTOR GreenCard : DoomKey 12186
 {
 	//$Category SpookyItems
 	Inventory.PickupMessage "Found Green Key"
+	Inventory.Icon "STKEYGRN"
 	States
 	{
 		Spawn:
