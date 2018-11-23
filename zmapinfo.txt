@@ -118,7 +118,9 @@ Map SPOOK08 lookup "SP_SPOOK08"
 Map SPOOK09 lookup "SP_SPOOK09"
 {
 	music = "D_SPOOK9"
+	lightmode = 3
 	levelnum = 10
+	par = "600"
 }
 
 Map SPOOK10 lookup "SP_SPOOK10"

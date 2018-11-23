@@ -13,12 +13,7 @@ A Halloween 2018 map pack for Doom.
 - The project deadline is on the 30th of October, the day before Halloween.
   Can be delayed if necessary for some mappers to finish their work.
 
-### Current status
-
-Total maps: 19
-Completed: 18
-In Progress: 1
-Free slots: 0
+### Current Status
 
 - **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
 - **SPOOK01**: Imperishable Fright - Jaxxoon R [completed] [par time set]
@@ -29,7 +24,7 @@ Free slots: 0
 - **SPOOK06**: Avarice - UndeadRyker [completed] [par time set]
 - **SPOOK07**: The Crimson Flow - Rachael [completed] [par time set]
 - **SPOOK08**: The Graveyard Shift - Batandy [completed] [par time set]
-- **SPOOK09**: Deep Sea - Camper125Lv [completed]
+- **SPOOK09**: Deep Sea - Camper125Lv [completed] [par time set]
 - **SPOOK10**: The War-den - Pixel Eater [completed] [par time set]
 - **SPOOK11**: Large House of Illusions - leodoom85 [completed] [par time set]
 - **SPOOK12**: Alone in the Dark - ImpieTwo [completed] [par time set]

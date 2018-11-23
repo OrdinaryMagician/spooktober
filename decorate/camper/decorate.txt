@@ -6,7 +6,7 @@
 
 //////////////////////////////////////////////////////////////////////MARINE_STUFF
 
-ACTOR HelmA 12130
+/*ACTOR HelmA 12130
 {
 	//$Category SpookyProps
 	Radius 8
@@ -102,7 +102,7 @@ ACTOR UniformB 12136
 			UNIF B -1
 			Stop
 	}
-}
+}*/
 
 
 //////////////////////////////////////////////////////////////////////HOLOGRAMS
@@ -225,7 +225,7 @@ Actor PlasmaSpawner3 : plasmaspawner////Orange
 
 //////////////////////////////////////////////////////////////////////FOOD
 
-ACTOR burger1 12144
+/*ACTOR burger1 12144
 {
 	//$Category SpookyProps
 	mass 1
@@ -415,7 +415,7 @@ ACTOR dbox 12155
 			DBOX A -1
 			loop
 	}
-}
+}*/
 
 
 //////////////////////////////////////////////////////////////////////PIPES
@@ -498,7 +498,7 @@ ACTOR HPipe5 329
 
 //////////////////////////////////////////////////////////////////////TOILET
 
-ACTOR Toilet1 290
+/*ACTOR Toilet1 290
 {
 	//$Category SpookyProps
 	SpawnID 125
@@ -547,7 +547,7 @@ ACTOR Toilet1 290
 			TOIF D 3
 			Loop
 	}
-}
+}*/
 
 
 //////////////////////////////////////////////////////////////////////SPECIMEN_TANK
@@ -1115,7 +1115,7 @@ actor BubbleSpawner 12345
 
 //////////////////////////////////////////////////////////////////////CHAIR
 
-Actor Chair 12165
+/*Actor Chair 12165
 {
 	//$Category SpookyProps
 	+FloorClip
@@ -1128,7 +1128,7 @@ Actor Chair 12165
 			CHAI A -1
 			Stop
 	}
-}
+}*/
 
 
 //////////////////////////////////////////////////////////////////////GORE

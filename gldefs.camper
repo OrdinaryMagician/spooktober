@@ -368,60 +368,60 @@ brightmap sprite SSMGD0
 
 BrightMap Sprite WICKJ1
 {
-	Map BRIGHTMAPS/BMWICKJ1
+	Map "BRIGHTMAPS/BMWICKJ1.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKJ2J8
 {
-	Map BRIGHTMAPS/BMWICKJ2
+	Map "BRIGHTMAPS/BMWICKJ2.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKJ3J7
 {
-	Map BRIGHTMAPS/BMWICKJ3
+	Map "BRIGHTMAPS/BMWICKJ3.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKJ4J6
 {
-	Map BRIGHTMAPS/BMWICKJ4
+	Map "BRIGHTMAPS/BMWICKJ4.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKJ5
 {
-	Map BRIGHTMAPS/BMWICKJ5
+	Map "BRIGHTMAPS/BMWICKJ5.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKK1
 {
-	Map BRIGHTMAPS/BMWICKK1
+	Map "BRIGHTMAPS/BMWICKK1.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKK2K8
 {
-	Map BRIGHTMAPS/BMWICKK2
+	Map "BRIGHTMAPS/BMWICKK2.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKK3K7
 {
-	Map BRIGHTMAPS/BMWICKK3
+	Map "BRIGHTMAPS/BMWICKK3.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKK4K6
 {
-	Map BRIGHTMAPS/BMWICKK4
+	Map "BRIGHTMAPS/BMWICKK4.png"
 	DisableFullBright
 }
 
 BrightMap Sprite WICKK5
 {
-	Map BRIGHTMAPS/BMWICKK5
+	Map "BRIGHTMAPS/BMWICKK5.png"
 	DisableFullBright
 }
