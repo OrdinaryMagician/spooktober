@@ -425,3 +425,30 @@ BrightMap Sprite WICKK5
 	Map "BRIGHTMAPS/BMWICKK5.png"
 	DisableFullBright
 }
+
+//---------------------------------------------------------------------------------------------------------- Shotgun
+
+BrightMap Sprite GSTGA0
+{
+	Map "BRIGHTMAPS/GSTGA0BM.png"
+}
+
+BrightMap Sprite GSTGD0
+{
+	Map "BRIGHTMAPS/GSTGD0BM.png"
+}
+
+BrightMap Sprite GSTGE0
+{
+	Map "BRIGHTMAPS/GSTGE0BM.png"
+}
+
+BrightMap Sprite GSTGF0
+{
+	Map "BRIGHTMAPS/GSTGF0BM.png"
+}
+
+BrightMap Sprite GSTGG0
+{
+	Map "BRIGHTMAPS/GSTGG0BM.png"
+}

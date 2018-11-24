@@ -2,7 +2,7 @@ Actor DeepSMG : DoomWeapon 12121
 {
 	//$Category SpookyWeapon
 	Weapon.AmmoGive 12
-	Weapon.SelectionOrder 1901
+	Weapon.SelectionOrder 1200
 	Weapon.AmmoUse 1
 	Weapon.AmmoType "Clip"
 	Weapon.SlotNumber 2
@@ -29,6 +29,46 @@ Actor DeepSMG : DoomWeapon 12121
 			SSMG B 1 A_FireBullets (5.6, 0, 1, 15, "BulletPuff")
 			SSMG C 1 A_GunFlash
 			SSMG B 0 A_ReFire
+			Goto Ready
+	}
+}
+
+ACTOR DeepShotgun : DoomWeapon 12188
+{
+	//$Category SpookyWeapon
+	Weapon.SelectionOrder 1300
+	Weapon.AmmoUse 1
+	Weapon.AmmoGive 8
+	Weapon.AmmoType "Shell"
+	Weapon.SlotNumber 3
+	Inventory.PickupMessage "$GOTSHOTGUN"
+	Obituary "$OB_MPSHOTGUN"
+	Tag "$TAG_SHOTGUN"
+	+CHEATNOTWEAPON
+	States
+	{
+		Spawn:
+			GSTG G -1
+			Stop
+		Ready:
+			GSTG A 1 A_WeaponReady
+			Loop
+		Deselect:
+			GSTG A 1 A_Lower
+			Loop
+		Select:
+			GSTG A 1 A_Raise
+			Loop
+		Fire:
+			GSTG A 1
+			GSTG B 1 A_FireBullets (10, 10, 15, 5, "BulletPuff")
+			GSTG B 1 A_PlaySound ("weapons/shotgf", CHAN_WEAPON)
+			GSTG C 1 A_GunFlash
+			GSTG D 2
+			GSTG E 4
+			GSTG F 6
+			GSTG E 4
+			GSTG D 2
 			Goto Ready
 	}
 }

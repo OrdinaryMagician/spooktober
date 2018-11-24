@@ -27,7 +27,7 @@ ACTOR WaterDoomImp 12125
 		Melee:
 		Missile:
 			WIMP EF 8 A_FaceTarget
-			WIMP G 6 A_TroopAttack
+			WIMP G 6 A_CustomComboAttack("WaterDoomImpBall", 32, 3 * random(1, 8), "imp/melee")
 			Goto See
 		Pain:
 			WIMP H 2
@@ -52,6 +52,30 @@ ACTOR WaterDoomImp 12125
 			WIMP ML 8
 			WIMP KJI 6
 			Goto See
+	}
+}
+
+ACTOR WaterDoomImpBall
+{
+	Radius 6
+	Height 8
+	Speed 20
+	FastSpeed 30
+	Damage 3
+	Projectile
+	+RANDOMIZE
+	RenderStyle Add
+	Alpha 1
+	SeeSound "imp/attack"
+	DeathSound "imp/shotx"
+	States
+	{
+		Spawn:
+			BAL1 AB 4 Bright
+			Loop
+		Death:
+			BAL1 CDE 6 Bright
+			Stop
 	}
 }
 
@@ -344,6 +368,58 @@ Actor WickedTorsoRes
 	{
 		Spawn:
 			WICK WVUTSRQ 5
+			Stop
+	}
+}
+
+Actor Fleshspawn 12187
+{
+	//$Category SpookyMonsters
+	HitObituary "%o was devoured by a FleshSpawn."
+	health 5
+	radius 14
+	height 30
+	mass 80
+	speed 10
+	damage 5
+	painchance 224
+	bloodcolor "blue"
+	attacksound "flesh/melee"
+	seesound "flesh/sight"
+	painsound "flesh/pain"
+	deathsound "flesh/death"
+	activesound "flesh/active"
+	MONSTER
+	+FLOAT
+	+NOGRAVITY
+	+DONTHURTSPECIES
+	+NOINFIGHTING
+	+NOTARGET
+	States
+	{
+		Spawn:
+			FLSP CD 8 A_Look
+			loop
+		See:
+			FLSP AABB 2 A_Chase
+			loop
+		Missile:
+			FLSP BA 2 A_FaceTarget
+			FLSP E 4 A_SkullAttack
+			FLSP ABD 1
+			goto See
+		Pain:
+			FLSP I 3
+			FLSP I 3 A_Pain
+			Goto See
+		Death:
+			FLSP I 2
+			FLSP J 2 A_Scream
+			FLSP K 2
+			FLSP L 2 A_NoBlocking
+			FLSP M 2
+			FLSP N 2
+			FLSP O -1
 			Stop
 	}
 }

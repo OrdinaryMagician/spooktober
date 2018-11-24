@@ -30,3 +30,9 @@ weapons/firmfi                  dsfirmfi
 weapons/firex5                  dsfirex5
 monster/tenpn1                  dstenpn1
 monster/tenpn2                  dstenpn2
+
+flesh/sight		flspnsit
+flesh/melee		flspnatk
+flesh/pain		flspnhit
+flesh/death		flspndth
+flesh/active		flspnact

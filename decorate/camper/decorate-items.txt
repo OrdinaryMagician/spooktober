@@ -104,3 +104,21 @@ ACTOR GreenCard : DoomKey 12186
 			Loop
 	}
 }
+
+ACTOR DiveSuit : PowerupGiver 12189
+{
+	//$Category SpookyItems
+	Powerup.Color BlueMap, 0.2
+	Height 46
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	Inventory.MaxAmount 0
+	Inventory.PickupMessage "Diving Suit"
+	Powerup.Type "IronFeet"
+	States
+	{
+		Spawn:
+			SCUB A -1 Bright
+			Stop
+	}
+}
