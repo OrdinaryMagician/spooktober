@@ -137,7 +137,7 @@ actor Aracnorb 12128
 	+NOGRAVITY
 	+FLOAT
 	+FLOATBOB
-	Health 125
+	Health 200
 	Radius 24
 	Height 56
 	Mass 400
@@ -225,7 +225,7 @@ actor AracnorbBall
 Actor Wicked 30133
 {
 	//$Category SpookyMonsters
-	Health 175
+	Health 300
 	Radius 25
 	Height 88
 	Mass 200
@@ -375,7 +375,7 @@ Actor WickedTorsoRes
 Actor Fleshspawn 12187
 {
 	//$Category SpookyMonsters
-	HitObituary "%o was devoured by a FleshSpawn."
+	HitObituary "%o was devoured by a Flesh Spawn."
 	health 5
 	radius 14
 	height 30
@@ -418,8 +418,7 @@ Actor Fleshspawn 12187
 			FLSP K 2
 			FLSP L 2 A_NoBlocking
 			FLSP M 2
-			FLSP N 2
-			FLSP O -1
+			TNT1 A -1
 			Stop
 	}
 }
