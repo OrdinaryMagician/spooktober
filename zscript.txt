@@ -46,3 +46,27 @@ class WaterHandler : StaticEventHandler {
 		}
 	}
 }
+
+// for SPOOK09
+Class PowerScuba : Powerup
+{
+	Default
+	{
+		Powerup.Duration -60;
+		Powerup.Color "40 40 ff",  0.2;
+	}
+
+	override void AbsorbDamage( int damage, Name damageType, out int newdamage )
+	{
+		if ( damageType == 'Drowning' )
+			newdamage = 0;
+	}
+
+	override void DoEffect()
+	{
+		if ( Owner.player != NULL )
+			Owner.player.mo.ResetAirSupply();
+		if ( !(level.time&0x3f) )
+			Owner.A_PlaySound("misc/mask",CHAN_AUTO);
+	}
+}

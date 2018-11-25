@@ -8,7 +8,7 @@ texture CGCANI00
     pic CGCANI05 tics 1.5
     pic CGCANI06 tics 1.5
     pic CGCANI07 tics 1.5
-    
+
 switch CGSWC00A on sound Switch1 pic CGSWC00B tics 0
 switch CGSWC00B off sound Switch2 pic CGSWC00A tics 0
 
@@ -33,3 +33,4 @@ switch CDOORB off sound Switch2 pic CDOORA tics 0
 warp2 texture sbuba0
 
 cameratexture CAMTEX0 72 51 fit 24 17
+cameratexture CAMTEX1 72 51 fit 24 17
