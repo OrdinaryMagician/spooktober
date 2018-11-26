@@ -207,14 +207,14 @@ SP_SPOOK06 = "Avarice - by: UndeadRyker";
 SP_SPOOK07 = "The Crimson Flow - by: Rachael";
 SP_SPOOK08 = "The Graveyard Shift - by: Batandy";
 SP_SPOOK09 = "Deep Sea - by: Camper125Lv";
-SP_SPOOK10 = "The War-den - by: Pixel Eater";
+SP_SPOOK10 = "Mansion of Despair - by: QuakedoomNukem Cz";
 SP_SPOOK11 = "Large House of Illusions - by: leodoom85";
 SP_SPOOK12 = "Alone in the Dark - by: ImpieTwo";
 SP_SPOOK13 = "\ctNightmare Fuel Arena\c- - by: Marisa Kirisame";
 SP_SECRET01 = "\cdUncle Reggie's Basement\c- - by: Giraffe Man";
 SP_SECRET02 = "\czBobby\c- - by: ImpieTwo";
 SP_SECRET03 = "\c[DeepRed]Point Motion\c- - by: Marisa Kirisame";
-SP_SECRET04 = "\cpMansion of Despair\c- - by: QuakedoomNukem Cz";
+SP_SECRET04 = "\cjThe War-den\c- - by: Pixel Eater";
 SP_SECRET05 = "\cxGolden Slaughterer\c- - by: Marisa Kirisame";
 
 // Exit Text

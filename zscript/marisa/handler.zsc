@@ -658,8 +658,8 @@ Class SpooktoberHandler : EventHandler
 		switch ( level.levelnum )
 		{
 		case 1:
-		case 11:
 		case 17:
+		case 18:
 		case 19:
 			// you get nothing
 			break;
@@ -672,9 +672,9 @@ Class SpooktoberHandler : EventHandler
 			break;
 		case 5:
 		case 10:
+		case 11:
 		case 14:
 		case 16:
-		case 18:
 			// fist only
 			mo.GiveInventory("Fist",1);
 			break;
