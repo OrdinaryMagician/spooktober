@@ -61,10 +61,12 @@ misc/ulava lava31
 misc/wind5 wind21
 $pitchshiftrange 4
 misc/uquake quake31
+$pitchshiftrange 0
 misc/stnloop4 stnloop4
 misc/adend60 adend60
 misc/wlloop31 wlloop31
 misc/wlend31 wlend31
+$pitchshiftrange 4
 // from other sources
 misc/flesh1 ftfle1
 misc/flesh2 ftfle2
