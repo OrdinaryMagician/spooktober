@@ -201,7 +201,7 @@ Class mkDialogueSequence : HUDMessageBase
 		// fade in textbox
 		if ( seqnum && (dimalpha < 1.0) )
 		{
-			dimalpha += 0.1;
+			dimalpha = min(1.0,dimalpha+0.1);
 			return false;
 		}
 		if ( delaycnt < curdelay )
@@ -216,11 +216,15 @@ Class mkDialogueSequence : HUDMessageBase
 			AdvanceText(bSkip);
 			return false;
 		}
-		if ( seqnum ) DialogueSeq(curstate);
+		if ( seqnum )
+		{
+			DialogueSeq(curstate);
+			return false;
+		}
 		// fade out textbox
 		if ( dimalpha > 0.0 )
 		{
-			dimalpha -= 0.1;
+			dimalpha = max(0.0,dimalpha-0.1);
 			return false;
 		}
 		EventHandler.SendNetworkEvent("dialogue_end");

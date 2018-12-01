@@ -818,6 +818,8 @@ Class CrowbarKaibutsu : Actor
 						Console.Printf("Investigating node (% g, % g)",searchnodes[newindex].pos.x,searchnodes[newindex].pos.y);
 					return ResolveState("Search");
 				}
+				// can't make path, just wander
+				return ResolveState("Wander");
 			}
 			return ResolveState(null);
 		}
@@ -1501,7 +1503,7 @@ Class RedDemon : Actor
 			A_Wander();
 			return true;
 		}
-		if ( CheckMeleeRange() )
+		if ( CheckMeleeRange() && (!target.player || !(target.player.cheats&CF_TOTALLYFROZEN)) )
 		{
 			target.DamageMobj(self,self,GetMissileDamage(0,0),'Melee',DMG_THRUSTLESS);
 			target.A_Stop();

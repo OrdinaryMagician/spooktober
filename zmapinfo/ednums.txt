@@ -129,6 +129,7 @@ DoomEdNums
 	6525 = Cleaner
 	6526 = BlackCard
 	6527 = WhiteCard
+	6528 = mkAntigravityBox
 }
 
 // Pixel Eater

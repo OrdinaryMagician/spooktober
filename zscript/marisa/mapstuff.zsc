@@ -3366,3 +3366,60 @@ Class mkRevRain : Actor
 		Loop;
 	}
 }
+
+// AABB hitbox that toggles flight for players inside it
+// arg0: X length
+// arg1: Y length
+// arg2: Z length
+Class mkAntigravityBox : Actor
+{
+	bool inside[MAXPLAYERS];
+
+	override void Tick()
+	{
+		Super.Tick();
+		for ( int i=0; i<MAXPLAYERS; i++ )
+		{
+			if ( !playeringame[i] ) continue;
+			let mo = players[i].mo;
+			// silently ignore dead
+			if ( mo.health <= 0 )
+			{
+				if ( inside[i] )
+				{
+					mo.player.cheats &= ~CF_FLY;
+					mo.bFLY = false;
+					mo.bNOGRAVITY = false;
+					inside[i] = false;
+				}
+				continue;
+			}
+			// check bounds
+			Vector3 diff = level.Vec3Diff(pos,mo.pos);
+			bool nowinside = (abs(diff.x)<=args[0])&&(abs(diff.y)<=args[1])&&(abs(diff.z)<=args[2]);
+			if ( nowinside )
+			{
+				mo.player.cheats |= CF_FLY;
+				mo.bFLY = true;
+				mo.bNOGRAVITY = true;
+				if ( inside[i] ) continue;
+				inside[i] = true;
+			}
+			else
+			{
+				if ( !inside[i] ) continue;
+				mo.player.cheats &= ~CF_FLY;
+				mo.bFLY = false;
+				mo.bNOGRAVITY = false;
+				inside[i] = false;
+			}
+		}
+	}
+
+	Default
+	{
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+DONTSPLASH;
+	}
+}

@@ -634,6 +634,11 @@ Class SpooktoberHandler : EventHandler
 				mo.scale = d.scale;
 				mo.player.viewheight = mo.viewheight = d.viewheight;
 				mo.viewbob = d.viewbob;
+				// in case the player somehow manages to trigger a painting while in a ladder
+				// not like this is even possible (unless it's in coop, which the map pack isn't meant for, but what the hell, just in case)
+				mo.player.cheats &= ~CF_FLY;
+				mo.bFLY = false;
+				mo.bNOGRAVITY = false;
 			}
 			else if ( level.levelnum == 17 )
 			{

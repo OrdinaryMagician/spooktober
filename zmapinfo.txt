@@ -41,6 +41,7 @@ Map SPOOKHUB lookup "SP_HUB"
 	SecretNext = "EndGame2"
 	levelnum = 1
 	Sky1 = "HUBSKY"
+	lightadditivesurfaces = 1
 }
 
 Map SPOOK01 lookup "SP_SPOOK01"
