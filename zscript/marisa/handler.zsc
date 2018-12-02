@@ -830,14 +830,15 @@ Class SpooktoberHandler : EventHandler
 
 	override void UiTick()
 	{
-		// replace hud with invisible hud when in the hub
+		// replace hud
 		if ( level.levelnum == 1 || level.levelnum == 17 )
 		{
 			if ( StatusBar is 'SpooktoberHUD' ) return;
-			// set null hud
+			// create replacement hud
 			let n = new("SpooktoberHUD");
-			n.oldbar = StatusBar.GetClass();
-			StatusBar.Destroy();
+			// stash away old bar
+			n.oldbar = StatusBar;
+			// set and initialize new bar
 			StatusBar = n;
 			StatusBar.AttachToPlayer(players[consoleplayer]);
 			n.Init();
@@ -845,12 +846,11 @@ Class SpooktoberHandler : EventHandler
 		}
 		else if ( StatusBar is 'SpooktoberHUD' )
 		{
-			let n = BaseStatusBar(new(SpooktoberHUD(StatusBar).oldbar));
-			n.Init();
+			let n = SpooktoberHUD(StatusBar).oldbar;
+			// not needed here
 			StatusBar.Destroy();
+			// restore old bar
 			StatusBar = n;
-			StatusBar.AttachToPlayer(players[consoleplayer]);
-			StatusBar.NewGame();
 		}
 	}
 }

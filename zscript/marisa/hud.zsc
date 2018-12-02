@@ -1,7 +1,7 @@
 // Replacement HUD for the hub and secret03
 Class SpooktoberHUD : BaseStatusBar
 {
-	Class<BaseStatusBar> oldbar;
+	BaseStatusBar oldbar;
 	HUDFont mHUDFont;
 	int diestage;
 
