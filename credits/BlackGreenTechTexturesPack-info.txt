@@ -1,0 +1,6 @@
+Source: Various Doom 2 textures
+Count: 69
+Palette: Custom
+Format: TX_ markers
+Anims/Switches: Yes, ZDoom compatible
+Description: A set of textures of a black & green themed style that I used for a few maps that I think other people may like

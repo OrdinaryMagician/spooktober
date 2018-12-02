@@ -1,0 +1,10 @@
+texture B_VOID01 range B_VOID02 tics 8
+
+switch SWITCH01 on sound Switch1 pic SWITCH02 tics 0
+switch SWITCH02 off sound Switch2 pic SWITCH01 tics 0
+
+switch SWITCH03 on sound Switch1 pic SWITCH04 tics 0
+switch SWITCH04 off sound Switch2 pic SWITCH03 tics 0
+
+switch SWITCH05 on sound Switch1 pic SWITCH06 tics 0
+switch SWITCH06 off sound Switch2 pic SWITCH05 tics 0

@@ -1,0 +1,433 @@
+WallTexture S3DUMMY, 128, 128
+{
+	NullTexture
+	Patch S3DUMMY, 0, 0
+}
+WallTexture CITYBRIK, 128, 128
+{
+	Patch CITYBRIK, 0, 0
+}
+WallTexture CITYBRI2, 128, 128
+{
+	Patch CITYBRI2, 0, 0
+}
+WallTexture CITYBRI3, 128, 128
+{
+	Patch CITYBRI3, 0, 0
+}
+WallTexture CITYBRI4, 128, 128
+{
+	Patch CITYBRI4, 0, 0
+}
+WallTexture ALLBLACK, 128, 128
+{
+	Patch ALLBLACK, 0, 0
+}
+WallTexture JUNKFENC, 128, 128
+{
+	Patch JUNKFENC, 0, 0
+}
+WallTexture JUNKWOOD, 24, 128
+{
+	Patch JUNKWOOD, 0, 0
+}
+WallTexture JUNKWOOH, 128, 24
+{
+	Patch JUNKWOOH, 0, 0
+}
+WallTexture CITYBRIS, 128, 128
+{
+	Patch CITYBRIS, 0, 0
+}
+WallTexture JUNKWOO2, 24, 128
+{
+	Patch JUNKWOO2, 0, 0
+}
+WallTexture JUNKWOH2, 128, 24
+{
+	Patch JUNKWOH2, 0, 0
+}
+WallTexture BRKWINDW, 128, 128
+{
+	Patch BRKWINDW, 0, 0
+}
+WallTexture VICSIGN, 128, 128
+{
+	Patch VICSIGN, 0, 0
+}
+WallTexture VICSIGN2, 128, 128
+{
+	Patch VICSIGN2, 0, 0
+}
+WallTexture CITYBRIR, 128, 128
+{
+	Patch CITYBRIR, 0, 0
+}
+WallTexture BRIKARCB, 128, 128
+{
+	Patch BRIKARCB, 0, 0
+}
+WallTexture BRIKARCH, 128, 128
+{
+	Patch BRIKARCH, 0, 0
+}
+WallTexture VICPWALL, 128, 128
+{
+	Patch VICPWALL, 0, 0
+}
+WallTexture VICDWALL, 128, 128
+{
+	Patch VICDWALL, 0, 0
+}
+WallTexture WODDSUPT, 128, 128
+{
+	Patch WODDSUPT, 0, 0
+}
+WallTexture WODDSUP2, 128, 128
+{
+	Patch WODDSUP2, 0, 0
+}
+WallTexture WODDSUB0, 128, 128
+{
+	Patch WODDSUB0, 0, 0
+}
+WallTexture WODDSUB1, 128, 128
+{
+	Patch WODDSUB1, 0, 0
+}
+WallTexture TWOODA, 64, 64
+{
+	Patch TWOODA, 0, 0
+}
+WallTexture VICWDSLT, 128, 128
+{
+	Patch VICWDSLT, 0, 0
+}
+WallTexture VWODAAA, 128, 128
+{
+	Patch VWODAAA, 0, 0
+}
+WallTexture VWODAAB, 128, 128
+{
+	Patch VWODAAB, 0, 0
+}
+WallTexture VWODAAC, 128, 128
+{
+	Patch VWODAAC, 0, 0
+}
+WallTexture VWODAAD, 128, 128
+{
+	Patch VWODAAD, 0, 0
+}
+WallTexture VWODAAE, 128, 128
+{
+	Patch VWODAAE, 0, 0
+}
+WallTexture VWODAAF, 128, 128
+{
+	Patch VWODAAF, 0, 0
+}
+WallTexture VWODAAG, 128, 128
+{
+	Patch VWODAAG, 0, 0
+}
+WallTexture VWODAAH, 128, 128
+{
+	Patch VWODAAH, 0, 0
+}
+WallTexture VWODAAI, 128, 128
+{
+	Patch VWODAAI, 0, 0
+}
+WallTexture VWODIUO, 128, 128
+{
+	Patch VWODIUO, 0, 0
+}
+WallTexture VWODNOB, 128, 128
+{
+	Patch VWODNOB, 0, 0
+}
+WallTexture VWODAAJ, 128, 128
+{
+	Patch VWODAAJ, 0, 0
+}
+WallTexture GRATING, 128, 128
+{
+	Patch GRATING, 0, 0
+}
+WallTexture VICLOCK, 128, 128
+{
+	Patch VICLOCK, 0, 0
+}
+WallTexture VWINDOW, 128, 128
+{
+	Patch VWINDOW, 0, 0
+}
+WallTexture VWINDOW2, 128, 128
+{
+	Patch VWINDOW2, 0, 0
+}
+WallTexture VWALLAAA, 128, 128
+{
+	Patch VWALLAAA, 0, 0
+}
+WallTexture VWALLAAB, 128, 128
+{
+	Patch VWALLAAB, 0, 0
+}
+WallTexture VWALLAAC, 128, 128
+{
+	Patch VWALLAAC, 0, 0
+}
+WallTexture VWALLAAD, 128, 128
+{
+	Patch VWALLAAD, 0, 0
+}
+WallTexture VWALLAAE, 128, 128
+{
+	Patch VWALLAAE, 0, 0
+}
+WallTexture VWALLAAF, 128, 128
+{
+	Patch VWALLAAF, 0, 0
+}
+WallTexture VWALLAAR, 128, 128
+{
+	Patch VWALLAAR, 0, 0
+}
+WallTexture VWINDOW3, 128, 128
+{
+	Patch VWINDOW3, 0, 0
+}
+WallTexture VWINDOW4, 128, 128
+{
+	Patch VWINDOW4, 0, 0
+}
+WallTexture DOOR, 80, 128
+{
+	Patch DOOR, 0, 0
+}
+WallTexture BRICKS11, 128, 128
+{
+	Patch BRICKS11, 0, 0
+}
+WallTexture BRICKS12, 128, 128
+{
+	Patch BRICKS12, 0, 0
+}
+WallTexture BRICKS13, 128, 128
+{
+	Patch BRICKS13, 0, 0
+}
+WallTexture BRICKS14, 128, 128
+{
+	Patch BRICKS14, 0, 0
+}
+WallTexture BRICKS17, 128, 128
+{
+	Patch BRICKS17, 0, 0
+}
+WallTexture BRICKS18, 128, 128
+{
+	Patch BRICKS18, 0, 0
+}
+WallTexture WOOD163, 128, 128
+{
+	Patch WOOD163, 0, 0
+}
+WallTexture WOOD166, 128, 128
+{
+	Patch WOOD166, 0, 0
+}
+WallTexture WOOD167, 128, 128
+{
+	Patch WOOD167, 0, 0
+}
+WallTexture WOOD168, 128, 128
+{
+	Patch WOOD168, 0, 0
+}
+WallTexture BRICKD11, 128, 128
+{
+	Patch BRICKD11, 0, 0
+}
+WallTexture BRICKD12, 128, 128
+{
+	Patch BRICKD12, 0, 0
+}
+WallTexture BRICKD13, 128, 128
+{
+	Patch BRICKD13, 0, 0
+}
+WallTexture BRICKD14, 128, 128
+{
+	Patch BRICKD14, 0, 0
+}
+WallTexture BRICKD17, 128, 128
+{
+	Patch BRICKD17, 0, 0
+}
+WallTexture BRICKD18, 128, 128
+{
+	Patch BRICKD18, 0, 0
+}
+WallTexture WODBRK01, 128, 128
+{
+	Patch WODBRK01, 0, 0
+}
+WallTexture WODBRK02, 128, 128
+{
+	Patch WODBRK02, 0, 0
+}
+WallTexture WODBRK03, 128, 128
+{
+	Patch WODBRK03, 0, 0
+}
+WallTexture WODBRK04, 128, 128
+{
+	Patch WODBRK04, 0, 0
+}
+WallTexture WODBRK11, 128, 128
+{
+	Patch WODBRK11, 0, 0
+}
+WallTexture WODBRK12, 128, 128
+{
+	Patch WODBRK12, 0, 0
+}
+WallTexture WODBRK13, 128, 128
+{
+	Patch WODBRK13, 0, 0
+}
+WallTexture WODBRK14, 128, 128
+{
+	Patch WODBRK14, 0, 0
+}
+WallTexture WODBRK21, 128, 128
+{
+	Patch WODBRK21, 0, 0
+}
+WallTexture WODBRK22, 128, 128
+{
+	Patch WODBRK22, 0, 0
+}
+WallTexture WODBRK23, 128, 128
+{
+	Patch WODBRK23, 0, 0
+}
+WallTexture WODBRK24, 128, 128
+{
+	Patch WODBRK24, 0, 0
+}
+WallTexture WODBRK25, 128, 128
+{
+	Patch WODBRK25, 0, 0
+}
+WallTexture WODBRK26, 128, 128
+{
+	Patch WODBRK26, 0, 0
+}
+WallTexture WODBRK31, 128, 128
+{
+	Patch WODBRK31, 0, 0
+}
+WallTexture WODBRK32, 128, 128
+{
+	Patch WODBRK32, 0, 0
+}
+WallTexture WODBRK33, 128, 128
+{
+	Patch WODBRK33, 0, 0
+}
+WallTexture WODBRK34, 128, 128
+{
+	Patch WODBRK34, 0, 0
+}
+WallTexture WODBRK35, 128, 128
+{
+	Patch WODBRK35, 0, 0
+}
+WallTexture WODBRK36, 128, 128
+{
+	Patch WODBRK36, 0, 0
+}
+WallTexture WODBRK37, 128, 128
+{
+	Patch WODBRK37, 0, 0
+}
+WallTexture WODBRK38, 128, 128
+{
+	Patch WODBRK38, 0, 0
+}
+WallTexture WODBRK39, 128, 128
+{
+	Patch WODBRK39, 0, 0
+}
+WallTexture WODBRK40, 128, 128
+{
+	Patch WODBRK40, 0, 0
+}
+WallTexture WODBRK41, 128, 128
+{
+	Patch WODBRK41, 0, 0
+}
+WallTexture WODBRK42, 128, 128
+{
+	Patch WODBRK42, 0, 0
+}
+WallTexture WODBRK43, 128, 128
+{
+	Patch WODBRK43, 0, 0
+}
+WallTexture WODBRK44, 128, 128
+{
+	Patch WODBRK44, 0, 0
+}
+WallTexture WODBRK45, 128, 128
+{
+	Patch WODBRK45, 0, 0
+}
+WallTexture WODBRK46, 128, 128
+{
+	Patch WODBRK46, 0, 0
+}
+WallTexture WODBRK47, 128, 128
+{
+	Patch WODBRK47, 0, 0
+}
+WallTexture WODBRK48, 128, 128
+{
+	Patch WODBRK48, 0, 0
+}
+WallTexture WODWOD01, 128, 128
+{
+	Patch WODWOD01, 0, 0
+}
+WallTexture WODWOD02, 128, 128
+{
+	Patch WODWOD02, 0, 0
+}
+WallTexture WODWOD03, 128, 128
+{
+	Patch WODWOD03, 0, 0
+}
+WallTexture WODWOD04, 128, 128
+{
+	Patch WODWOD04, 0, 0
+}
+WallTexture WODWOD05, 128, 128
+{
+	Patch WODWOD05, 0, 0
+}
+WallTexture WODWOD06, 128, 128
+{
+	Patch WODWOD06, 0, 0
+}
+WallTexture WODWOD07, 128, 128
+{
+	Patch WODWOD07, 0, 0
+}
+WallTexture WODWOD08, 128, 128
+{
+	Patch WODWOD08, 0, 0
+}

@@ -1,5 +1,12 @@
-*		text=auto
+*			text=auto
 *.txt		text
+animdefs.*	text
+textures.*	text
+TEXTURES.*	text
+sndinfo.*	text
+gldefs.*	text
+modeldef.*	text
+decaldef.*	text
 
 *.png		binary
 *.imgz		binary

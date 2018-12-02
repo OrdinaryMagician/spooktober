@@ -1,0 +1,89 @@
+texture ECG_1 range ECG_4 tics 3 //electrocardiogram
+
+texture PORT_1 range PORT_4 tics 8 oscillate //aging portrait
+
+texture CLOCK_1 range CLOCK_5 tics 6 oscillate //grandfather clock
+
+texture LTR_1 range LTR_3 tics 6 //left-to-right lights
+
+texture SLOTS_1 range SLOTS_4 tics 4 //slot machine
+
+texture TRAIN_1 range TRAIN_4 tics 3 //train wheels
+
+texture WHEEL1 range WHEEL2 tics 2 //wheel
+
+texture SAW1_1 range SAW1_3 tics 2 //sawblade
+
+texture SAW2_1 range SAW2_3 tics 2 //bloody sawblade
+
+texture SAW3_1 range SAW3_3 tics 2 //blood spurt for sawblade
+
+texture SWAXE_1 range SWAXE_7 TICS 8 //swinging axe
+
+texture FAN_1 range FAN_3 tics 4 //fan
+
+texture SGATE_1 range SGATE_3 tics 5 //stargate thingy :D
+
+texture TORCH_01 range TORCH_04 rand 3 6 //wall torch
+
+texture FLAG_1 range FLAG_8 rand 4 6 //evil flag
+
+texture PORTAL_1 range PORTAL_4 tics 2 //black n white portal
+
+texture STEAM_1 range STEAM_4 tics 2 //steam
+
+texture CHN1_1 range CHN1_5 tics 6 oscillate //swinging chain
+
+texture CHN2_1 range CHN2_3 tics 3 //scrolling chain
+
+texture RAIN_1 range RAIN_8 tics 2 //rain falling
+
+texture SNOW_01 range SNOW_10 tics 6 //snow falling
+
+texture BUBBLE_1 range BUBBLE_4 rand 3 6 //rising bubbles
+
+texture BLKBUB_1 range BLKBUB_4 rand 3 6 //idle bubbles
+
+texture BDRIP_1 range BDRIP_8 rand 4 8 //dripping blood
+
+texture ZAP_1 range ZAP_3 tics 2 //electricity
+
+texture WIRE_1 range WIRE_3 rand 3 5 //live wires
+
+texture SPIKE_1 range SPIKE_8 tics 4 //spinning spike trap
+
+texture GARGLOW1 range GARGLOW3 tics 8 oscillate //glowing gargoyle face
+
+texture SQUIRM_1 range SQUIRM_4 tics 4 //something squirming :\
+
+texture SNAKES_1 range SNAKES_4 tics 4 //motherfuckin snakes
+
+texture BWAT_01 range BWAT_10 tics 4 //water
+
+texture BWT2_1 range BWT2_9 tics 4 //more water
+
+texture BWT3_1 range BWT3_5 tics 4 //are ya thirsty yet?
+
+texture SHALLOW1 range SHALLOW7 tics 4 //water over bricks
+
+texture POOP_1 range POOP_7 tics 8 //lol eeeew
+
+texture POO2_1 range POO2_4 tics 8 //what a wonderful smell I've discovered...
+
+texture POOFAL_1 range POOFAL_5 tics 3 //double eeeeew!
+
+texture RED_1 range RED_8 tics 3 //red energy or liquid
+
+texture SLUDGE_1 range SLUDGE_7 tics 8 //green sludge
+
+/*
+Well, here we go. A texture pack of Blood, Plasma Pak, Cryptic Passage, and the Alpha
+and Beta releases of the game. Pretty cool stuff! As a warning, -lots- of these sumbitches
+will require either manual mirroring in a paint tool or (and I recommend this) the use of
+TEXTURES. See my tutorial for it on Realm667's forum!
+
+Have fun, y'all. --Ceeb
+
+PS: Regarding the texture set STNBRK_x, I don't know where it's complete version is, if there
+even is one. It wouldn't be hard to repair that, I don't think. Either way...
+*/
