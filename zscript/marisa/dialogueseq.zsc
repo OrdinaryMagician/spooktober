@@ -294,7 +294,7 @@ Class mkSmoothLookTo : Thinker
 		ipitch = Clamp(ipitch,-speed,speed);
 		target.A_SetAngle(target.angle+iangle,SPF_INTERPOLATE);
 		target.A_SetPitch(target.pitch+ipitch,SPF_INTERPOLATE);
-		if ( (abs(iangle) < double.epsilon) && (abs(ipitch) < double.epsilon) )
+		if ( (abs(iangle) < speed) && (abs(ipitch) < speed) )
 			Destroy();
 	}
 }
@@ -354,6 +354,11 @@ Class mkDialogueHandler : EventHandler
 			// thaw player and return camera
 			starter.cheats &= ~CF_TOTALLYFROZEN;
 			starter.camera = speakee;
+			// force end any smoothlook thinkers
+			let t = ThinkerIterator.Create("mkSmoothLookTo",Thinker.STAT_USER);
+			mkSmoothLookTo l;
+			while ( l = mkSmoothLookTo(t.Next()) )
+				if ( l.target == speakee ) l.Destroy();
 			if ( orientspeaker )
 				mkSmoothLookTo.LookTowards(speaker,oldang,oldpt,12.0);
 			seqnum = 0;
