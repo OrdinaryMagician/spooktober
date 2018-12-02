@@ -1,11 +1,129 @@
-// Completely blank HUD, stores class of previous HUD
-Class NullHUD : BaseStatusBar
+// Replacement HUD for the hub and secret03
+Class SpooktoberHUD : BaseStatusBar
 {
 	Class<BaseStatusBar> oldbar;
+	HUDFont mHUDFont;
+	int diestage;
 
 	override void Init()
 	{
 		Super.Init();
 		SetSize(0,320,200);
+		Font fnt = "FLOWNUMS";
+		mHUDFont = HUDFont.Create(fnt,fnt.GetCharWidth("0"),true);
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		if ( CPlayer.health <= 0 )
+			diestage = min(diestage+1,12);
+		else diestage = 0;
+	}
+
+	// oh-so-fancy sabi mugshot
+	void DrawMug( Vector2 pos )
+	{
+		if ( CPlayer.cheats&(CF_GODMODE|CF_GODMODE2) )
+			DrawImage("SABI30",pos,DI_ITEM_OFFSETS);
+		else if ( CPlayer.cheats&(CF_BUDDHA|CF_BUDDHA2) )
+			DrawImage(String.Format("SABI%d",20+((level.time/12)%4)),pos,DI_ITEM_OFFSETS);
+		else if ( CPlayer.health <= 0 )
+			DrawImage(String.Format("SABI%d",13+(diestage/4)),pos,DI_ITEM_OFFSETS);
+		else
+			DrawImage(String.Format("SABI%d",clamp(12-int(CPlayer.health*0.12),0,12)),pos,DI_ITEM_OFFSETS);
+	}
+
+	override void Draw( int state, double TicFrac )
+	{
+		Super.Draw(state,TicFrac);
+		if ( level.levelnum != 17 ) return;
+		SetSize(32,320,200);
+		if ( state == HUD_StatusBar )
+		{
+			BeginStatusBar();
+			// Draw bar
+			double base = 0;
+			double rx, dummy;
+			do
+			{
+				[rx, dummy, dummy] = StatusBarToRealCoords(base,0,HorizontalResolution);
+				if ( rx <= 0 ) continue;
+				else DrawImage("FLOWBAR",(base,168),DI_ITEM_RIGHT_TOP);
+				base -= 8;
+			} while ( rx > 0 );
+			base = 0;
+			do
+			{
+				[rx, dummy, dummy] = StatusBarToRealCoords(base,0,HorizontalResolution);
+				if ( rx >= Screen.GetWidth() ) continue;
+				DrawImage("FLOWBAR",(base,168),DI_ITEM_LEFT_TOP);
+				base += 8;
+			} while ( rx < Screen.GetWidth() );
+			// Draw health
+			DrawMug((10,176));
+			DrawString(mHUDFont,FormatNumber(CPlayer.health,3),(32,180));
+			// Draw keys
+			base = 296;
+			if ( CPlayer.mo.CheckKeys(8,false,true) )
+			{
+				DrawImage("DKEYB0",(base,176),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+			if ( CPlayer.mo.CheckKeys(9,false,true) )
+			{
+				DrawImage("WKEYB0",(base,176),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+			if ( CPlayer.mo.CheckKeys(2,false,true) )
+			{
+				DrawImage("BKEYB0",(base,176),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+			if ( CPlayer.mo.CheckKeys(3,false,true) )
+			{
+				DrawImage("YKEYB0",(base,176),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+			if ( CPlayer.mo.CheckKeys(1,false,true) )
+			{
+				DrawImage("RKEYB0",(base,176),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+		}
+		else if ( state == HUD_Fullscreen )
+		{
+			BeginHUD();
+			// Draw health
+			DrawMug((6,-20));
+			DrawString(mHUDFont,FormatNumber(CPlayer.health,3),(28,-16));
+			// Draw keys
+			double base = -20;
+			if ( CPlayer.mo.CheckKeys(8,false,true) )
+			{
+				DrawImage("DKEYB0",(base,-20),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+			if ( CPlayer.mo.CheckKeys(9,false,true) )
+			{
+				DrawImage("WKEYB0",(base,-20),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+			if ( CPlayer.mo.CheckKeys(2,false,true) )
+			{
+				DrawImage("BKEYB0",(base,-20),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+			if ( CPlayer.mo.CheckKeys(3,false,true) )
+			{
+				DrawImage("YKEYB0",(base,-20),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+			if ( CPlayer.mo.CheckKeys(1,false,true) )
+			{
+				DrawImage("RKEYB0",(base,-20),DI_ITEM_LEFT_TOP);
+				base -= 20;
+			}
+		}
 	}
 }

@@ -250,6 +250,15 @@ Class SpooktoberHandler : EventHandler
 
 	override void CheckReplacement( ReplaceEvent e )
 	{
+		if ( level.levelnum == 17 )
+		{
+			// prevent mods from replacing items in this map
+			if ( (e.Replacee == 'BlueCard') || (e.Replacee == 'RedCard') || (e.Replacee == 'YellowCard') || (e.Replacee == 'Stimpack') || (e.Replacee == 'Medikit') || (e.Replacee == 'Soulsphere') )
+			{
+				e.Replacement = null;
+				e.IsFinal = true;
+			}
+		}
 		if ( e.Replacee == 'BossBrain' )
 		{
 			e.Replacement = 'SpooktoberBossBrain';
@@ -822,11 +831,11 @@ Class SpooktoberHandler : EventHandler
 	override void UiTick()
 	{
 		// replace hud with invisible hud when in the hub
-		if ( level.levelnum == 1 )
+		if ( level.levelnum == 1 || level.levelnum == 17 )
 		{
-			if ( StatusBar is 'NullHUD' ) return;
+			if ( StatusBar is 'SpooktoberHUD' ) return;
 			// set null hud
-			let n = new("NullHUD");
+			let n = new("SpooktoberHUD");
 			n.oldbar = StatusBar.GetClass();
 			StatusBar.Destroy();
 			StatusBar = n;
@@ -834,9 +843,9 @@ Class SpooktoberHandler : EventHandler
 			n.Init();
 			StatusBar.NewGame();
 		}
-		else if ( StatusBar is 'NullHUD' )
+		else if ( StatusBar is 'SpooktoberHUD' )
 		{
-			let n = BaseStatusBar(new(NullHUD(StatusBar).oldbar));
+			let n = BaseStatusBar(new(SpooktoberHUD(StatusBar).oldbar));
 			n.Init();
 			StatusBar.Destroy();
 			StatusBar = n;

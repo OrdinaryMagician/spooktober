@@ -59,15 +59,14 @@ Class SilWitch : Actor
 	{
 		//$Title Silhouette Witch
 		//$Category Jaxx
-		Radius 0.1;
-		Height 0;
+		Radius 1;
+		Height 1;
 		monster;
 		-countkill;
 		+SLIDESONWALLS;
 		+NOGRAVITY;
 		+NODROPOFF;
 		-shootable;
-		-NOBLOCKMONST;
 		+friendly;
 		+Bright
 	}
