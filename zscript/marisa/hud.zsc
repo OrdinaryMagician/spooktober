@@ -37,7 +37,11 @@ Class SpooktoberHUD : BaseStatusBar
 	override void Draw( int state, double TicFrac )
 	{
 		Super.Draw(state,TicFrac);
-		if ( level.levelnum != 17 ) return;
+		if ( level.levelnum != 17 )
+		{
+			SetSize(0,320,200);
+			return;
+		}
 		SetSize(32,320,200);
 		if ( state == HUD_StatusBar )
 		{

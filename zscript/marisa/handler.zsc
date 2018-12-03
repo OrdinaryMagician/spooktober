@@ -629,6 +629,8 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldUnloaded( WorldEvent e )
 	{
+		if ( e.IsSaveGame )
+			return;
 		SpooktoberGlobals.SetCompletion(level.levelnum-2);
 		// adjust player sizes back to normal
 		// there's no "PlayerLeft" event so it has to be done here
@@ -649,7 +651,7 @@ Class SpooktoberHandler : EventHandler
 				mo.bFLY = false;
 				mo.bNOGRAVITY = false;
 			}
-			else if ( level.levelnum == 17 )
+			else if ( (level.levelnum == 17) && (mo is 'Sabitsuki') )
 			{
 				// awfully gross hack
 				oldplayer[i].SetOrigin(mo.pos,false);
@@ -706,7 +708,7 @@ Class SpooktoberHandler : EventHandler
 			mo.player.viewheight = mo.viewheight = 65;
 			mo.viewbob = d.viewbob*0.5;
 		}
-		else if ( level.levelnum == 17 )
+		else if ( (level.levelnum == 17) && !(mo is 'Sabitsuki') )
 		{
 			// awfully gross hack
 			oldplayer[e.playernumber] = mo;
@@ -715,8 +717,8 @@ Class SpooktoberHandler : EventHandler
 			n.player = mo.player;
 			mo.player.mo = PlayerPawn(n);
 			mo.player.camera = n;
-			mo.player = null;
-			mo.SetOrigin((-32000,32000,0),false);
+			//mo.player = null;	// if I unassign this, the playerpawn will not be preserved in saves
+			mo.SetOrigin((-1024,-64,0),false);
 			// needed to update who gets the footsteps
 			mo = PlayerPawn(n);
 		}

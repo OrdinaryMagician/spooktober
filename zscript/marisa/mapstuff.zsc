@@ -846,16 +846,21 @@ Class mkFootstepMaker : Thinker
 	static void SetAutomatic( bool value )
 	{
 		let t = ThinkerIterator.Create("mkFootstepMaker",STAT_USER);
-		let m = mkFootstepMaker(t.Next());
-		if ( !m ) return;
-		m.automatic = value;
+		mkFootstepMaker m;
+		while ( m = mkFootstepMaker(t.Next()) )
+			m.automatic = value;
 	}
 
 	static void AttachTo( PlayerPawn mo )
 	{
 		let t = ThinkerIterator.Create("mkFootstepMaker",STAT_USER);
-		if ( t.Next() ) return;
-		let m = new("mkFootstepMaker");
+		mkFootstepMaker m;
+		while ( m = mkFootstepMaker(t.Next()) )
+		{
+			if ( m.mo == mo )
+				return;
+		}
+		m = new("mkFootstepMaker");
 		m.ChangeStatNum(STAT_USER);
 		m.mo = mo;
 		m.init = false;
