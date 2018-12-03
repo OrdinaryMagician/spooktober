@@ -30,11 +30,17 @@ class FireImp : DoomImp
 		#### AABBCCDD 3 A_Chase;
 		Loop;
 	Melee:
-	Missile:
 		#### A 0 A_JumpIfInventory( "ShrinkWrap", 1, "See" );
 		TROO EF 8 A_FaceTarget;
-		TROO G 6 A_TroopAttack ;
+		TROO G 6 A_CatAttack ;
 		Goto See;
+	Missile:
+		#### A 0 A_JumpIfInventory( "ShrinkWrap", 1, "See" );
+		#### A 0 A_JumpIfInventory( "Evolved", 1, 1 );
+		Goto See ;
+		TROO EF 8 A_FaceTarget;
+		TROO G 6 A_TroopAttack ;
+		Goto See ;
 	Include:
 		TRAP A 0 ;
 		Goto See ;
@@ -45,6 +51,7 @@ class FireImp : DoomImp
 	{
 		super.BeginPlay() ;
 		A_SetInventory( "FearFactor", Random( 0, 1 ));
+		if( checkclass( "FireImp" )) A_GiveInventory( "Evolved", 1 );
 		ThePit = TexMan.CheckForTexture( "BLAKWAL1", TexMan.Type_Any );
 	}
 	override void Tick()
@@ -103,7 +110,7 @@ class ScratchImp : FireImp
 		TROO G 6 A_CatAttack ;
 		Goto See;
 	Missile:
-		Goto See ;
+		Goto See;
 	}
 }
 
@@ -117,7 +124,29 @@ class TrappedImp : ScratchImp
 	}
 }
 
-extend class ScratchImp
+class EvolvingImp : FireImp
+{
+//$Category "Spooktober"
+	override void BeginPlay()
+	{
+		super.BeginPlay() ;
+		A_GiveInventory( "ShrinkWrap", 1 );
+		A_TakeInventory( "Evolved", 1 );
+		
+	}
+	override bool Used( actor user )
+	{
+		if( user )
+		{
+			super.used( user );
+			A_GiveInventory( "Evolution", 1 );
+			return true ;
+		}
+		else return false ;
+	}
+}
+
+extend class FireImp
 {
 	void A_CatAttack()
 	{
@@ -134,6 +163,50 @@ extend class ScratchImp
 
 class FearFactor : Inventory
 {}
+
+class Evolved : Inventory
+{
+	override void AttachToOwner( actor owner )
+	{
+		if( owner )
+		{
+			super.AttachToOwner( owner ) ;
+			owner.A_SetTranslation( "Evolved" );
+		}
+	}
+	
+	override void DetachFromOwner()
+	{
+		if( owner )
+		{
+			super.DetachFromOwner() ;
+			owner.A_SetTranslation( "None" );
+		}
+	}
+}
+
+class Evolution : Inventory
+{
+	int progress ;
+	
+	override void DoEffect()
+	{
+		if( owner )
+		{
+			super.DoEffect() ;
+			
+			if( owner.CountInv( "ShrinkWrap" ) == 0 )
+			{
+				progress++ ;
+				if( progress > 3325 )
+				{
+					owner.A_GiveInventory( "Evolved", 1 );
+					owner.TakeInventory( "Evolution", 1 );
+				}
+			}
+		}
+	}
+}
 
 class ShrinkWrap : Inventory
 {

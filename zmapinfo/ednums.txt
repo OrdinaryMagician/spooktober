@@ -167,6 +167,7 @@ DoomEdNums
 	11029 = UpSdDnBulls
 	11030 = UpSdDnShells
 	11031 = UpSdDnBPack
+	11032 = EvolvingImp
 }
 
 // Jaxx
