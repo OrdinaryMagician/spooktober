@@ -37,8 +37,8 @@ Map SPOOKHUB lookup "SP_HUB"
 	EvenLighting
 	RememberState
 	Music = "D_SPKHUB"
-	Next = "EndGame2"
-	SecretNext = "EndGame2"
+	Next = EndPic, "CREDIT"
+	SecretNext = EndPic, "CREDIT"
 	levelnum = 1
 	Sky1 = "HUBSKY"
 	lightadditivesurfaces = 1

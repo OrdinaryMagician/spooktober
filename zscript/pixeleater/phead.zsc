@@ -389,6 +389,7 @@ class PumpKing : Archvile
 	{
 		+INVULNERABLE
 		+LOOKALLAROUND
+		+TELESTOMP
 	}
 	States
 	{
@@ -598,6 +599,7 @@ class TheBuried : ZombieMan
 			Health = 20 ;
 			PainChance = 200 ;
 			bCorpse = false ;
+			Target = players[ consoleplayer ].mo ;
 		}
 	Hunt:
 		POSS AABBCCDD 4 A_Chase ;
@@ -647,6 +649,7 @@ class ChainedDown : ChaingunGuy
 			Health = 70 ;
 			PainChance = 170 ;
 			bCorpse = false ;
+			Target = players[ consoleplayer ].mo ;
 		}
 	Hunt:
 		CPOS AABBCCDD 3 A_Chase;
@@ -694,6 +697,7 @@ class DarkKnight : HellKnight
 	{
 		Translation "DarkKnight" ;
 		+NEVERTARGET
+		+NOINFIGHTING
 		Obituary "I oughtta hit you with a bat, man" ;
 		HitObituary "You contracted Lyssavirus" ;
 	}
