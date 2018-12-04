@@ -599,7 +599,7 @@ class TheBuried : ZombieMan
 			Health = 20 ;
 			PainChance = 200 ;
 			bCorpse = false ;
-			Target = players[ consoleplayer ].mo ;
+			//Target = players[ consoleplayer ].mo ;
 		}
 	Hunt:
 		POSS AABBCCDD 4 A_Chase ;
@@ -649,7 +649,7 @@ class ChainedDown : ChaingunGuy
 			Health = 70 ;
 			PainChance = 170 ;
 			bCorpse = false ;
-			Target = players[ consoleplayer ].mo ;
+			//Target = players[ consoleplayer ].mo ;
 		}
 	Hunt:
 		CPOS AABBCCDD 3 A_Chase;
