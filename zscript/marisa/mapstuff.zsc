@@ -1101,8 +1101,9 @@ Class mkFootstepMaker : Thinker
 // because most thief decorations expect collision boxes to have independent
 // width/length, these have to be used to cover the gaps
 // Y Scale controls radius and X scale controls height
-// (they're in that order because SLADE is a special boy)
+// (this used to be due to a SLADE quirk, but it's fixed now and it's too late to swap them back)
 // the AMBUSH flag makes them shootable
+// the STANDSTILL flag makes projectiles pass through
 // the Score property controls the footstep material
 // (see above class for reference on materials)
 Class mkBlockActor : Actor
@@ -1125,6 +1126,7 @@ Class mkBlockActor : Actor
 		Super.PostBeginPlay();
 		A_SetSize(Scale.y,Scale.x);
 		bSHOOTABLE = bAMBUSH;
+		bNONSHOOTABLE = bSTANDSTILL;
 	}
 	States
 	{
