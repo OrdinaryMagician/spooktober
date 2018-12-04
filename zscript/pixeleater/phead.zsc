@@ -599,7 +599,7 @@ class TheBuried : ZombieMan
 			Health = 20 ;
 			PainChance = 200 ;
 			bCorpse = false ;
-			//Target = players[ consoleplayer ].mo ;
+			A_FindTarget() ;
 		}
 	Hunt:
 		POSS AABBCCDD 4 A_Chase ;
@@ -621,6 +621,25 @@ extend class TheBuried
 	{
 		Health = 999999 ;
 		PainChance = 0 ;
+	}
+	void A_FindTarget()
+	{
+		int closest = 0 ;
+		double shortest = 0x7fffffff ;
+		for( int i = 0; i < MAXPLAYERS; i++ )
+		{
+			if( players[i].mo
+			&& playeringame[i] )
+			{
+				double dist = self.Distance2D( players[i].mo );
+				if( dist < shortest )
+				{
+					shortest = dist ;
+					closest = i ;
+				}
+			}
+		}
+		Target = players[closest].mo ;
 	}
 }
 
@@ -649,7 +668,7 @@ class ChainedDown : ChaingunGuy
 			Health = 70 ;
 			PainChance = 170 ;
 			bCorpse = false ;
-			//Target = players[ consoleplayer ].mo ;
+			A_FindTarget() ;
 		}
 	Hunt:
 		CPOS AABBCCDD 3 A_Chase;
@@ -686,6 +705,25 @@ extend class ChainedDown
 				SetStateLabel( "Hunt" );
 			}
 		}
+	}
+	void A_FindTarget()
+	{
+		int closest = 0 ;
+		double shortest = 0x7fffffff ;
+		for( int i = 0; i < MAXPLAYERS; i++ )
+		{
+			if( players[i].mo
+			&& playeringame[i] )
+			{
+				double dist = self.Distance2D( players[i].mo );
+				if( dist < shortest )
+				{
+					shortest = dist ;
+					closest = i ;
+				}
+			}
+		}
+		Target = players[closest].mo ;
 	}
 }
 
