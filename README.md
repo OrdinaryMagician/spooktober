@@ -13,24 +13,39 @@ A Halloween 2018 map pack for Doom.
 - The project deadline is on the 30th of October, the day before Halloween.
   Can be delayed if necessary for some mappers to finish their work.
 
-### Current Status
+### The maps
 
-- **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame [completed]
-- **SPOOK01**: Imperishable Fright - Jaxxoon R [completed] [par time set]
-- **SPOOK02**: A Baron's Nightmare - Rachael [completed] [par time set]
-- **SPOOK03**: Pumpkin Head - Pixel Eater [completed] [par time set]
-- **SPOOK04**: For Whom It Is Reserved - zrrion the insect [completed] [par time set]
-- **SPOOK05**: The Unpowered Spaceship - CanSteam [completed] [par time set]
-- **SPOOK06**: Avarice - UndeadRyker [completed] [par time set]
-- **SPOOK07**: The Crimson Flow - Rachael [completed] [par time set]
-- **SPOOK08**: The Graveyard Shift - Batandy [completed] [par time set]
-- **SPOOK09**: Deep Sea - Camper125Lv [completed] [par time set]
-- **SPOOK10**: Mansion of Despair - QuakedoomNukem Cz [completed] [par time set]
-- **SPOOK11**: Large House of Illusions - leodoom85 [completed] [par time set]
-- **SPOOK12**: Alone in the Dark - ImpieTwo [completed] [par time set]
-- **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame [completed] [par time set]
-- **SECRET01**: Uncle Reggie's Basement - Giraffe Man [completed] [par time set]
-- **SECRET02**: Bobby - ImpieTwo [completed] [par time set]
-- **SECRET03**: Point Motion - Marisa Kirisame [completed] [par time set]
-- **SECRET04**: The War-den - Pixel Eater [completed] [par time set]
-- **SECRET05**: Golden Slaughterer - Marisa Kirisame [completed] [par time set]
+- **SPOOKHUB**: Gallery of Spooks - Marisa Kirisame
+
+#### Foyer
+
+- **SPOOK01**: Imperishable Fright - Jaxxoon R
+- **SPOOK02**: A Baron's Nightmare - Rachael
+- **SPOOK03**: Pumpkin Head - Pixel Eater
+- **SECRET01**: Uncle Reggie's Basement - Giraffe Man
+
+#### East Wing
+
+- **SPOOK04**: For Whom It Is Reserved - zrrion the insect
+- **SPOOK05**: The Unpowered Spaceship - CanSteam
+- **SPOOK06**: Avarice - UndeadRyker
+- **SECRET02**: Bobby - ImpieTwo
+
+#### West Wing
+
+- **SPOOK07**: The Crimson Flow - Rachael
+- **SPOOK08**: The Graveyard Shift - Batandy
+- **SPOOK09**: Deep Sea - Camper125Lv
+- **SECRET03**: Point Motion - Marisa Kirisame
+
+#### Second Floor
+
+- **SPOOK10**: Mansion of Despair - QuakedoomNukem Cz
+- **SPOOK11**: Large House of Illusions - leodoom85
+- **SPOOK12**: Alone in the Dark - ImpieTwo
+- **SECRET04**: The War-den - Pixel Eater
+
+#### Basement
+
+- **SPOOK13**: Nightmare Fuel Arena - Marisa Kirisame
+- **SECRET05**: Golden Slaughterer - Marisa Kirisame

@@ -49,7 +49,8 @@ Class SpooktoberGlobals : Thinker
 		{
 			// store the stats
 			v.maptimes[n][0] = level.maptime/Thinker.TICRATE;
-			v.maptimes[n][1] = level.partime;	// this one is in seconds
+			if ( !v.maptimes[n][1] || (v.maptimes[n][0] < v.maptimes[n][1]) )
+				v.maptimes[n][1] = v.maptimes[n][0];
 			v.mapkills[n][0] = level.killed_monsters;
 			v.mapkills[n][1] = level.total_monsters;
 			v.mapitems[n][0] = level.found_items;
@@ -511,7 +512,7 @@ Class SpooktoberHandler : EventHandler
 		int len;
 		int maxlen = 0;
 		int h1 = 0, m1 = 0, s1, h2 = 0, m2 = 0, s2, ki1, ki2, it1, it2, sc1, sc2;
-		String ctime, ptime, ckills, citems, csecrets;
+		String ctime, btime, ckills, citems, csecrets;
 		if ( SpooktoberGlobals.GetCompletion(tdata.HitLine.args[2]-2) )
 		{
 			[s1, s2] = SpooktoberGlobals.GetTimes(tdata.HitLine.args[2]-2);
@@ -534,9 +535,9 @@ Class SpooktoberHandler : EventHandler
 				h2 = s2/3600;
 				m2 = (s2%3600)/60;
 				s2 = s2%60;
-				if ( h2 > 0 ) ptime = String.Format("%02d:%02d:%02d",h2,m2,s2);
-				else ptime = String.Format("%02d:%02d",m2,s2);
-				len = statsfont.StringWidth("Par: "..ptime);
+				if ( h2 > 0 ) btime = String.Format("%02d:%02d:%02d",h2,m2,s2);
+				else btime = String.Format("%02d:%02d",m2,s2);
+				len = statsfont.StringWidth("Best: "..btime);
 				if ( len > maxlen ) maxlen = len;
 				ypos -= statsfont.GetHeight();
 			}
@@ -594,9 +595,9 @@ Class SpooktoberHandler : EventHandler
 			}
 			if ( (s2 > 0) || (m2 > 0) || (h2 > 0) )
 			{
-				Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Par:",DTA_Bottom320x200,true);
-				len = statsfont.StringWidth(ptime);
-				Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,ptime,DTA_Bottom320x200,true);
+				Screen.DrawText(statsfont,Font.CR_RED,(320.-maxlen)/2.,ypos,"Best:",DTA_Bottom320x200,true);
+				len = statsfont.StringWidth(btime);
+				Screen.DrawText(statsfont,Font.CR_WHITE,(320.+maxlen)/2.-len,ypos,btime,DTA_Bottom320x200,true);
 				ypos += statsfont.GetHeight();
 			}
 			if ( ki2 > 0 )
