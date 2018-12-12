@@ -6,7 +6,7 @@ D_NO2, D_PON1, D_BGM40, D_BGM2, D_KAZE : Tracks from .flow
 D_DEEP : Deep Red theme
 C9_DARK : Dark Clouds - C9-La Creme
 CDE-WINT : Winter Frontiers - CDE
-VANDNBRG : Vandenburg Airfield from Deus Ex
+THANTOS2 : Prison Planet Thantos 2nd Mix from Bomberman 64: The Second Attack
 STEPS, DRIPS, MONSTER : Tracks from Alone in the Dark series
 CFOREBOD, CSCISSOR : Tracks from Clock Tower
 D_SPOOK : Spooky Scary Skeletons by Andrew Gold

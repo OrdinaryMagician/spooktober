@@ -1387,7 +1387,7 @@ Class mkSecret05GoatInvasion : Actor
 		// maximum active goat budget
 		int goatbudget;
 		// spawnpoints
-		int goattid, ammotid, healthtid;
+		int goattid, ammotid, healthtid, respawntid;
 		// world stuffs
 		int useline;	// line to use for activating this stage
 		int gate;	// gate that opens for this stage, then closes at start
@@ -1400,6 +1400,15 @@ Class mkSecret05GoatInvasion : Actor
 	int curwave;
 	Array<Actor> goatspawns, ammospawns, healthspawns;
 	Array<Actor> goats, ammos, healths;
+
+	static int GetRespawnDest()
+	{
+		let t = ThinkerIterator.Create("mkSecret05GoatInvasion");
+		mkSecret05GoatInvasion i;
+		while ( i = mkSecret05GoatInvasion(t.Next()) )
+			return i.waves[i.curwave].respawntid;
+		return 900;
+	}
 
 	int CountHealth()
 	{
@@ -1462,6 +1471,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[0].goattid = 201;
 		waves[0].ammotid = 301;
 		waves[0].healthtid = 401;
+		waves[0].respawntid = 2001;
 		// 2
 		waves[1].lessergoats = 15;
 		waves[1].goatbudget = 4;
@@ -1470,6 +1480,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[1].goattid = 202;
 		waves[1].ammotid = 302;
 		waves[1].healthtid = 402;
+		waves[1].respawntid = 2002;
 		waves[1].useline = 4;
 		waves[1].blockline = 3;
 		waves[1].gate = 3;
@@ -1484,6 +1495,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[2].goattid = 203;
 		waves[2].ammotid = 303;
 		waves[2].healthtid = 403;
+		waves[2].respawntid = 2003;
 		waves[2].useline = 6;
 		waves[2].blockline = 5;
 		waves[2].gate = 4;
@@ -1497,6 +1509,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[3].goattid = 204;
 		waves[3].ammotid = 304;
 		waves[3].healthtid = 404;
+		waves[3].respawntid = 2004;
 		waves[3].useline = 8;
 		waves[3].blockline = 7;
 		waves[3].gate = 5;
@@ -1509,6 +1522,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[4].goattid = 205;
 		waves[4].ammotid = 305;
 		waves[4].healthtid = 405;
+		waves[4].respawntid = 2005;
 		waves[4].useline = 10;
 		waves[4].blockline = 9;
 		waves[4].gate = 6;
@@ -1523,6 +1537,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[5].goattid = 206;
 		waves[5].ammotid = 306;
 		waves[5].healthtid = 406;
+		waves[5].respawntid = 2006;
 		waves[5].useline = 12;
 		waves[5].blockline = 11;
 		waves[5].gate = 7;
@@ -1535,6 +1550,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[6].goattid = 205;
 		waves[6].ammotid = 305;
 		waves[6].healthtid = 405;
+		waves[6].respawntid = 2005;
 		waves[6].useline = 11;
 		waves[6].blockline = 12;
 		waves[6].gate = 7;
@@ -1548,6 +1564,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[7].goattid = 207;
 		waves[7].ammotid = 307;
 		waves[7].healthtid = 407;
+		waves[7].respawntid = 2007;
 		waves[7].useline = 14;
 		waves[7].blockline = 13;
 		waves[7].gate = 8;
@@ -1560,6 +1577,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[8].goattid = 208;
 		waves[8].ammotid = 308;
 		waves[8].healthtid = 408;
+		waves[8].respawntid = 2008;
 		waves[8].useline = 16;
 		waves[8].blockline = 15;
 		waves[8].gate = 9;
@@ -1571,6 +1589,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[9].goattid = 209;
 		waves[9].ammotid = 309;
 		waves[9].healthtid = 409;
+		waves[9].respawntid = 2009;
 		waves[9].useline = 18;
 		waves[9].blockline = 17;
 		waves[9].gate = 10;
@@ -1582,6 +1601,7 @@ Class mkSecret05GoatInvasion : Actor
 		waves[10].goattid = 201;
 		waves[10].ammotid = 301;
 		waves[10].healthtid = 401;
+		waves[10].respawntid = 2001;
 		waves[10].useline = 2;
 		waves[10].blockline = 1;
 		waves[10].gate = 11;

@@ -177,6 +177,15 @@ Class SpooktoberUtil abstract play
 		level.levelname.Split(splitname," - by: ");
 		return splitname[part];
 	}
+
+	// kills all actors in a sector
+	static void KillInSector( int tag, bool crushing = true )
+	{
+		let t = SectorTagIterator.Create(tag);
+		for ( int s=t.Next(); s!=-1; s=t.Next() )
+			for ( Actor a=level.Sectors[s].thinglist; a; a=a.snext )
+				a.DamageMobj(null,null,int.max,crushing?'Crush':'Massacre',DMG_FORCED|DMG_THRUSTLESS);
+	}
 }
 
 // pretty cutting-edge stuff

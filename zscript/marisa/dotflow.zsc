@@ -1203,6 +1203,8 @@ Class FleshPost1 : Actor
 	{
 		//$Title Flesh Post 1
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 16;
 		Height 64;
@@ -1225,6 +1227,8 @@ Class FleshPost2 : Actor
 	{
 		//$Title Flesh Post 2
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 16;
 		Height 64;
@@ -1247,6 +1251,8 @@ Class FleshBeast1 : Actor
 	{
 		//$Title Flesh Beast 1
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 24;
 		Height 64;
@@ -1269,6 +1275,8 @@ Class FleshBeast2 : Actor
 	{
 		//$Title Flesh Beast 2
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 24;
 		Height 64;
@@ -1291,6 +1299,8 @@ Class FleshBeast3 : Actor
 	{
 		//$Title Flesh Beast 3
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 32;
 		Height 64;
@@ -1313,6 +1323,8 @@ Class FleshBeast4 : Actor
 	{
 		//$Title Flesh Beast 4
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 40;
 		Height 64;
@@ -1383,6 +1395,8 @@ Class FloorBlood1 : Actor
 	{
 		//$Title Floor Blood 1
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1402,6 +1416,8 @@ Class FloorBlood2 : Actor
 	{
 		//$Title Floor Blood 2
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1421,6 +1437,8 @@ Class FloorEye : Actor
 	{
 		//$Title Floor Eye
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1441,6 +1459,8 @@ Class FleshBanner1 : Actor
 	{
 		//$Title Flesh Banner 1
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1463,6 +1483,8 @@ Class FleshBanner2 : Actor
 	{
 		//$Title Flesh Banner 2
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1662,6 +1684,8 @@ Class WallEye : Actor
 	{
 		//$Title Wall Eye
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1696,6 +1720,8 @@ Class WallMouth : Actor
 	{
 		//$Title Wall Mouth
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1744,6 +1770,8 @@ Class MouthBanner1 : Actor
 	{
 		//$Title Mouth Banner 1
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1766,6 +1794,8 @@ Class MouthBanner2 : Actor
 	{
 		//$Title Mouth Banner 2
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1788,6 +1818,8 @@ Class MouthBanner3 : Actor
 	{
 		//$Title Mouth Banner 3
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1810,6 +1842,8 @@ Class MouthBanner4 : Actor
 	{
 		//$Title Mouth Banner 4
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1832,6 +1866,8 @@ Class MouthBanner5 : Actor
 	{
 		//$Title Mouth Banner 5
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1854,6 +1890,8 @@ Class MouthBanner6 : Actor
 	{
 		//$Title Mouth Banner 6
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1876,6 +1914,8 @@ Class EyeBanner1 : Actor
 	{
 		//$Title Eye Banner 1
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1898,6 +1938,8 @@ Class EyeBanner2 : Actor
 	{
 		//$Title Eye Banner 2
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Scale 2.0;
 		Radius 1;
 		Height 0.1;
@@ -1921,6 +1963,8 @@ Class SkyEye : Actor
 	{
 		//$Title Sky Eye
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Radius 1;
 		Height 0.1;
 		+NOGRAVITY;
@@ -1962,6 +2006,8 @@ Class SkyCross : Actor
 	{
 		//$Title Sky Cross
 		//$Category Marisa Kirisame/dotFlow
+		RenderStyle "Translucent";
+		Alpha 0.999999;
 		Radius 1;
 		Height 0.1;
 		+NOGRAVITY;

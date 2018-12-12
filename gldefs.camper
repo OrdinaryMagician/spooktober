@@ -351,12 +351,17 @@ brightmap sprite CAMTEX0
 
 brightmap sprite SSMGA0
 {
-	map "BRIGHTMAPS/SSMGABCBR.png"
+	map "BRIGHTMAPS/SSMGABR.png"
+}
+
+brightmap sprite SSMGB0
+{
+	map "BRIGHTMAPS/SSMGBBR.png"
 }
 
 brightmap sprite SSMGC0
 {
-	map "BRIGHTMAPS/SSMGABCBR.png"
+	map "BRIGHTMAPS/SSMGABR.png"
 }
 
 brightmap sprite SSMGD0
@@ -433,22 +438,28 @@ BrightMap Sprite GSTGA0
 	Map "BRIGHTMAPS/GSTGA0BM.png"
 }
 
+BrightMap Sprite GSTGB0
+{
+	Map "BRIGHTMAPS/GSTGB0BM.png"
+}
+
+BrightMap Sprite GSTGC0
+{
+	Map "BRIGHTMAPS/GSTGC0BM.png"
+}
+
 BrightMap Sprite GSTGD0
 {
-	Map "BRIGHTMAPS/GSTGD0BM.png"
+	Map "BRIGHTMAPS/GSTGA0BM.png"
 }
 
 BrightMap Sprite GSTGE0
 {
-	Map "BRIGHTMAPS/GSTGE0BM.png"
+	Map "BRIGHTMAPS/GSTGA0BM.png"
 }
 
 BrightMap Sprite GSTGF0
 {
-	Map "BRIGHTMAPS/GSTGF0BM.png"
+	Map "BRIGHTMAPS/GSTGA0BM.png"
 }
 
-BrightMap Sprite GSTGG0
-{
-	Map "BRIGHTMAPS/GSTGG0BM.png"
-}

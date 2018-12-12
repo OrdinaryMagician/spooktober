@@ -2,6 +2,7 @@
 Class mkDialogueSequence : HUDMessageBase
 {
 	PlayerInfo p;
+	String pname;
 	int seqnum, curstate, curdelay, delaycnt, charcnt, col, tspeed, fx, rss;
 	double dimalpha, vvol;
 	bool bStarted, bInText;
@@ -31,6 +32,7 @@ Class mkDialogueSequence : HUDMessageBase
 	{
 		self.seqnum = seqnum;
 		self.p = p;
+		self.pname = p.GetUserName();
 		self.voice = "misc/voice";
 		self.col = Font.CR_WHITE;
 		self.tspeed = 1;
@@ -109,10 +111,10 @@ Class mkDialogueSequence : HUDMessageBase
 		savedtext = cont;
 		if ( cont.CharAt(0) == "$" ) loc = StringTable.Localize(cont);
 		// replace player name
-		String pname = p.GetUserName();
-		if ( pname ~== "Player" ) pname = StringTable.Localize("$DEFPNAME");
-		else pname = "\cf"..pname.."\c-";
-		loc.Replace("%pn",pname);
+		String pnamel;
+		if ( pname ~== "Player" ) pnamel = StringTable.Localize("$DEFPNAME");
+		else pnamel = "\cf"..pname.."\c-";
+		loc.Replace("%pn",pnamel);
 		if ( !tfont ) tfont = Font.GetFont('STAT_LWR');
 		lines = tfont.BreakLines(loc,290);
 		// these two mustn't be reset on BrokenLines rebuilding
@@ -172,7 +174,7 @@ Class mkDialogueSequence : HUDMessageBase
 			return;
 		}
 		// play sound on non-whitespace
-		if ( (whitespace.IndexOf(ch) == -1) && (p == players[consoleplayer]) )
+		if ( whitespace.IndexOf(ch) == -1 )
 			S_Sound(voice,CHAN_VOICE|CHAN_UI,vvol,ATTN_NONE);
 		if ( bSkip )
 		{
@@ -190,7 +192,9 @@ Class mkDialogueSequence : HUDMessageBase
 
 	override bool Tick()
 	{
-		bool bSkip = !!(p.cmd.buttons&BT_USE);
+		bool bSkip;
+		if ( !p ) bSkip = true;	// emergency skip if player disconnects mid-dialogue (don't do this)
+		else bSkip = !!(p.cmd.buttons&BT_USE);	// only the initiator can advance dialogue
 		rss = Random[DialogueSeq]();
 		if ( !bStarted )
 		{
@@ -233,7 +237,6 @@ Class mkDialogueSequence : HUDMessageBase
 
 	override void Draw( int bottom, int visibility )
 	{
-		if ( p != players[consoleplayer] ) return;
 		// draw textbox area
 		Vector2 pos, sz;
 		[pos, sz] = Screen.VirtualToRealCoords((10,160),(300,30),(320,200),true);
@@ -265,6 +268,7 @@ Class mkSmoothLookTo : Thinker
 
 	static void LookTowards( Actor target, double angle, double pitch, double speed )
 	{
+		if ( !target ) return;
 		let slt = new("mkSmoothLookTo");
 		slt.ChangeStatNum(STAT_USER);
 		slt.target = target;
@@ -275,6 +279,7 @@ Class mkSmoothLookTo : Thinker
 
 	static void LookTowardsTid( Actor target, int ttid, double speed )
 	{
+		if ( !target ) return;
 		let slt = new("mkSmoothLookTo");
 		slt.ChangeStatNum(STAT_USER);
 		slt.target = target;
@@ -287,6 +292,11 @@ Class mkSmoothLookTo : Thinker
 	override void Tick()
 	{
 		Super.Tick();
+		if ( !target )
+		{
+			Destroy();
+			return;
+		}
 		double iangle, ipitch;
 		iangle = Actor.DeltaAngle(target.angle,angle);
 		ipitch = Actor.DeltaAngle(target.pitch,pitch);
@@ -311,6 +321,7 @@ Class mkDialogueHandler : EventHandler
 	// gets the pitch needed for one actor to look at another in the face
 	static double FaceToFace( Actor a, Actor b )
 	{
+		if ( !a || !b ) return 0;
 		Vector3 otherpos = level.Vec3Diff(b.Vec3Offset(0,0,b.height),a.Vec3Offset(0,0,a.height));
 		double dist = otherpos.length();
 		if ( dist > 0 ) return asin(otherpos.z/dist);
@@ -345,15 +356,26 @@ Class mkDialogueHandler : EventHandler
 			}
 			if ( orientspeakee )
 				mkSmoothLookTo.LookTowards(speakee,speakee.AngleTo(speaker),FaceToFace(speakee,speaker),3.0);
-			speakee.vel *= 0;	// stap
-			starter.vel *= 0;	// STAHP
-			starter.cheats |= CF_TOTALLYFROZEN; // freeze!
+			// stop players and set camera to speakee
+			for ( int i=0; i<MAXPLAYERS; i++ )
+			{
+				if ( !playeringame[i] ) continue;
+				players[i].mo.vel *= 0;	// stap
+				players[i].vel *= 0;	// STAHP
+				players[i].cheats |= CF_TOTALLYFROZEN; // freeze!
+				players[i].mo.SetStateLabel("Spawn");	// stop walking in place damn it
+				players[i].camera = speakee;
+			}
 		}
 		else if ( e.Name ~== "dialogue_end" )
 		{
-			// thaw player and return camera
-			starter.cheats &= ~CF_TOTALLYFROZEN;
-			starter.camera = speakee;
+			// thaw players and return camera
+			for ( int i=0; i<MAXPLAYERS; i++ )
+			{
+				if ( !playeringame[i] ) continue;
+				players[i].cheats &= ~CF_TOTALLYFROZEN;
+				players[i].camera = players[i].mo;
+			}
 			// force end any smoothlook thinkers
 			let t = ThinkerIterator.Create("mkSmoothLookTo",Thinker.STAT_USER);
 			mkSmoothLookTo l;
@@ -365,10 +387,23 @@ Class mkDialogueHandler : EventHandler
 		}
 		else if ( e.Name ~== "dialogue_setcam" )
 		{
-			if ( e.Args[0] <= 0 ) starter.camera = speakee;
-			let i = ActorIterator.Create(e.Args[0]);
-			Actor c = i.Next();
-			if ( c ) starter.camera = c;
+			if ( e.Args[0] <= 0 )
+			{
+				for ( int i=0; i<MAXPLAYERS; i++ )
+				{
+					if ( !playeringame[i] ) continue;
+					players[i].camera = speakee;
+				}
+				return;
+			}
+			let ai = ActorIterator.Create(e.Args[0]);
+			Actor c = ai.Next();
+			if ( !c ) return;
+			for ( int i=0; i<MAXPLAYERS; i++ )
+			{
+				if ( !playeringame[i] ) continue;
+				players[i].camera = c;
+			}
 		}
 		else if ( e.Name ~== "dialogue_special" )
 		{
@@ -380,8 +415,6 @@ Class mkDialogueHandler : EventHandler
 			// set the next dialogue index
 			speaker.score = e.Args[0];
 		}
-		else if ( e.Name ~== "talkedtofirstmonk" )
-			Cvar.GetCVar('talkedtofirstmonk').SetBool(true);
 		else if ( e.Name ~== "movetobasement" )
 			level.ExecuteSpecial(80,null,null,false,202);
 		else if ( e.Name ~== "dispelbosspainting" )
@@ -394,9 +427,13 @@ Class mkDialogueHandler : EventHandler
 			speaker.frame = e.Args[0];
 		else if ( e.Name ~== "giveshotty" )
 		{
-			speakee.GiveInventory("Fist",1);
-			speakee.GiveInventory("Model1873",1);
-			speakee.A_PlaySound("seacat/rreload",CHAN_WEAPON);
+			for ( int i=0; i<MAXPLAYERS; i++ )
+			{
+				if ( !playeringame[i] ) continue;
+				players[i].mo.GiveInventory("Fist",1);
+				players[i].mo.GiveInventory("Model1873",1);
+			}
+			if ( speakee ) speakee.A_PlaySound("seacat/rreload",CHAN_WEAPON);
 		}
 		else if ( e.Name ~== "secret05exit" )
 			level.ExecuteSpecial(80,null,null,false,2);

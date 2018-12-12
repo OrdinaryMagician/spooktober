@@ -22,3 +22,13 @@ SCRIPT "MapFadeOut" ( int next )
 	if ( ln == 1 ) Teleport_NewMap(next,0);
 	else Exit_Normal(ln);
 }
+
+SCRIPT "EmergencyExit" ( void ) NET
+{
+	if ( GetLevelInfo(LEVELINFO_LEVELNUM) == 1 )
+	{
+		Print(s:"You can't use this while in the hub!");
+		terminate;
+	}
+	ACS_NamedExecute("MapFadeOut",0);
+}

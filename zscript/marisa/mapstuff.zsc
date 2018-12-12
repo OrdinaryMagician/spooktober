@@ -28,7 +28,6 @@ Class mkDialogueSequence1 : mkDialogueSequence
 			StartText("$HUBD_17");
 			break;
 		case 7:
-			EventHandler.SendNetworkEvent("talkedtofirstmonk");
 			EndSeq(2);
 			break;
 		}
@@ -2955,6 +2954,7 @@ Class mkMirrorManEnd : Actor
 }
 
 // A spooky thing
+// consoleplayer-dependant, but shouldn't cause desyncs as long as it's used with static, non-interactable actors
 Class mkLookAtMe : Actor
 {
 	private bool InConsoleplayerLOS( Actor a )

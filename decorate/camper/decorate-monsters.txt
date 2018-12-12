@@ -59,11 +59,12 @@ ACTOR WaterDoomImpBall
 {
 	Radius 6
 	Height 8
-	Speed 20
-	FastSpeed 30
+	Speed 10
+	FastSpeed 20
 	Damage 3
 	Projectile
 	+RANDOMIZE
+	Translation "0:255=%[0.00,0.00,0.00]:[1.25,2.00,0.50]"
 	RenderStyle Add
 	Alpha 1
 	SeeSound "imp/attack"

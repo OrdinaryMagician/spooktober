@@ -52,7 +52,7 @@ Class PowerScuba : Powerup
 {
 	Default
 	{
-		Powerup.Duration -60;
+		Powerup.Duration -120;
 		Powerup.Color "40 40 ff",  0.2;
 	}
 
