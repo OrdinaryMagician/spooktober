@@ -4,6 +4,7 @@
 // Called by event handler, don't use directly
 SCRIPT "MapFadeIn" ( void )
 {
+	ScriptCall("SpooktoberUtil","FullUnfreeze");
 	ScriptCall("SpooktoberHandler","FadeInShader",1.0);
 	FadeRange(0,0,0,1.0,0,0,0,0.0,1.0);
 }

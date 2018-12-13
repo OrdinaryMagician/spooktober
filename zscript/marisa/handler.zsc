@@ -129,6 +129,11 @@ Class SpooktoberGlobals : Thinker
 // replacer for maps that use it
 class SpooktoberBossBrain : BossBrain
 {
+	Default
+	{
+		Height 56;	// taller so it's easier to shoot
+	}
+
 	void A_BrainDieAlt()
 	{
 		// [RH] If noexit, then don't end the level.

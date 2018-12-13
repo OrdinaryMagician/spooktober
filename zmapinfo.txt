@@ -6,6 +6,7 @@ GameInfo
 	AddEventHandlers = "SpooktoberHandler", "mkDialogueHandler", "MapShader", "WaterHandler"
 	TitleMusic = "spkmenu"
 	FinaleMusic = "D_WALTZ"
+	CorrectPrintBold = true
 }
 
 DefaultMap

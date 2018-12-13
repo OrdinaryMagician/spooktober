@@ -34,7 +34,7 @@ Class SpooktoberUtil abstract play
 	}
 
 	// marks lines as seen/unseen in automap
-	static void ShowLine( Actor activator, int tag, bool show = true, bool noforce = false )
+	static void ShowLine( int tag, bool show = true, bool noforce = false )
 	{
 		let l = LineIdIterator.Create(tag);
 		int i;
@@ -65,14 +65,53 @@ Class SpooktoberUtil abstract play
 			level.sectors[i].SetPlaneLight(part,brightness);
 	}
 
-	// door transition teleport for hub
-	static void DoorMove( Actor whom, int angle )
+	private static bool NotReallyObstructing( Vector3 testpos, Actor a, Actor b )
 	{
-		if ( !whom ) return;
+		Vector3 vdiff = level.Vec3Diff(testpos,b.pos);
+		if ( abs(vdiff.x) > (a.radius+b.radius) ) return true;
+		if ( abs(vdiff.y) > (a.radius+b.radius) ) return true;
+		if ( (vdiff.z > 0) && (abs(vdiff.z) > a.height) ) return true;
+		if ( (vdiff.z < 0) && (abs(vdiff.z) > b.height) ) return true;
+		return false;
+	}
+
+	// door transition teleport for hub
+	static bool DoorMove( Actor whom, int angle )
+	{
+		if ( !whom ) return true;
 		Vector2 movedir = Actor.RotateVector((128,0),angle);
-		whom.SetOrigin(whom.Vec3Offset(movedir.x,movedir.y,0),false);
+		Vector3 ofspos = whom.Vec3Offset(movedir.x,movedir.y,0);
+		let bt = BlockThingsIterator.CreateFromPos(ofspos.x,ofspos.y,ofspos.z,whom.height,whom.radius,true);
+		while ( bt.Next() )
+		{
+			let t = bt.Thing;
+			if ( !t || !t.bSOLID || (t == whom) || NotReallyObstructing(ofspos,whom,t) ) continue;
+			return false;
+		}
+		whom.SetOrigin(ofspos,false);
 		whom.angle = angle;
 		whom.pitch = 0;
+		return true;
+	}
+
+	// spot transition teleport for secret03
+	static bool SpotMove( Actor whom, int spot )
+	{
+		if ( !whom ) return true;
+		Actor a = ActorIterator.Create(spot).Next();
+		if ( !a ) return true;
+		Vector3 destpos = a.pos;
+		let bt = BlockThingsIterator.CreateFromPos(destpos.x,destpos.y,destpos.z,whom.height,whom.radius,true);
+		while ( bt.Next() )
+		{
+			let t = bt.Thing;
+			if ( !t || !t.bSOLID || (t == whom) || NotReallyObstructing(destpos,whom,t) ) continue;
+			return false;
+		}
+		whom.SetOrigin(destpos,false);
+		whom.angle = a.angle;
+		whom.pitch = 0;
+		return true;
 	}
 
 	// adds totallyfrozen and nogravity, clears velocity
@@ -185,6 +224,84 @@ Class SpooktoberUtil abstract play
 		for ( int s=t.Next(); s!=-1; s=t.Next() )
 			for ( Actor a=level.Sectors[s].thinglist; a; a=a.snext )
 				a.DamageMobj(null,null,int.max,crushing?'Crush':'Massacre',DMG_FORCED|DMG_THRUSTLESS);
+	}
+
+	static void BathroomMusic( Actor activator, int mode, bool local )
+	{
+		bool doit = false;
+		if ( local )
+		{
+			if ( activator.player == players[consoleplayer] )
+				doit = true;
+		}
+		else
+		{
+			for ( int st=22; st<=24; st++ )
+			{
+				SectorTagIterator t = SectorTagIterator.Create(st);
+				for ( int i=t.Next(); i!=-1; i=t.Next() )
+				{
+					if ( players[consoleplayer].mo.CurSector != level.Sectors[i] ) continue;
+					doit = true;
+					break;
+				}
+				if ( doit ) break;
+			}
+		}
+		if ( !doit ) return;
+		if ( mode == 0 )
+		{
+			ShowLine(13,false);
+			S_ChangeMusic("D_SPKHUB");
+			SetMusicVolume(1.0);
+		}
+		else if ( mode == 1 )
+		{
+			ShowLine(13,false);
+			S_ChangeMusic("D_SPKHUB");
+			SetMusicVolume(0.25);
+		}
+		else
+		{
+			ShowLine(13,true);
+			S_ChangeMusic("D_MIRROR");
+			SetMusicVolume(1.0);
+		}
+	}
+
+	static void FixPlayerMusic( int bmode )
+	{
+		// check where the player is located in the hub
+		Vector3 cppos = players[consoleplayer].mo.pos;
+		if ( (cppos.x > 1024) && (cppos.x < 1472) && (cppos.y > 1664) && (cppos.y < 1920) )
+		{
+			if ( bmode == 0 )
+			{
+				ShowLine(13,false);
+				S_ChangeMusic("D_SPKHUB");
+				SetMusicVolume(1.0);
+			}
+			else if ( bmode == 1 )
+			{
+				ShowLine(13,false);
+				S_ChangeMusic("D_SPKHUB");
+				SetMusicVolume(0.25);
+			}
+			else
+			{
+				ShowLine(13,true);
+				S_ChangeMusic("D_MIRROR");
+				SetMusicVolume(1.0);
+			}
+		}
+		else
+		{
+			ShowLine(13,false);
+			SetMusicVolume(1.0);
+			if ( (cppos.x > 3968) && (cppos.x < 4608) && (cppos.y > 3824) && (cppos.y < 5248) )
+				S_ChangeMusic("");
+			else S_ChangeMusic("D_SPKHUB");
+		}
 	}
 }
 

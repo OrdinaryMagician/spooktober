@@ -65,7 +65,10 @@ ACTOR DeepShotgun : DoomWeapon 12188
 			GSTG B 0 A_PlaySound ("weapons/shotga", CHAN_WEAPON)
 			GSTG B 1 A_GunFlash
 			GSTG C 1
-			GSTG DEF 1
+			GSTG D 5
+			GSTG E 4
+			GSTG F 3
+			GSTG A 2
 			Goto Ready
 	}
 }
