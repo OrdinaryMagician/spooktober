@@ -4,6 +4,7 @@ Class SpooktoberHUD : BaseStatusBar
 	BaseStatusBar oldbar;
 	HUDFont mHUDFont;
 	int diestage;
+	TextureID eye;
 
 	override void Init()
 	{
@@ -11,6 +12,7 @@ Class SpooktoberHUD : BaseStatusBar
 		SetSize(0,320,200);
 		Font fnt = "FLOWNUMS";
 		mHUDFont = HUDFont.Create(fnt,fnt.GetCharWidth("0"),true);
+		eye = TexMan.CheckForTexture("EYEDA0",TexMan.Type_Any);
 	}
 
 	override void Tick()
@@ -129,5 +131,16 @@ Class SpooktoberHUD : BaseStatusBar
 				base -= 20;
 			}
 		}
+	}
+
+	override void DrawAutomapHUD( double ticFrac )
+	{
+		if ( level.levelnum == 17 )
+		{
+			Screen.Dim("Black",1.0,0,0,Screen.GetWidth(),Screen.GetHeight());
+			Screen.DrawTexture(eye,false,Screen.GetWidth()/2,GetTopOfStatusBar()/2,DTA_CleanNoMove,true);
+			Screen.DrawText(smallfont,Font.CR_DARKGRAY,(Screen.GetWidth()-smallfont.StringWidth("No map available")*CleanXFac)/2,(GetTopOfStatusBar()-smallfont.GetHeight()*CleanYFac)/2,"No map available",DTA_CleanNoMove,true);
+		}
+		Super.DrawAutomapHUD(ticFrac);
 	}
 }
