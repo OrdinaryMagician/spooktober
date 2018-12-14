@@ -130,6 +130,7 @@ DoomEdNums
 	6526 = BlackCard
 	6527 = WhiteCard
 	6528 = mkAntigravityBox
+	6529 = mkSpook09Vent
 }
 
 // Pixel Eater

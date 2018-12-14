@@ -3430,3 +3430,28 @@ Class mkAntigravityBox : Actor
 		+DONTSPLASH;
 	}
 }
+
+// for SPOOK09
+Class mkSpook09Vent : Actor
+{
+	override void Activate( Actor activator )
+	{
+		bNOGRAVITY = false;
+	}
+	Default
+	{
+		+NOGRAVITY;
+		+SOLID;
+		+ACTLIKEBRIDGE;
+		+CANNOTPUSH;
+		Mass int.max;
+		Radius 32;
+		Height 2;
+	}
+	States
+	{
+	Spawn:
+		MODL A -1;
+		Stop;
+	}
+}

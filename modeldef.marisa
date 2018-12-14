@@ -862,3 +862,13 @@ Model "SchoolTableChair"
 	FrameIndex TABL B 0 2
 	FrameIndex TABL B 0 3
 }
+
+Model "mkSpook09Vent"
+{
+	Path "models"
+	Model 0 "Flat_d.3d"
+	Skin 0 "CGFENC1S"
+	Scale 0.25 0.3 0.01
+	RollOffset 90
+	FrameIndex MODL A 0 0
+}

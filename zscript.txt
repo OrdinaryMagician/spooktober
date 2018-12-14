@@ -58,15 +58,34 @@ Class PowerScuba : Powerup
 
 	override void AbsorbDamage( int damage, Name damageType, out int newdamage )
 	{
-		if ( damageType == 'Drowning' )
-			newdamage = 0;
+		if ( damageType == 'Drowning' ) newdamage = 0;
 	}
 
+	override void Tick()
+	{
+		// Powerups cannot exist outside an inventory
+		if ( !Owner )
+		{
+			Destroy();
+			return;
+		}
+		if ( Owner.waterlevel > 2 ) EffectTics--;
+		if ( EffectTics <= 0 ) Destroy();
+	}
+
+	override Color GetBlend()
+	{
+		if ( Owner && (Owner.waterlevel <= 2) ) return 0;
+		return Super.GetBlend();
+	}
+	override bool isBlinking()
+	{
+		return (EffectTics <= BLINKTHRESHOLD && (level.time&8) && !bNoScreenBlink);
+	}
 	override void DoEffect()
 	{
-		if ( Owner.player != NULL )
-			Owner.player.mo.ResetAirSupply();
-		if ( !(level.time&0x3f) )
+		if ( Owner.player ) Owner.player.mo.ResetAirSupply();
+		if ( (Owner.waterlevel > 2) && !(level.time&0x3f) )
 			Owner.A_PlaySound("misc/mask",CHAN_AUTO);
 	}
 }

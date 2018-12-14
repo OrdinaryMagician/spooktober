@@ -243,6 +243,7 @@ Class SpooktoberHandler : EventHandler
 	double fspeed[MAXPLAYERS];
 	int fphase[MAXPLAYERS], ftic[MAXPLAYERS];
 	transient ui Font titlefont, authorfont, statsfont, commentfont;
+	transient ui TextureID scubatex;
 	int tcnt;
 	// color grading (with transitions)
 	marifx_gradingvars gvars, gvars_in, gvars_out;
@@ -469,6 +470,23 @@ Class SpooktoberHandler : EventHandler
 	override void RenderOverlay( RenderEvent e )
 	{
 		PlayerInfo p = players[consoleplayer];
+		// scuba display
+		Powerup scuba = Powerup(p.mo.FindInventory("PowerScuba"));
+		if ( scuba )
+		{
+			if ( !scubatex ) scubatex = TexMan.CheckForTexture("SCUBAICN",TexMan.Type_Any);
+			double xpos = Screen.GetWidth()-25*CleanXFac;
+			double ypos = (Screen.GetHeight()-30*CleanYFac)/2.;
+			Screen.DrawTexture(scubatex,false,xpos,ypos,DTA_CleanNoMove,true);
+			xpos -= 9*CleanXFac;
+			ypos += 20*CleanYFac;
+			int s = (scuba.EffectTics/35)%60;
+			int m = scuba.EffectTics/(35*60);
+			String pct = String.Format("%d:%02d",m,s);
+			int tcol = Font.CR_WHITE;
+			if ( !scuba.IsBlinking() ) tcol = Font.CR_BLACK;
+			Screen.DrawText(confont,tcol,xpos,ypos,pct,DTA_CleanNoMove,true);
+		}
 		Shader.SetEnabled(p,"marifx_grading",genabled);
 		if ( genabled )
 		{
