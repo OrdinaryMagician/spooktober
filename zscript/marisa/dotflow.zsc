@@ -71,6 +71,7 @@ Class CommonKaibutsu : Actor
 		+NODAMAGE;
 		+SPRITEANGLE;
 		+SLIDESONWALLS;
+		Tag "Kaibutsu";
 	}
 	void A_SetSkin()
 	{
@@ -394,6 +395,7 @@ Class CrowbarKaibutsu : Actor
 		+NODAMAGE;
 		+SPRITEANGLE;
 		+SLIDESONWALLS;
+		Tag "Kaibutsu";
 	}
 	override void OnDestroy()
 	{
@@ -936,6 +938,7 @@ Class SchoolKid : Actor
 		-ISMONSTER;
 		+NODAMAGE;
 		+SLIDESONWALLS;
+		Tag "Kid";
 	}
 	void A_SchoolKidWander()
 	{
@@ -1003,6 +1006,7 @@ Class Smile : Actor
 		+STANDSTILL;
 		+SPRITEANGLE;
 		+SLIDESONWALLS;
+		Tag "Smile";
 	}
 	bool CheckDirectMove()
 	{
@@ -1098,6 +1102,7 @@ Class Smile2 : Smile
 	{
 		//$Title Smile (Cutscene)
 		//$Category Marisa Kirisame/dotFlow
+		Tag "Smile";
 	}
 	private bool InPlayerLOS( int p )
 	{
@@ -1535,6 +1540,7 @@ Class RedDemon : Actor
 		+NODAMAGE;
 		+SLIDESONWALLS;
 		+LOOKALLAROUND;
+		Tag "Red Demon";
 	}
 	bool A_RedChase()
 	{
@@ -1612,6 +1618,7 @@ Class RedDemonBig : RedDemon
 		Speed 3;
 		DamageFunction (Random[Red](3,9)*3);
 		-SOLID;
+		Tag "Big Red Demon";
 	}
 	States
 	{

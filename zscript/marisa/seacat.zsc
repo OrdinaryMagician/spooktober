@@ -202,6 +202,7 @@ Class mkBeatrice : Actor
 	}
 	Default
 	{
+		Tag "Beatrice";
 		RenderStyle "Translucent";
 		Alpha 0;
 		Radius 8;
@@ -304,6 +305,7 @@ Class mkLesserGoatServant : Actor
 
 	Default
 	{
+		Tag "Lesser Goat Servant";
 		MONSTER;
 		-SHOOTABLE;
 		+LOOKALLAROUND;
@@ -331,6 +333,11 @@ Class mkLesserGoatServant : Actor
 	{
 		let s = Spawn("mkSeacatFade");
 		s.target = self;
+	}
+	override int DamageMobj( Actor inflictor, Actor source, int damage, Name mod, int flags, double angle )
+	{
+		if ( master && target && target.player ) master.target = target;
+		return Super.DamageMobj(inflictor,source,damage,mod,flags,angle);
 	}
 	// turns out it can not be blocking
 	bool BlockingLineIsBlocking()
@@ -612,6 +619,7 @@ Class mkGoatServant : Actor
 
 	Default
 	{
+		Tag "Goat Servant";
 		MONSTER;
 		-SHOOTABLE;
 		+NOINFIGHTSPECIES;
@@ -696,6 +704,11 @@ Class mkGoatServant : Actor
 		Super.Tick();
 		if ( InStateSequence(CurState,ResolveState("Charge")) ) speed = 25;
 		else speed = 15;
+	}
+	override int DamageMobj( Actor inflictor, Actor source, int damage, Name mod, int flags, double angle )
+	{
+		if ( master && target && target.player ) master.target = target;
+		return Super.DamageMobj(inflictor,source,damage,mod,flags,angle);
 	}
 	void A_GoatAttack()
 	{
@@ -1854,10 +1867,23 @@ Class mkSecret05GoatInvasion : Actor
 		// at the last wave, do the exit special instead
 		if ( !waves[curwave].completed ) return;
 		if ( curwave < 10 )
-			ACS_Execute(201,0,waves[curwave+1].useline,waves[curwave+1].gate,waves[curwave+1].blockline);
+			level.ExecuteSpecial(80,null,null,false,201,0,waves[curwave+1].useline,waves[curwave+1].gate,waves[curwave+1].blockline);
 		else
 		{
-			ACS_Execute(5,0);
+			// get either the last killer (if alive) or first live player, otherwise wait
+			Actor activ = null;
+			if ( target && target.player && (target.Health > 0) ) activ = target;
+			if ( !activ )
+			{
+				for ( int i=0; i<MAXPLAYERS; i++ )
+				{
+					if ( !playeringame[i] || players[i].mo.Health <= 0 ) continue;
+					activ = players[i].mo;
+					break;
+				}
+			}
+			if ( !activ ) return;
+			level.ExecuteSpecial(80,activ,null,false,5);
 			A_Die();
 		}
 	}

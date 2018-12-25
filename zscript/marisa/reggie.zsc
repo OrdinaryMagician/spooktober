@@ -142,7 +142,7 @@ Class mkUncleReggie : Actor
 	Morph:
 		REGG C 0
 		{
-			ACS_Execute(45,0);
+			level.ExecuteSpecial(80,null,null,false,45);
 			S_ChangeMusic("ExplodHt");
 			Autosave();
 		}
