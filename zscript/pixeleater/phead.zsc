@@ -390,6 +390,8 @@ class PumpKing : Archvile
 		+INVULNERABLE
 		+LOOKALLAROUND
 		+TELESTOMP
+		+NOINFIGHTING
+		+NOTARGETSWITCH
 	}
 	States
 	{
@@ -580,6 +582,7 @@ class TheBuried : ZombieMan
 	Default
 	{
 		+CORPSE
+		//-COUNTKILL
 	}
 	States
 	{
@@ -599,6 +602,7 @@ class TheBuried : ZombieMan
 			Health = 20 ;
 			PainChance = 200 ;
 			bCorpse = false ;
+			//bCountKill = true ;
 			A_FindTarget() ;
 		}
 	Hunt:
@@ -649,6 +653,7 @@ class ChainedDown : ChaingunGuy
 	Default
 	{
 		+CORPSE
+		//-COUNTKILL
 	}
 	States
 	{
@@ -668,6 +673,7 @@ class ChainedDown : ChaingunGuy
 			Health = 70 ;
 			PainChance = 170 ;
 			bCorpse = false ;
+			//bCountKill = true ;
 			A_FindTarget() ;
 		}
 	Hunt:
