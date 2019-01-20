@@ -45,13 +45,13 @@ class FireImp : DoomImp
 		TRAP A 0 ;
 		Goto See ;
 	}
-	
+
 	TextureID ThePit ;
 	override void BeginPlay()
 	{
 		super.BeginPlay() ;
 		A_SetInventory( "FearFactor", Random( 0, 1 ));
-		if( checkclass( "FireImp" )) A_GiveInventory( "Evolved", 1 );
+		if( GetClassName() == "FireImp" ) A_GiveInventory( "Evolved", 1 );
 		ThePit = TexMan.CheckForTexture( "BLAKWAL1", TexMan.Type_Any );
 	}
 	override void Tick()
@@ -59,14 +59,14 @@ class FireImp : DoomImp
 		super.tick() ;
 		if( floorpic != ThePit )	bSolid = true ;
 		else						bSolid = false ;
-		
+
 	}
 	override bool Used( actor user )
 	{
 		if( user )
 		{
 			int UserAmt = user.CountInv( "ShrinkWrap" );
-			
+
 			if( self.FindInventory( "ShrinkWrap" ))
 			{
 				if( UserAmt < 2 ) //Remove jacket
@@ -132,7 +132,7 @@ class EvolvingImp : FireImp
 		super.BeginPlay() ;
 		A_GiveInventory( "ShrinkWrap", 1 );
 		A_TakeInventory( "Evolved", 1 );
-		
+
 	}
 	override bool Used( actor user )
 	{
@@ -174,7 +174,7 @@ class Evolved : Inventory
 			owner.A_SetTranslation( "Evolved" );
 		}
 	}
-	
+
 	override void DetachFromOwner()
 	{
 		if( owner )
@@ -188,13 +188,13 @@ class Evolved : Inventory
 class Evolution : Inventory
 {
 	int progress ;
-	
+
 	override void DoEffect()
 	{
 		if( owner )
 		{
 			super.DoEffect() ;
-			
+
 			if( owner.CountInv( "ShrinkWrap" ) == 0 )
 			{
 				progress++ ;
@@ -214,14 +214,14 @@ class ShrinkWrap : Inventory
 	{
 		Inventory.MaxAmount 2 ;
 		//Inventory.InvBar ;
-		
+
 	}
 	override void AttachToOwner( actor owner )
 	{
 		if( owner )
 		{
 			super.AttachToOwner( owner ) ;
-			if( owner.checkclass( "DoomImp", AAPTR_DEFAULT, true ))
+			if( owner is "DoomImp" )
 			{
 				owner.sprite = GetSpriteIndex( "TRAP" );
 				owner.bPushable = true ;
@@ -235,7 +235,7 @@ class ShrinkWrap : Inventory
 		if( owner )
 		{
 			super.DetachFromOwner() ;
-			if( owner.checkclass( "DoomImp", AAPTR_DEFAULT, true ))
+			if( owner is "DoomImp" )
 			{
 				owner.sprite = GetSpriteIndex( "TROO" );
 				owner.bPushable = false ;

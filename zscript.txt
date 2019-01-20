@@ -1,4 +1,4 @@
-version "3.6"
+version "3.7"
 
 #include "zscript/marisa/helpers.zsc"
 #include "zscript/marisa/handler.zsc"
@@ -28,12 +28,12 @@ version "3.6"
 
 class WaterHandler : StaticEventHandler {
 	override void RenderOverlay(RenderEvent e) {
+		PlayerInfo p = players[consoleplayer];
 		if ( level.levelnum != 10 ) return;
 		// set the player's timer up correctly (more-than-1-tick precision)
-		PlayerInfo p = players[consoleplayer];
 		Shader.SetUniform1f(p, "watershader", "timer", gametic + e.FracTic);
 
-		if (p.mo.waterlevel >= 3) {
+		if (p.camera.waterlevel >= 3) {
 			Shader.SetEnabled(p, "watershader", true);
 			Shader.SetEnabled(p, "waterzoomshader", true);
 			double effectSize = 0.01;

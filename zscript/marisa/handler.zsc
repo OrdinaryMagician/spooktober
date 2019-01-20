@@ -39,30 +39,35 @@ Class SpooktoberGlobals : Thinker
 		return v.unlocks[n];
 	}
 
+	private void LocalSetCompletion( int n, bool forced )
+	{
+		completion[n] = true;
+		if ( !forced )
+		{
+			// store the stats
+			maptimes[n][0] = level.maptime/Thinker.TICRATE;
+			if ( !maptimes[n][1] || (maptimes[n][0] < maptimes[n][1]) )
+				maptimes[n][1] = maptimes[n][0];
+			mapkills[n][0] = level.killed_monsters;
+			mapkills[n][1] = level.total_monsters;
+			mapitems[n][0] = level.found_items;
+			mapitems[n][1] = level.total_items;
+			mapsecrets[n][0] = level.found_secrets;
+			mapsecrets[n][1] = level.total_secrets;
+		}
+		if ( (n <= 12) && GetFullCompletion(4) ) stage = max(5,stage);
+		else if ( (n <= 11) && GetFullCompletion(3) ) stage = max(4,stage);
+		else if ( (n <= 8) && GetFullCompletion(2) ) stage = max(3,stage);
+		else if ( (n <= 5) && GetFullCompletion(1) ) stage = max(2,stage);
+		else if ( (n <= 2) && GetFullCompletion(0) ) stage = max(1,stage);
+	}
+
 	static void SetCompletion( int n, bool forced = false )
 	{
 		if ( (n < 0) || (n > 17) ) return;
 		let v = GetInstance();
 		if ( !v ) return;
-		v.completion[n] = true;
-		if ( !forced )
-		{
-			// store the stats
-			v.maptimes[n][0] = level.maptime/Thinker.TICRATE;
-			if ( !v.maptimes[n][1] || (v.maptimes[n][0] < v.maptimes[n][1]) )
-				v.maptimes[n][1] = v.maptimes[n][0];
-			v.mapkills[n][0] = level.killed_monsters;
-			v.mapkills[n][1] = level.total_monsters;
-			v.mapitems[n][0] = level.found_items;
-			v.mapitems[n][1] = level.total_items;
-			v.mapsecrets[n][0] = level.found_secrets;
-			v.mapsecrets[n][1] = level.total_secrets;
-		}
-		if ( (n <= 12) && GetFullCompletion(4) ) v.stage = max(5,v.stage);
-		else if ( (n <= 11) && GetFullCompletion(3) ) v.stage = max(4,v.stage);
-		else if ( (n <= 8) && GetFullCompletion(2) ) v.stage = max(3,v.stage);
-		else if ( (n <= 5) && GetFullCompletion(1) ) v.stage = max(2,v.stage);
-		else if ( (n <= 2) && GetFullCompletion(0) ) v.stage = max(1,v.stage);
+		v.LocalSetCompletion(n,forced);
 	}
 
 	static clearscope bool GetCompletion( int n )
