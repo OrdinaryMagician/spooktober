@@ -2393,7 +2393,7 @@ Class mkBarrier : Actor
 		let ti = ActorIterator.Create(tid+100);
 		Actor a;
 		while ( a = ti.Next() )
-			a.bDORMANT = false;
+			a.Activate(activator);
 		A_PlaySound("thief/egloop",CHAN_BODY,1.0,true,2.0);
 		SetStateLabel("FadeIn");
 	}
@@ -2407,7 +2407,7 @@ Class mkBarrier : Actor
 		Actor a;
 		while ( a = ti.Next() )
 		{
-			a.bDORMANT = true;
+			a.Deactivate(activator);
 			Spawn("mkBarrierExplLight",a.pos);
 		}
 		A_StopSound(CHAN_BODY);
