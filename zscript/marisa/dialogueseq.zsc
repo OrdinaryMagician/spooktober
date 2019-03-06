@@ -5,11 +5,12 @@ Class mkDialogueSequence : HUDMessageBase
 	String pname;
 	int seqnum, curstate, curdelay, delaycnt, charcnt, col, tspeed, fx, rss;
 	double dimalpha, vvol;
-	bool bStarted, bInText;
+	bool bStarted, bInText, interrupt, endsignal;
 	transient BrokenLines lines;
 	String savedtext;
 	String header, voice;
 	transient Font tfont;
+	mkDialogueHandler hnd;
 
 	enum ETextEffect
 	{
@@ -30,6 +31,7 @@ Class mkDialogueSequence : HUDMessageBase
 
 	mkDialogueSequence Init( int seqnum, PlayerInfo p )
 	{
+		hnd = mkDialogueHandler(EventHandler.Find("mkDialogueHandler"));
 		self.seqnum = seqnum;
 		self.p = p;
 		self.pname = p.GetUserName();
@@ -38,6 +40,14 @@ Class mkDialogueSequence : HUDMessageBase
 		self.tspeed = 1;
 		self.vvol = 0.5;
 		return self;
+	}
+
+	void JumpState( int newstate )
+	{
+		curstate = newstate;
+		charcnt = 0;
+		bInText = false;
+		curdelay = 0;
 	}
 
 	private void DrawShiver( String part, Vector2 pos )
@@ -201,6 +211,15 @@ Class mkDialogueSequence : HUDMessageBase
 			bStarted = true;
 			EventHandler.SendNetworkEvent("dialogue_start");
 		}
+		// emergency cancel if either actor takes damage
+		if ( interrupt )
+		{
+			interrupt = false;
+			EventHandler.SendNetworkEvent("dialogue_save",seqnum,curstate);
+			bInText = false;
+			curdelay = 0;
+			seqnum = 0;
+		}
 		// here comes the spaghetti code!
 		// fade in textbox
 		if ( seqnum && (dimalpha < 1.0) )
@@ -225,13 +244,18 @@ Class mkDialogueSequence : HUDMessageBase
 			DialogueSeq(curstate);
 			return false;
 		}
+		if ( !endsignal )
+		{
+			endsignal = true;
+			EventHandler.SendNetworkEvent("dialogue_end");
+		}
 		// fade out textbox
 		if ( dimalpha > 0.0 )
 		{
 			dimalpha = max(0.0,dimalpha-0.1);
 			return false;
 		}
-		EventHandler.SendNetworkEvent("dialogue_end");
+		hnd.seqexit = true;
 		return true;
 	}
 
@@ -309,14 +333,25 @@ Class mkSmoothLookTo : Thinker
 	}
 }
 
+Class mkSavedDialogue
+{
+	int seqnum;
+	int pos;
+}
+
 // Main handler for all interactive dialogues with the monks
 Class mkDialogueHandler : EventHandler
 {
-	transient int seqtime, seqnum;
+	transient ui bool attachhotfix;
+	ui bool seqexit;
+	bool interrupt;
+	int seqnum;
 	Actor speaker, speakee;
 	PlayerInfo starter;
 	bool orientspeaker, orientspeakee;
 	double oldang, oldpt;
+	Array<mkSavedDialogue> saved;
+	ui mkDialogueSequence activeseq;
 
 	// gets the pitch needed for one actor to look at another in the face
 	static double FaceToFace( Actor a, Actor b )
@@ -330,7 +365,42 @@ Class mkDialogueHandler : EventHandler
 
 	override void PostUiTick()
 	{
-		if ( !seqnum || (seqtime < gametic) ) return;
+		// leaving dialogue completely
+		if ( seqexit )
+		{
+			activeseq = null;
+			seqexit = false;
+			attachhotfix = false;
+			EventHandler.SendNetworkEvent("dialogue_end2");
+			return;
+		}
+		// interrupt the sequence
+		if ( interrupt && activeseq )
+		{
+			activeseq.interrupt = true;
+			return;
+		}
+		// hey graf how about you let me check if a message is attached
+		// to the hud so I don't need this completely unreliable hotfix?
+		if ( activeseq && !attachhotfix && activeseq.seqnum )
+		{
+			StatusBar.AttachMessage(activeseq,0,BaseStatusBar.HUDMSGLayer_OverHUD);
+			attachhotfix = true;
+			return;
+		}
+		// super duper double checku
+		// this should fix the dialogue restart bug in SPOOK13's boss autosave
+		// for real this time (as long as it's a fresh save, old saves will still trigger it)
+		// I really need to rewrite this massive clusterfuck of a dialogue system someday
+		// in a way that isn't a horrendous crime against good coding
+		// ironically, this may happen in crimes_m
+		if ( activeseq && !activeseq.seqnum )
+		{
+			seqexit = true;
+			return;
+		}
+		if ( !seqnum || activeseq ) return;
+		Console.Printf("Starting dialogue %d",seqnum);
 		String sname = String.Format("mkDialogueSequence%d",seqnum);
 		Class sclass = sname;
 		if ( !sclass )
@@ -338,8 +408,29 @@ Class mkDialogueHandler : EventHandler
 			Console.Printf("Unknown dialogue sequence %s!",sname);
 			return;
 		}
-		let s = mkDialogueSequence(new(sclass)).Init(seqnum,starter);
-		StatusBar.AttachMessage(s,0,BaseStatusBar.HUDMSGLayer_OverHUD);
+		activeseq = mkDialogueSequence(new(sclass)).Init(seqnum,starter);
+		for ( int i=0; i<saved.Size(); i++ )
+		{
+			if ( saved[i].seqnum != seqnum ) continue;
+			// restore saved dialogue spot
+			activeseq.JumpState(saved[i].pos);
+			SendNetworkEvent("dialogue_clearsave",seqnum);
+		}
+		StatusBar.AttachMessage(activeseq,0,BaseStatusBar.HUDMSGLayer_OverHUD);
+		attachhotfix = true;
+	}
+
+	// these two make sure to interrupt dialogue if the speaker/speakee get hurt or disappear
+	override void WorldThingDamaged( WorldEvent e )
+	{
+		if ( (e.Thing == speaker) || (e.Thing == speakee) )
+			interrupt = true;
+	}
+
+	override void WorldThingDestroyed( WorldEvent e )
+	{
+		if ( (e.Thing == speaker) || (e.Thing == speakee) )
+			interrupt = true;
 	}
 
 	override void NetworkProcess( ConsoleEvent e )
@@ -363,7 +454,7 @@ Class mkDialogueHandler : EventHandler
 				players[i].mo.vel *= 0;	// stap
 				players[i].vel *= 0;	// STAHP
 				players[i].cheats |= CF_TOTALLYFROZEN; // freeze!
-				players[i].mo.SetStateLabel("Spawn");	// stop walking in place damn it
+				players[i].mo.PlayIdle();	// stop walking in place damn it
 				players[i].camera = speakee;
 			}
 		}
@@ -383,7 +474,12 @@ Class mkDialogueHandler : EventHandler
 				if ( l.target == speakee ) l.Destroy();
 			if ( orientspeaker )
 				mkSmoothLookTo.LookTowards(speaker,oldang,oldpt,12.0);
-			seqnum = 0;
+			// clear these
+			speaker = speakee = null;
+		}
+		else if ( e.Name ~== "dialogue_end2" )
+		{
+			seqnum = 0;	// can start new dialogue
 		}
 		else if ( e.Name ~== "dialogue_setcam" )
 		{
@@ -414,6 +510,36 @@ Class mkDialogueHandler : EventHandler
 		{
 			// set the next dialogue index
 			speaker.score = e.Args[0];
+		}
+		else if ( e.Name ~== "dialogue_save" )
+		{
+			// save last state in active dialogue after interruption
+			interrupt = false;
+			int f = -1;
+			for ( int i=0; i<saved.Size(); i++ )
+			{
+				if ( saved[i].seqnum != e.Args[0] ) continue;
+				f = i;
+			}
+			if ( f != -1 ) saved[f].pos = e.Args[1];
+			else
+			{
+				let s = new("mkSavedDialogue");
+				s.seqnum = e.Args[0];
+				s.pos = e.Args[1];
+				saved.Push(s);
+			}
+		}
+		else if ( e.Name ~== "dialogue_clearsave" )
+		{
+			// clear currently saved dialogue position
+			for ( int i=0; i<saved.Size(); i++ )
+			{
+				if ( saved[i].seqnum != e.Args[0] ) continue;
+				let s = saved[i];
+				saved.Delete(i,1);
+				s.Destroy();
+			}
 		}
 		else if ( e.Name ~== "movetobasement" )
 			level.ExecuteSpecial(80,null,null,false,202);
@@ -451,7 +577,6 @@ Class mkDialogueHandler : EventHandler
 		let dh = mkDialogueHandler(EventHandler.Find("mkDialogueHandler"));
 		if ( !dh ) ThrowAbortException("Dialogue Handler not found!");
 		if ( dh.seqnum ) return;	// only one at a time
-		dh.seqtime = gametic;
 		dh.seqnum = seqnum;
 		dh.speaker = speaker;
 		dh.speakee = speakee;

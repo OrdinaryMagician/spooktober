@@ -155,45 +155,13 @@ Class SpooktoberUtil abstract play
 	}
 
 	// gives a player their start items
-	// replicates APlayerPawn::GiveDefaultInventory since it's not exported
+	// previously a full replica of GiveDefaultInventory, but it's been
+	// exported in 3.7.2
 	static void GiveStartItems( Actor mo )
 	{
 		if ( !(mo is 'PlayerPawn') ) return;
-		DropItem di;
-		for ( di=mo.GetDropItems(); di; di=di.Next )
-		{
-			Class<Actor> ti = di.Name;
-			if ( !(ti is 'Inventory') )
-			{
-				Console.Printf(Font.TEXTCOLOR_ORANGE.."%s is not an inventory item and cannot be given to a player as start item.",ti.GetClassName());
-				continue;
-			}
-			Inventory itm = mo.FindInventory((Class<Inventory>)(ti));
-			if ( !itm )
-			{
-				itm = Inventory(Actor.Spawn(ti));
-				itm.bIGNORESKILL = true;
-				itm.Amount = di.Amount;
-				if ( itm is 'Weapon' ) Weapon(itm).AmmoGive1 = Weapon(itm).AmmoGive2 = 0;
-				Actor check;
-				bool res;
-				[res, check] = itm.CallTryPickup(mo);
-				if ( !res )
-				{
-					if ( check != mo )
-						ThrowAbortException("Cannot give morph items when starting a game");
-					itm.Destroy();
-					itm = null;
-				}
-			}
-			else
-			{
-				let def = GetDefaultByType((Class<Inventory>)(ti));
-				itm.Amount = clamp(itm.Amount+(di.Amount?di.Amount:def.Amount),0,itm.MaxAmount);
-			}
-			if ( itm && (itm is 'Weapon') && Weapon(itm).CheckAmmo(Weapon.EitherFire,false) )
-				mo.player.pendingweapon = Weapon(itm);	// setting also readyweapon like in the C++ version seems to make the weapon break
-		}
+		PlayerPawn(mo).GiveDefaultInventory();
+		PlayerPawn(mo).BringUpWeapon();
 	}
 
 	// RIP demons

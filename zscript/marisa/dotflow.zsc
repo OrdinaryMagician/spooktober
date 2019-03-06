@@ -15,6 +15,9 @@ Class Sabitsuki : PlayerPawn
 		Player.ViewBob 0.25;
 		Player.ForwardMove 0.8, 0.4;
 		Player.SideMove 0.8, 0.4;
+		// When you want to be compatible with all mods but Brutal Doom does something stupid
+		// This should fix the "bug" where Sabi takes damage randomly on teleports
+		DamageFactor "TeleportRemover", 0.0;
 		+NOSKIN;
 		+NOMENU;
 	}

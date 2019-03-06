@@ -5,6 +5,7 @@ Class SpooktoberHUD : BaseStatusBar
 	HUDFont mHUDFont;
 	int diestage;
 	TextureID eye;
+	transient CVar cheatsydoodle;
 
 	override void Init()
 	{
@@ -135,8 +136,10 @@ Class SpooktoberHUD : BaseStatusBar
 
 	override void DrawAutomapHUD( double ticFrac )
 	{
-		if ( level.levelnum == 17 )
+		if ( !cheatsydoodle ) cheatsydoodle = CVar.GetCVar('am_cheat',players[consoleplayer]);
+		if ( (level.levelnum == 17) && (cheatsydoodle.GetInt() <= 0) )
 		{
+			// hide the map unless cheating (I'm not a jerk)
 			Screen.Dim("Black",1.0,0,0,Screen.GetWidth(),Screen.GetHeight());
 			Screen.DrawTexture(eye,false,Screen.GetWidth()/2,GetTopOfStatusBar()/2,DTA_CleanNoMove,true);
 			Screen.DrawText(smallfont,Font.CR_DARKGRAY,(Screen.GetWidth()-smallfont.StringWidth("No map available")*CleanXFac)/2,(GetTopOfStatusBar()-smallfont.GetHeight()*CleanYFac)/2,"No map available",DTA_CleanNoMove,true);
