@@ -400,7 +400,6 @@ Class mkDialogueHandler : EventHandler
 			return;
 		}
 		if ( !seqnum || activeseq ) return;
-		Console.Printf("Starting dialogue %d",seqnum);
 		String sname = String.Format("mkDialogueSequence%d",seqnum);
 		Class sclass = sname;
 		if ( !sclass )
