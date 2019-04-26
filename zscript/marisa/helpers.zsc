@@ -76,7 +76,7 @@ Class SpooktoberUtil abstract play
 	}
 
 	// door transition teleport for hub
-	static bool DoorMove( Actor whom, int angle )
+	static bool DoorMove( Actor whom, int angle, bool checkonly = false )
 	{
 		if ( !whom ) return true;
 		Vector2 movedir = Actor.RotateVector((128,0),angle);
@@ -88,6 +88,7 @@ Class SpooktoberUtil abstract play
 			if ( !t || !t.bSOLID || (t == whom) || NotReallyObstructing(ofspos,whom,t) ) continue;
 			return false;
 		}
+		if ( checkonly ) return true;
 		whom.SetOrigin(ofspos,false);
 		whom.angle = angle;
 		whom.pitch = 0;
