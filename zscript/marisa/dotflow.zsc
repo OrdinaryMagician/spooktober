@@ -386,8 +386,6 @@ Class CrowbarKaibutsu : Actor
 	{
 		//$Title Kaibutsu (Crowbar)
 		//$Category Marisa Kirisame/dotFlow
-		RenderStyle "Translucent";
-		Alpha 0.0;
 		Radius 16;
 		Height 56;
 		Scale 2;
