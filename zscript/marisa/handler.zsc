@@ -276,6 +276,16 @@ Class SpooktoberHandler : EventHandler
 			e.Replacement = 'SpooktoberBossBrain';
 			return;
 		}
+		else if ( e.Replacee.GetClassName() == 'DeepSMG' )
+		{
+			let r = Actor.GetReplacement('Chaingun');
+			if ( r != 'Chaingun' ) e.Replacement = r;
+		}
+		else if ( e.Replacee.GetClassName() == 'DeepShotgun' )
+		{
+			let r = Actor.GetReplacement('Shotgun');
+			if ( r != 'Shotgun' ) e.Replacement = r;
+		}
 		if ( e.Replacee != 'mkNightmareLord' ) return;
 		switch ( G_SkillPropertyInt(SKILLP_ACSReturn) )
 		{
@@ -764,8 +774,13 @@ Class SpooktoberHandler : EventHandler
 		case 4:
 			// scythe instead of fist
 			mo.GiveInventory("Scyth",1);
-			mo.GiveInventory("Pistol",1);
-			mo.SetInventory("Clip",1);
+			let p = (class<Weapon>)(Actor.GetReplacement("Pistol"));
+			if ( p )
+			{
+				mo.GiveInventory(p,1);
+				let pi = Weapon(mo.FindInventory(p));
+				if ( pi && pi.Ammo1 ) pi.Ammo1.Amount = 1;
+			}
 			mo.A_SelectWeapon("Scyth");
 			break;
 		case 5:
@@ -774,7 +789,8 @@ Class SpooktoberHandler : EventHandler
 		case 14:
 		case 16:
 			// fist only
-			mo.GiveInventory("Fist",1);
+			let f = (class<Weapon>)(Actor.GetReplacement("Fist"));
+			if ( f ) mo.GiveInventory(f,1);
 			break;
 		default:
 			// give start items for player pawn (this allows mod support)

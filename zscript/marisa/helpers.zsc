@@ -272,6 +272,13 @@ Class SpooktoberUtil abstract play
 			else S_ChangeMusic("D_SPKHUB");
 		}
 	}
+
+	static bool YellowRed( Actor a, int checktype )
+	{
+		if ( checktype )
+			return a.checkkeys(1,false,true)&&a.checkkeys(4,false,true);
+		return a.checkkeys(3,false,true)&&a.checkkeys(6,false,true);
+	}
 }
 
 // pretty cutting-edge stuff

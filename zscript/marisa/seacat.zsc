@@ -1804,7 +1804,7 @@ Class mkSecret05GoatInvasion : Actor
 		let s = PickAmmoSpot();
 		if ( !s ) return false;
 		Actor amo;
-		Spawn("ItemFog",s.pos);
+		Spawn("ItemFog",s.pos,ALLOW_REPLACE);
 		if ( spawnbig )
 		{
 			amo = Spawn("W44AmmoBox",s.pos);
@@ -1831,7 +1831,7 @@ Class mkSecret05GoatInvasion : Actor
 		let s = PickHealthSpot();
 		if ( !s ) return false;
 		Actor heal;
-		Spawn("ItemFog",s.pos);
+		Spawn("ItemFog",s.pos,ALLOW_REPLACE);
 		if ( spawnbig )
 		{
 			heal = Spawn("Medikit",s.pos,ALLOW_REPLACE);

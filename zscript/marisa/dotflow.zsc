@@ -1529,8 +1529,6 @@ Class RedDemon : Actor
 	{
 		//$Title Red Demon
 		//$Category Marisa Kirisame/dotFlow
-		RenderStyle "Translucent";
-		Alpha 0.0;
 		Scale 2.0;
 		Radius 16;
 		Height 56;
