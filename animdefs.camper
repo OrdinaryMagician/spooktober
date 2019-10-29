@@ -32,5 +32,5 @@ switch CDOORB off sound Switch2 pic CDOORA tics 0
 
 warp2 texture sbuba0
 
-cameratexture CAMTEX0 72 51 fit 24 17
-cameratexture CAMTEX1 72 51 fit 52 47
+cameratexture CAMTEX0 144 102 fit 24 17
+cameratexture CAMTEX1 288 204 fit 52 47
