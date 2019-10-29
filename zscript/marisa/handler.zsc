@@ -726,6 +726,8 @@ Class SpooktoberHandler : EventHandler
 	// just in case players still SOMEHOW manage to die in the hub even with god mode on
 	override void PlayerRespawned( PlayerEvent e )
 	{
+		if ( gamestate == GS_TITLELEVEL )
+			return;
 		let mo = players[e.playernumber].mo;
 		// adjust player size (too lazy to rescale map itself)
 		if ( level.levelnum == 1 )
@@ -761,6 +763,8 @@ Class SpooktoberHandler : EventHandler
 
 	override void PlayerEntered( PlayerEvent e )
 	{
+		if ( gamestate == GS_TITLELEVEL )
+			return;
 		// loadout management
 		let mo = players[e.playernumber].mo;
 		mo.A_ResetHealth();
