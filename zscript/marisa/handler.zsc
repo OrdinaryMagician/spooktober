@@ -795,11 +795,11 @@ Class SpooktoberHandler : EventHandler
 		case 14:
 		case 16:
 			// fist only
-			let f = (class<Weapon>)(Actor.GetReplacement("Fist"));
-			if ( f )
+			let f2 = (class<Weapon>)(Actor.GetReplacement("Fist"));
+			if ( f2 )
 			{
-				mo.GiveInventory(f,1);
-				mo.A_SelectWeapon(f);
+				mo.GiveInventory(f2,1);
+				mo.A_SelectWeapon(f2);
 			}
 			break;
 		default:
