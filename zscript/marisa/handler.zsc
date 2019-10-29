@@ -278,8 +278,8 @@ Class SpooktoberHandler : EventHandler
 		}
 		else if ( e.Replacee.GetClassName() == 'DeepSMG' )
 		{
-			let r = Actor.GetReplacement('Chaingun');
-			if ( r != 'Chaingun' ) e.Replacement = r;
+			let r = Actor.GetReplacement('Pistol');
+			if ( r != 'Pistol' ) e.Replacement = r;
 		}
 		else if ( e.Replacee.GetClassName() == 'DeepShotgun' )
 		{
@@ -334,6 +334,8 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldLoaded( WorldEvent e )
 	{
+		if ( gamestate == GS_TITLELEVEL )
+			return;
 		// initialize globals
 		SpooktoberGlobals.MakeInstance();
 		if ( !e.IsSaveGame )
@@ -683,7 +685,7 @@ Class SpooktoberHandler : EventHandler
 
 	override void WorldUnloaded( WorldEvent e )
 	{
-		if ( e.IsSaveGame )
+		if ( (gamestate == GS_TITLELEVEL) || e.IsSaveGame )
 			return;
 		SpooktoberGlobals.SetCompletion(level.levelnum-2);
 		// adjust player sizes back to normal
@@ -774,6 +776,10 @@ Class SpooktoberHandler : EventHandler
 		case 4:
 			// scythe instead of fist
 			mo.GiveInventory("Scyth",1);
+			// still give the fist if it's replaced by a mod
+			let f = (class<Weapon>)(Actor.GetReplacement("Fist"));
+			if ( f && (f != 'Fist') ) mo.GiveInventory(f,1);
+			// pistol with 1 ammo
 			let p = (class<Weapon>)(Actor.GetReplacement("Pistol"));
 			if ( p )
 			{
@@ -790,7 +796,11 @@ Class SpooktoberHandler : EventHandler
 		case 16:
 			// fist only
 			let f = (class<Weapon>)(Actor.GetReplacement("Fist"));
-			if ( f ) mo.GiveInventory(f,1);
+			if ( f )
+			{
+				mo.GiveInventory(f,1);
+				mo.A_SelectWeapon(f);
+			}
 			break;
 		default:
 			// give start items for player pawn (this allows mod support)

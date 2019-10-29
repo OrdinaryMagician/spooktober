@@ -555,8 +555,10 @@ Class mkDialogueHandler : EventHandler
 			for ( int i=0; i<MAXPLAYERS; i++ )
 			{
 				if ( !playeringame[i] ) continue;
-				players[i].mo.GiveInventory("Fist",1);
+				let f = (Class<Weapon>)(Actor.GetReplacement("Fist"));
+				if ( f ) players[i].mo.GiveInventory(f,1);
 				players[i].mo.GiveInventory("Model1873",1);
+				players[i].mo.A_SelectWeapon("Model1873");
 			}
 			if ( speakee ) speakee.A_PlaySound("seacat/rreload",CHAN_WEAPON);
 		}
